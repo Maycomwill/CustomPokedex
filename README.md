@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  <a href="https://caderneta-digital.vercel.app/">🔗 Live Preview</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="https://custom-pokedex.vercel.app/">🔗 Live Preview</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-projeto">🖥️ Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-tecnologias">🚀 Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-license">📝 License</a>
@@ -29,7 +29,7 @@ Uma pokedex customizada, onde você pode pesquisar os pokemons de acordo com as 
 
 ## Preview pics
 
-<p>Aqui está algumas imagens do projeto, porém, você também pode testar na <a href="https://caderneta-digital.vercel.app/" target="_blank">Live preview</a></p>
+<p>Aqui está algumas imagens do projeto, porém, você também pode testar na <a href="https://custom-pokedex.vercel.app/" target="_blank">Live preview</a></p>
 
  <div align="center">
  <img src="https://github.com/Maycomwill/CustomPokedex/blob/master/public/Prints/1.jpg?raw=true" width: 700px/>
