@@ -32,11 +32,15 @@ Uma pokedex customizada, onde você pode pesquisar os pokemons de acordo com as 
 <p>Aqui está algumas imagens do projeto, porém, você também pode testar na <a href="https://caderneta-digital.vercel.app/" target="_blank">Live preview</a></p>
 
  <div align="center">
- <img src="https://github.com/Maycomwill/Ignite-Lab/blob/master/public/Prints/1.jpg?raw=true" width: 700px/>
+ <img src="https://github.com/Maycomwill/CustomPokedex/blob/master/public/Prints/1.jpg?raw=true" width: 700px/>
  </div>
 
  <div align="center">
- <img src="https://github.com/Maycomwill/Ignite-Lab/blob/master/public/Prints/2.jpg?raw=true" width: 700px/>
+ <img src="https://github.com/Maycomwill/CustomPokedex/blob/master/public/Prints/2.jpg?raw=true" width: 700px/>
+ </div>
+
+ <div align="center">
+ <img src="https://github.com/Maycomwill/CustomPokedex/blob/master/public/Prints/3.jpg?raw=true" width: 700px/>
  </div>
 
 ## 📝 License
