@@ -1,5 +1,7 @@
+import { useNavigate } from "react-router-dom";
 import { UniquePokemonData } from "../../context/PokedexContext";
 import theme from "../../styles/theme";
+import { Button } from "../Button/Button";
 import { TextStyled } from "../Text/styles";
 import { TypeCard } from "../TypeCard/TypeCard";
 import { Container } from "./styles";
@@ -44,6 +46,8 @@ function UniquePokemonPage({
     return numberWithZeroes;
   }
 
+  const navigate = useNavigate();
+
   return (
     <Container>
       <div className="spritesDiv">
@@ -81,9 +85,11 @@ function UniquePokemonPage({
         </div>
       </div>
 
-      <div>
-        <TextStyled size="lg" transform="capitalize">Abilities:</TextStyled>
-        <div>
+      <div className="abilitiesContainer">
+        <TextStyled size="lg" transform="capitalize">
+          Abilities:
+        </TextStyled>
+        <div className="abilities">
           {abilities?.map((ability) => {
             return (
               <div>
@@ -102,16 +108,21 @@ function UniquePokemonPage({
       </div>
 
       <div className="statsWrapper">
-        <TextStyled size="lg" transform="capitalize">Stats:</TextStyled>
-        <div>
+        <TextStyled size="lg" transform="capitalize">
+          Stats:
+        </TextStyled>
+        <div className="statsContainer">
           {stats?.map((stat) => {
             return (
               <div className="baseStatWrapper" key={stat.stat.name}>
-                <TextStyled size="lg" transform="capitalize">{stat.stat.name}</TextStyled>
+                <TextStyled size="lg" transform="capitalize">
+                  {stat.stat.name}
+                </TextStyled>
                 <div className="baseStatDiv">
                   <div
                     style={{
                       width: `${stat.base_stat}%`,
+                      maxWidth: "100%",
                       backgroundColor: `${theme.colors.purple[500]}`,
                       borderRadius: ".4rem",
                     }}
@@ -123,6 +134,11 @@ function UniquePokemonPage({
             );
           })}
         </div>
+      </div>
+      <div className="backButton">
+        <Button color="delete" onClick={()=> navigate(-1)}>
+          Voltar
+        </Button>
       </div>
     </Container>
   );

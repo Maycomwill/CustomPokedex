@@ -31,7 +31,7 @@ export function Pokedex() {
         <div className="generationDiv">
           <TextStyled size="xlg">{params.generationid}ª Geração</TextStyled>
           <div>
-            <Button color="delete" onClick={() => navigate("/")}>Voltar</Button>
+            <Button color="delete" onClick={() => history.back()}>Voltar</Button>
           </div>
         </div>
 

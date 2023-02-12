@@ -14,6 +14,10 @@ export const Container = styled.div`
     grid-auto-flow: row;
     grid-template-columns: repeat(3, minmax(5rem, .85fr));
     place-items: center;
+
+    @media (max-width: 500px){
+      grid-template-columns: repeat(2, minmax(5rem, .85fr));
+    }
   };
 
   .generationDiv{

@@ -24,7 +24,7 @@ export function Button({ children, size, color, ...rest }: IButtonProps) {
   }
 
   return (
-    <ButtonStyled color={color} size={size}>
+    <ButtonStyled color={color} size={size} {...rest}>
       <TextStyled size={handleSizeButton(size)}>{children}</TextStyled>
     </ButtonStyled>
   );

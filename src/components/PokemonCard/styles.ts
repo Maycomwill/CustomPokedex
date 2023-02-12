@@ -57,6 +57,11 @@ export const Container = styled.button<IContainerProps>`
   background-color: ${({color}) => backgroundColorType(color)};
   border-bottom: .4rem solid ${({color}) => darken(0.3, backgroundColorType(color))};
   cursor: pointer;
+
+  @media (max-width: 500px){
+    height: 31rem
+  };
+
   :hover{
     background-color: ${({color}) => darken(0.05, backgroundColorType(color))};
     border-bottom: .4rem solid ${({color}) => darken(0.4, backgroundColorType(color))};
@@ -67,6 +72,10 @@ export const Container = styled.button<IContainerProps>`
     justify-content: space-between;
     align-items: center;
     padding: .8rem 2.4rem;
+
+    @media (max-width: 500px){
+      flex-direction: column;
+    }
   };
 
   .pokemonInfoDiv{
@@ -75,6 +84,12 @@ export const Container = styled.button<IContainerProps>`
     gap: 1.6rem;
     align-items: flex-start;
     justify-content: center;
+
+    @media (max-width: 500px){
+      flex-direction: column;
+      align-items: center;
+      gap: .4rem;
+    }
   };
 
   .typesWrapper{
@@ -91,5 +106,9 @@ export const Container = styled.button<IContainerProps>`
     align-items: center;
     justify-content: center;
     gap: 1.6rem;
+
+    @media (max-width: 500px){
+      flex-direction: column
+    }
   }
 `;

@@ -10,29 +10,57 @@ interface IUniqueContainerProps {
 export const Container = styled.div<IUniqueContainerProps>`
   padding: 2rem 2.4rem;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   margin: auto;
   width: 95%;
   border-radius: 1.6rem;
   justify-content: space-evenly;
-  align-items: flex-start;
+  align-items: center;
   background: ${theme.colors.gray[800]};
+  margin-bottom: 2.4rem;
+
+  @media (max-width: 500px){
+    flex-direction: column;
+    padding: 2rem;
+    width: 90%;
+    overflow-x: hidden;
+  };
 
 .infoWrapper{
+  width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  justify: center;
   gap: .8rem;
+  margin-bottom: 2.4rem;
+
+  @media (max-width: 500px){
+    flex-direction: column;
+  }
 
   .pokedexInfo{
-    display: flex;
-    flex-direction: column;
-    gap: .4rem;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(10rem, 1fr));
+    place-items: center;
+    grid-gap: .4rem;
+
+    @media (max-width: 500px){
+      display: grid;
+      grid-template-columns: repeat(2, minmax(10rem, 1fr));
+      grid-gap: .8rem;
+      width: 100%;
+      margin: auto;
+    }
   }
 };
 
 .spritesDiv{
   display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2.4rem
 };
 
 .typesWrapper{
@@ -47,6 +75,34 @@ export const Container = styled.div<IUniqueContainerProps>`
 .typesContainer{
   display: flex;
   gap: .4rem;
+};
+
+.abilitiesContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @media (max-width: 500px){
+    text-align: center;
+    width: 100%;
+    margin-bottom: 2rem
+  }
+}
+
+.abilities{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 3.2rem;
+
+
+  @media (max-width: 500px){
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
 }
 
 .baseStatDiv{
@@ -60,11 +116,32 @@ export const Container = styled.div<IUniqueContainerProps>`
 }
 
 .statsWrapper{
-  width: 20%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 500px){
+    width: 100%;
+  }
+}
+
+.statsContainer{
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(10rem, 1fr));
+  place-items: center;
+  grid-gap: 1.6rem;
+  padding: 0 2.4rem;
+
+
+  @media (max-width: 500px){
+    display: grid;
+    grid-template-columns: repeat(2, minmax(10rem, 1fr));
+    grid-gap: 1.6rem;
+    padding: 0 0.2rem
+  }
 }
 
 .baseStatWrapper{
@@ -76,6 +153,12 @@ export const Container = styled.div<IUniqueContainerProps>`
   flex-direction: column;
   gap: .2rem;
   padding-top: .8rem;
+  }
+
+  .backButton{
+    width: 10rem;
+    margin: auto;
+    margin-top: 2.4rem;
   }
 
 `;

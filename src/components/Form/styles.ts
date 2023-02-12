@@ -18,6 +18,11 @@ export const Container = styled.div`
     padding: 3.2rem 1.6rem;
     border-radius: 1.6rem;
     box-shadow: 0 0 4.8rem rgb(0 0 0 / .1);
+
+    @media (max-width: 500px){
+      width: min(100rem, 100%);
+      padding: 1.6rem .8rem;
+    }
 };
 
 fieldset{
@@ -30,11 +35,21 @@ fieldset{
   align-items: center;
   justify-content: flex-start;
   gap: 1.4rem;
+
+  @media (max-width: 500px){
+    gap: .8rem;
+  }
 }
 
 .radio-wrapper > div * {
   color: ${theme.colors.purple[200]};
   font-size: 2rem;
+  text-align: center;
+
+  @media (max-width: 500px){
+    font-size: 1.2rem;
+    text-align: center
+  }
 }
 
 .radio-wrapper {
@@ -42,6 +57,10 @@ fieldset{
   border: .2rem solid ${theme.colors.yellow[500]};
   padding: 1.2rem;
   width: 75%;
+
+  @media (max-width: 500px){
+    padding: .4rem;
+  }
 }
 
 
@@ -51,6 +70,11 @@ fieldset{
   height: 2.8rem;
   width: 2.8rem;
   border-radius: 50%;
+
+  @media (max-width: 500px){
+    height: 2rem;
+    width: 2rem
+  }
 }
 
 .radio-wrapper input[type="radio"]:checked {
@@ -82,4 +106,9 @@ export const RadiosDivWrapper = styled.div`
   gap: 2rem;
   grid-template-columns: repeat(3, minmax(10rem,1fr));
   width: 100%;
+
+  @media (max-width: 500px){
+    grid-template-columns: repeat(2, minmax(10rem,1fr));
+    place-items: center
+  }
 `;
