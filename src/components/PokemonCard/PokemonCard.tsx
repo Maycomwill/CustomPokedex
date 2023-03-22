@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 interface PokemonProps {
   name: string;
-  id: string;
+  id: number;
   sprite: string;
   types: typeProps[];
   primaryType: string;
@@ -52,7 +52,7 @@ export function PokemonCard({
             {name}
           </TextStyled>
           <TextStyled weight="semi-bold" color="gray">
-            #{addZeroes(id, 3)}
+            #{addZeroes(String(id), 3)}
           </TextStyled>
         </div>
         <div className="spriteDiv">

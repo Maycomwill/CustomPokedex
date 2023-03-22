@@ -59,7 +59,7 @@ export const Container = styled.button<IContainerProps>`
   cursor: pointer;
 
   @media (max-width: 500px){
-    height: 31rem
+    height: 28rem
   };
 
   :hover{
@@ -107,8 +107,5 @@ export const Container = styled.button<IContainerProps>`
     justify-content: center;
     gap: 1.6rem;
 
-    @media (max-width: 500px){
-      flex-direction: column
-    }
   }
 `;

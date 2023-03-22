@@ -1,6 +1,7 @@
 import { useContext, createContext, ReactNode, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { pokeapi } from "../services/api";
+import axios from "axios";
 
 export interface PokedexContextDataProps {
   getGenerationFromUserChoice: (generation: string | undefined) => void;
@@ -17,7 +18,7 @@ interface PokedexDataProps {
 
 export interface PokemonDataProps {
   name: string;
-  id: string;
+  id: number;
   sprite: string;
   types: typeProps[];
 }
@@ -62,6 +63,7 @@ interface statsProps {
 export const PokedexContext = createContext({} as PokedexContextDataProps);
 
 export function PokedexContextProvider({ children }: PokedexProviderProps) {
+  let rawPokemonData: PokemonDataProps[] = [];
   const [gen, setGen] = useState<string | undefined>();
   const [isLoading, setIsLoading] = useState();
   const [pokemonData, setPokemonData] = useState<PokemonDataProps[]>([]);
@@ -136,15 +138,39 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     // Console para mostrar o resultado da consulta a API
     // console.log("resultado da consulta da api pokelist:", result);
 
-    result.map((pokemon: PokedexDataProps) => {
-      getPokemonInformation(pokemon.name);
+    // result.map((pokemon: PokedexDataProps) => {
+    //   getPokemonInformation(pokemon.name);
+    // });
+    rawPokemonData = [];
+    waitingPromises(result).then((response) => {
+      let newArray = rawPokemonData.sort((a, b) => {
+        return a.id - b.id;
+      });
+      newArray.map((pokemon) => storagePokemonInformation(pokemon));
     });
   }
 
-  async function getPokemonInformation(pokemonName: string) {
-    const result = await pokeapi.get(`pokemon/${pokemonName}`);
-    storagePokemonInformation(result.data);
+  function waitingPromises(results: PokedexDataProps[]) {
+    return Promise.all(
+      results.map((pokemon) => getPokemonInformation(pokemon.url))
+    );
   }
+
+  function getPokemonInformation(pokemonUrl: string) {
+    return axios.get(pokemonUrl).then(function (response) {
+      return rawPokemonData.push(response.data);
+    });
+  }
+
+  // function getPokemonInformation(pokemonName: string) {
+  //   return pokeapi.get(`pokemon/${pokemonName}`).then((result) => {
+  //     storagePokemonInformation(result.data);
+  //   });
+  // }
+  // async function getPokemonInformation(pokemonName: string) {
+  //   const result = await pokeapi.get(`pokemon/${pokemonName}`);
+  //   storagePokemonInformation(result.data);
+  // }
 
   function storagePokemonInformation(pokemon: any) {
     // Console para mostrar as informações individuais dos pokemon
