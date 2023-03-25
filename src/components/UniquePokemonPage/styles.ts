@@ -88,6 +88,14 @@ export const Container = styled.div<IUniqueContainerProps>`
   }
 }
 
+.abilityName{
+  cursor: pointer;
+
+  :hover{
+   color: ${theme.colors.yellow[500]}
+  }
+}
+
 .abilities{
   width: 100%;
   display: flex;

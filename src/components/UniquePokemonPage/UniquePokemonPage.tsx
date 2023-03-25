@@ -97,7 +97,7 @@ function UniquePokemonPage({
                   size="lg"
                   transform="capitalize"
                   onClick={() => navigate(`/ability/${ability.ability.name}`)}
-                  style={{cursor: 'pointer'}}
+                  className="abilityName"
                 >
                   {ability.ability.name}
                 </TextStyled>
