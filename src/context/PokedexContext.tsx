@@ -1,4 +1,4 @@
-import { useContext, createContext, ReactNode, useState } from "react";
+import { useContext, createContext, ReactNode, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { pokeapi } from "../services/api";
 import axios from "axios";
@@ -7,8 +7,11 @@ export interface PokedexContextDataProps {
   getGenerationFromUserChoice: (generation: string | undefined) => void;
   getPokedexList: (generation: string | undefined) => void;
   getPokemonData: (generation: string | undefined) => void;
+  getAbilityInfo: (ability: string | undefined) => void;
   pokemonData: PokemonDataProps[];
   uniquePokemonData: UniquePokemonData;
+  abilityInfo: AbilityInfoProps | undefined;
+  pokemonAbilityCommon: PokemonDataProps[];
 }
 
 interface PokedexDataProps {
@@ -60,12 +63,22 @@ interface statsProps {
   };
 }
 
+interface AbilityInfoProps {
+  name: string;
+  description: string;
+  pokemon?: PokemonDataProps[];
+}
+
 export const PokedexContext = createContext({} as PokedexContextDataProps);
 
 export function PokedexContextProvider({ children }: PokedexProviderProps) {
   let rawPokemonData: PokemonDataProps[] = [];
-  const [gen, setGen] = useState<string | undefined>();
-  const [isLoading, setIsLoading] = useState();
+  const [abilityInfo, setAbilityInfo] = useState<AbilityInfoProps | undefined>(
+    undefined
+  );
+  const [pokemonAbilityCommon, setPokemonAbilityCommon] = useState<
+    PokemonDataProps[]
+  >([]);
   const [pokemonData, setPokemonData] = useState<PokemonDataProps[]>([]);
   const [uniquePokemonData, setUniquePokemonData] = useState<UniquePokemonData>(
     {} as UniquePokemonData
@@ -146,6 +159,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
       let newArray = rawPokemonData.sort((a, b) => {
         return a.id - b.id;
       });
+      console.log(newArray)
       newArray.map((pokemon) => storagePokemonInformation(pokemon));
     });
   }
@@ -156,9 +170,18 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     );
   }
 
-  function getPokemonInformation(pokemonUrl: string) {
-    return axios.get(pokemonUrl).then(function (response) {
-      return rawPokemonData.push(response.data);
+  async function getPokemonInformation(pokemonUrl: string) {
+    return await axios.get(pokemonUrl).then(function (response) {
+      return rawPokemonData.push({
+        name: response.data.name,
+        id: response.data.id,
+        sprite: response.data.sprites.front_default,
+        types: response.data.types.map((type: any) => {
+          return {
+            type: type.type.name,
+          };
+        }),
+      });
     });
   }
 
@@ -181,10 +204,10 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
       {
         name: pokemon.name,
         id: pokemon.id,
-        sprite: pokemon.sprites.front_default,
+        sprite: pokemon.sprite,
         types: pokemon.types.map((type: any) => {
           return {
-            type: type.type.name,
+            type: type.type,
           };
         }),
       },
@@ -227,14 +250,61 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     });
   }
 
+  async function getAbilityInfo(ability: string | undefined) {
+    setPokemonAbilityCommon([]);
+    let description = "";
+    rawPokemonData = [];
+    const result = await pokeapi.get(`ability/${ability}`);
+    let response = result.data.pokemon.map((pokemon: any) => {
+      return { name: pokemon.pokemon.name, url: pokemon.pokemon.url };
+    });
+    waitingPromises(response);
+
+    if(result.data.effect_entries[0].language.name === "en"){
+      description = result.data.effect_entries[0].effect
+    } description = result.data.effect_entries[1].effect
+    setAbilityInfo({
+      name: result.data.name,
+      description: description,
+      pokemon: [],
+    });
+
+    storagePokemonAbilityCommon();
+  }
+
+  function storagePokemonAbilityCommon() {
+
+    setTimeout(()=>{rawPokemonData.sort((a, b) => {
+      return a.id - b.id;
+    }).map((pokemon) => {
+      return setPokemonAbilityCommon((prev) => [
+        ...prev,
+        {
+          name: pokemon.name,
+          id: pokemon.id,
+          sprite: pokemon.sprite,
+          types: pokemon.types.map((type: any) => {
+            return {
+              type: type.type,
+            };
+          }),
+        },
+      ]);
+    }), console.log(rawPokemonData)}, 500)
+
+  }
+
   return (
     <PokedexContext.Provider
       value={{
         getGenerationFromUserChoice,
         getPokedexList,
         getPokemonData,
+        getAbilityInfo,
         pokemonData,
         uniquePokemonData,
+        abilityInfo,
+        pokemonAbilityCommon,
       }}
     >
       {children}

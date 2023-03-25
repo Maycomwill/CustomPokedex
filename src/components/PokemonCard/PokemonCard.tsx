@@ -65,7 +65,7 @@ export function PokemonCard({
         </TextStyled>
         <div className="typesCards">
           {types.map((type) => {
-            return <TypeCard pokemonType={type.type} />;
+            return <TypeCard pokemonType={type.type} key={`${type.type}`}/>;
           })}
         </div>
       </div>

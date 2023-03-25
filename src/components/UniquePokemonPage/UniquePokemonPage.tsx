@@ -22,9 +22,9 @@ function UniquePokemonPage({
   types,
   weight,
 }: IUniquePokemonPage) {
-  // const firstType = types[0].type
 
-  console.log("firstType:", types);
+  // Console log para mostrar os tipos do pokemon
+  // console.log("Types:", types);
 
   function checkingIMG(url: string) {
     if (official_artwork == null) {
@@ -79,7 +79,7 @@ function UniquePokemonPage({
           </TextStyled>
           <div className="typesContainer">
             {types?.map((type) => {
-              return <TypeCard pokemonType={type.type} key={type.type} />;
+              return <TypeCard pokemonType={type.type} key={`${type.type}`} />;
             })}
           </div>
         </div>
@@ -92,15 +92,15 @@ function UniquePokemonPage({
         <div className="abilities">
           {abilities?.map((ability) => {
             return (
-              <div>
-                <a
-                  href={ability.ability.url}
-                  style={{ textDecoration: "none" }}
+              <div key={`${ability.ability.name}-${ability.slot}`}>
+                <TextStyled
+                  size="lg"
+                  transform="capitalize"
+                  onClick={() => navigate(`/ability/${ability.ability.name}`)}
+                  style={{cursor: 'pointer'}}
                 >
-                  <TextStyled size="lg" transform="capitalize">
-                    {ability.ability.name}
-                  </TextStyled>
-                </a>
+                  {ability.ability.name}
+                </TextStyled>
               </div>
             );
           })}
@@ -114,7 +114,7 @@ function UniquePokemonPage({
         <div className="statsContainer">
           {stats?.map((stat) => {
             return (
-              <div className="baseStatWrapper" key={stat.stat.name}>
+              <div className="baseStatWrapper" key={`${stat.stat.name}-${stat.effort}`}>
                 <TextStyled size="lg" transform="capitalize">
                   {stat.stat.name}
                 </TextStyled>
@@ -124,7 +124,7 @@ function UniquePokemonPage({
                       width: `${stat.base_stat}%`,
                       maxWidth: "100%",
                       backgroundColor: `${theme.colors.purple[500]}`,
-                      borderRadius: ".4rem",
+                      borderRadius: "0 .4rem .4rem 0",
                     }}
                   >
                     <TextStyled size="md">{stat.base_stat}</TextStyled>
@@ -136,7 +136,7 @@ function UniquePokemonPage({
         </div>
       </div>
       <div className="backButton">
-        <Button color="delete" onClick={()=> navigate(-1)}>
+        <Button color="delete" onClick={() => navigate(-1)}>
           Voltar
         </Button>
       </div>

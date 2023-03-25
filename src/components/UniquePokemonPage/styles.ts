@@ -6,7 +6,6 @@ interface IUniqueContainerProps {
   firstType?: string
 }
 
-
 export const Container = styled.div<IUniqueContainerProps>`
   padding: 2rem 2.4rem;
   display: flex;
