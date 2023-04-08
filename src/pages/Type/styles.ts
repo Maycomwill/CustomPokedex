@@ -9,6 +9,15 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: 500px) {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: .4rem;
+    }
   }
 
   .pageTitle > span {
@@ -19,6 +28,10 @@ export const Container = styled.div`
 
   .pageTitle > div {
     padding-right: 3.2rem;
+
+    @media (max-width: 500px){
+      padding: 0;
+    }
   }
 
   .pokemonCard-wrapper {
@@ -43,5 +56,10 @@ export const Container = styled.div`
     width: 10%;
     margin: auto;
     padding-bottom: 2.4rem;
+
+    @media (max-width: 500px) {
+      margin-top: .8rem;
+      width: 25%;
+    }
   }
 `;
