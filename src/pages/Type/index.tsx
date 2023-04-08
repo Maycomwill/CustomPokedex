@@ -4,7 +4,8 @@ import { useParams } from "react-router-dom";
 import { usePokedex } from "../../hooks/usePokedex";
 import { Loading } from "../../components/Loading/Loading";
 import { PokemonCard } from "../../components/PokemonCard/PokemonCard";
-import Text from "../../components/Text/Text";
+import { TextStyled } from "../../components/Text/styles";
+import { Button } from "../../components/Button/Button";
 
 export function Type() {
   const params = useParams();
@@ -25,9 +26,24 @@ export function Type() {
   } else {
     return (
       <Container>
-        <Text transform="capitalize" color="white" size="xxl">
-          {params.typename} type page
-        </Text>
+        <div className="pageTitle">
+          <TextStyled color="white" size="xlg">
+            Todos os Pokemon que são do tipo:{" "}
+            <TextStyled
+              transform="uppercase"
+              color="yellow"
+              size="xlg"
+              weight="bold"
+            >
+              {params.typename}
+            </TextStyled>
+          </TextStyled>
+          <div>
+            <Button color="delete" onClick={() => history.back()}>
+              Voltar
+            </Button>
+          </div>
+        </div>
         <div className="pokemonCard-wrapper">
           {pokemonData.map((pokemon) => {
             return (
@@ -42,6 +58,11 @@ export function Type() {
             );
           })}
         </div>
+        <div className="backButton">
+            <Button color="delete" onClick={() => history.back()}>
+              Voltar
+            </Button>
+          </div>
       </Container>
     );
   }
