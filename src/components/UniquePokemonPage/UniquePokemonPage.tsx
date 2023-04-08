@@ -106,7 +106,7 @@ function UniquePokemonPage({
                   onClick={() => navigate(`/ability/${ability.ability.name}`)}
                   className="abilityName"
                 >
-                  {ability.ability.name}
+                  {ability.ability.name.split("-").join(" ")}
                 </TextStyled>
               </div>
             );

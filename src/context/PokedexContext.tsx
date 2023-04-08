@@ -5,7 +5,7 @@ import axios from "axios";
 export interface PokedexContextDataProps {
   getGenerationFromUserChoice: (generation: string | undefined) => void;
   getPokedexList: (generation: string | undefined) => void;
-  getPokemonData: (generation: string | undefined) => void;
+  getPokemonData: (pokemonName: string | undefined) => void;
   getAbilityInfo: (ability: string | undefined) => void;
   getTypeData: (type: string | undefined) => void;
   pokemonData: PokemonDataProps[];
@@ -214,8 +214,8 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     ]);
   }
 
-  async function getPokemonData(pokemon: string | undefined) {
-    const result = await pokeapi.get(`pokemon/${pokemon}`);
+  async function getPokemonData(pokemonName: string | undefined) {
+    const result = await pokeapi.get(`pokemon/${pokemonName}`);
     setUniquePokemonData({
       name: result.data.name,
       id: result.data.id,
@@ -265,6 +265,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     } else {
       description = result.data.effect_entries[1].effect;
     }
+
     setAbilityInfo({
       name: result.data.name,
       description: description,

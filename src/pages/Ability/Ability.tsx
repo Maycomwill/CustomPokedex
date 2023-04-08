@@ -30,7 +30,7 @@ export function Ability() {
         <>
           <div className="abilityName">
             <TextStyled cap="true" size="xxl" color="yellow" weight="bold">
-              {abilityInfo?.name}
+              {abilityInfo?.name.split("-").join(" ")}
             </TextStyled>
           </div>
           <div className="descriptionDiv">

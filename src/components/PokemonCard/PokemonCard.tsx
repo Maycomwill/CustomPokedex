@@ -51,7 +51,7 @@ export function PokemonCard({
             transform="capitalize"
             color="gray"
           >
-            {name}
+            {name.split("-").join(" ")}
           </TextStyled>
           <TextStyled weight="semi-bold" color="gray">
             #{addZeroes(String(id), 3)}
