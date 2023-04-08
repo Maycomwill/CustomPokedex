@@ -1,5 +1,4 @@
-import { useContext, createContext, ReactNode, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { createContext, ReactNode, useState } from "react";
 import { pokeapi } from "../services/api";
 import axios from "axios";
 
@@ -8,6 +7,7 @@ export interface PokedexContextDataProps {
   getPokedexList: (generation: string | undefined) => void;
   getPokemonData: (generation: string | undefined) => void;
   getAbilityInfo: (ability: string | undefined) => void;
+  getTypeData: (type: string | undefined) => void;
   pokemonData: PokemonDataProps[];
   uniquePokemonData: UniquePokemonData;
   abilityInfo: AbilityInfoProps | undefined;
@@ -106,7 +106,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
         break;
 
       case "3":
-        limitURL = "125";
+        limitURL = "135";
         offsetURL = "251";
         break;
 
@@ -159,7 +159,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
       let newArray = rawPokemonData.sort((a, b) => {
         return a.id - b.id;
       });
-      console.log(newArray)
+      console.log(newArray);
       newArray.map((pokemon) => storagePokemonInformation(pokemon));
     });
   }
@@ -260,9 +260,11 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     });
     waitingPromises(response);
 
-    if(result.data.effect_entries[0].language.name === "en"){
-      description = result.data.effect_entries[0].effect
-    } description = result.data.effect_entries[1].effect
+    if (result.data.effect_entries[0].language.name === "en") {
+      description = result.data.effect_entries[0].effect;
+    } else {
+      description = result.data.effect_entries[1].effect;
+    }
     setAbilityInfo({
       name: result.data.name,
       description: description,
@@ -273,25 +275,45 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
   }
 
   function storagePokemonAbilityCommon() {
+    setTimeout(() => {
+      rawPokemonData
+        .sort((a, b) => {
+          return a.id - b.id;
+        })
+        .map((pokemon) => {
+          return setPokemonAbilityCommon((prev) => [
+            ...prev,
+            {
+              name: pokemon.name,
+              id: pokemon.id,
+              sprite: pokemon.sprite,
+              types: pokemon.types.map((type: any) => {
+                return {
+                  type: type.type,
+                };
+              }),
+            },
+          ]);
+        }),
+        console.log(rawPokemonData);
+    }, 500);
+  }
 
-    setTimeout(()=>{rawPokemonData.sort((a, b) => {
-      return a.id - b.id;
-    }).map((pokemon) => {
-      return setPokemonAbilityCommon((prev) => [
-        ...prev,
-        {
-          name: pokemon.name,
-          id: pokemon.id,
-          sprite: pokemon.sprite,
-          types: pokemon.types.map((type: any) => {
-            return {
-              type: type.type,
-            };
-          }),
-        },
-      ]);
-    }), console.log(rawPokemonData)}, 500)
-
+  async function getTypeData(type: string | undefined) {
+    const consult = await pokeapi.get(`/type/${type}`);
+    const pokemonTypeCommon = consult.data.pokemon;
+    let newPokemonTypeArray: any = [];
+    pokemonTypeCommon.map((pokemon: any) =>
+      newPokemonTypeArray.push(pokemon.pokemon)
+    );
+    waitingPromises(newPokemonTypeArray).then((response) => {
+      let newArray = rawPokemonData.sort((a, b) => {
+        return a.id - b.id;
+      });
+      console.log(newArray);
+      setPokemonData([]);
+      newArray.map((pokemon) => storagePokemonInformation(pokemon));
+    });
   }
 
   return (
@@ -301,6 +323,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
         getPokedexList,
         getPokemonData,
         getAbilityInfo,
+        getTypeData,
         pokemonData,
         uniquePokemonData,
         abilityInfo,

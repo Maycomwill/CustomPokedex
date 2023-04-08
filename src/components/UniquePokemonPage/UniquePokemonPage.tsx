@@ -62,21 +62,21 @@ function UniquePokemonPage({
       <div className="infoWrapper">
         <div className="pokedexInfo">
           <TextStyled size="lg" transform="capitalize">
-            Name: {name}
+            Nome: {name}
           </TextStyled>
           <TextStyled size="lg" transform="capitalize">
             id: #{addZeroes(id, 3)}
           </TextStyled>
           <TextStyled size="lg" transform="capitalize">
-            height: {height * 10}cm
+            Altura: {height * 10}cm
           </TextStyled>
           <TextStyled size="lg" transform="capitalize">
-            weight: {weight / 10}kg
+            Peso: {weight / 10}kg
           </TextStyled>
         </div>
         <div className="typesWrapper">
           <TextStyled size="lg" transform="capitalize">
-            types:
+            tipos:
           </TextStyled>
           <div className="typesContainer">
             {types?.map((type) => {
@@ -94,7 +94,7 @@ function UniquePokemonPage({
 
       <div className="abilitiesContainer">
         <TextStyled size="lg" transform="capitalize">
-          Abilities:
+          Habilidades:
         </TextStyled>
         <div className="abilities">
           {abilities?.map((ability) => {
@@ -116,7 +116,7 @@ function UniquePokemonPage({
 
       <div className="statsWrapper">
         <TextStyled size="lg" transform="capitalize">
-          Stats:
+          Status:
         </TextStyled>
         <div className="statsContainer">
           {stats?.map((stat) => {
@@ -134,7 +134,7 @@ function UniquePokemonPage({
                       width: `${stat.base_stat}%`,
                       maxWidth: "100%",
                       backgroundColor: `${theme.colors.purple[500]}`,
-                      borderRadius: "0 .4rem .4rem 0",
+                      borderRadius: ".4rem",
                     }}
                   >
                     <TextStyled size="md">{stat.base_stat}</TextStyled>

@@ -30,7 +30,7 @@ export const Container = styled.div<IUniqueContainerProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify: center;
+  justify-content: center;
   gap: .8rem;
   margin-bottom: 2.4rem;
 
