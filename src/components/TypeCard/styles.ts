@@ -2,12 +2,12 @@ import { darken } from 'polished';
 import styled from 'styled-components';
 import theme from '../../styles/theme';
 
-interface ITypeProps{
-  type: string
+interface ITypeProps {
+  pokemonType: string
 };
 
-function backgroundColorType(color: string){
-  switch(color){
+function backgroundColorType(color: string) {
+  switch (color) {
     case "bug":
       return `${theme.backgroundCard.bug}`;
     case "dark":
@@ -50,7 +50,7 @@ function backgroundColorType(color: string){
 }
 
 export const Container = styled.div<ITypeProps>`
-  background-color: ${({type}) => darken(0.2, backgroundColorType(type))};
+  background-color: ${({ pokemonType }) => darken(0.2, backgroundColorType(pokemonType))};
   width: 12rem;
   border-radius: .4rem;
   display: flex;
@@ -58,9 +58,24 @@ export const Container = styled.div<ITypeProps>`
   align-items: center;
   gap: 1.6rem;
   padding: .8rem 1.6rem;
-/*
-futura opção para ver as informações da tipagem
+
+`;
+
+export const ContainerButton = styled.button<ITypeProps>`
+  background-color: ${({ pokemonType }) => darken(0.2, backgroundColorType(pokemonType))};
+  width: 12rem;
+  border: none;
+  border-radius: .4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.6rem;
+  padding: .8rem 1.6rem;
+  cursor: pointer;
+  transition: background .2s;
+
+/* futura opção para ver as informações da tipagem */
   :hover{
-    background-color: ${({type}) => darken(0.3, backgroundColorType(type))};
-  } */
+    background-color: ${({ pokemonType }) => darken(0.1, backgroundColorType(pokemonType))};
+  }
 `;

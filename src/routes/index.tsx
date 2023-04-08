@@ -4,6 +4,7 @@ import { Home } from "../pages/Home/Home";
 import { Pokedex } from "../pages/Pokedex/Pokedex";
 import { Pokemon } from "../pages/Pokemon/Pokemon";
 import { Ability } from "../pages/Ability/Ability";
+import { Type } from "../pages/Type";
 
 export function IndexRoutes() {
   return (
@@ -14,6 +15,7 @@ export function IndexRoutes() {
         <Route path="/pokedex/:generationid" element={<Pokedex />} />
         <Route path="/pokemon/:pokemonname" element={<Pokemon />} />
         <Route path="/ability/:abilityname" element={<Ability />} />
+        <Route path="/type/:typename" element={<Type />} />
       </Routes>
     </Router>
   );

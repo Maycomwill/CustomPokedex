@@ -8,6 +8,7 @@ import { Container } from "./styles";
 
 interface IUniquePokemonPage extends UniquePokemonData {
   firstType?: string;
+  pressable?: boolean;
 }
 
 function UniquePokemonPage({
@@ -21,8 +22,8 @@ function UniquePokemonPage({
   stats,
   types,
   weight,
+  pressable,
 }: IUniquePokemonPage) {
-
   // Console log para mostrar os tipos do pokemon
   // console.log("Types:", types);
 
@@ -79,7 +80,13 @@ function UniquePokemonPage({
           </TextStyled>
           <div className="typesContainer">
             {types?.map((type) => {
-              return <TypeCard pokemonType={type.type} key={`${type.type}`} />;
+              return (
+                <TypeCard
+                  pressable={true}
+                  pokemonType={type.type}
+                  key={`${type.type}`}
+                />
+              );
             })}
           </div>
         </div>
@@ -114,7 +121,10 @@ function UniquePokemonPage({
         <div className="statsContainer">
           {stats?.map((stat) => {
             return (
-              <div className="baseStatWrapper" key={`${stat.stat.name}-${stat.effort}`}>
+              <div
+                className="baseStatWrapper"
+                key={`${stat.stat.name}-${stat.effort}`}
+              >
                 <TextStyled size="lg" transform="capitalize">
                   {stat.stat.name}
                 </TextStyled>

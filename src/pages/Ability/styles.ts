@@ -38,6 +38,7 @@ export const Container = styled.div`
     width: 10rem;
     margin: auto;
     margin-top: 2.4rem;
+    padding-bottom: 1.6rem;
   }
 `;
 

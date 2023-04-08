@@ -10,6 +10,7 @@ interface PokemonProps {
   sprite: string;
   types: typeProps[];
   primaryType: string;
+  pressable?: boolean;
 }
 
 export function PokemonCard({
@@ -18,6 +19,7 @@ export function PokemonCard({
   types,
   sprite,
   primaryType,
+  pressable = false,
 }: PokemonProps) {
   function addZeroes(num: string, len: number) {
     var numberWithZeroes = String(num);
@@ -65,7 +67,13 @@ export function PokemonCard({
         </TextStyled>
         <div className="typesCards">
           {types.map((type) => {
-            return <TypeCard pokemonType={type.type} key={`${type.type}`}/>;
+            return (
+              <TypeCard
+                pressable={false}
+                pokemonType={type.type}
+                key={`${type.type}`}
+              />
+            );
           })}
         </div>
       </div>

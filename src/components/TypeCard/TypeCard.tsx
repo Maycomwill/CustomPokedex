@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { TextStyled } from "../Text/styles";
-import { Container } from "./styles";
+import { Container, ContainerButton } from "./styles";
 
 import bug from "../../assets/TypesSvg/bug.svg";
 import dark from "../../assets/TypesSvg/dark.svg";
@@ -20,12 +20,15 @@ import psychic from "../../assets/TypesSvg/psychic.svg";
 import rock from "../../assets/TypesSvg/rock.svg";
 import steel from "../../assets/TypesSvg/steel.svg";
 import water from "../../assets/TypesSvg/water.svg";
+import { useNavigate } from "react-router-dom";
 
 interface ITypeCardProps {
   pokemonType: string;
+  pressable?: boolean;
 }
 
-export function TypeCard({ pokemonType, ...rest }: ITypeCardProps) {
+export function TypeCard({ pokemonType, pressable, ...rest }: ITypeCardProps) {
+  const navigate = useNavigate();
   const pokemonTypesObject = {
     bug: bug,
     dark: dark,
@@ -51,19 +54,40 @@ export function TypeCard({ pokemonType, ...rest }: ITypeCardProps) {
     return pokemonTypesObject[typeName];
   }
 
-  return (
-    <Container type={pokemonType}>
-      <div className="typeName">
-        <TextStyled transform="capitalize">{pokemonType}</TextStyled>
-      </div>
-      <div className="svgDiv">
-        <img
-          width={20}
-          height={20}
-          src={pokemonTypeImageName(pokemonType)}
-          alt={`${pokemonType} image`}
-        />
-      </div>
-    </Container>
-  );
+  if (pressable === true) {
+    return (
+      <ContainerButton
+        pokemonType={pokemonType}
+        onClick={() => navigate(`/type/${pokemonType}`)}
+      >
+        <div className="typeName">
+          <TextStyled transform="capitalize">{pokemonType}</TextStyled>
+        </div>
+        <div className="svgDiv">
+          <img
+            width={20}
+            height={20}
+            src={pokemonTypeImageName(pokemonType)}
+            alt={`${pokemonType} image`}
+          />
+        </div>
+      </ContainerButton>
+    );
+  } else {
+    return (
+      <Container pokemonType={pokemonType}>
+        <div className="typeName">
+          <TextStyled transform="capitalize">{pokemonType}</TextStyled>
+        </div>
+        <div className="svgDiv">
+          <img
+            width={20}
+            height={20}
+            src={pokemonTypeImageName(pokemonType)}
+            alt={`${pokemonType} image`}
+          />
+        </div>
+      </Container>
+    );
+  }
 }

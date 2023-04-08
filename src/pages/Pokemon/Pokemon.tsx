@@ -38,6 +38,7 @@ export function Pokemon() {
         types={uniquePokemonData.types}
         weight={uniquePokemonData.weight}
         key={uniquePokemonData.id}
+        pressable={true}
       />
     );
   }
