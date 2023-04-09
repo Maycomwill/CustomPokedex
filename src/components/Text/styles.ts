@@ -51,7 +51,7 @@ const handleCapitilize = (cap: "true" | undefined) => {
 
 export const TextStyled = styled.span<ITextProps>`
   color: ${({ color }) => handleTextColor(color)};
-  font-size: ${({ size }) => size ? `${theme.fontSize[size]}` : '1.6rem'};
+  font-size: ${({ size }) => size ? `${theme.fontSize[size]}` : "1.6rem"};
   text-transform: ${({ transform }) => transform};
   font-weight: ${({ weight }) => handleFontWeight(weight)};
   text-transform: ${({ cap }) => handleCapitilize(cap)};

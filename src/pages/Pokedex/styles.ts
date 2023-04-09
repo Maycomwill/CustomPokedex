@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '../../styles/theme';
 
 export const Container = styled.div`
   width: 100%;
@@ -30,6 +31,38 @@ export const Container = styled.div`
     align-items: center;
     justify-content: space-between
   };
+
+  .inputWrapper{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+
+    form{
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+
+      input{
+        color: ${theme.colors.gray[100]};
+        font-size: ${theme.fontSize.md};
+        padding: .6rem 1.2rem;
+        background-color: ${theme.colors.gray[700]};
+        cursor: pointer;
+        border: none;
+        border-radius: .4rem;
+        margin-bottom: .4rem;
+
+        ::placeholder{
+          color: ${theme.colors.gray[400]};
+        }
+
+        :focus{
+          cursor: text
+        }
+      }
+    }
+  }
 
   .backButton{
     width: 10rem;
