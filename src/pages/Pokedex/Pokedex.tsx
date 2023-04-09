@@ -21,7 +21,7 @@ export function Pokedex() {
 
   const pokemonListFiltered =
     search.length > 0
-      ? pokemonData.filter((pokemon) => pokemon.name.includes(search))
+      ? pokemonData.filter((pokemon) => pokemon.name.includes(search.toLowerCase()))
       : [];
 
   useEffect(() => {

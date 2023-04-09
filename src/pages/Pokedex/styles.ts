@@ -49,7 +49,8 @@ export const Container = styled.div`
         padding: .6rem 1.2rem;
         background-color: ${theme.colors.gray[700]};
         cursor: pointer;
-        border: none;
+        border: .2rem solid rgb(0 0 0 / 0);
+        outline: none;
         border-radius: .4rem;
         margin-bottom: .4rem;
 
@@ -58,9 +59,14 @@ export const Container = styled.div`
         }
 
         :focus{
-          cursor: text
+          cursor: text;
+          border: .2rem solid ${theme.colors.yellow[500]};
         }
       }
+    }
+
+    @media (max-width: 500px){
+      margin-top: 2.4rem;
     }
   }
 
