@@ -62,7 +62,7 @@ function UniquePokemonPage({
       <div className="infoWrapper">
         <div className="pokedexInfo">
           <TextStyled size="lg" transform="capitalize">
-            Nome: {name}
+            Nome: {name.split("-").join(" ")}
           </TextStyled>
           <TextStyled size="lg" transform="capitalize">
             id: #{addZeroes(id, 3)}
