@@ -6,6 +6,7 @@ import { Loading } from "../../components/Loading/Loading";
 import { PokemonCard } from "../../components/PokemonCard/PokemonCard";
 import { TextStyled } from "../../components/Text/styles";
 import { Button } from "../../components/Button/Button";
+import { BackToTop } from "../../components/BackToTop/BackToTop";
 
 export function Type() {
   const params = useParams();
@@ -63,6 +64,7 @@ export function Type() {
               Voltar
             </Button>
           </div>
+          <BackToTop />
       </Container>
     );
   }

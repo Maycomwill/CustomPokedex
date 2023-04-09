@@ -8,6 +8,7 @@ import { usePokedex } from "../../hooks/usePokedex";
 import theme from "../../styles/theme";
 import { Container } from "./styles";
 import { PokemonDataProps } from "../../context/PokedexContext";
+import { BackToTop } from "../../components/BackToTop/BackToTop";
 
 export function Pokedex() {
   const params = useParams();
@@ -21,7 +22,9 @@ export function Pokedex() {
 
   const pokemonListFiltered =
     search.length > 0
-      ? pokemonData.filter((pokemon) => pokemon.name.includes(search.toLowerCase()))
+      ? pokemonData.filter((pokemon) =>
+          pokemon.name.includes(search.toLowerCase())
+        )
       : [];
 
   useEffect(() => {
@@ -46,7 +49,9 @@ export function Pokedex() {
         <div className="inputWrapper">
           <form>
             <label htmlFor="searchInput">
-              <TextStyled size="lg">Filtre a lista pelo nome dos pokemon</TextStyled>
+              <TextStyled size="lg">
+                Filtre a lista pelo nome dos pokemon
+              </TextStyled>
             </label>
             <input
               type="text"
@@ -101,7 +106,7 @@ export function Pokedex() {
               })}
           </div>
         )}
-
+        <BackToTop />
         <div className="backButton">
           <Button color="delete" onClick={() => navigate("/")}>
             Voltar
