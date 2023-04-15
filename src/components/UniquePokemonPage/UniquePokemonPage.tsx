@@ -146,9 +146,7 @@ function UniquePokemonPage({
         </div>
       </div>
       <div className="backButton">
-        <Button color="delete" onClick={() => navigate(-1)}>
-          Voltar
-        </Button>
+        <Button color="delete" onClick={() => navigate(-1)} text={"Voltar"}/>
       </div>
     </Container>
   );

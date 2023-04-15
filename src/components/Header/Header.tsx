@@ -16,7 +16,7 @@ export function Header() {
           />
         </a>
         <div id="maycomLogo">
-        <a href="https://github.com/maycomwill" target="_blank">
+        <a rel="noopener" href="https://github.com/maycomwill" target="_blank">
           <img
             alt="Maycom Willams Logo"
             width={50}
