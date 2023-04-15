@@ -14,12 +14,9 @@ export function Type() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setIsLoading(true);
     getTypeData(params.typename);
-    if (pokemonData === undefined) {
-      setIsLoading(true);
-    } else {
-      setIsLoading(false);
-    }
+    setTimeout(()=>{setIsLoading(false)}, 500)
   }, []);
 
   if (isLoading) {
@@ -40,7 +37,11 @@ export function Type() {
             </TextStyled>
           </TextStyled>
           <div>
-            <Button color="delete" onClick={() => history.back()} text="Voltar"/>
+            <Button
+              color="delete"
+              onClick={() => history.back()}
+              text="Voltar"
+            />
           </div>
         </div>
         <div className="pokemonCard-wrapper">
@@ -58,10 +59,9 @@ export function Type() {
           })}
         </div>
         <div className="backButton">
-            <Button color="delete" onClick={() => history.back()} text="Voltar"/>
-
-          </div>
-          <BackToTop />
+          <Button color="delete" onClick={() => history.back()} text="Voltar" />
+        </div>
+        <BackToTop />
       </Container>
     );
   }
