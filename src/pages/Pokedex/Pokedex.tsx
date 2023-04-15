@@ -9,6 +9,8 @@ import theme from "../../styles/theme";
 import { Container } from "./styles";
 import { PokemonDataProps } from "../../context/PokedexContext";
 import { BackToTop } from "../../components/BackToTop/BackToTop";
+import { CaretLeft, CaretRight } from "phosphor-react";
+import NavButtons from "../../components/NavButtons/NavButtons";
 
 export function Pokedex() {
   const params = useParams();
@@ -31,7 +33,7 @@ export function Pokedex() {
     setIsLoading(true);
     getPokedexList(generation);
     setIsLoading(false);
-  }, []);
+  }, [generation]);
 
   if (isLoading || pokemonData.length === 0) {
     return <Loading size={64} color={theme.colors.yellow[500]} />;
@@ -41,9 +43,12 @@ export function Pokedex() {
         <div className="generationDiv">
           <TextStyled size="xlg">{params.generationid}ª Geração</TextStyled>
           <div>
-            <Button color="delete" onClick={() => history.back()}>
-              Voltar
-            </Button>
+            <Button
+              size={"small"}
+              color="delete"
+              onClick={() => history.back()}
+              text={"Voltar"}
+            />
           </div>
         </div>
         <div className="inputWrapper">
@@ -107,11 +112,7 @@ export function Pokedex() {
           </div>
         )}
         <BackToTop />
-        <div className="backButton">
-          <Button color="delete" onClick={() => navigate("/")}>
-            Voltar
-          </Button>
-        </div>
+        <NavButtons />
       </Container>
     );
   }

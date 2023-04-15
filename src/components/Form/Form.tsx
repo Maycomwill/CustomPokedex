@@ -153,13 +153,13 @@ export function Form() {
             </div>
           </RadiosDivWrapper>
           <div className="Button-Div">
-            <Button>
-              {isLoading ? (
+            {isLoading ? (
+              <Button text="">
                 <Loading color={theme.colors.gray[100]} size={30} />
-              ) : (
-                "Enviar"
-              )}
-            </Button>
+              </Button>
+            ) : (
+              <Button text="Enviar" />
+            )}
           </div>
         </form>
       </div>

@@ -32,6 +32,9 @@ const handleButtonColor = (color: string | undefined) => {
 
 export const ButtonStyled = styled.button<IButtonProps>`
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: ${({ color }) => handleButtonColor(color)};
   outline: none;
   border: .2rem solid rgb(0 0 0 / 0);

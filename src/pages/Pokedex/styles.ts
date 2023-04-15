@@ -2,7 +2,7 @@ import styled from "styled-components";
 import theme from "../../styles/theme";
 
 export const Container = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 100%;
 
   .pokemonCard-wrapper {
@@ -71,13 +71,5 @@ export const Container = styled.div`
     @media (max-width: 500px) {
       margin-top: 2.4rem;
     }
-  }
-
-
-  .backButton {
-    width: 10rem;
-    margin: auto;
-    margin-top: 1.6rem;
-    margin-bottom: 1.6rem;
   }
 `;
