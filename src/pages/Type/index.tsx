@@ -40,9 +40,7 @@ export function Type() {
             </TextStyled>
           </TextStyled>
           <div>
-            <Button color="delete" onClick={() => history.back()}>
-              Voltar
-            </Button>
+            <Button color="delete" onClick={() => history.back()} text="Voltar"/>
           </div>
         </div>
         <div className="pokemonCard-wrapper">
@@ -60,9 +58,8 @@ export function Type() {
           })}
         </div>
         <div className="backButton">
-            <Button color="delete" onClick={() => history.back()}>
-              Voltar
-            </Button>
+            <Button color="delete" onClick={() => history.back()} text="Voltar"/>
+
           </div>
           <BackToTop />
       </Container>
