@@ -1,6 +1,5 @@
-import React, { FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { usePokedex } from "../../hooks/usePokedex";
 import theme from "../../styles/theme";
 import { Button } from "../Button/Button";
 import { Loading } from "../Loading/Loading";
@@ -8,7 +7,6 @@ import { TextStyled } from "../Text/styles";
 import { Container, RadiosDivWrapper } from "./styles";
 
 export function Form() {
-  const { getGenerationFromUserChoice } = usePokedex();
   const [generation, setGeneration] = useState<string>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -26,7 +24,6 @@ export function Form() {
     } catch (error) {
       console.log("erro ao escolher opção");
     } finally {
-
     }
   }
 
@@ -145,11 +142,11 @@ export function Form() {
             <div className="radio-wrapper">
               <div>
                 <input
-                  disabled
                   type="radio"
                   name="generation"
                   id="gen9"
                   value="9"
+                  onChange={(e) => setGeneration(e.target.value)}
                 />
                 <label htmlFor="gen9">Geração 9</label>
               </div>

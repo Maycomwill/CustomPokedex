@@ -78,6 +78,10 @@ export const Container = styled.button<IContainerProps>`
     }
   };
 
+  .spriteDiv img{
+    max-width: 10rem;
+  }
+
   .pokemonInfoDiv{
     display: flex;
     flex-direction: column;

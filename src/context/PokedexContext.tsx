@@ -131,9 +131,13 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
         break;
 
       case "8":
-        limitURL = "89";
+        limitURL = "96";
         offsetURL = "809";
         break;
+
+      case "9":
+        limitURL = "105";
+        offsetURL = "905";
     }
 
     // Console para mostrar o limit e offset usados na requisição da API
@@ -172,16 +176,29 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
 
   async function getPokemonInformation(pokemonUrl: string) {
     return await axios.get(pokemonUrl).then(function (response) {
-      return rawPokemonData.push({
-        name: response.data.name,
-        id: response.data.id,
-        sprite: response.data.sprites.front_default,
-        types: response.data.types.map((type: any) => {
-          return {
-            type: type.type.name,
-          };
-        }),
-      });
+      if (response.data.sprites.front_default != null) {
+        return rawPokemonData.push({
+          name: response.data.name,
+          id: response.data.id,
+          sprite: response.data.sprites.front_default,
+          types: response.data.types.map((type: any) => {
+            return {
+              type: type.type.name,
+            };
+          }),
+        });
+      } else {
+        return rawPokemonData.push({
+          name: response.data.name,
+          id: response.data.id,
+          sprite: response.data.sprites.other["official-artwork"].front_default,
+          types: response.data.types.map((type: any) => {
+            return {
+              type: type.type.name,
+            };
+          }),
+        });
+      }
     });
   }
 
@@ -228,7 +245,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
       height: result.data.height,
       sprite_default: result.data.sprites.front_default,
       sprite_shiny: result.data.sprites.front_shiny,
-      official_artwork: result.data.sprites.other.dream_world.front_default,
+      official_artwork: result.data.sprites.other["official-artwork"].front_default,
       stats: result.data.stats.map((stat: statsProps) => {
         return {
           base_stat: stat.base_stat,
