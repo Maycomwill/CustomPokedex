@@ -16,7 +16,7 @@ export function Type() {
   useEffect(() => {
     setIsLoading(true);
     getTypeData(params.typename);
-    setTimeout(()=>{setIsLoading(false)}, 500)
+    setTimeout(()=>{setIsLoading(false)}, 2000)
   }, []);
 
   if (isLoading) {

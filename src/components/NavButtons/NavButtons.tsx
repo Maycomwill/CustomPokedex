@@ -66,7 +66,7 @@ function NavButtons() {
             size={"small"}
             color="delete"
             onClick={() => navigate("/")}
-            text={"Home"}
+            text={"Voltar"}
           />
           <Button
             size={"small"}

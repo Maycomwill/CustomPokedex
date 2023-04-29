@@ -4,7 +4,7 @@ import theme from "../../styles/theme";
 export const Container = styled.div`
   width: 6.4rem;
   height: 6.4rem;
-  background-color: gray;
+  background-color: ${theme.colors.gray[500]};
   padding: 0.4rem;
   border-radius: 100%;
   display: flex;
@@ -24,14 +24,21 @@ export const Container = styled.div`
     border: 0.2rem solid ${theme.colors.yellow[500]};
   }
 
-  @media (max-width: 500px){
-    opacity: .6;
+  :hover {
+    background-color: ${theme.colors.gray[600]};
+  }
+
+  @media (max-width: 500px) {
+    opacity: 0.6;
     margin-right: 1rem;
     margin-bottom: 1.6rem;
 
     :active {
-    opacity: 0.8;
-    border: 0.2rem solid ${theme.colors.yellow[500]};
-  }
+      opacity: 0.8;
+      border: 0.2rem solid ${theme.colors.yellow[500]};
+    }
+    :hover {
+      background-color: ${theme.colors.gray[600]};
+    }
   }
 `;

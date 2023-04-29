@@ -22,7 +22,7 @@ export function Ability() {
     setIsLoading(false);
   }, []);
 
-  if (isLoading === true) {
+  if(pokemonAbilityCommon.length == 0) {
     return <Loading color={theme.colors.yellow[500]} size={64} />;
   } else {
     return (
