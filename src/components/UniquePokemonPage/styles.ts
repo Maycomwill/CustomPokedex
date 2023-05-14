@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import theme from '../../styles/theme';
-import { backgroundColorType } from '../PokemonCard/styles'
+import styled from "styled-components";
+import theme from "../../styles/theme";
+import { backgroundColorType } from "../PokemonCard/styles";
 
 interface IUniqueContainerProps {
-  firstType?: string
+  firstType?: string;
 }
 
 export const Container = styled.div<IUniqueContainerProps>`
@@ -18,154 +18,160 @@ export const Container = styled.div<IUniqueContainerProps>`
   background: ${theme.colors.gray[800]};
   margin-bottom: 2.4rem;
 
-  @media (max-width: 500px){
+  @media (max-width: 500px) {
     flex-direction: column;
     padding: 2rem;
     width: 90%;
     overflow-x: hidden;
-  };
-
-.infoWrapper{
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: .8rem;
-  margin-bottom: 2.4rem;
-
-  @media (max-width: 500px){
-    flex-direction: column;
   }
 
-  .pokedexInfo{
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(10rem, 1fr));
-    place-items: center;
-    grid-gap: .4rem;
-
-    @media (max-width: 500px){
-      display: grid;
-      grid-template-columns: repeat(2, minmax(10rem, 1fr));
-      grid-gap: .8rem;
-      width: 100%;
-      margin: auto;
-    }
-  }
-};
-
-.spritesDiv{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 2.4rem
-};
-
-.typesWrapper{
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: .4rem;
-};
-
-.typesContainer{
-  display: flex;
-  gap: .4rem;
-};
-
-.abilitiesContainer{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  @media (max-width: 500px){
-    text-align: center;
-    width: 100%;
-    margin-bottom: 2rem
-  }
-}
-
-.abilityName{
-  cursor: pointer;
-
-  :hover{
-   color: ${theme.colors.yellow[500]}
-  }
-}
-
-.abilities{
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  gap: 3.2rem;
-
-
-  @media (max-width: 500px){
+  .infoWrapper {
     width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-bottom: 2.4rem;
+
+    @media (max-width: 500px) {
+      flex-direction: column;
+    }
+
+    .pokedexInfo {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(10rem, 1fr));
+      place-items: center;
+      grid-gap: 0.4rem;
+
+      @media (max-width: 500px) {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(10rem, 1fr));
+        grid-gap: 0.8rem;
+        width: 100%;
+        margin: auto;
+      }
+    }
   }
-}
 
-.baseStatDiv{
-  width: 100%;
-  background-color: ${theme.colors.gray[600]};
-  border-radius: .4rem;
-  div span{
-    padding: .4rem;
+  .spritesDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2.4rem;
   }
 
-}
+  .spritesDiv img {
+    width: 30rem;
+    height: 30rem;
 
-.statsWrapper{
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+    @media (max-width: 500px) {
+      width: 18rem;
+      height: 18rem;
+    }
+  }
 
-  @media (max-width: 500px){
+  .typesWrapper {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
   }
-}
 
-.statsContainer{
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(10rem, 1fr));
-  place-items: center;
-  grid-gap: 1.6rem;
-  padding: 0 2.4rem;
+  .typesContainer {
+    display: flex;
+    gap: 0.4rem;
+  }
 
+  .abilitiesContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    @media (max-width: 500px) {
+      text-align: center;
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+  }
 
-  @media (max-width: 500px){
+  .abilityName {
+    cursor: pointer;
+
+    :hover {
+      color: ${theme.colors.yellow[500]};
+    }
+  }
+
+  .abilities {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 3.2rem;
+
+    @media (max-width: 500px) {
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+  }
+
+  .baseStatDiv {
+    width: 100%;
+    background-color: ${theme.colors.gray[600]};
+    border-radius: 0.4rem;
+    div span {
+      padding: 0.4rem;
+    }
+  }
+
+  .statsWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 500px) {
+      width: 100%;
+    }
+  }
+
+  .statsContainer {
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(2, minmax(10rem, 1fr));
+    grid-template-columns: repeat(3, minmax(10rem, 1fr));
+    place-items: center;
     grid-gap: 1.6rem;
-    padding: 0 0.2rem
-  }
-}
+    padding: 0 2.4rem;
 
-.baseStatWrapper{
-  width: 100%;
-  margin: auto;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
-  gap: .2rem;
-  padding-top: .8rem;
+    @media (max-width: 500px) {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(10rem, 1fr));
+      grid-gap: 1.6rem;
+      padding: 0 0.2rem;
+    }
   }
 
-  .backButton{
+  .baseStatWrapper {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding-top: 0.8rem;
+  }
+
+  .backButton {
     width: 10rem;
     margin: auto;
     margin-top: 2.4rem;
   }
-
 `;

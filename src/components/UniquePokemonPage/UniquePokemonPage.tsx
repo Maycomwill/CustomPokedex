@@ -53,8 +53,6 @@ function UniquePokemonPage({
     <Container>
       <div className="spritesDiv">
         <img
-          width={200}
-          height={200}
           src={checkingIMG(official_artwork)}
           alt={`${name} image`}
         />
