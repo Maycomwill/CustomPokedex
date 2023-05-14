@@ -7,6 +7,7 @@ import theme from "../../styles/theme";
 import { PokemonCard } from "../../components/PokemonCard/PokemonCard";
 import { Container } from "./styles";
 import { Button } from "../../components/Button/Button";
+import { BackToTop } from "../../components/BackToTop/BackToTop";
 
 export function Ability() {
   const params = useParams();
@@ -32,6 +33,7 @@ export function Ability() {
             <TextStyled cap="true" size="xxl" color="yellow" weight="bold">
               {abilityInfo?.name.split("-").join(" ")}
             </TextStyled>
+            
           </div>
           <div className="descriptionDiv">
             <TextStyled size="xlg">
@@ -63,6 +65,7 @@ export function Ability() {
             <Button color="delete" onClick={() => navigate(-1)} text="Voltar"/>
           </div>
         </>
+        <BackToTop />
       </Container>
     );
   }

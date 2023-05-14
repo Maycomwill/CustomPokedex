@@ -39,8 +39,13 @@ Uma pokedex customizada, onde você pode pesquisar os pokemons de acordo com as 
  <img src="https://github.com/Maycomwill/CustomPokedex/blob/master/public/Prints/2.jpg?raw=true" width: 700px/>
  </div>
 
- <div align="center">
+  <div align="center">
  <img src="https://github.com/Maycomwill/CustomPokedex/blob/master/public/Prints/3.jpg?raw=true" width: 700px/>
+ </div>
+
+ <div align="center" style="display: flex; flex-direction: row; align-items: center; justify-content: center">
+  <img align="top" src="https://github.com/Maycomwill/CustomPokedex/blob/master/public/Prints/4.jpg?raw=true" width: 350px />
+  <img align="top" src="https://github.com/Maycomwill/CustomPokedex/blob/master/public/Prints/5.jpg?raw=true" width: 350px />
  </div>
 
 ## 📝 License
