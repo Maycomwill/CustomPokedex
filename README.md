@@ -40,7 +40,7 @@ Uma pokedex customizada, onde você pode pesquisar os pokemons de acordo com as 
  </div>
 
   <div align="center">
- <img src="https://github.com/Maycomwill/CustomPokedex/blob/master/public/Prints/3.jpg?raw=true" width: 700px/>
+ <img src="https://github.com/Maycomwill/CustomPokedex/blob/master/public/Prints/dragon-type.jpg?raw=true" width: 700px/>
  </div>
 
  <div align="center" style="display: flex; flex-direction: row; align-items: center; justify-content: center">
