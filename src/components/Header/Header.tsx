@@ -1,9 +1,13 @@
 import MWLogo from "../../assets/logo.svg";
 import { Container } from "./styles";
 
-export function Header() {
+interface IHeaderProps {
+  id: string
+}
+
+export function Header({id}: IHeaderProps) {
   return (
-    <Container>
+    <Container id={id}>
       <div id="logos">
         <a href="/">
           <img

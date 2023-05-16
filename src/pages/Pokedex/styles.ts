@@ -59,7 +59,7 @@ export const Container = styled.div`
 
         :focus {
           cursor: text;
-          border: 0.2rem solid ${theme.colors.yellow[500]};
+          border: 0.2rem solid ${theme.colors.primary[500]};
         }
 
         :target {

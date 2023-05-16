@@ -6,7 +6,7 @@ export interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
   text: string;
   size?: "small" | "big" | undefined;
-  color?: "gray" | "delete" | "standard";
+  color?: "gray" | "delete" | "standard" | "primary";
 }
 
 export function Button({ children, text, size, color, ...rest }: IButtonProps) {

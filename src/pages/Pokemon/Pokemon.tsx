@@ -23,7 +23,7 @@ export function Pokemon() {
   }, []);
 
   if (isLoading) {
-    return <Loading color={theme.colors.yellow[500]} size={64} />;
+    return <Loading color={theme.colors.primary[500]} size={64} />;
   } else {
     return (
       <UniquePokemonPage

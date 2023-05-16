@@ -21,7 +21,7 @@ export const Container = styled.div`
 
   :active {
     opacity: 0.4;
-    border: 0.2rem solid ${theme.colors.yellow[500]};
+    border: 0.2rem solid ${theme.colors.primary[500]};
   }
 
   :hover {
@@ -35,7 +35,7 @@ export const Container = styled.div`
 
     :active {
       opacity: 0.8;
-      border: 0.2rem solid ${theme.colors.yellow[500]};
+      border: 0.2rem solid ${theme.colors.primary[500]};
     }
     :hover {
       background-color: ${theme.colors.gray[600]};

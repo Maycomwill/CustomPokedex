@@ -131,7 +131,7 @@ function UniquePokemonPage({
                     style={{
                       width: `${stat.base_stat}%`,
                       maxWidth: "100%",
-                      backgroundColor: `${theme.colors.purple[500]}`,
+                      backgroundColor: `${theme.colors.primary[500]}`,
                       borderRadius: ".4rem",
                     }}
                   >

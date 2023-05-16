@@ -1,7 +1,25 @@
-import { createGlobalStyle } from 'styled-components';
+import { ThemeProps, createGlobalStyle } from 'styled-components';
 import theme from './theme';
 
-const GlobalStyle = createGlobalStyle`
+import { DefaultTheme } from "styled-components";
+
+interface MyTheme extends DefaultTheme {
+  background: string;
+  text: string;
+}
+
+export const lightTheme: MyTheme = {
+  background: '#f5f5f5',
+  text: '#212121'
+};
+
+export const darkTheme: MyTheme = {
+  background: '#212121',
+  text: '#f5f5f5'
+};
+
+
+const GlobalStyle = createGlobalStyle<ThemeProps<MyTheme>>`
 
   *{
     margin: 0;
@@ -14,7 +32,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background: ${theme.colors.gray[900]};
+    background: ${(props)=> props.theme.background};
+    color: ${(props)=> props.theme.text};
     overflow-x: hidden;
 
     /* width */
@@ -41,7 +60,6 @@ const GlobalStyle = createGlobalStyle`
   body * {
     font-family: 'Poppins', Sans-Serif;
     font-size: 1rem;
-    color: ${theme.colors.gray[100]}
   }
 `;
 

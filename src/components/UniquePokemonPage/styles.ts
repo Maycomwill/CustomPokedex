@@ -102,7 +102,7 @@ export const Container = styled.div<IUniqueContainerProps>`
     cursor: pointer;
 
     :hover {
-      color: ${theme.colors.yellow[500]};
+      color: ${theme.colors.primary[500]};
     }
   }
 

@@ -45,7 +45,7 @@ export function backgroundColorType(color?: string){
     case "water":
       return `${theme.backgroundCard.water}`;
     default:
-      return `${theme.colors.purple[200]}`
+      return `${theme.colors.accent[200]}`
   }
 }
 

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import theme from '../../styles/theme';
-import { tint } from 'polished'
+import { lighten, saturate, shade } from 'polished'
 import { IButtonProps } from './Button';
 
 const handleSizeButton = (size: string | undefined) => {
@@ -19,14 +19,16 @@ const handleSizeButton = (size: string | undefined) => {
 
 const handleButtonColor = (color: string | undefined) => {
   switch (color) {
+    case "primary":
+      return `${theme.colors.primary[500]}`;
     case "gray":
       return `${theme.colors.gray[700]}`;
     case "delete":
       return `${theme.colors.red}`;
     case "standard":
-      return `${theme.colors.purple[500]}`;
+      return `${theme.colors.accent[300]}`;
     default:
-      return `${theme.colors.purple[500]}`
+      return `${theme.colors.accent[300]}`
   }
 }
 
@@ -41,13 +43,25 @@ export const ButtonStyled = styled.button<IButtonProps>`
   border-radius: .4rem;
   padding: ${({ size }) => handleSizeButton(size)};
   cursor: pointer;
+  transition: transform .2s ease;
 
   :hover{
-    background-color: ${({ color }) => tint(0.2, handleButtonColor(color))}
+    background-color: ${({ color }) => {if(color == "delete"){
+      return `${lighten(0.2, handleButtonColor(color))}`
+    }else {
+      return `${saturate(0.2, handleButtonColor(color))}`
+    }}};
+    transform: translateY(-.2rem)
   };
 
 
   :focus {
-      border: .2rem solid ${theme.colors.yellow[500]};
+      border: .2rem solid ${({color}) => {if(color == "standard" || color == undefined){
+        return `${theme.colors.primary[200]}`
+      }else if(color == "delete"){
+        return  `${theme.colors.red}`
+      }else {
+        return `${theme.colors.accent[200]}`
+      }}};
   }
 `;

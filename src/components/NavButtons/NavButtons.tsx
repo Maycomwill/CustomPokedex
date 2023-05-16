@@ -13,7 +13,7 @@ function NavButtons() {
     return (
       <Container>
         <div className="navButtons">
-          <Button id="zeroGen" text={""}></Button>
+          <Button color="primary" id="zeroGen" text={""}></Button>
           <Button
             size={"small"}
             color="delete"
@@ -21,6 +21,7 @@ function NavButtons() {
             text={"Home"}
           />
           <Button
+            color="primary"
             size={"small"}
             text={`Geração ${Number(generation) + 1}`}
             onClick={() => navigate(`/pokedex/${Number(generation) + 1}`)}
@@ -35,6 +36,7 @@ function NavButtons() {
       <Container>
         <div className="navButtons">
           <Button
+            color="primary"
             size={"small"}
             text={`Geração ${Number(generation) - 1}`}
             onClick={() => navigate(`/pokedex/${Number(generation) - 1}`)}
@@ -47,7 +49,7 @@ function NavButtons() {
             onClick={() => navigate("/")}
             text={"Home"}
           />
-          <Button id="zeroGen" text={""}></Button>
+          <Button color="primary" id="zeroGen" text={""}></Button>
         </div>
       </Container>
     );
@@ -56,6 +58,7 @@ function NavButtons() {
       <Container>
         <div className="navButtons">
           <Button
+            color="primary"
             size={"small"}
             text={`Geração ${Number(generation) - 1}`}
             onClick={() => navigate(`/pokedex/${Number(generation) - 1}`)}
@@ -69,6 +72,7 @@ function NavButtons() {
             text={"Voltar"}
           />
           <Button
+            color="primary"
             size={"small"}
             text={`Geração ${Number(generation) + 1}`}
             onClick={() => navigate(`/pokedex/${Number(generation) + 1}`)}

@@ -33,8 +33,7 @@ export function Form() {
 
   return (
     <Container>
-      <div>
-        <form onSubmit={handleGenerationSelected}>
+        <form className="form" onSubmit={handleGenerationSelected}>
           <fieldset>
             <legend>
               <TextStyled size="xxl" weight="semi-bold">
@@ -162,7 +161,6 @@ export function Form() {
             )}
           </div>
         </form>
-      </div>
     </Container>
   );
 }

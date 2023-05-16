@@ -36,7 +36,7 @@ export function Pokedex() {
   }, [generation]);
 
   if (isLoading || pokemonData.length === 0) {
-    return <Loading size={64} color={theme.colors.yellow[500]} />;
+    return <Loading size={64} color={theme.colors.primary[500]} />;
   } else {
     return (
       <Container>

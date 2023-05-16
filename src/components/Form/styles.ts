@@ -5,8 +5,10 @@ import theme from '../../styles/theme';
 export const Container = styled.div`
   width: 100%;
   height: 100%;
-  margin: auto;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   form {
     display: flex;
     flex-direction: column;
@@ -42,7 +44,7 @@ fieldset{
 }
 
 .radio-wrapper > div * {
-  color: ${theme.colors.purple[200]};
+  color: ${theme.colors.primary[200]};
   font-size: 2rem;
   text-align: center;
 
@@ -54,7 +56,7 @@ fieldset{
 
 .radio-wrapper {
   border-radius: .4rem;
-  border: .2rem solid ${theme.colors.yellow[500]};
+  border: .2rem solid ${theme.colors.accent[300]};
   padding: 1.2rem;
   width: 75%;
 
@@ -66,7 +68,7 @@ fieldset{
 
 .radio-wrapper input[type="radio"] {
   appearance: none;
-  border: .1rem solid ${theme.colors.purple[200]};
+  border: .1rem solid ${theme.colors.primary[200]};
   height: 2.8rem;
   width: 2.8rem;
   border-radius: 50%;
@@ -78,12 +80,16 @@ fieldset{
 }
 
 .radio-wrapper input[type="radio"]:checked {
-  background-image: radial-gradient(${theme.colors.purple[900]} 35%, ${theme.colors.purple[200]} 40%);
+  background-image: radial-gradient(${theme.colors.accent[300]} 35%, ${theme.colors.accent[100]} 40%);
 }
 
 .radio-wrapper:not(:has(:checked)) {
   opacity: .6;
-  border: .2rem solid ${theme.colors.purple[500]};
+  border: .2rem solid ${theme.colors.primary[500]};
+}
+
+.radio-wrapper:has(:checked) > div *  {
+  color: ${theme.colors.accent[200]};
 }
 
 .radio-wrapper:has(:disabled){
