@@ -7,6 +7,7 @@ import { PokemonCard } from "../../components/PokemonCard/PokemonCard";
 import { TextStyled } from "../../components/Text/styles";
 import { Button } from "../../components/Button/Button";
 import { BackToTop } from "../../components/BackToTop/BackToTop";
+import theme from "../../styles/theme";
 
 export function Type() {
   const params = useParams();
@@ -20,7 +21,7 @@ export function Type() {
   }, []);
 
   if (isLoading) {
-    return <Loading size={64} color="yellow" />;
+    return <Loading color={theme.colors.primary[500]} size={64} />;
   } else {
     return (
       <Container>
@@ -29,7 +30,7 @@ export function Type() {
             Todos os Pokemon que são do tipo:{" "}
             <TextStyled
               transform="uppercase"
-              color="yellow"
+              color="primary"
               size="xlg"
               weight="bold"
             >

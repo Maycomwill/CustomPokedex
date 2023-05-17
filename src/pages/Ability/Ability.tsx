@@ -24,16 +24,16 @@ export function Ability() {
   }, []);
 
   if(pokemonAbilityCommon.length == 0) {
-    return <Loading color={theme.colors.yellow[500]} size={64} />;
+    return <Loading color={theme.colors.primary[500]} size={64} />;
   } else {
     return (
       <Container>
         <>
           <div className="abilityName">
-            <TextStyled cap="true" size="xxl" color="yellow" weight="bold">
+            <TextStyled cap="true" size="xxl" color="primary" weight="bold">
               {abilityInfo?.name.split("-").join(" ")}
             </TextStyled>
-            
+
           </div>
           <div className="descriptionDiv">
             <TextStyled size="xlg">
