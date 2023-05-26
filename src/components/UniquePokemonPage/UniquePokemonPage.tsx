@@ -52,10 +52,7 @@ function UniquePokemonPage({
   return (
     <Container>
       <div className="spritesDiv">
-        <img
-          src={checkingIMG(official_artwork)}
-          alt={`${name} image`}
-        />
+        <img src={checkingIMG(official_artwork)} alt={`${name} image`} />
       </div>
       <div className="infoWrapper">
         <div className="pokedexInfo">
@@ -144,7 +141,7 @@ function UniquePokemonPage({
         </div>
       </div>
       <div className="backButton">
-        <Button color="delete" onClick={() => navigate(-1)} text={"Voltar"}/>
+        <Button color="delete" onClick={() => navigate(-1)} text={"Voltar"} />
       </div>
     </Container>
   );
