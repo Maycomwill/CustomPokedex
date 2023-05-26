@@ -4,7 +4,7 @@ import theme from '../../styles/theme';
 
 export interface ITextProps extends React.HTMLAttributes<HTMLSpanElement> {
   children: ReactNode;
-  // size?: "1rem" | "1.4rem" | "1.6rem" | "2rem" | "2.4rem" | "3rem";
+  //size?: "1rem" | "1.4rem" | "1.6rem" | "2rem" | "2.4rem" | "3rem";
   size?: 'xsm' | 'sm' | 'md' | 'lg' | 'xlg' | 'xxl';
   color?: "accent" | "gray" | "primary" | "white" | undefined;
   transform?: "capitalize" | "uppercase" | "lowercase" | undefined;
