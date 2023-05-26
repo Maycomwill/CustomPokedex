@@ -1,7 +1,9 @@
 import { createContext, ReactNode, useState } from "react";
 import { pokeapi } from "../services/api";
 import axios from "axios";
+import { AbilityInfoProps, PokedexDataProps, PokedexProviderProps, PokemonDataProps, statsProps, UniquePokemonData } from "../interfaces/pokemonInterfaces";
 
+//Interface do Provedor
 export interface PokedexContextDataProps {
   getGenerationFromUserChoice: (generation: string | undefined) => void;
   getPokedexList: (generation: string | undefined) => void;
@@ -14,63 +16,10 @@ export interface PokedexContextDataProps {
   pokemonAbilityCommon: PokemonDataProps[];
 }
 
-interface PokedexDataProps {
-  name: string;
-  url: string;
-}
-
-export interface PokemonDataProps {
-  name: string;
-  id: number;
-  sprite: string;
-  types: typeProps[];
-}
-
-export interface typeProps {
-  type: string;
-}
-
-interface PokedexProviderProps {
-  children: ReactNode;
-}
-
-export interface UniquePokemonData {
-  name: string;
-  id: number;
-  sprite_default: string;
-  sprite_shiny: string;
-  official_artwork: string;
-  types: typeProps[];
-  weight: number;
-  height: number;
-  stats: statsProps[];
-  abilities: abilityProps[];
-}
-
-interface abilityProps {
-  ability: {
-    name: string;
-    url: string;
-  };
-  slot: number;
-}
-
-interface statsProps {
-  base_stat: number;
-  effort: string;
-  stat: {
-    name: string;
-  };
-}
-
-interface AbilityInfoProps {
-  name: string;
-  description: string;
-  pokemon?: PokemonDataProps[];
-}
-
+//Criação do contexto
 export const PokedexContext = createContext({} as PokedexContextDataProps);
 
+//Criação do provedor do contexto, que será utilizado na criação do hook
 export function PokedexContextProvider({ children }: PokedexProviderProps) {
   let rawPokemonData: PokemonDataProps[] = [];
   const [abilityInfo, setAbilityInfo] = useState<AbilityInfoProps | undefined>(
@@ -84,11 +33,13 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     {} as UniquePokemonData
   );
 
+  //Função que recebe do front-end a escolha inicial do usuário
   function getGenerationFromUserChoice(generation: string | undefined) {
     console.log("Geração selecionada pelo usuário:", generation);
     getPokedexList(generation);
   }
 
+  //Função inicial utilizada para determinar os parâmetros da API definindo a geração de Pokemon que será buscada
   async function getPokedexList(generation: string | undefined) {
     setPokemonData([]);
     let limitURL = "0";
@@ -168,12 +119,14 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     });
   }
 
+  // Esta função retorna os resultados de todas as requisições quando prontas
   function waitingPromises(results: PokedexDataProps[]) {
-    return Promise.all(
+    return axios.all(
       results.map((pokemon) => getPokemonInformation(pokemon.url))
     );
   }
 
+  // Esta função busca na api os dados do pokemon e retorna os dados já formatados
   async function getPokemonInformation(pokemonUrl: string) {
     return await axios.get(pokemonUrl).then(function (response) {
       if (response.data.sprites.front_default != null) {
@@ -202,17 +155,9 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     });
   }
 
-  // function getPokemonInformation(pokemonName: string) {
-  //   return pokeapi.get(`pokemon/${pokemonName}`).then((result) => {
-  //     storagePokemonInformation(result.data);
-  //   });
-  // }
-  // async function getPokemonInformation(pokemonName: string) {
-  //   const result = await pokeapi.get(`pokemon/${pokemonName}`);
-  //   storagePokemonInformation(result.data);
-  // }
-
+  // Esta função salva no estado os dados dos pokemon
   function storagePokemonInformation(pokemon: any) {
+
     // Console para mostrar as informações individuais dos pokemon
     // console.log("informações dos pokemon chegando na última função: ", pokemon);
 
@@ -231,6 +176,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     ]);
   }
 
+  // Esta função salva no estado os dados de um único pokemon
   async function getPokemonData(pokemonName: string | undefined) {
     const result = await pokeapi.get(`pokemon/${pokemonName}`);
     setUniquePokemonData({
@@ -267,6 +213,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     });
   }
 
+  //Esta função busca na api os dados de uma habilidade e salva esses dados em um estado
   async function getAbilityInfo(ability: string | undefined) {
     setPokemonAbilityCommon([]);
     let description = "";
@@ -292,6 +239,8 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     storagePokemonAbilityCommon();
   }
 
+
+  //Esta função organiza e retorna os pokemon que possuem a mesma habilidade
   function storagePokemonAbilityCommon() {
     setTimeout(() => {
       rawPokemonData
@@ -317,6 +266,8 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     }, 500);
   }
 
+
+  //Esta função busca na api os dados de um tipo e armazena os dados dos pokemon que possuem o mesmo tipo
   async function getTypeData(type: string | undefined) {
     const consult = await pokeapi.get(`/type/${type}`);
     const pokemonTypeCommon = consult.data.pokemon;
@@ -335,6 +286,8 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
   }
 
   return (
+
+  //Retorno do provedor do contexto, disponibilizando todas as funções e variáveis necessárias para montar os componentes
     <PokedexContext.Provider
       value={{
         getGenerationFromUserChoice,
