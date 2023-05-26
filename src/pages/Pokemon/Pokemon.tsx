@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Loading } from "../../components/Loading/Loading";
-import { TextStyled } from "../../components/Text/styles";
-import { TypeCard } from "../../components/TypeCard/TypeCard";
 import UniquePokemonPage from "../../components/UniquePokemonPage/UniquePokemonPage";
 import { usePokedex } from "../../hooks/usePokedex";
 import theme from "../../styles/theme";
-import { Container } from "./styles";
 
 export function Pokemon() {
   const { getPokemonData, uniquePokemonData } = usePokedex();

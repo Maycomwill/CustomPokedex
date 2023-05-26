@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import { TextStyled } from "../Text/styles";
 import { Container, ContainerButton } from "./styles";
 

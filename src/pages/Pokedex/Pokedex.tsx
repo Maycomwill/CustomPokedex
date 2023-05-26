@@ -7,7 +7,7 @@ import { TextStyled } from "../../components/Text/styles";
 import { usePokedex } from "../../hooks/usePokedex";
 import theme from "../../styles/theme";
 import { Container } from "./styles";
-import { PokemonDataProps } from "../../context/PokedexContext";
+import { PokemonDataProps } from "../../interfaces/pokemonInterfaces";
 import { BackToTop } from "../../components/BackToTop/BackToTop";
 import { CaretLeft, CaretRight } from "phosphor-react";
 import NavButtons from "../../components/NavButtons/NavButtons";

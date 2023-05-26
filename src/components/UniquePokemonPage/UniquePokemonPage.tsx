@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { UniquePokemonData } from "../../context/PokedexContext";
+import { UniquePokemonData } from "../../interfaces/pokemonInterfaces";
 import theme from "../../styles/theme";
 import { Button } from "../Button/Button";
 import { TextStyled } from "../Text/styles";

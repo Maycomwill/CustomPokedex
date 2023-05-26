@@ -1,5 +1,5 @@
 import { Container } from "./styles";
-import { typeProps } from "../../context/PokedexContext";
+import { typeProps } from "../../interfaces/pokemonInterfaces";
 import { TextStyled } from "../Text/styles";
 import { TypeCard } from "../TypeCard/TypeCard";
 import { useNavigate } from "react-router-dom";

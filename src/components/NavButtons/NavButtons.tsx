@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "../Button/Button";
 import { CaretLeft, CaretRight } from "phosphor-react";
 import { useNavigate, useParams } from "react-router-dom";
