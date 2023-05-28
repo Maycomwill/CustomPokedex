@@ -29,8 +29,6 @@ export const Container = styled.div`
 
 
   @media (max-width: 500px) {
-    text-align: justify;
-
     .card-wrapper {
       display: flex;
       flex-direction: column;
