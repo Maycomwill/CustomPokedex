@@ -10,6 +10,7 @@ import { Loading } from "../../components/Loading/Loading";
 import theme from "../../styles/theme";
 import { TypesForm } from "../../components/TypesForm/TypesForm";
 import { BackToTop } from "../../components/BackToTop/BackToTop";
+import { Spacer } from "../../components/Spacer/Spacer";
 
 export function Home() {
   const screenWidth: number = screen.width;
@@ -77,11 +78,12 @@ export function Home() {
         </form>
       </div>
       <div className="filters-wrapper">
+        <Spacer className="spacer1"/>
         <div className="regions-wrapper">
           <RegionsForm />
         </div>
+        <Spacer className="spacer2"/>
         <div className="types-wrapper">
-          <TextStyled>Você pode filtrar os pokemon por tipos</TextStyled>
           <TypesForm />
         </div>
       </div>

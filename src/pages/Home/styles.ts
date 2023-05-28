@@ -8,7 +8,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1.6rem 1.2rem;
+  padding: .4rem 1.2rem;
 
   .search-bar {
     width: 100%;
@@ -52,7 +52,7 @@ export const Container = styled.div`
     display: block;
   }
 
-  .regions-wrapper {
+  .regions-wrapper, .filters-wrapper {
     width: 100%;
     text-align: center;
   }
@@ -65,10 +65,6 @@ export const Container = styled.div`
     gap: 0.8rem;
   }
 
-  .filters-wrapper {
-    width: 80%;
-  }
-
   .types-wrapper {
     width: 100%;
     display: flex;
@@ -79,14 +75,20 @@ export const Container = styled.div`
     gap: 1.2rem;
   }
 
-  .types-wrapper, .regions-wrapper {
+  .types-wrapper, .regions-wrapper, .spacer1, .spacer2 {
     animation: upSurge 1s 0.2s ease-out backwards;
   }
 
   .filters-wrapper div:nth-child(1) {
-    animation-delay: 0.4s;
+    animation-delay: 0.2s;
   }
   .filters-wrapper div:nth-child(2) {
+    animation-delay: 0.4s;
+  }
+  .filters-wrapper div:nth-child(3) {
+    animation-delay: 0.6s;
+  }
+  .filters-wrapper div:nth-child(4) {
     animation-delay: 0.8s;
   }
 

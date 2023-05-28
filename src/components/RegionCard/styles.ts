@@ -58,7 +58,7 @@ export const Container = styled.button<ContainerProps>`
   border-radius: 0.4rem;
   position: relative;
   width: 100%;
-  padding: 2.4rem 0;
+  padding: 3.6rem 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
