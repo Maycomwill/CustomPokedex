@@ -28,4 +28,11 @@ export const Container = styled.div`
       border: .2rem solid rgba(0, 0, 0, 0);
   }
   }
+
+  @media (max-width: 500px){
+
+  .navButtons Button {
+    max-width: 25%;
+  }
+  }
 `;

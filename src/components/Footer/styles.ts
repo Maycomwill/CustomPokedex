@@ -6,7 +6,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 1.6rem;
+  margin: 1.6rem .8rem;
 
   span > a {
     text-decoration: none;

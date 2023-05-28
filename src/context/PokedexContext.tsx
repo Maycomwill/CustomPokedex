@@ -178,7 +178,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
 
   // Esta função salva no estado os dados de um único pokemon
   async function getPokemonData(pokemonName: string | undefined) {
-    const result = await pokeapi.get(`pokemon/${pokemonName}`);
+    const result = await pokeapi.get(`pokemon/${pokemonName?.toLowerCase()}`);
     setUniquePokemonData({
       name: result.data.name,
       id: result.data.id,

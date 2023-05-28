@@ -8,12 +8,22 @@ export interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   animated?: boolean | undefined;
   size?: "small" | "big" | undefined;
   color?: "gray" | "delete" | "standard" | "primary";
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
 }
 
-export function Button({ children, text, size, color, animated, ...rest }: IButtonProps) {
-
+export function Button({
+  children,
+  text,
+  size,
+  color,
+  animated,
+  leftIcon,
+  rightIcon,
+  ...rest
+}: IButtonProps) {
   function handleSizeButton(size: string | undefined) {
-    switch(size){
+    switch (size) {
       case "big":
         return "xxl";
 
@@ -21,14 +31,24 @@ export function Button({ children, text, size, color, animated, ...rest }: IButt
         return "sm";
 
       case undefined:
-        return "md"
+        return "md";
     }
   }
 
   return (
-    <ButtonStyled color={color} size={size} animated={animated} text={text} {...rest}>
+    <ButtonStyled
+      color={color}
+      size={size}
+      animated={animated}
+      text={text}
+      leftIcon={leftIcon}
+      rightIcon={rightIcon}
+      {...rest}
+    >
+      {leftIcon}
       {children}
       <TextStyled size={handleSizeButton(size)}>{text}</TextStyled>
+      {rightIcon}
     </ButtonStyled>
   );
 }
