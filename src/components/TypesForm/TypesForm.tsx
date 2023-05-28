@@ -14,16 +14,16 @@ export function TypesForm() {
       <TypeCard pokemonType='fighting' pressable/>
       <TypeCard pokemonType='fire' pressable/>
       <TypeCard pokemonType='flying' pressable/>
-      <TypeCard pokemonType='grass' pressable/>
       <TypeCard pokemonType='ghost' pressable/>
+      <TypeCard pokemonType='grass' pressable/>
       <TypeCard pokemonType='ground' pressable/>
       <TypeCard pokemonType='ice' pressable/>
       <TypeCard pokemonType='normal' pressable/>
       <TypeCard pokemonType='poison' pressable/>
       <TypeCard pokemonType='psychic' pressable/>
-      <TypeCard pokemonType='water' pressable/>
-      <TypeCard pokemonType='steel' pressable/>
       <TypeCard pokemonType='rock' pressable/>
+      <TypeCard pokemonType='steel' pressable/>
+      <TypeCard pokemonType='water' pressable/>
     </Container>
   )
 }
