@@ -69,7 +69,7 @@ export const Container = styled.div`
     width: 80%;
   }
 
-  .types-wrapper{
+  .types-wrapper {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -85,7 +85,7 @@ export const Container = styled.div`
   }
 
   .filters-wrapper div:nth-child(1) {
-    animation-delay: .4s;
+    animation-delay: 0.4s;
   }
   .filters-wrapper div:nth-child(2) {
     animation-delay: 0.8s;
@@ -131,6 +131,10 @@ export const Container = styled.div`
 
     .search-form > button {
       width: 50%;
+    }
+
+    .filters-wrapper {
+      width: 95%;
     }
   }
 `;

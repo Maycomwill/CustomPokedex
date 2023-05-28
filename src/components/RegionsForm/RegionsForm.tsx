@@ -13,7 +13,7 @@ export function RegionsForm() {
 
   return (
     <Container>
-      <TextStyled>Navege pelas regiões do mundo pokemon:</TextStyled>
+      <TextStyled>Navege pelas regiões do mundo pokemon</TextStyled>
       <div className="card-wrapper">
         <RegionCard region={{ region_name: "kanto", number: 1 }} />
 

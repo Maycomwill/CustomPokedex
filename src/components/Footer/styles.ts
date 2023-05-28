@@ -6,10 +6,16 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: .8rem 0;
+  padding: 0.8rem 0;
 
-  span>a{
+  span > a {
     text-decoration: none;
-    color: ${theme.colors.gray[100]}
+    color: ${theme.colors.gray[100]};
+  }
+
+  @media (max-width: 500px) {
+    span > a {
+      font-size: 1.4rem;
+    }
   }
 `;

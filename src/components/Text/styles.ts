@@ -57,6 +57,6 @@ export const TextStyled = styled.span<ITextProps>`
   text-transform: ${({ cap }) => handleCapitilize(cap)};
 
   @media (max-width: 500px){
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
 `;
