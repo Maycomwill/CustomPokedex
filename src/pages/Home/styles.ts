@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import theme from "../../styles/theme";
 
 export const Container = styled.div`
   width: 100%;
@@ -11,56 +12,87 @@ export const Container = styled.div`
 
   .search-bar {
     width: 100%;
-    padding: 1.6rem 2.4rem;
+    padding: 1.2rem 2.4rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: dropDown 1s ease backwards;
   }
 
-  .search-bar > form {
+  .search-form {
     display: flex;
     gap: 1.2rem;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+  }
+
+  .search-input {
+    padding: 0.9rem 1.6rem;
+    width: 100%;
+    outline: none;
+    border: 0.1rem solid rgba(0, 0, 0, 0);
+    font-size: 1.6rem;
+    color: ${theme.colors.gray[100]};
+    text-align: center;
+    border-radius: 0.4rem;
+    background-color: ${theme.colors.gray[600]};
+
+    :focus-within {
+      border: 0.1rem solid ${theme.colors.primary[500]};
+    }
+    ::placeholder {
+      font-size: 1.6rem;
+      text-align: center;
+      color: ${theme.colors.gray[400]};
+    }
+  }
+
+  .search-button-wrapper {
+    display: block;
   }
 
   .regions-wrapper {
     width: 100%;
     text-align: center;
   }
-  form {
-    width: 100%;
+
+  .form-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
   }
-  form > div {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    grid-column-gap: 24px;
-    grid-row-gap: 24px;
+
+  @keyframes dropDown {
+    0% {
+      transform: translateY(-2rem);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateY(0rem);
+      opacity: 100;
+    }
   }
 
   @media (max-width: 500px) {
-
-    .search-bar > form {
+    .search-form {
       flex-direction: column;
       justify-content: center;
       align-items: center;
     }
 
-    .search-bar > form > input {
+    .search-form > input {
       width: 100%;
+      ::placeholder {
+        font-size: 1.4rem;
+      }
     }
 
-    .search-bar > form > button {
+    .search-form > button {
       width: 50%;
-    }
-
-    form {
-      padding: 0rem 1.2rem;
-    }
-
-    form > div {
-      display: flex;
-      flex-direction: column;
-      gap: 1.6rem;
     }
   }
 `;

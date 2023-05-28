@@ -22,7 +22,7 @@ export function Form() {
         window.location.reload;
       }
     } catch (error) {
-      console.log("erro ao escolher opção");
+      console.log("Erro ao escolher opção");
     } finally {
     }
   }

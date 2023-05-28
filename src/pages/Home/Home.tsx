@@ -1,48 +1,82 @@
+import { FormEvent, useState } from "react";
 import { Button } from "../../components/Button/Button";
 import { Form } from "../../components/Form/Form";
 import { RegionCard } from "../../components/RegionCard/RegionCard";
+import { RegionsForm } from "../../components/RegionsForm/RegionsForm";
 import { TextStyled } from "../../components/Text/styles";
 import { Container } from "./styles";
+import { useNavigate } from "react-router-dom";
+import { Loading } from "../../components/Loading/Loading";
+import theme from "../../styles/theme";
 
 export function Home() {
+  const screenWidth: number = screen.width;
+  const [pokemonRef, setPokemonRef] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  const handleSearch = (e: FormEvent) => {
+    setIsLoading(true);
+    try {
+      if (pokemonRef !== "") {
+        e.preventDefault();
+        setTimeout(() => {
+          navigate(`/pokemon/${pokemonRef}`);
+        }, 1000);
+        setIsLoading(false);
+      } else {
+        setIsLoading(false);
+        alert("Digite o nome ou id de um pokemon para pesquisar");
+        window.location.reload;
+      }
+    } catch (error) {
+      console.log("Erro ao escolher opção");
+    } finally {
+    }
+  };
+
   return (
     <Container>
-      {/* <Form /> */}
       <div className="search-bar">
-        <form action="">
-          <input type="text" placeholder="Busque um pokemon pelo nome ou id"/>
-          <Button text="Buscar" />
+        <form action="" className="search-form" onSubmit={handleSearch}>
+          {screenWidth < 500 ? (
+            <>
+              <input
+                className="search-input"
+                type="text"
+                placeholder="Buscar por um pokemon"
+                value={pokemonRef}
+                onChange={(e) => setPokemonRef(e.target.value)}
+              />
+              <div className="search-button-wrapper">
+                <Button animated text="Buscar" size="small" />
+              </div>
+            </>
+          ) : (
+            <>
+              <input
+                className="search-input"
+                type="text"
+                placeholder="Buscar por um pokemon por nome ou id"
+                value={pokemonRef}
+                onChange={(e) => setPokemonRef(e.target.value)}
+              />
+              <div className="search-button-wrapper">
+                {isLoading ? (
+                  <Button text="" animated>
+                    <Loading color={theme.colors.gray[100]} size={30} />
+                  </Button>
+                ) : (
+                  <Button text="Buscar" animated/>
+                )}
+              </div>
+            </>
+          )}
         </form>
       </div>
       <div className="regions-wrapper">
-        <div>
-          <TextStyled>Navege pelas regiões do mundo pokemon:</TextStyled>
-          <form action="">
-            <div>
-              <RegionCard region={{ region_name: "kanto", number: 1 }} />
-
-              <RegionCard region={{ region_name: "johto", number: 2 }} />
-
-              <RegionCard region={{ region_name: "hoenn", number: 3 }} />
-
-              <RegionCard region={{ region_name: "sinnoh", number: 4 }} />
-
-              <RegionCard region={{ region_name: "unova", number: 5 }} />
-
-              <RegionCard region={{ region_name: "kalos", number: 6 }} />
-
-              <RegionCard region={{ region_name: "alola", number: 7 }} />
-
-              <RegionCard region={{ region_name: "galar", number: 8 }} />
-
-              <RegionCard region={{ region_name: "paldea", number: 9 }} />
-            </div>
-          </form>
-        </div>
-        <div></div>
-        <div></div>
+        <RegionsForm />
       </div>
-
     </Container>
   );
 }

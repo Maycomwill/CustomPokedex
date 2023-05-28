@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import theme from '../../styles/theme';
-import { lighten, saturate, shade } from 'polished'
+import { lighten, saturate } from 'polished'
 import { IButtonProps } from './Button';
 
 const handleSizeButton = (size: string | undefined) => {
@@ -14,6 +14,14 @@ const handleSizeButton = (size: string | undefined) => {
     default:
       return ".8rem 2.4rem";
 
+  }
+}
+
+const handleTranslate = (animated: boolean | undefined)=>{
+  if(animated === true){
+    return 'translateY(-.1rem)'
+  } else {
+    return 'none'
   }
 }
 
@@ -43,7 +51,7 @@ export const ButtonStyled = styled.button<IButtonProps>`
   border-radius: .4rem;
   padding: ${({ size }) => handleSizeButton(size)};
   cursor: pointer;
-  transition: transform .2s ease;
+  transition: all .2s ease;
 
   :hover{
     background-color: ${({ color }) => {if(color == "delete"){
@@ -51,9 +59,8 @@ export const ButtonStyled = styled.button<IButtonProps>`
     }else {
       return `${saturate(0.2, handleButtonColor(color))}`
     }}};
-    transform: translateY(-.2rem)
+    transform: ${({animated})=> handleTranslate(animated)}
   };
-
 
   :focus {
       border: .2rem solid ${({color}) => {if(color == "standard" || color == undefined){

@@ -5,11 +5,12 @@ import { ButtonStyled } from "./styles";
 export interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
   text: string;
+  animated?: boolean | undefined;
   size?: "small" | "big" | undefined;
   color?: "gray" | "delete" | "standard" | "primary";
 }
 
-export function Button({ children, text, size, color, ...rest }: IButtonProps) {
+export function Button({ children, text, size, color, animated, ...rest }: IButtonProps) {
 
   function handleSizeButton(size: string | undefined) {
     switch(size){
@@ -25,7 +26,7 @@ export function Button({ children, text, size, color, ...rest }: IButtonProps) {
   }
 
   return (
-    <ButtonStyled color={color} size={size} {...rest} text={text}>
+    <ButtonStyled color={color} size={size} animated={animated} text={text} {...rest}>
       {children}
       <TextStyled size={handleSizeButton(size)}>{text}</TextStyled>
     </ButtonStyled>
