@@ -28,6 +28,7 @@ export function RegionsForm() {
         <RegionCard region={{ region_name: "kalos", number: 6 }} />
 
         <RegionCard region={{ region_name: "alola", number: 7 }} />
+
         <RegionCard region={{ region_name: "galar", number: 8 }} />
 
         <RegionCard region={{ region_name: "paldea", number: 9 }} />

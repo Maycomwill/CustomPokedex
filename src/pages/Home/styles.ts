@@ -79,8 +79,7 @@ export const Container = styled.div`
     gap: 1.2rem;
   }
 
-  .types-wrapper,
-  .regions-wrapper {
+  .types-wrapper, .regions-wrapper {
     animation: upSurge 1s 0.2s ease-out backwards;
   }
 
