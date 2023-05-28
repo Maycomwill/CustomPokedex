@@ -65,9 +65,47 @@ export const Container = styled.div`
     gap: 0.8rem;
   }
 
+  .filters-wrapper {
+    width: 80%;
+  }
+
+  .types-wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1.2rem;
+  }
+
+  .types-wrapper,
+  .regions-wrapper {
+    animation: upSurge 1s 0.2s ease-out backwards;
+  }
+
+  .filters-wrapper div:nth-child(1) {
+    animation-delay: .4s;
+  }
+  .filters-wrapper div:nth-child(2) {
+    animation-delay: 0.8s;
+  }
+
   @keyframes dropDown {
     0% {
       transform: translateY(-2rem);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateY(0rem);
+      opacity: 100;
+    }
+  }
+
+  @keyframes upSurge {
+    0% {
+      transform: translateY(4rem);
       opacity: 0;
     }
 

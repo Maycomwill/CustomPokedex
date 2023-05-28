@@ -8,6 +8,8 @@ import { Container } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { Loading } from "../../components/Loading/Loading";
 import theme from "../../styles/theme";
+import { TypesForm } from "../../components/TypesForm/TypesForm";
+import { BackToTop } from "../../components/BackToTop/BackToTop";
 
 export function Home() {
   const screenWidth: number = screen.width;
@@ -67,16 +69,23 @@ export function Home() {
                     <Loading color={theme.colors.gray[100]} size={30} />
                   </Button>
                 ) : (
-                  <Button text="Buscar" animated/>
+                  <Button text="Buscar" animated />
                 )}
               </div>
             </>
           )}
         </form>
       </div>
-      <div className="regions-wrapper">
-        <RegionsForm />
+      <div className="filters-wrapper">
+        <div className="regions-wrapper">
+          <RegionsForm />
+        </div>
+        <div className="types-wrapper">
+          <TextStyled>Você pode filtrar os pokemon por tipos</TextStyled>
+          <TypesForm />
+        </div>
       </div>
+      <BackToTop />
     </Container>
   );
 }

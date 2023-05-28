@@ -9,16 +9,16 @@ export const Container = styled.div`
   align-items: center;
   padding: 1.6rem 1.2rem;
   gap: .8rem;
-  animation: upSurge 1s .2s ease-out backwards;
-  animation-delay: 1s;
+
 
   .card-wrapper {
-    width: 80%;
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     grid-column-gap: 6.4rem;
     grid-row-gap: 1.2rem;
+    place-items: center;
   }
 
   .card-wrapper > div{
@@ -35,18 +35,4 @@ export const Container = styled.div`
       gap: 1.6rem;
     }
   }
-
-
-  @keyframes upSurge {
-    0% {
-      transform: translateY(4rem);
-      opacity: 0;
-    }
-
-    100% {
-      transform: translateY(0rem);
-      opacity: 100;
-    }
-  }
-
 `;
