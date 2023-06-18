@@ -25,10 +25,10 @@ export function RegionCard(props: RegionCardProps) {
     <Container region={props.region.region_name} onClick={()=>navigate(`/pokedex/${props.region.number}`)}>
       <div id="filter" />
       <div>
-        <Text size="xxl" cap="true" color="white" weight="bold">
+        <Text size="xxl" transform="capitalize" color="white" weight="bold">
           {props.region.region_name}
         </Text>
-        <Text size="md" cap="true" color="white" weight="semi-bold">
+        <Text size="md" transform="capitalize" color="white" weight="semi-bold">
           {props.region.number}º geração
         </Text>
       </div>
