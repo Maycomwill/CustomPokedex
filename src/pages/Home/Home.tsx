@@ -1,9 +1,6 @@
 import { FormEvent, useState } from "react";
 import { Button } from "../../components/Button/Button";
-import { Form } from "../../components/Form/Form";
-import { RegionCard } from "../../components/RegionCard/RegionCard";
 import { RegionsForm } from "../../components/RegionsForm/RegionsForm";
-import { TextStyled } from "../../components/Text/styles";
 import { Container } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { Loading } from "../../components/Loading/Loading";

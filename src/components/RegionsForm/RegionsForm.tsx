@@ -2,7 +2,7 @@ import React, { FormEvent, useState } from "react";
 import { Container } from "./styles";
 import { RegionCard } from "../RegionCard/RegionCard";
 import { useNavigate } from "react-router-dom";
-import { TextStyled } from "../Text/styles";
+import { Text } from "../Text/Text";
 
 export function RegionsForm() {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ export function RegionsForm() {
 
   return (
     <Container>
-      <TextStyled>Navege pelas regiões do mundo pokemon</TextStyled>
+      <Text size="lg">Navege pelas regiões do mundo pokemon</Text>
       <div className="card-wrapper">
         <RegionCard region={{ region_name: "kanto", number: 1 }} />
 

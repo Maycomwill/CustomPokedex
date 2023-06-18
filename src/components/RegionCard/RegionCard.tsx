@@ -1,5 +1,5 @@
 import React, { ButtonHTMLAttributes } from "react";
-import { TextStyled } from "../Text/styles";
+import { Text } from "../Text/Text";
 import { Container } from "./styles";
 import { useNavigate } from "react-router-dom";
 interface RegionCardProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -25,12 +25,12 @@ export function RegionCard(props: RegionCardProps) {
     <Container region={props.region.region_name} onClick={()=>navigate(`/pokedex/${props.region.number}`)}>
       <div id="filter" />
       <div>
-        <TextStyled size="xlg" cap="true" color="white" weight="bold">
+        <Text size="xxl" cap="true" color="white" weight="bold">
           {props.region.region_name}
-        </TextStyled>
-        <TextStyled size="md" cap="true" color="white" weight="semi-bold">
+        </Text>
+        <Text size="md" cap="true" color="white" weight="semi-bold">
           {props.region.number}º geração
-        </TextStyled>
+        </Text>
       </div>
     </Container>
   );

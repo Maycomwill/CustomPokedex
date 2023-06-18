@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import theme from "../../styles/theme";
 import { Button } from "../Button/Button";
 import { Loading } from "../Loading/Loading";
-import { TextStyled } from "../Text/styles";
 import { Container, RadiosDivWrapper } from "./styles";
+import { Text } from "../Text/Text";
 
 export function Form() {
   const [generation, setGeneration] = useState<string>();
@@ -36,9 +36,9 @@ export function Form() {
         <form className="form" onSubmit={handleGenerationSelected}>
           <fieldset>
             <legend>
-              <TextStyled size="xxl" weight="semi-bold">
+              <Text size="xl" weight="semi-bold">
                 Selecione qual a geração você deseja pesquisar
-              </TextStyled>
+              </Text>
             </legend>
           </fieldset>
           <RadiosDivWrapper>

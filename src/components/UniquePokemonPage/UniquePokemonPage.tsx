@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { UniquePokemonData } from "../../interfaces/pokemonInterfaces";
 import theme from "../../styles/theme";
 import { Button } from "../Button/Button";
-import { TextStyled } from "../Text/styles";
+import { Text } from "../Text/Text";
 import { TypeCard } from "../TypeCard/TypeCard";
 import { Container } from "./styles";
 
@@ -56,23 +56,23 @@ function UniquePokemonPage({
       </div>
       <div className="infoWrapper">
         <div className="pokedexInfo">
-          <TextStyled size="lg" transform="capitalize">
+          <Text size="lg" transform="capitalize">
             Nome: {name?.split("-").join(" ")}
-          </TextStyled>
-          <TextStyled size="lg" transform="capitalize">
+          </Text>
+          <Text size="lg" transform="capitalize">
             id: #{addZeroes(id, 3)}
-          </TextStyled>
-          <TextStyled size="lg" transform="capitalize">
+          </Text>
+          <Text size="lg" transform="capitalize">
             Altura: {height * 10}cm
-          </TextStyled>
-          <TextStyled size="lg" transform="capitalize">
+          </Text>
+          <Text size="lg" transform="capitalize">
             Peso: {weight / 10}kg
-          </TextStyled>
+          </Text>
         </div>
         <div className="typesWrapper">
-          <TextStyled size="lg" transform="capitalize">
+          <Text size="lg" transform="capitalize">
             tipos:
-          </TextStyled>
+          </Text>
           <div className="typesContainer">
             {types?.map((type) => {
               return (
@@ -88,21 +88,21 @@ function UniquePokemonPage({
       </div>
 
       <div className="abilitiesContainer">
-        <TextStyled size="lg" transform="capitalize">
+        <Text size="lg" transform="capitalize">
           Habilidades:
-        </TextStyled>
+        </Text>
         <div className="abilities">
           {abilities?.map((ability) => {
             return (
               <div key={`${ability.ability.name}-${ability.slot}`}>
-                <TextStyled
+                <Text
                   size="lg"
                   transform="capitalize"
                   onClick={() => navigate(`/ability/${ability.ability.name}`)}
                   className="abilityName"
                 >
                   {ability.ability.name.split("-").join(" ")}
-                </TextStyled>
+                </Text>
               </div>
             );
           })}
@@ -110,9 +110,9 @@ function UniquePokemonPage({
       </div>
 
       <div className="statsWrapper">
-        <TextStyled size="lg" transform="capitalize">
+        <Text size="lg" transform="capitalize">
           Status:
-        </TextStyled>
+        </Text>
         <div className="statsContainer">
           {stats?.map((stat) => {
             return (
@@ -120,9 +120,9 @@ function UniquePokemonPage({
                 className="baseStatWrapper"
                 key={`${stat.stat.name}-${stat.effort}`}
               >
-                <TextStyled size="lg" transform="capitalize">
+                <Text size="lg" transform="capitalize">
                   {stat.stat.name}
-                </TextStyled>
+                </Text>
                 <div className="baseStatDiv">
                   <div
                     style={{
@@ -132,7 +132,7 @@ function UniquePokemonPage({
                       borderRadius: ".4rem",
                     }}
                   >
-                    <TextStyled size="md">{stat.base_stat}</TextStyled>
+                    <Text size="md">{stat.base_stat}</Text>
                   </div>
                 </div>
               </div>

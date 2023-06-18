@@ -73,7 +73,7 @@ export function DropMenu() {
             height: "30rem",
             backgroundColor: `${theme.colors.gray[200]}`,
             color: `${theme.colors.gray[800]}`,
-            fontSize: `${theme.fontSize.xlg}`,
+            fontSize: `${theme.fontSize.xxl}`,
           },
         }}
       >

@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "../../components/Button/Button";
 import { Loading } from "../../components/Loading/Loading";
 import { PokemonCard } from "../../components/PokemonCard/PokemonCard";
-import { TextStyled } from "../../components/Text/styles";
 import { usePokedex } from "../../hooks/usePokedex";
 import theme from "../../styles/theme";
 import { Container } from "./styles";
@@ -11,6 +10,7 @@ import { PokemonDataProps } from "../../interfaces/pokemonInterfaces";
 import { BackToTop } from "../../components/BackToTop/BackToTop";
 import NavButtons from "../../components/NavButtons/NavButtons";
 import { DropMenu } from "../../components/DropdownMenu/DropMenu";
+import { Text } from "../../components/Text/Text";
 
 export function Pokedex() {
   const params = useParams();
@@ -44,7 +44,7 @@ export function Pokedex() {
       return (
         <Container>
           <div className="generationDiv">
-            <TextStyled size="xlg">{params.generationid}ª Geração</TextStyled>
+            <Text size="xl">{params.generationid}ª Geração</Text>
             <div>
               <Button
                 size={"small"}
@@ -59,9 +59,9 @@ export function Pokedex() {
             <div className="inputWrapper">
               <form>
                 <label htmlFor="searchInput">
-                  <TextStyled size="lg">
+                  <Text size="lg">
                     Filtre a lista pelo nome dos pokemon
-                  </TextStyled>
+                  </Text>
                 </label>
                 <input
                   type="text"
@@ -128,7 +128,7 @@ export function Pokedex() {
       return (
         <Container>
           <div className="generationDiv">
-            <TextStyled size="xlg">{params.generationid}ª Geração</TextStyled>
+            <Text size="md">{params.generationid}ª Geração</Text>
             <div>
               <Button
                 size={"small"}
@@ -143,9 +143,9 @@ export function Pokedex() {
             <div className="inputWrapper">
               <form>
                 <label htmlFor="searchInput">
-                  <TextStyled size="lg">
+                  <Text size="md">
                     Filtre a lista pelo nome dos pokemon
-                  </TextStyled>
+                  </Text>
                 </label>
                 <input
                   type="text"

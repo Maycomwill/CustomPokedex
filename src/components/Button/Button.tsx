@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
-import { TextStyled } from "../Text/styles";
 import { ButtonStyled } from "./styles";
+import { Text } from "../Text/Text";
 
 export interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
@@ -47,7 +47,7 @@ export function Button({
     >
       {leftIcon}
       {children}
-      <TextStyled size={handleSizeButton(size)}>{text}</TextStyled>
+      <Text size={handleSizeButton(size)}>{text}</Text>
       {rightIcon}
     </ButtonStyled>
   );

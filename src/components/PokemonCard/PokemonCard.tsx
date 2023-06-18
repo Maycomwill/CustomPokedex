@@ -1,6 +1,6 @@
 import { Container } from "./styles";
 import { typeProps } from "../../interfaces/pokemonInterfaces";
-import { TextStyled } from "../Text/styles";
+import { Text } from "../Text/Text";
 import { TypeCard } from "../TypeCard/TypeCard";
 import { useNavigate } from "react-router-dom";
 
@@ -45,26 +45,26 @@ export function PokemonCard({
     >
       <div className="topWrapper">
         <div className="pokemonInfoDiv">
-          <TextStyled
+          <Text
             size="lg"
             weight="bold"
             transform="capitalize"
             color="gray"
           >
             {name.split("-").join(" ")}
-          </TextStyled>
-          <TextStyled weight="semi-bold" color="gray">
+          </Text>
+          <Text weight="semi-bold" color="gray">
             #{addZeroes(String(id), 3)}
-          </TextStyled>
+          </Text>
         </div>
         <div className="spriteDiv">
           <img src={sprite} alt={`${name} sprite`} />
         </div>
       </div>
       <div className="typesWrapper">
-        <TextStyled color="gray" transform="capitalize">
+        <Text color="gray" transform="capitalize">
           types:
-        </TextStyled>
+        </Text>
         <div className="typesCards">
           {types.map((type) => {
             return (

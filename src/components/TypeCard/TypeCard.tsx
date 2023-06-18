@@ -1,4 +1,4 @@
-import { TextStyled } from "../Text/styles";
+import { Text } from "../Text/Text";
 import { Container, ContainerButton } from "./styles";
 
 import bug from "../../assets/TypesSvg/bug.svg";
@@ -60,7 +60,7 @@ export function TypeCard({ pokemonType, pressable, ...rest }: ITypeCardProps) {
         onClick={() => navigate(`/type/${pokemonType}`)}
       >
         <div className="typeName">
-          <TextStyled transform="capitalize">{pokemonType}</TextStyled>
+          <Text transform="capitalize">{pokemonType}</Text>
         </div>
         <div className="svgDiv">
           <img
@@ -76,7 +76,7 @@ export function TypeCard({ pokemonType, pressable, ...rest }: ITypeCardProps) {
     return (
       <Container pokemonType={pokemonType}>
         <div className="typeName">
-          <TextStyled transform="capitalize">{pokemonType}</TextStyled>
+          <Text transform="capitalize">{pokemonType}</Text>
         </div>
         <div className="svgDiv">
           <img

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Container } from "./styles";
 import { useParams } from "react-router-dom";
 import { usePokedex } from "../../hooks/usePokedex";
 import { Loading } from "../../components/Loading/Loading";
 import { PokemonCard } from "../../components/PokemonCard/PokemonCard";
-import { TextStyled } from "../../components/Text/styles";
+import { Text } from "../../components/Text/Text";
 import { Button } from "../../components/Button/Button";
 import { BackToTop } from "../../components/BackToTop/BackToTop";
 import theme from "../../styles/theme";
@@ -26,17 +26,17 @@ export function Type() {
     return (
       <Container>
         <div className="pageTitle">
-          <TextStyled color="white" size="xlg">
+          <Text color="white" size="lg">
             Todos os Pokemon que são do tipo:{" "}
-            <TextStyled
+            <Text
               transform="uppercase"
               color="primary"
-              size="xlg"
+              size="lg"
               weight="bold"
             >
               {params.typename}
-            </TextStyled>
-          </TextStyled>
+            </Text>
+          </Text>
           <div>
             <Button
               color="delete"

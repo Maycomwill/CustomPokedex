@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { TextStyled } from "../../components/Text/styles";
+import { Text } from "../../components/Text/Text";
 import { usePokedex } from "../../hooks/usePokedex";
 import { Loading } from "../../components/Loading/Loading";
 import theme from "../../styles/theme";
@@ -30,20 +30,20 @@ export function Ability() {
       <Container>
         <>
           <div className="abilityName">
-            <TextStyled cap="true" size="xxl" color="primary" weight="bold">
+            <Text transform="uppercase" size="xxl" color="primary" weight="bold">
               {abilityInfo?.name.split("-").join(" ")}
-            </TextStyled>
+            </Text>
 
           </div>
           <div className="descriptionDiv">
-            <TextStyled size="xlg">
+            <Text size="md">
               {abilityInfo?.description}
-            </TextStyled>
+            </Text>
           </div>
           <div className="pokemonCommon">
-            <TextStyled size="lg">
+            <Text size="lg">
               Pokemons que possuem esta habilidade:{" "}
-            </TextStyled>
+            </Text>
           </div>
           <div className="pokemons">
             <>

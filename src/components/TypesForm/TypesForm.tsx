@@ -1,13 +1,13 @@
 import React from "react";
 import { Container } from "./styles";
-import { TextStyled } from "../Text/styles";
+import { Text } from "../Text/Text";
 import { TypeCard } from "../TypeCard/TypeCard";
 
 export function TypesForm() {
   return (
     <Container>
       <div className="text-wrapper">
-        <TextStyled>Você pode filtrar os pokemon por tipos</TextStyled>
+        <Text>Você pode filtrar os pokemon por tipos</Text>
       </div>
       <div className="types-wrapper">
         <div className="blank-spacer"></div>
