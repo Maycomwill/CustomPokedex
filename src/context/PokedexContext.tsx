@@ -1,7 +1,14 @@
 import { createContext, ReactNode, useState } from "react";
 import { pokeapi } from "../services/api";
 import axios from "axios";
-import { AbilityInfoProps, PokedexDataProps, PokedexProviderProps, PokemonDataProps, statsProps, UniquePokemonData } from "../interfaces/pokemonInterfaces";
+import {
+  AbilityInfoProps,
+  PokedexDataProps,
+  PokedexProviderProps,
+  PokemonDataProps,
+  statsProps,
+  UniquePokemonData,
+} from "../interfaces/pokemonInterfaces";
 
 //Interface do Provedor
 export interface PokedexContextDataProps {
@@ -10,10 +17,12 @@ export interface PokedexContextDataProps {
   getPokemonData: (pokemonName: string | undefined) => void;
   getAbilityInfo: (ability: string | undefined) => void;
   getTypeData: (type: string | undefined) => void;
+  handleFilterGenType: (type: string) => void;
   pokemonData: PokemonDataProps[];
   uniquePokemonData: UniquePokemonData;
   abilityInfo: AbilityInfoProps | undefined;
   pokemonAbilityCommon: PokemonDataProps[];
+  genTypeFilteredList: PokemonDataProps[]
 }
 
 //Criação do contexto
@@ -22,6 +31,7 @@ export const PokedexContext = createContext({} as PokedexContextDataProps);
 //Criação do provedor do contexto, que será utilizado na criação do hook
 export function PokedexContextProvider({ children }: PokedexProviderProps) {
   let rawPokemonData: PokemonDataProps[] = [];
+  let genTypeFilter: PokemonDataProps[] = []
   const [abilityInfo, setAbilityInfo] = useState<AbilityInfoProps | undefined>(
     undefined
   );
@@ -32,6 +42,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
   const [uniquePokemonData, setUniquePokemonData] = useState<UniquePokemonData>(
     {} as UniquePokemonData
   );
+  const [genTypeFilteredList, setGenTypeFilteredList] = useState<PokemonDataProps[]>([])
 
   //Função que recebe do front-end a escolha inicial do usuário
   function getGenerationFromUserChoice(generation: string | undefined) {
@@ -157,7 +168,6 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
 
   // Esta função salva no estado os dados dos pokemon
   function storagePokemonInformation(pokemon: any) {
-
     // Console para mostrar as informações individuais dos pokemon
     // console.log("informações dos pokemon chegando na última função: ", pokemon);
 
@@ -191,7 +201,8 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
       height: result.data.height,
       sprite_default: result.data.sprites.front_default,
       sprite_shiny: result.data.sprites.front_shiny,
-      official_artwork: result.data.sprites.other["official-artwork"].front_default,
+      official_artwork:
+        result.data.sprites.other["official-artwork"].front_default,
       stats: result.data.stats.map((stat: statsProps) => {
         return {
           base_stat: stat.base_stat,
@@ -239,7 +250,6 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     storagePokemonAbilityCommon();
   }
 
-
   //Esta função organiza e retorna os pokemon que possuem a mesma habilidade
   function storagePokemonAbilityCommon() {
     setTimeout(() => {
@@ -266,7 +276,6 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     }, 500);
   }
 
-
   //Esta função busca na api os dados de um tipo e armazena os dados dos pokemon que possuem o mesmo tipo
   async function getTypeData(type: string | undefined) {
     const consult = await pokeapi.get(`/type/${type}`);
@@ -285,9 +294,15 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     });
   }
 
-  return (
+  function handleFilterGenType(typeName: string) {
+    // console.log("função chamada:", type)
+    genTypeFilter = (typeName.length > 0) ? pokemonData.filter((pokemon)=>pokemon.types.some((type)=> type.type.toLowerCase() === typeName.toLowerCase())) : [];
+    console.log(genTypeFilter)
+    setGenTypeFilteredList(genTypeFilter)
+  }
 
-  //Retorno do provedor do contexto, disponibilizando todas as funções e variáveis necessárias para montar os componentes
+  return (
+    //Retorno do provedor do contexto, disponibilizando todas as funções e variáveis necessárias para montar os componentes
     <PokedexContext.Provider
       value={{
         getGenerationFromUserChoice,
@@ -295,10 +310,12 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
         getPokemonData,
         getAbilityInfo,
         getTypeData,
+        handleFilterGenType,
         pokemonData,
         uniquePokemonData,
         abilityInfo,
         pokemonAbilityCommon,
+        genTypeFilteredList
       }}
     >
       {children}
