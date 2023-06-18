@@ -17,7 +17,7 @@ export function Pokedex() {
   const navigate = useNavigate();
   let generation = params.generationid;
 
-  const { getPokedexList, pokemonData, genTypeFilteredList} = usePokedex();
+  const { getPokedexList, pokemonData, genTypeFilteredList, handleFilterGenType} = usePokedex();
 
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -31,8 +31,10 @@ export function Pokedex() {
 
   useEffect(() => {
     setIsLoading(true);
+    handleFilterGenType("")
     getPokedexList(generation);
     setIsLoading(false);
+    window.scrollTo({top: 0, behavior: 'smooth'})
   }, [generation]);
 
   if (isLoading || pokemonData.length === 0) {
