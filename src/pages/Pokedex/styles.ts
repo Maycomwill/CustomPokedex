@@ -86,6 +86,16 @@ export const Container = styled.div`
 
     @media (max-width: 500px) {
       justify-content: flex-start;
+      padding: 0rem .4rem;
+      form{
+        width: 80%;
+        font-size: 1.4rem;
+      }
+      form input{
+        ::placeholder {
+          font-size: 1.4rem;
+        }
+      }
     }
   }
   .pokemonCard-wrapper {
