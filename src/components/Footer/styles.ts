@@ -6,11 +6,12 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 1.6rem .8rem;
+  margin: 1.6rem;
 
   span > a {
     text-decoration: none;
     color: ${theme.colors.gray[100]};
+    font-size: ${theme.fontSize.xsm};
   }
 
   @media (max-width: 500px) {

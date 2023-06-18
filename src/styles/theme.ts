@@ -89,7 +89,7 @@ export default {
     sm: "1.4rem",
     md: "1.6rem",
     lg: "2rem",
-    xlg: "2.4rem",
+    xl: "2.4rem",
     xxl: "3rem",
   },
 } as const;

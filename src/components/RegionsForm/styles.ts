@@ -12,7 +12,7 @@ export const Container = styled.div`
 
 
   .card-wrapper {
-    width: 100%;
+    width: 90%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);

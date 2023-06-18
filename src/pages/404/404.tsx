@@ -1,7 +1,12 @@
-import React from 'react'
+import { TextStyled } from "../../components/Text/styles";
+import { Container } from "./styles";
 
 export function BlankPage() {
   return (
-    <div>BlankPage</div>
-  )
+    <Container>
+      <div>
+        <TextStyled size="lg">404</TextStyled>
+      </div>
+    </Container>
+  );
 }

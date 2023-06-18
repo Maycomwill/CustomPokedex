@@ -2,27 +2,42 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  padding: 1.6rem 0;
+  margin: 1.6rem 0;
 
   .types-wrapper {
-    padding-top: 1.6rem;
     display: grid;
-    grid-template-columns: repeat(9, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 0rem;
-    grid-row-gap: 1.6rem;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    justify-content: center;
     place-items: center;
+    margin-top: 1.6rem;
+    gap: 1.6rem;
+  }
+
+  .typesDiv{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.4rem;
+    align-items: center;
   }
 
   @media (max-width: 500px) {
+    .blank-spacer{
+      display: none;
+    }
     .types-wrapper{
       width: 100%;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(2, 1fr);
-      grid-column-gap: 2.4rem;
-      grid-row-gap: 1.2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 1.2rem;
       place-items: center;
     }
+    .typesDiv{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: .8rem;
+    align-items: center;
+  }
   }
 `;

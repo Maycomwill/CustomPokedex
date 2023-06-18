@@ -29,7 +29,8 @@ export const Container = styled.div`
 
   .search-input {
     padding: 0.9rem 1.6rem;
-    width: 100%;
+    width: 50%;
+    height: 100%;
     outline: none;
     border: 0.1rem solid rgba(0, 0, 0, 0);
     font-size: 1.6rem;
@@ -68,7 +69,6 @@ export const Container = styled.div`
   .types-wrapper {
     width: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
