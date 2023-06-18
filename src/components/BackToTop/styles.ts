@@ -12,9 +12,7 @@ export const Container = styled.div`
   justify-content: center;
   position: fixed;
   bottom: 0;
-  right: 0;
-  margin-right: 4rem;
-  margin-bottom: 1.2rem;
+  right: 2%;
   opacity: 0.2;
   cursor: pointer;
   border: 0.2rem solid rgb(0 0 0 / 0);
@@ -30,8 +28,8 @@ export const Container = styled.div`
 
   @media (max-width: 500px) {
     opacity: 0.6;
-    margin-right: 1rem;
-    margin-bottom: 1.6rem;
+    bottom: 3.2rem;
+    right: 2rem;
 
     :active {
       opacity: 0.8;
