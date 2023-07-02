@@ -9,8 +9,8 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
-import { Button } from "../Button/Button";
-import { CircleButton } from "../Button/CircleButton";
+import { Button } from "../Button";
+import { CircleButton } from "../Button/CircleButton/CircleButton";
 import { Funnel } from "phosphor-react";
 import { usePokedex } from "../../hooks/usePokedex";
 

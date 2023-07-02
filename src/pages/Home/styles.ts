@@ -27,10 +27,12 @@ export const Container = styled.div`
     width: 70%;
   }
 
-  .search-input {
-    padding: 0.9rem 1.6rem;
+  .input-wrapper{
     width: 50%;
-    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 1.6rem;
     outline: none;
     border: 0.1rem solid rgba(0, 0, 0, 0);
     font-size: 1.6rem;
@@ -42,9 +44,28 @@ export const Container = styled.div`
     :focus-within {
       border: 0.1rem solid ${theme.colors.primary[500]};
     }
+  }
+
+  .input-icon-wrapper{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .search-input {
+    padding: 0rem 1.6rem;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+    font-size: 1.6rem;
+    color: ${theme.colors.gray[100]};
+    background-color: ${theme.colors.gray[600]};
+
     ::placeholder {
       font-size: 1.6rem;
-      text-align: center;
+      text-align: left;
       color: ${theme.colors.gray[400]};
     }
   }

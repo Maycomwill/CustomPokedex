@@ -1,34 +1,37 @@
-import { Button } from "../Button/Button";
+import { Button } from "../Button";
 import { CaretLeft, CaretRight } from "phosphor-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Container } from "./styles";
 
 function NavButtons() {
-  const screenWidth = screen.width
+  const screenWidth = screen.width;
   const params = useParams();
   let generation = params.generationid;
   let navigate = useNavigate();
 
-  if(screenWidth > 500){
+  if (screenWidth > 500) {
     if (generation == "1") {
       return (
         <Container>
           <div className="navButtons">
-            <Button color="primary" id="zeroGen" text={""}></Button>
-            <Button
-              size={"small"}
+            <Button.Root color="primary" id="zeroGen" size="small">
+              <Button.Content text={""} />
+            </Button.Root>
+            <Button.Root
               color="delete"
+              size="small"
               onClick={() => navigate("/")}
-              text={"Home"}
-            />
-            <Button
-              color="primary"
-              size={"small"}
-              text={`Geração ${Number(generation) + 1}`}
-              onClick={() => navigate(`/pokedex/${Number(generation) + 1}`)}
-              rightIcon={<CaretRight size={24} />}
             >
-            </Button>
+              <Button.Content text={"Home"} />
+            </Button.Root>
+            <Button.Root
+              color="primary"
+              size="small"
+              onClick={() => navigate(`/pokedex/${Number(generation) + 1}`)}
+            >
+              <Button.Content text={`Geração ${Number(generation) + 1}`} />
+              <Button.RightIcon icon={CaretRight} size={24} />
+            </Button.Root>
           </div>
         </Container>
       );
@@ -36,21 +39,24 @@ function NavButtons() {
       return (
         <Container>
           <div className="navButtons">
-            <Button
+            <Button.Root
               color="primary"
-              size={"small"}
-              text={`Geração ${Number(generation) - 1}`}
+              size="small"
               onClick={() => navigate(`/pokedex/${Number(generation) - 1}`)}
-              leftIcon={<CaretLeft size={24} />}
             >
-            </Button>
-            <Button
-              size={"small"}
+              <Button.LeftIcon icon={CaretLeft} size={24} />
+              <Button.Content text={`Geração ${Number(generation) - 1}`} />
+            </Button.Root>
+            <Button.Root
               color="delete"
+              size="small"
               onClick={() => navigate("/")}
-              text={"Home"}
-            />
-            <Button color="primary" id="zeroGen" text={""}></Button>
+            >
+              <Button.Content text={"Home"} />
+            </Button.Root>
+            <Button.Root color="primary" id="zeroGen" size="small">
+              <Button.Content text={""} />
+            </Button.Root>
           </div>
         </Container>
       );
@@ -58,52 +64,58 @@ function NavButtons() {
       return (
         <Container>
           <div className="navButtons">
-            <Button
+            <Button.Root
               color="primary"
               size={"small"}
-              text={`Geração ${Number(generation) - 1}`}
               onClick={() => navigate(`/pokedex/${Number(generation) - 1}`)}
-              leftIcon={<CaretLeft size={24} />}
             >
-            </Button>
-            <Button
+              <Button.LeftIcon icon={CaretLeft} size={24} />
+              <Button.Content text={`Geração ${Number(generation) - 1}`} />
+            </Button.Root>
+            <Button.Root
               size={"small"}
               color="delete"
               onClick={() => navigate("/")}
-              text={"Voltar"}
-            />
-            <Button
+            >
+              <Button.Content text={"Voltar"} />
+            </Button.Root>
+            <Button.Root
               color="primary"
               size={"small"}
-              text={`Geração ${Number(generation) + 1}`}
               onClick={() => navigate(`/pokedex/${Number(generation) + 1}`)}
-              rightIcon={<CaretRight size={24} />}
             >
-            </Button>
+              <Button.Content text={`Geração ${Number(generation) + 1}`} />
+              <Button.RightIcon icon={CaretRight} size={24} />
+            </Button.Root>
           </div>
         </Container>
       );
     }
-  } else{
+  } else {
     if (generation == "1") {
       return (
         <Container>
           <div className="navButtons">
-            <Button color="primary" id="zeroGen" text={""}></Button>
-            <Button
-              size={"small"}
-              color="delete"
-              onClick={() => navigate("/")}
-              text={"Home"}
-            />
-            <Button
+            <Button.Root color="primary" id="zeroGen" size="small">
+              <Button.Content text={""} />
+            </Button.Root>
+            <Button.Root
               color="primary"
-              size={"small"}
-              text={`gen ${Number(generation) + 1}`}
-              onClick={() => navigate(`/pokedex/${Number(generation) + 1}`)}
-              rightIcon={<CaretRight size={24} />}
+              id="zeroGen"
+              size="small"
+              onClick={() => navigate("/")}
             >
-            </Button>
+              <Button.Content text={"Home"} />
+            </Button.Root>
+            <Button.Root
+              color="primary"
+              id="zeroGen"
+              size="small"
+              onClick={() => navigate(`/pokedex/${Number(generation) + 1}`)}
+            >
+              <Button.Content text={`Gen ${Number(generation) + 1}`} />
+              <Button.RightIcon icon={CaretRight} size={24} />
+            </Button.Root>
           </div>
         </Container>
       );
@@ -111,21 +123,24 @@ function NavButtons() {
       return (
         <Container>
           <div className="navButtons">
-            <Button
+            <Button.Root
               color="primary"
-              size={"small"}
-              text={`gen ${Number(generation) - 1}`}
+              size="small"
               onClick={() => navigate(`/pokedex/${Number(generation) - 1}`)}
-              leftIcon={<CaretLeft size={24} />}
             >
-            </Button>
-            <Button
-              size={"small"}
+              <Button.LeftIcon icon={CaretLeft} size={24} />
+              <Button.Content text={`Gen ${Number(generation) - 1}`} />
+            </Button.Root>
+            <Button.Root
               color="delete"
+              size="small"
               onClick={() => navigate("/")}
-              text={"Home"}
-            />
-            <Button color="primary" id="zeroGen" text={""}></Button>
+            >
+              <Button.Content text={"Home"} />
+            </Button.Root>
+            <Button.Root color="primary" id="zeroGen" size="small">
+              <Button.Content text={""} />
+            </Button.Root>
           </div>
         </Container>
       );
@@ -133,27 +148,29 @@ function NavButtons() {
       return (
         <Container>
           <div className="navButtons">
-            <Button
+            <Button.Root
               color="primary"
               size={"small"}
-              text={`gen ${Number(generation) - 1}`}
               onClick={() => navigate(`/pokedex/${Number(generation) - 1}`)}
-              leftIcon={<CaretLeft size={24} />}
             >
-            </Button>
-            <Button
+              <Button.LeftIcon icon={CaretLeft} size={24} />
+              <Button.Content text={`Gen ${Number(generation) - 1}`} />
+            </Button.Root>
+            <Button.Root
+              size={"small"}
               color="delete"
               onClick={() => navigate("/")}
-              text={"Voltar"}
-            />
-            <Button
+            >
+              <Button.Content text={"Home"} />
+            </Button.Root>
+            <Button.Root
               color="primary"
               size={"small"}
-              text={`gen ${Number(generation) + 1}`}
               onClick={() => navigate(`/pokedex/${Number(generation) + 1}`)}
-              rightIcon={<CaretRight size={24} />}
             >
-            </Button>
+              <Button.Content text={`Gen ${Number(generation) + 1}`} />
+              <Button.RightIcon icon={CaretRight} size={24} />
+            </Button.Root>
           </div>
         </Container>
       );

@@ -1,5 +1,4 @@
 import { FormEvent, useState } from "react";
-import { Button } from "../../components/Button/Button";
 import { RegionsForm } from "../../components/RegionsForm/RegionsForm";
 import { Container } from "./styles";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +7,8 @@ import theme from "../../styles/theme";
 import { TypesForm } from "../../components/TypesForm/TypesForm";
 import { BackToTop } from "../../components/BackToTop/BackToTop";
 import { Spacer } from "../../components/Spacer/Spacer";
+import { FileSearch } from "phosphor-react";
+import { Button } from "../../components/Button";
 
 export function Home() {
   const screenWidth: number = screen.width;
@@ -44,30 +45,53 @@ export function Home() {
               <input
                 className="search-input"
                 type="text"
-                placeholder="Buscar por um pokemon"
-                value={pokemonRef}
-                onChange={(e) => setPokemonRef(e.target.value)}
-              />
-              <div className="search-button-wrapper">
-                <Button animated text="Buscar" size="small" />
-              </div>
-            </>
-          ) : (
-            <>
-              <input
-                className="search-input"
-                type="text"
-                placeholder="Buscar por um pokemon por nome ou id"
+                placeholder="Buscar um Pokemon"
                 value={pokemonRef}
                 onChange={(e) => setPokemonRef(e.target.value)}
               />
               <div className="search-button-wrapper">
                 {isLoading ? (
-                  <Button text="" animated>
-                    <Loading color={theme.colors.gray[100]} size={30} />
-                  </Button>
+                  <Button.Root animated size="small">
+                    <Button.LeftIcon
+                      icon={Loading}
+                      size={30}
+                      color={theme.colors.gray[100]}
+                    />
+                  </Button.Root>
                 ) : (
-                  <Button text="Buscar" animated />
+                  <Button.Root animated size="small">
+                    <Button.Content text="Buscar um Pokemon" />
+                  </Button.Root>
+                )}
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="input-wrapper">
+                <div className="input-icon-wrapper">
+                  <FileSearch size={32} />
+                </div>
+                <input
+                  className="search-input"
+                  type="text"
+                  placeholder="Buscar um Pokemon"
+                  value={pokemonRef}
+                  onChange={(e) => setPokemonRef(e.target.value)}
+                />
+              </div>
+              <div className="search-button-wrapper">
+                {isLoading ? (
+                  <Button.Root animated>
+                    <Button.LeftIcon
+                      icon={Loading}
+                      size={30}
+                      color={theme.colors.gray[100]}
+                    />
+                  </Button.Root>
+                ) : (
+                  <Button.Root animated>
+                    <Button.Content text="Buscar" />
+                  </Button.Root>
                 )}
               </div>
             </>
@@ -75,11 +99,11 @@ export function Home() {
         </form>
       </div>
       <div className="filters-wrapper">
-        <Spacer className="spacer1"/>
+        <Spacer className="spacer1" />
         <div className="regions-wrapper">
           <RegionsForm />
         </div>
-        <Spacer className="spacer2"/>
+        <Spacer className="spacer2" />
         <div className="types-wrapper">
           <TypesForm />
         </div>

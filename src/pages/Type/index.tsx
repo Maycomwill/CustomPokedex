@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Container } from "./styles";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { usePokedex } from "../../hooks/usePokedex";
 import { Loading } from "../../components/Loading/Loading";
 import { PokemonCard } from "../../components/PokemonCard/PokemonCard";
 import { Text } from "../../components/Text/Text";
-import { Button } from "../../components/Button/Button";
+import { Button } from "../../components/Button";
 import { BackToTop } from "../../components/BackToTop/BackToTop";
 import theme from "../../styles/theme";
 
@@ -13,11 +13,14 @@ export function Type() {
   const params = useParams();
   const { getTypeData, pokemonData } = usePokedex();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);
     getTypeData(params.typename);
-    setTimeout(()=>{setIsLoading(false)}, 2000)
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
   }, []);
 
   if (isLoading) {
@@ -28,21 +31,14 @@ export function Type() {
         <div className="pageTitle">
           <Text color="white" size="lg">
             Todos os Pokemon que são do tipo:{" "}
-            <Text
-              transform="uppercase"
-              color="primary"
-              size="lg"
-              weight="bold"
-            >
+            <Text transform="uppercase" color="primary" size="lg" weight="bold">
               {params.typename}
             </Text>
           </Text>
           <div>
-            <Button
-              color="delete"
-              onClick={() => history.back()}
-              text="Voltar"
-            />
+            <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>
+              <Button.Content text={"Voltar"} />
+            </Button.Root>
           </div>
         </div>
         <div className="pokemonCard-wrapper">
@@ -60,7 +56,9 @@ export function Type() {
           })}
         </div>
         <div className="backButton">
-          <Button color="delete" onClick={() => history.back()} text="Voltar" />
+          <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>
+            <Button.Content text={"Voltar"} />
+          </Button.Root>
         </div>
         <BackToTop />
       </Container>

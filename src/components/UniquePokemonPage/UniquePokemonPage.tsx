@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { UniquePokemonData } from "../../interfaces/pokemonInterfaces";
 import theme from "../../styles/theme";
-import { Button } from "../Button/Button";
+import { Button } from "../Button";
 import { Text } from "../Text/Text";
 import { TypeCard } from "../TypeCard/TypeCard";
 import { Container } from "./styles";
@@ -141,7 +141,9 @@ function UniquePokemonPage({
         </div>
       </div>
       <div className="backButton">
-        <Button color="delete" onClick={() => navigate(-1)} text={"Voltar"} />
+        <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>
+          <Button.Content text={"Voltar"} />
+        </Button.Root>
       </div>
     </Container>
   );

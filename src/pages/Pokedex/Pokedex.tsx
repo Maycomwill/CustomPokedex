@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button } from "../../components/Button/Button";
+import { Button } from "../../components/Button";
 import { Loading } from "../../components/Loading/Loading";
 import { PokemonCard } from "../../components/PokemonCard/PokemonCard";
 import { usePokedex } from "../../hooks/usePokedex";
@@ -17,7 +17,12 @@ export function Pokedex() {
   const navigate = useNavigate();
   let generation = params.generationid;
 
-  const { getPokedexList, pokemonData, genTypeFilteredList, handleFilterGenType} = usePokedex();
+  const {
+    getPokedexList,
+    pokemonData,
+    genTypeFilteredList,
+    handleFilterGenType,
+  } = usePokedex();
 
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -31,27 +36,28 @@ export function Pokedex() {
 
   useEffect(() => {
     setIsLoading(true);
-    handleFilterGenType("")
+    handleFilterGenType("");
     getPokedexList(generation);
     setIsLoading(false);
-    window.scrollTo({top: 0, behavior: 'smooth'})
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [generation]);
 
   if (isLoading || pokemonData.length === 0) {
     return <Loading size={64} color={theme.colors.primary[500]} />;
   } else {
-    if(genTypeFilteredList.length == 0) {
+    if (genTypeFilteredList.length == 0) {
       return (
         <Container>
           <div className="generationDiv">
             <Text size="xl">{params.generationid}ª Geração</Text>
             <div>
-              <Button
-                size={"small"}
-                color="delete"
-                onClick={() => history.back()}
-                text={"Voltar"}
-              />
+              <Button.Root
+                backgroundColor="delete"
+                onClick={() => navigate(-1)}
+                size="small"
+              >
+                <Button.Content text={"Voltar"} />
+              </Button.Root>
             </div>
           </div>
           <div className="filtersWrapper">
@@ -59,9 +65,7 @@ export function Pokedex() {
             <div className="inputWrapper">
               <form>
                 <label htmlFor="searchInput">
-                  <Text size="lg">
-                    Filtre a lista pelo nome dos pokemon
-                  </Text>
+                  <Text size="lg">Filtre a lista pelo nome dos pokemon</Text>
                 </label>
                 <input
                   type="text"
@@ -88,7 +92,7 @@ export function Pokedex() {
                 .map((pokemon: PokemonDataProps) => {
                   return (
                     <PokemonCard
-                      key={pokemon.id}
+                      key={`${pokemon.id}-${pokemon.name}`}
                       id={pokemon.id}
                       name={pokemon.name}
                       types={pokemon.types}
@@ -109,7 +113,7 @@ export function Pokedex() {
                 .map((pokemon: PokemonDataProps) => {
                   return (
                     <PokemonCard
-                      key={pokemon.id}
+                      key={`${pokemon.id}-${pokemon.name}`}
                       id={pokemon.id}
                       name={pokemon.name}
                       types={pokemon.types}
@@ -124,18 +128,19 @@ export function Pokedex() {
           <NavButtons />
         </Container>
       );
-    } else{
+    } else {
       return (
         <Container>
           <div className="generationDiv">
             <Text size="md">{params.generationid}ª Geração</Text>
             <div>
-              <Button
-                size={"small"}
-                color="delete"
-                onClick={() => history.back()}
-                text={"Voltar"}
-              />
+              <Button.Root
+                backgroundColor="delete"
+                onClick={() => navigate(-1)}
+                size="small"
+              >
+                <Button.Content text={"Voltar"} />
+              </Button.Root>
             </div>
           </div>
           <div className="filtersWrapper">
@@ -143,9 +148,7 @@ export function Pokedex() {
             <div className="inputWrapper">
               <form>
                 <label htmlFor="searchInput">
-                  <Text size="md">
-                    Filtre a lista pelo nome dos pokemon
-                  </Text>
+                  <Text size="md">Filtre a lista pelo nome dos pokemon</Text>
                 </label>
                 <input
                   type="text"
@@ -172,7 +175,7 @@ export function Pokedex() {
                 .map((pokemon: PokemonDataProps) => {
                   return (
                     <PokemonCard
-                      key={pokemon.id}
+                      key={`${pokemon.id}-${pokemon.name}`}
                       id={pokemon.id}
                       name={pokemon.name}
                       types={pokemon.types}
@@ -193,7 +196,7 @@ export function Pokedex() {
                 .map((pokemon: PokemonDataProps) => {
                   return (
                     <PokemonCard
-                      key={pokemon.id}
+                      key={`${pokemon.id}-${pokemon.name}`}
                       id={pokemon.id}
                       name={pokemon.name}
                       types={pokemon.types}

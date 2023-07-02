@@ -6,7 +6,7 @@ import { Loading } from "../../components/Loading/Loading";
 import theme from "../../styles/theme";
 import { PokemonCard } from "../../components/PokemonCard/PokemonCard";
 import { Container } from "./styles";
-import { Button } from "../../components/Button/Button";
+import { Button } from "../../components/Button";
 import { BackToTop } from "../../components/BackToTop/BackToTop";
 
 export function Ability() {
@@ -23,27 +23,27 @@ export function Ability() {
     setIsLoading(false);
   }, []);
 
-  if(pokemonAbilityCommon.length == 0) {
+  if (pokemonAbilityCommon.length == 0) {
     return <Loading color={theme.colors.primary[500]} size={64} />;
   } else {
     return (
       <Container>
         <>
           <div className="abilityName">
-            <Text transform="uppercase" size="xxl" color="primary" weight="bold">
+            <Text
+              transform="uppercase"
+              size="xxl"
+              color="primary"
+              weight="bold"
+            >
               {abilityInfo?.name.split("-").join(" ")}
             </Text>
-
           </div>
           <div className="descriptionDiv">
-            <Text size="md">
-              {abilityInfo?.description}
-            </Text>
+            <Text size="md">{abilityInfo?.description}</Text>
           </div>
           <div className="pokemonCommon">
-            <Text size="lg">
-              Pokemons que possuem esta habilidade:{" "}
-            </Text>
+            <Text size="lg">Pokemons que possuem esta habilidade: </Text>
           </div>
           <div className="pokemons">
             <>
@@ -62,7 +62,9 @@ export function Ability() {
             </>
           </div>
           <div className="backButton">
-            <Button color="delete" onClick={() => navigate(-1)} text="Voltar"/>
+            <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>
+              <Button.Content text={"Voltar"} />
+            </Button.Root>
           </div>
         </>
         <BackToTop />
