@@ -109,7 +109,7 @@ export const Container = styled.button<IContainerProps>`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1.6rem;
+    gap: .8rem;
 
   }
 `;

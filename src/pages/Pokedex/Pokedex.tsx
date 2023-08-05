@@ -48,6 +48,7 @@ export function Pokedex() {
     if (genTypeFilteredList.length == 0) {
       return (
         <Container>
+
           <div className="generationDiv">
             <Text size="xl">{params.generationid}ª Geração</Text>
             <div>
@@ -132,7 +133,7 @@ export function Pokedex() {
       return (
         <Container>
           <div className="generationDiv">
-            <Text size="md">{params.generationid}ª Geração</Text>
+            <Text size="lg">{params.generationid}ª Geração</Text>
             <div>
               <Button.Root
                 backgroundColor="delete"
@@ -148,7 +149,7 @@ export function Pokedex() {
             <div className="inputWrapper">
               <form>
                 <label htmlFor="searchInput">
-                  <Text size="md">Filtre a lista pelo nome dos pokemon</Text>
+                  <Text size="lg">Filtre a lista pelo nome dos pokemon</Text>
                 </label>
                 <input
                   type="text"

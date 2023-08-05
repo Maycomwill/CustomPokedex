@@ -25,36 +25,6 @@ export const Container = styled.div<IUniqueContainerProps>`
     overflow-x: hidden;
   }
 
-  .infoWrapper {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 0.8rem;
-    margin-bottom: 2.4rem;
-
-    @media (max-width: 500px) {
-      flex-direction: column;
-    }
-
-    .pokedexInfo {
-      width: 100%;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(10rem, 1fr));
-      place-items: center;
-      grid-gap: 0.4rem;
-
-      @media (max-width: 500px) {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(10rem, 1fr));
-        grid-gap: 0.8rem;
-        width: 100%;
-        margin: auto;
-      }
-    }
-  }
-
   .spritesDiv {
     display: flex;
     justify-content: center;
@@ -71,6 +41,37 @@ export const Container = styled.div<IUniqueContainerProps>`
       height: 18rem;
     }
   }
+
+  .infoWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2.4rem;
+
+    @media (max-width: 500px) {
+      flex-direction: column;
+    }
+
+    .pokedexInfo {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(10rem, 1fr));
+      place-items: start;
+      grid-gap: 0.4rem;
+      margin-left: 2.8rem;
+
+      @media (max-width: 500px) {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(10rem, 1fr));
+        grid-gap: 0.8rem;
+        width: 100%;
+        margin: auto;
+      }
+    }
+  }
+
 
   .typesWrapper {
     width: 100%;

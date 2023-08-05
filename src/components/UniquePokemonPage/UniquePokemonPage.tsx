@@ -5,6 +5,7 @@ import { Button } from "../Button";
 import { Text } from "../Text/Text";
 import { TypeCard } from "../TypeCard/TypeCard";
 import { Container } from "./styles";
+import { Spacer } from "../Spacer/Spacer";
 
 interface IUniquePokemonPage extends UniquePokemonData {
   firstType?: string;
@@ -30,8 +31,9 @@ function UniquePokemonPage({
   function checkingIMG(url: string) {
     if (official_artwork == null) {
       return sprite_default;
+    }else{
+      return official_artwork;
     }
-    return official_artwork;
   }
 
   function addZeroes(num: number, len: number) {
@@ -63,10 +65,10 @@ function UniquePokemonPage({
             id: #{addZeroes(id, 3)}
           </Text>
           <Text size="lg" transform="capitalize">
-            Altura: {height * 10}cm
+            Altura: {(height * .1).toFixed(2)}m
           </Text>
           <Text size="lg" transform="capitalize">
-            Peso: {weight / 10}kg
+            Peso: {weight * 0.1}kg
           </Text>
         </div>
         <div className="typesWrapper">
@@ -86,7 +88,6 @@ function UniquePokemonPage({
           </div>
         </div>
       </div>
-
       <div className="abilitiesContainer">
         <Text size="lg" transform="capitalize">
           Habilidades:
@@ -109,6 +110,7 @@ function UniquePokemonPage({
         </div>
       </div>
 
+      <Spacer />
       <div className="statsWrapper">
         <Text size="lg" transform="capitalize">
           Status:

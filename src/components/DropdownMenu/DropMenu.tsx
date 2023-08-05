@@ -40,10 +40,6 @@ export function DropMenu() {
     setAnchorEl(null);
   };
 
-  React.useEffect(()=>{
-    // console.log("Type filtered: ", typeFilter)
-  },[typeFilter])
-
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
@@ -73,8 +69,10 @@ export function DropMenu() {
             height: "30rem",
             backgroundColor: `${theme.colors.gray[200]}`,
             color: `${theme.colors.gray[800]}`,
-            fontSize: `${theme.fontSize.xxl}`,
           },
+          ".MuiTypography-root": {
+            fontSize: 16
+          }
         }}
       >
         <div className="formControlDiv">

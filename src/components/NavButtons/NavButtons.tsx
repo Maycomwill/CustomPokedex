@@ -14,7 +14,7 @@ function NavButtons() {
       return (
         <Container>
           <div className="navButtons">
-            <Button.Root color="primary" id="zeroGen" size="small">
+            <Button.Root disabled color="primary" id="zeroGen" size="small">
               <Button.Content text={""} />
             </Button.Root>
             <Button.Root
@@ -52,7 +52,7 @@ function NavButtons() {
               size="small"
               onClick={() => navigate("/")}
             >
-              <Button.Content text={"Home"} />
+              <Button.Content text={"Voltar"} />
             </Button.Root>
             <Button.Root color="primary" id="zeroGen" size="small">
               <Button.Content text={""} />
@@ -100,16 +100,14 @@ function NavButtons() {
               <Button.Content text={""} />
             </Button.Root>
             <Button.Root
-              color="primary"
-              id="zeroGen"
+              color="delete"
               size="small"
               onClick={() => navigate("/")}
             >
-              <Button.Content text={"Home"} />
+              <Button.Content text={"Voltar"} />
             </Button.Root>
             <Button.Root
               color="primary"
-              id="zeroGen"
               size="small"
               onClick={() => navigate(`/pokedex/${Number(generation) + 1}`)}
             >
@@ -136,9 +134,9 @@ function NavButtons() {
               size="small"
               onClick={() => navigate("/")}
             >
-              <Button.Content text={"Home"} />
+              <Button.Content text={"Voltar"} />
             </Button.Root>
-            <Button.Root color="primary" id="zeroGen" size="small">
+            <Button.Root color="primary" id="zeroGen" size="small" disabled>
               <Button.Content text={""} />
             </Button.Root>
           </div>
@@ -161,7 +159,7 @@ function NavButtons() {
               color="delete"
               onClick={() => navigate("/")}
             >
-              <Button.Content text={"Home"} />
+              <Button.Content text={"Voltar"} />
             </Button.Root>
             <Button.Root
               color="primary"

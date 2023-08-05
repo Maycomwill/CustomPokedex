@@ -1,7 +1,7 @@
 import { Container } from './styles'
 
 interface SpacerProps{
-  className: string
+  className?: string
 }
 
 export function Spacer({className}: SpacerProps) {
