@@ -62,6 +62,10 @@ export const Container = styled.div<ITypeProps>`
   padding-left: 1rem;
   padding-right: 1rem;
 
+  @media (min-width: 500px){
+    width: 12rem;
+  }
+
   .svgDiv {
     width: 2.5rem;
     height: 2.5rem;
@@ -86,6 +90,10 @@ export const ContainerButton = styled.button<ITypeProps>`
   height: 4rem;
   padding-left: 1rem;
   padding-right: 1rem;
+
+  @media (min-width: 500px){
+    max-width: 12rem;
+  }
 
   .svgDiv {
     width: 2.5rem;

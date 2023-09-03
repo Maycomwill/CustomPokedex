@@ -24,6 +24,7 @@ function UniquePokemonPage({
   stats,
   types,
   weight,
+  flavor,
   pressable,
 }: IUniquePokemonPage) {
   // Console log para mostrar os tipos do pokemon
@@ -79,7 +80,7 @@ function UniquePokemonPage({
             </div>
           </div>
           <div className="flavorWrapper">
-            <Text size="md">flavor here</Text>
+            <Text size="md">{flavor}</Text>
           </div>
         </div>
       </div>

@@ -22,7 +22,7 @@ export interface PokedexContextDataProps {
   uniquePokemonData: UniquePokemonData;
   abilityInfo: AbilityInfoProps | undefined;
   pokemonAbilityCommon: PokemonDataProps[];
-  genTypeFilteredList: PokemonDataProps[]
+  genTypeFilteredList: PokemonDataProps[];
 }
 
 //Criação do contexto
@@ -31,7 +31,7 @@ export const PokedexContext = createContext({} as PokedexContextDataProps);
 //Criação do provedor do contexto, que será utilizado na criação do hook
 export function PokedexContextProvider({ children }: PokedexProviderProps) {
   let rawPokemonData: PokemonDataProps[] = [];
-  let genTypeFilter: PokemonDataProps[] = []
+  let genTypeFilter: PokemonDataProps[] = [];
   const [abilityInfo, setAbilityInfo] = useState<AbilityInfoProps | undefined>(
     undefined
   );
@@ -42,7 +42,9 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
   const [uniquePokemonData, setUniquePokemonData] = useState<UniquePokemonData>(
     {} as UniquePokemonData
   );
-  const [genTypeFilteredList, setGenTypeFilteredList] = useState<PokemonDataProps[]>([])
+  const [genTypeFilteredList, setGenTypeFilteredList] = useState<
+    PokemonDataProps[]
+  >([]);
 
   //Função que recebe do front-end a escolha inicial do usuário
   function getGenerationFromUserChoice(generation: string | undefined) {
@@ -137,7 +139,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     );
   }
 
-  // Esta função busca na api os dados do pokemon e retorna os dados já formatados
+  // Esta função busca na api os dados básicos do pokemon e retorna os dados já formatados
   async function getPokemonInformation(pokemonUrl: string) {
     return await axios.get(pokemonUrl).then(function (response) {
       if (response.data.sprites.front_default != null) {
@@ -189,6 +191,10 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
   // Esta função salva no estado os dados de um único pokemon
   async function getPokemonData(pokemonName: string | undefined) {
     const result = await pokeapi.get(`pokemon/${pokemonName?.toLowerCase()}`);
+    const extra_result = await pokeapi.get(
+      `pokemon-species/${pokemonName?.toLowerCase()}`
+    );
+    console.log("dados extra: ", extra_result.data);
     setUniquePokemonData({
       name: result.data.name,
       id: result.data.id,
@@ -221,6 +227,10 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
           slot: ability.slot,
         };
       }),
+      flavor: extra_result.data.flavor_text_entries[0].flavor_text
+        .split("\f")
+        .split("\n")
+        .join(" "),
     });
   }
 
@@ -296,9 +306,16 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
 
   function handleFilterGenType(typeName: string) {
     // console.log("função chamada:", type)
-    genTypeFilter = (typeName.length > 0) ? pokemonData.filter((pokemon)=>pokemon.types.some((type)=> type.type.toLowerCase() === typeName.toLowerCase())) : [];
-    console.log(genTypeFilter)
-    setGenTypeFilteredList(genTypeFilter)
+    genTypeFilter =
+      typeName.length > 0
+        ? pokemonData.filter((pokemon) =>
+            pokemon.types.some(
+              (type) => type.type.toLowerCase() === typeName.toLowerCase()
+            )
+          )
+        : [];
+    console.log(genTypeFilter);
+    setGenTypeFilteredList(genTypeFilter);
   }
 
   return (
@@ -315,7 +332,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
         uniquePokemonData,
         abilityInfo,
         pokemonAbilityCommon,
-        genTypeFilteredList
+        genTypeFilteredList,
       }}
     >
       {children}

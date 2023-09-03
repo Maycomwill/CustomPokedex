@@ -31,6 +31,7 @@ export interface UniquePokemonData {
   height: number;
   stats: statsProps[];
   abilities: abilityProps[];
+  flavor: string
 }
 
 export interface abilityProps {

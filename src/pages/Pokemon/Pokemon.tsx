@@ -35,6 +35,7 @@ export function Pokemon() {
         types={uniquePokemonData.types}
         weight={uniquePokemonData.weight}
         key={uniquePokemonData.id}
+        flavor={uniquePokemonData.flavor}
         pressable={true}
       />
     );
