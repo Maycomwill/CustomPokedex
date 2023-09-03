@@ -227,10 +227,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
           slot: ability.slot,
         };
       }),
-      flavor: extra_result.data.flavor_text_entries[0].flavor_text
-        .split("\f")
-        .split("\n")
-        .join(" "),
+      flavor: extra_result.data.flavor_text_entries[0].flavor_text,
     });
   }
 

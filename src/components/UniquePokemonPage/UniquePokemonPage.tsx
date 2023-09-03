@@ -80,7 +80,9 @@ function UniquePokemonPage({
             </div>
           </div>
           <div className="flavorWrapper">
-            <Text size="md">{flavor}</Text>
+            <Text size="md">
+              {flavor.split("\f").join(" ").split("\n").join(" ")}
+            </Text>
           </div>
         </div>
       </div>
@@ -106,7 +108,10 @@ function UniquePokemonPage({
 
         {abilities?.map((ability) => {
           return (
-            <div className="infoCard" onClick={() => navigate(`/ability/${ability.ability.name}`)}>
+            <div
+              className="infoCard"
+              onClick={() => navigate(`/ability/${ability.ability.name}`)}
+            >
               <Text size="md" transform="capitalize">
                 Habilidade
               </Text>
@@ -114,11 +119,7 @@ function UniquePokemonPage({
                 key={`${ability.ability.name}-${ability.slot}`}
                 className="info"
               >
-                <Text
-                  size="md"
-                  transform="capitalize"
-                  className="abilityName"
-                >
+                <Text size="md" transform="capitalize" className="abilityName">
                   {ability.ability.name.split("-").join(" ")}
                 </Text>
               </div>
@@ -158,7 +159,7 @@ function UniquePokemonPage({
       </div>
       <Spacer />
       <div className="evolution-chain">
-        <Text size="md">Evolution chain here</Text>
+        <Text size="md">Evolution chain goes here</Text>
       </div>
       <div className="backButton">
         <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>
