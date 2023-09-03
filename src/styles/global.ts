@@ -9,13 +9,13 @@ interface MyTheme extends DefaultTheme {
 }
 
 export const lightTheme: MyTheme = {
-  background: '#f5f5f5',
-  text: '#212121'
+  background: '#f4f4f5',
+  text: '#18181b'
 };
 
 export const darkTheme: MyTheme = {
-  background: '#212121',
-  text: '#f5f5f5'
+  background: '#18181b',
+  text: '#f4f4f5'
 };
 
 

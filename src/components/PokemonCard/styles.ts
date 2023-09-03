@@ -1,13 +1,13 @@
-import { darken } from 'polished';
-import styled from 'styled-components';
-import theme from '../../styles/theme';
+import { darken, tint } from "polished";
+import styled from "styled-components";
+import theme from "../../styles/theme";
 
 interface IContainerProps {
-  color: string
+  color: string;
 }
 
-export function backgroundColorType(color?: string){
-  switch(color){
+export function backgroundColorType(color?: string) {
+  switch (color) {
     case "bug":
       return `${theme.backgroundCard.bug}`;
     case "dark":
@@ -45,71 +45,112 @@ export function backgroundColorType(color?: string){
     case "water":
       return `${theme.backgroundCard.water}`;
     default:
-      return `${theme.colors.accent[200]}`
+      return `${theme.colors.accent[200]}`;
   }
 }
 
 export const Container = styled.button<IContainerProps>`
+height: 12rem;
+  width: 100%;
   border: 0;
   outline: none;
-  width: 80%;
-  border-radius: .8rem;
-  background-color: ${({color}) => backgroundColorType(color)};
-  border-bottom: .4rem solid ${({color}) => darken(0.3, backgroundColorType(color))};
+  border-radius: 0.8rem;
+  background-color: ${({ color }) => tint(0.85, backgroundColorType(color))};
+  /* border-bottom: .4rem solid ${({ color }) =>
+    darken(0.2, backgroundColorType(color))}; */
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: background-color .25s cubic-bezier(0.165, 0.84, 0.44, 1);
 
-  @media (max-width: 500px){
-    height: 28rem
-  };
+  @media (max-width: 500px) {
+    height: 12rem;
+    flex-direction: row;
 
-  :hover{
-    background-color: ${({color}) => darken(0.05, backgroundColorType(color))};
-    border-bottom: .4rem solid ${({color}) => darken(0.4, backgroundColorType(color))};
-  };
-
-  .topWrapper{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: .8rem 2.4rem;
-
-    @media (max-width: 500px){
-      flex-direction: column;
-    }
-  };
-
-  .spriteDiv img{
-    max-width: 10rem;
   }
 
-  .pokemonInfoDiv{
+  :hover {
+    background-color: ${({ color }) =>
+    backgroundColorType(color)};
+  }
+
+  .leftWrapper {
+    height: 12rem;
     display: flex;
     flex-direction: column;
-    gap: 1.6rem;
+    justify-content: space-between;
     align-items: flex-start;
-    justify-content: center;
+    padding: 0.8rem 2.4rem;
+    flex: 1;
 
-    @media (max-width: 500px){
-      flex-direction: column;
-      align-items: center;
-      gap: .4rem;
+    @media (max-width: 500px) {
+      height: 12rem;
     }
-  };
+  }
 
-  .typesWrapper{
+  .pokemonInfoDiv {
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+    align-items: flex-start;
+    justify-content: flex-start;
+    @media (max-width: 500px) {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+  }
+
+  .pokemonInfoDiv #pokemonName {
+    text-transform: uppercase;
+    font-size: 1.8rem;
+  }
+
+  .typesWrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: .4rem;
-    padding-bottom: .8rem;
-  };
+    gap: 0.4rem;
+    padding-bottom: 0.8rem;
+  }
 
-  .typesCards{
+  .typesCards ul {
+    list-style: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: .8rem;
+    gap: 0.8rem;
+  }
 
+  .rightWrapper {
+    height: 12rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 11rem;
+    height: 100%;
+    background-color: ${({ color }) => backgroundColorType(color)};
+    position: relative;
+    z-index: 10;
+    border-radius: 0.8rem;
+  }
+
+  .spriteDiv img {
+    height: 8rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  .spriteDiv .svg-Type-Pokemon-img {
+    opacity: 0.25;
+    height: 8rem;
+    position: absolute;
+    z-index: 0;
+    object-fit: cover;
   }
 `;

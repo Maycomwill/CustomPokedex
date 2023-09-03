@@ -12,10 +12,8 @@ export const Container = styled.div<IUniqueContainerProps>`
   flex-direction: column;
   margin: auto;
   width: 95%;
-  border-radius: 1.6rem;
   justify-content: space-evenly;
   align-items: center;
-  background: ${theme.colors.gray[800]};
   margin-bottom: 2.4rem;
 
   @media (max-width: 500px) {
@@ -29,7 +27,7 @@ export const Container = styled.div<IUniqueContainerProps>`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 2.4rem;
+    margin-bottom: .8rem;
   }
 
   .spritesDiv img {
@@ -45,66 +43,101 @@ export const Container = styled.div<IUniqueContainerProps>`
   .infoWrapper {
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-bottom: 2.4rem;
 
-    @media (max-width: 500px) {
+   /*  @media (max-width: 500px) {
       flex-direction: column;
-    }
-
+    } */
+  }
     .pokedexInfo {
       width: 100%;
       display: grid;
-      grid-template-columns: repeat(2, minmax(10rem, 1fr));
-      place-items: start;
-      grid-gap: 0.4rem;
-      margin-left: 2.8rem;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      grid-column-gap: 0px;
+      grid-row-gap: 0px;
+      gap: .4rem;
 
-      @media (max-width: 500px) {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(10rem, 1fr));
-        grid-gap: 0.8rem;
-        width: 100%;
-        margin: auto;
-      }
+
+    @media (max-width: 500px) {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
     }
   }
 
+  .pokedexInfo #name{
+    @media (min-width: 600px) {
+    grid-area: 1 / 1 / 2 / 2;
+    }
+  }
 
-  .typesWrapper {
+  .pokedexInfo #id{
+    @media (min-width: 600px) {
+    grid-area: 2 / 1 / 3 / 2;
+    }
+  }
+
+  .typesWrapper .typesContainer {
     width: 100%;
+    grid-area: 1 / 2 / 3 / 3;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    align-items: flex-start;
     justify-content: center;
     gap: 0.4rem;
+    margin: .4rem 0rem;
+    @media (max-width: 500px) {
+      align-items: flex-start;
+      justify-content: center;
+    }
   }
 
   .typesContainer {
     display: flex;
-    gap: 0.4rem;
+    gap: 1.6rem;
   }
 
-  .abilitiesContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  .flavorWrapper{
+    grid-area: 3 / 1 / 4 / 3;
+    text-align: justify;
+  }
+
+  .detailsWrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-row-gap: .8rem;
+    grid-column-gap: .8rem;
+    width: 100%;
     @media (max-width: 500px) {
-      text-align: center;
       width: 100%;
       margin-bottom: 2rem;
     }
   }
 
-  .abilityName {
-    cursor: pointer;
+  .detailsWrapper .info{
+    background: ${theme.colors.gray[800]};
+    padding: 1.2rem 0rem;
+    border: .2rem solid ${theme.colors.gray[500]};
+    border-radius: .8rem;
+    width: 100%;
+    display: flex;
+    flex:1;
+    align-content: center;
+    justify-content: center;
+  }
 
-    :hover {
+  .detailsWrapper .info:hover span{
       color: ${theme.colors.primary[500]};
-    }
+  }
+
+  .detailsWrapper .info:has(.abilityName) {
+    cursor: pointer;
   }
 
   .abilities {

@@ -20,6 +20,7 @@ import rock from "../../assets/TypesSvg/rock.svg";
 import steel from "../../assets/TypesSvg/steel.svg";
 import water from "../../assets/TypesSvg/water.svg";
 import { useNavigate } from "react-router-dom";
+import { poketypesComponents } from "../pokemonTypes/objects/objects";
 
 interface ITypeCardProps {
   pokemonType: string;
@@ -59,32 +60,30 @@ export function TypeCard({ pokemonType, pressable, ...rest }: ITypeCardProps) {
         pokemonType={pokemonType}
         onClick={() => navigate(`/type/${pokemonType}`)}
       >
-        <div className="typeName">
-          <Text transform="capitalize">{pokemonType}</Text>
+         <div className="svgDiv">
+          {poketypesComponents({
+            height: 25,
+            width: 25,
+            pokemonType,
+          })}
         </div>
-        <div className="svgDiv">
-          <img
-            width={20}
-            height={20}
-            src={pokemonTypeImageName(pokemonType)}
-            alt={`${pokemonType} image`}
-          />
+        <div className="typeName">
+          <Text transform="capitalize" weight="bold" size="md">{pokemonType}</Text>
         </div>
       </ContainerButton>
     );
   } else {
     return (
       <Container pokemonType={pokemonType}>
-        <div className="typeName">
-          <Text transform="capitalize">{pokemonType}</Text>
-        </div>
         <div className="svgDiv">
-          <img
-            width={20}
-            height={20}
-            src={pokemonTypeImageName(pokemonType)}
-            alt={`${pokemonType} image`}
-          />
+          {poketypesComponents({
+            height: 25,
+            width: 25,
+            pokemonType,
+          })}
+        </div>
+        <div className="typeName">
+          <Text transform="capitalize" weight="bold" size="sm">{pokemonType}</Text>
         </div>
       </Container>
     );

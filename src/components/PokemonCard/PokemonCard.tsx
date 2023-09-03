@@ -3,6 +3,7 @@ import { typeProps } from "../../interfaces/pokemonInterfaces";
 import { Text } from "../Text/Text";
 import { TypeCard } from "../TypeCard/TypeCard";
 import { useNavigate } from "react-router-dom";
+import { pokemonTypesObject } from "../pokemonTypes/objects/objects";
 
 interface PokemonProps {
   name: string;
@@ -43,13 +44,14 @@ export function PokemonCard({
       }}
       color={primaryType}
     >
-      <div className="topWrapper">
+      <div className="leftWrapper">
         <div className="pokemonInfoDiv">
           <Text
             size="lg"
             weight="bold"
             transform="capitalize"
             color="gray"
+            id="pokemonName"
           >
             {name.split("-").join(" ")}
           </Text>
@@ -57,24 +59,26 @@ export function PokemonCard({
             #{addZeroes(String(id), 3)}
           </Text>
         </div>
-        <div className="spriteDiv">
-          <img src={sprite} alt={`${name} sprite`} />
+        <div className="typesCards">
+          <ul>
+            {types.map((type) => {
+              return (
+                <li key={`${type.type}`}>
+                  <TypeCard pressable={false} pokemonType={type.type} />
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </div>
-      <div className="typesWrapper">
-        <Text color="gray" transform="capitalize">
-          types:
-        </Text>
-        <div className="typesCards">
-          {types.map((type) => {
-            return (
-              <TypeCard
-                pressable={false}
-                pokemonType={type.type}
-                key={`${type.type}`}
-              />
-            );
-          })}
+      <div className="rightWrapper">
+        <div className="spriteDiv">
+          <img
+          className="svg-Type-Pokemon-img"
+            src={pokemonTypesObject[primaryType]}
+            alt={`${primaryType}-type-svg`}
+          />
+          <img src={sprite} alt={`${name} sprite`} />
         </div>
       </div>
     </Container>

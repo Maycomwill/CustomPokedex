@@ -48,7 +48,6 @@ export function Pokedex() {
     if (genTypeFilteredList.length == 0) {
       return (
         <Container>
-
           <div className="generationDiv">
             <Text size="xl">{params.generationid}ª Geração</Text>
             <div>
@@ -65,13 +64,14 @@ export function Pokedex() {
             <div className="blankDiv"></div>
             <div className="inputWrapper">
               <form>
-                <label htmlFor="searchInput">
+                <label htmlFor="search" id="label">
                   <Text size="lg">Filtre a lista pelo nome dos pokemon</Text>
                 </label>
                 <input
                   type="text"
                   placeholder="Digite o nome do pokemon"
-                  id="searchInput"
+                  name="search"
+                  className="searchInput"
                   onChange={(e) => setSearch(e.target.value)}
                   value={search}
                 />
@@ -148,13 +148,14 @@ export function Pokedex() {
             <div className="blankDiv"></div>
             <div className="inputWrapper">
               <form>
-                <label htmlFor="searchInput">
+                <label htmlFor="search">
                   <Text size="lg">Filtre a lista pelo nome dos pokemon</Text>
                 </label>
                 <input
                   type="text"
                   placeholder="Digite o nome do pokemon"
-                  id="searchInput"
+                  className="searchInput"
+                  name="search"
                   onChange={(e) => setSearch(e.target.value)}
                   value={search}
                 />

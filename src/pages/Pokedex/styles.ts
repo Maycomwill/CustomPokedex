@@ -101,7 +101,6 @@ export const Container = styled.div`
   }
   .pokemonCard-wrapper {
     width: min(120rem, 97%);
-    margin: auto;
     padding-top: 1.2rem;
     display: grid;
     gap: 1.2rem;
@@ -111,12 +110,13 @@ export const Container = styled.div`
     align-items: flex-start;
 
     @media (max-width: 500px) {
-      width: 100%;
+
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      margin: 0rem 3.2rem;
     }
   }
 

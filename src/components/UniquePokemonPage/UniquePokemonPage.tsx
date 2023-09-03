@@ -6,6 +6,7 @@ import { Text } from "../Text/Text";
 import { TypeCard } from "../TypeCard/TypeCard";
 import { Container } from "./styles";
 import { Spacer } from "../Spacer/Spacer";
+import { BackToTop } from "../BackToTop/BackToTop";
 
 interface IUniquePokemonPage extends UniquePokemonData {
   firstType?: string;
@@ -31,7 +32,7 @@ function UniquePokemonPage({
   function checkingIMG(url: string) {
     if (official_artwork == null) {
       return sprite_default;
-    }else{
+    } else {
       return official_artwork;
     }
   }
@@ -58,63 +59,75 @@ function UniquePokemonPage({
       </div>
       <div className="infoWrapper">
         <div className="pokedexInfo">
-          <Text size="lg" transform="capitalize">
-            Nome: {name?.split("-").join(" ")}
+          <Text size="xxl" weight="bold" transform="capitalize" id="name">
+            {name?.split("-").join(" ")}
           </Text>
-          <Text size="lg" transform="capitalize">
-            id: #{addZeroes(id, 3)}
+          <Text size="lg" transform="capitalize" id="id">
+            #{addZeroes(id, 3)}
           </Text>
-          <Text size="lg" transform="capitalize">
-            Altura: {(height * .1).toFixed(2)}m
-          </Text>
-          <Text size="lg" transform="capitalize">
-            Peso: {weight * 0.1}kg
-          </Text>
-        </div>
-        <div className="typesWrapper">
-          <Text size="lg" transform="capitalize">
-            tipos:
-          </Text>
-          <div className="typesContainer">
-            {types?.map((type) => {
-              return (
-                <TypeCard
-                  pressable={true}
-                  pokemonType={type.type}
-                  key={`${type.type}`}
-                />
-              );
-            })}
+          <div className="typesWrapper">
+            <div className="typesContainer">
+              {types?.map((type) => {
+                return (
+                  <TypeCard
+                    pressable={true}
+                    pokemonType={type.type}
+                    key={`${type.type}`}
+                  />
+                );
+              })}
+            </div>
+          </div>
+          <div className="flavorWrapper">
+            <Text size="md">flavor here</Text>
           </div>
         </div>
       </div>
-      <div className="abilitiesContainer">
-        <Text size="lg" transform="capitalize">
-          Habilidades:
-        </Text>
-        <div className="abilities">
-          {abilities?.map((ability) => {
-            return (
-              <div key={`${ability.ability.name}-${ability.slot}`}>
+      <Spacer />
+      <div className="detailsWrapper">
+        <div className="infoCard">
+          <Text size="md" transform="capitalize">
+            Altura:
+          </Text>
+          <div className="info">
+            <Text size="md">{(height * 0.1).toFixed(2)}m</Text>
+          </div>
+        </div>
+
+        <div className="infoCard">
+          <Text size="md" transform="capitalize">
+            Peso:
+          </Text>
+          <div className="info">
+            <Text size="md">{weight * 0.1}kg</Text>
+          </div>
+        </div>
+
+        {abilities?.map((ability) => {
+          return (
+            <div className="infoCard" onClick={() => navigate(`/ability/${ability.ability.name}`)}>
+              <Text size="md" transform="capitalize">
+                Habilidade
+              </Text>
+              <div
+                key={`${ability.ability.name}-${ability.slot}`}
+                className="info"
+              >
                 <Text
-                  size="lg"
+                  size="md"
                   transform="capitalize"
-                  onClick={() => navigate(`/ability/${ability.ability.name}`)}
                   className="abilityName"
                 >
                   {ability.ability.name.split("-").join(" ")}
                 </Text>
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
 
       <Spacer />
       <div className="statsWrapper">
-        <Text size="lg" transform="capitalize">
-          Status:
-        </Text>
         <div className="statsContainer">
           {stats?.map((stat) => {
             return (
@@ -122,7 +135,7 @@ function UniquePokemonPage({
                 className="baseStatWrapper"
                 key={`${stat.stat.name}-${stat.effort}`}
               >
-                <Text size="lg" transform="capitalize">
+                <Text size="md" transform="capitalize">
                   {stat.stat.name}
                 </Text>
                 <div className="baseStatDiv">
@@ -142,11 +155,16 @@ function UniquePokemonPage({
           })}
         </div>
       </div>
+      <Spacer />
+      <div className="evolution-chain">
+        <Text size="md">Evolution chain here</Text>
+      </div>
       <div className="backButton">
         <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>
           <Button.Content text={"Voltar"} />
         </Button.Root>
       </div>
+      <BackToTop />
     </Container>
   );
 }

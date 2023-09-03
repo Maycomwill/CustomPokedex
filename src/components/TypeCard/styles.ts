@@ -50,32 +50,56 @@ function backgroundColorType(color: string) {
 }
 
 export const Container = styled.div<ITypeProps>`
-  background-color: ${({ pokemonType }) => darken(0.2, backgroundColorType(pokemonType))};
-  width: 12rem;
-  border-radius: .4rem;
+  background-color: ${({ pokemonType }) => backgroundColorType(pokemonType)};
+  border-radius: 9999rem;
+  border: none;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  gap: 1.6rem;
-  padding: .8rem 1.6rem;
+  gap: .8rem;
+  max-width: 10rem;
+  height: 4rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 
+  .svgDiv {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 0.4rem;
+  }
 `;
 
 export const ContainerButton = styled.button<ITypeProps>`
-  background-color: ${({ pokemonType }) => darken(0.2, backgroundColorType(pokemonType))};
-  width: 12rem;
+  background-color: ${({ pokemonType }) => backgroundColorType(pokemonType)};
+  border-radius: 9999rem;
   border: none;
-  border-radius: .4rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  gap: 1.6rem;
-  padding: .8rem 1.6rem;
-  cursor: pointer;
-  transition: background .2s;
+  gap: .8rem;
+  max-width: 10rem;
+  height: 4rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 
+  .svgDiv {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 0.4rem;
+  }
 /* futura opção para ver as informações da tipagem */
   :hover{
     background-color: ${({ pokemonType }) => darken(0.1, backgroundColorType(pokemonType))};
   }
+
 `;
