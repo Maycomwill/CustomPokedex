@@ -81,7 +81,7 @@ function UniquePokemonPage({
           </div>
           <div className="flavorWrapper">
             <Text size="md">
-              {flavor.split("\f").join(" ").split("\n").join(" ")}
+              {flavor.split("\f").join(" ")}
             </Text>
           </div>
         </div>
