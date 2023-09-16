@@ -1,5 +1,4 @@
 import { CaretUp } from 'phosphor-react'
-import React from 'react'
 import { Container } from './styles'
 
 function handleScrollTop(e: any){

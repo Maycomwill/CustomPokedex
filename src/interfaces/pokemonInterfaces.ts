@@ -20,6 +20,13 @@ export interface PokedexProviderProps {
   children: ReactNode;
 }
 
+export interface evolutionProps {
+  name: string
+  sprite: string
+  min_level: number | null | undefined
+}
+
+
 export interface UniquePokemonData {
   name: string;
   id: number;
@@ -31,7 +38,8 @@ export interface UniquePokemonData {
   height: number;
   stats: statsProps[];
   abilities: abilityProps[];
-  flavor: string
+  flavor: string;
+  evolution_chain: evolutionProps[]
 }
 
 export interface abilityProps {

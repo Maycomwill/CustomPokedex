@@ -7,6 +7,7 @@ import { TypeCard } from "../TypeCard/TypeCard";
 import { Container } from "./styles";
 import { Spacer } from "../Spacer/Spacer";
 import { BackToTop } from "../BackToTop/BackToTop";
+import { CaretRight } from "phosphor-react";
 
 interface IUniquePokemonPage extends UniquePokemonData {
   firstType?: string;
@@ -25,16 +26,17 @@ function UniquePokemonPage({
   types,
   weight,
   flavor,
+  evolution_chain,
   pressable,
 }: IUniquePokemonPage) {
   // Console log para mostrar os tipos do pokemon
   // console.log("Types:", types);
 
   function checkingIMG(url: string) {
-    if (official_artwork == null) {
+    if (url == null) {
       return sprite_default;
     } else {
-      return official_artwork;
+      return url;
     }
   }
 
@@ -53,120 +55,428 @@ function UniquePokemonPage({
 
   const navigate = useNavigate();
 
-  return (
-    <Container>
-      <div className="spritesDiv">
-        <img src={checkingIMG(official_artwork)} alt={`${name} image`} />
-      </div>
-      <div className="infoWrapper">
-        <div className="pokedexInfo">
-          <Text size="xxl" weight="bold" transform="capitalize" id="name">
-            {name?.split("-").join(" ")}
-          </Text>
-          <Text size="lg" transform="capitalize" id="id">
-            #{addZeroes(id, 3)}
-          </Text>
-          <div className="typesWrapper">
-            <div className="typesContainer">
-              {types?.map((type) => {
-                return (
-                  <TypeCard
-                    pressable={true}
-                    pokemonType={type.type}
-                    key={`${type.type}`}
-                  />
-                );
-              })}
-            </div>
-          </div>
-          <div className="flavorWrapper">
-            <Text size="md">{flavor?.split("\f").join(" ")}</Text>
-          </div>
-        </div>
-      </div>
-      <Spacer />
-      <div className="detailsWrapper">
-        <div className="infoCard">
-          <Text size="md" transform="capitalize">
-            Altura:
-          </Text>
-          <div className="info">
-            <Text size="md">{(height * 0.1).toFixed(2)}m</Text>
-          </div>
-        </div>
+  console.log("Evolution Chain", evolution_chain);
 
-        <div className="infoCard">
-          <Text size="md" transform="capitalize">
-            Peso:
-          </Text>
-          <div className="info">
-            <Text size="md">{weight * 0.1}kg</Text>
-          </div>
+  if (evolution_chain?.length == 3) {
+    return (
+      <Container>
+        <div className="spritesDiv">
+          <img src={checkingIMG(official_artwork)} alt={`${name} image`} />
         </div>
-
-        {abilities?.map((ability) => {
-          return (
-            <div
-              className="infoCard"
-              onClick={() => navigate(`/ability/${ability.ability.name}`)}
-            >
-              <Text size="md" transform="capitalize">
-                Habilidade
-              </Text>
-              <div
-                key={`${ability.ability.name}-${ability.slot}`}
-                className="info"
-              >
-                <Text size="md" transform="capitalize" className="abilityName">
-                  {ability.ability.name.split("-").join(" ")}
-                </Text>
+        <div className="infoWrapper">
+          <div className="pokedexInfo">
+            <Text size="xxl" weight="bold" transform="capitalize" id="name">
+              {name?.split("-").join(" ")}
+            </Text>
+            <Text size="lg" transform="capitalize" id="id">
+              #{addZeroes(id, 3)}
+            </Text>
+            <div className="typesWrapper">
+              <div className="typesContainer">
+                {types?.map((type) => {
+                  return (
+                    <TypeCard
+                      pressable={true}
+                      pokemonType={type.type}
+                      key={`${type.type}`}
+                    />
+                  );
+                })}
               </div>
             </div>
-          );
-        })}
-      </div>
+            <div className="flavorWrapper">
+              <Text size="md">{flavor?.split("\f").join(" ")}</Text>
+            </div>
+          </div>
+        </div>
+        <Spacer />
+        <div className="detailsWrapper">
+          <div className="infoCard">
+            <Text size="md" transform="capitalize">
+              Altura:
+            </Text>
+            <div className="info">
+              <Text size="md">{(height * 0.1).toFixed(2)}m</Text>
+            </div>
+          </div>
 
-      <Spacer />
-      <div className="statsWrapper">
-        <div className="statsContainer">
-          {stats?.map((stat) => {
+          <div className="infoCard">
+            <Text size="md" transform="capitalize">
+              Peso:
+            </Text>
+            <div className="info">
+              <Text size="md">{weight * 0.1}kg</Text>
+            </div>
+          </div>
+
+          {abilities?.map((ability) => {
             return (
               <div
-                className="baseStatWrapper"
-                key={`${stat.stat.name}-${stat.effort}`}
+                className="infoCard"
+                onClick={() => navigate(`/ability/${ability.ability.name}`)}
               >
                 <Text size="md" transform="capitalize">
-                  {stat.stat.name}
+                  Habilidade
                 </Text>
-                <div className="baseStatDiv">
-                  <div
-                    style={{
-                      width: `${stat.base_stat}%`,
-                      maxWidth: "100%",
-                      backgroundColor: `${theme.colors.primary[500]}`,
-                      borderRadius: ".4rem",
-                    }}
+                <div
+                  key={`${ability.ability.name}-${ability.slot}`}
+                  className="info"
+                >
+                  <Text
+                    size="md"
+                    transform="capitalize"
+                    className="abilityName"
                   >
-                    <Text size="md">{stat.base_stat}</Text>
-                  </div>
+                    {ability.ability.name.split("-").join(" ")}
+                  </Text>
                 </div>
               </div>
             );
           })}
         </div>
-      </div>
-      <Spacer />
-      <div className="evolution-chain">
-        <Text size="md">Evolution chain goes here</Text>
-      </div>
-      <div className="backButton">
-        <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>
-          <Button.Content text={"Voltar"} />
-        </Button.Root>
-      </div>
-      <BackToTop />
-    </Container>
-  );
-}
 
+        <Spacer />
+        <div className="statsWrapper">
+          <span>Status base:</span>
+          <div className="statsContainer">
+            {stats?.map((stat) => {
+              return (
+                <div
+                  className="baseStatWrapper"
+                  key={`${stat.stat.name}-${stat.effort}`}
+                >
+                  <Text size="md" transform="capitalize">
+                    {stat.stat.name}
+                  </Text>
+                  <div className="baseStatDiv">
+                    <div
+                      style={{
+                        width: `${stat.base_stat}%`,
+                        maxWidth: "100%",
+                        backgroundColor: `${theme.colors.primary[500]}`,
+                        borderRadius: ".4rem",
+                      }}
+                    >
+                      <Text size="md">{stat.base_stat}</Text>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <Spacer />
+        <div className="evolution-chain">
+          <Text size="md">Cadeia evolutiva:</Text>
+          <div className="evolutions">
+            <div className="evolution">
+              <img
+                src={evolution_chain[0].sprite}
+                alt={`${evolution_chain[0].name}`}
+              />
+              <span>{evolution_chain[0].name}</span>
+            </div>
+            <div className="separator">
+              <span>lv. {evolution_chain[1].min_level}</span>
+              <CaretRight size={24} />
+            </div>
+            <div className="evolution">
+              <img
+                src={evolution_chain[1].sprite}
+                alt={`${evolution_chain[1].name}`}
+              />
+              <span>{evolution_chain[1].name}</span>
+            </div>
+            <div className="separator">
+              <span>lv. {evolution_chain[2].min_level}</span>
+              <CaretRight size={24} />
+            </div>
+            <div className="evolution">
+              <img
+                src={evolution_chain[2].sprite}
+                alt={`${evolution_chain[2].name}`}
+              />
+              <span>{evolution_chain[2].name}</span>
+            </div>
+          </div>
+        </div>
+        <div className="backButton">
+          <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>
+            <Button.Content text={"Voltar"} />
+          </Button.Root>
+        </div>
+        <BackToTop />
+      </Container>
+    );
+  } else if (evolution_chain?.length == 2) {
+    return (
+      <Container>
+        <div className="spritesDiv">
+          <img src={checkingIMG(official_artwork)} alt={`${name} image`} />
+        </div>
+        <div className="infoWrapper">
+          <div className="pokedexInfo">
+            <Text size="xxl" weight="bold" transform="capitalize" id="name">
+              {name?.split("-").join(" ")}
+            </Text>
+            <Text size="lg" transform="capitalize" id="id">
+              #{addZeroes(id, 3)}
+            </Text>
+            <div className="typesWrapper">
+              <div className="typesContainer">
+                {types?.map((type) => {
+                  return (
+                    <TypeCard
+                      pressable={true}
+                      pokemonType={type.type}
+                      key={`${type.type}`}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+            <div className="flavorWrapper">
+              <Text size="md">{flavor?.split("\f").join(" ")}</Text>
+            </div>
+          </div>
+        </div>
+        <Spacer />
+        <div className="detailsWrapper">
+          <div className="infoCard">
+            <Text size="md" transform="capitalize">
+              Altura:
+            </Text>
+            <div className="info">
+              <Text size="md">{(height * 0.1).toFixed(2)}m</Text>
+            </div>
+          </div>
+
+          <div className="infoCard">
+            <Text size="md" transform="capitalize">
+              Peso:
+            </Text>
+            <div className="info">
+              <Text size="md">{weight * 0.1}kg</Text>
+            </div>
+          </div>
+
+          {abilities?.map((ability) => {
+            return (
+              <div
+                className="infoCard"
+                onClick={() => navigate(`/ability/${ability.ability.name}`)}
+              >
+                <Text size="md" transform="capitalize">
+                  Habilidade
+                </Text>
+                <div
+                  key={`${ability.ability.name}-${ability.slot}`}
+                  className="info"
+                >
+                  <Text
+                    size="md"
+                    transform="capitalize"
+                    className="abilityName"
+                  >
+                    {ability.ability.name.split("-").join(" ")}
+                  </Text>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <Spacer />
+        <div className="statsWrapper">
+          <span>Status base:</span>
+          <div className="statsContainer">
+            {stats?.map((stat) => {
+              return (
+                <div
+                  className="baseStatWrapper"
+                  key={`${stat.stat.name}-${stat.effort}`}
+                >
+                  <Text size="md" transform="capitalize">
+                    {stat.stat.name}
+                  </Text>
+                  <div className="baseStatDiv">
+                    <div
+                      style={{
+                        width: `${stat.base_stat}%`,
+                        maxWidth: "100%",
+                        backgroundColor: `${theme.colors.primary[500]}`,
+                        borderRadius: ".4rem",
+                      }}
+                    >
+                      <Text size="md">{stat.base_stat}</Text>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <Spacer />
+        <div className="evolution-chain">
+          <Text size="md">Cadeia evolutiva:</Text>
+          <div className="evolutions">
+            <div className="evolution">
+              <img
+                src={evolution_chain[0].sprite}
+                alt={`${evolution_chain[0].name}`}
+              />
+              <span>{evolution_chain[0].name}</span>
+            </div>
+            <div className="separator">
+              <span>lv. {evolution_chain[1].min_level}</span>
+              <CaretRight size={24} />
+            </div>
+            <div className="evolution">
+              <img
+                src={evolution_chain[1].sprite}
+                alt={`${evolution_chain[1].name}`}
+              />
+              <span>{evolution_chain[1].name}</span>
+            </div>
+          </div>
+        </div>
+        <div className="backButton">
+          <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>
+            <Button.Content text={"Voltar"} />
+          </Button.Root>
+        </div>
+        <BackToTop />
+      </Container>
+    );
+  } else if (evolution_chain?.length == 1){
+    return (
+      <Container>
+        <div className="spritesDiv">
+          <img src={checkingIMG(official_artwork)} alt={`${name} image`} />
+        </div>
+        <div className="infoWrapper">
+          <div className="pokedexInfo">
+            <Text size="xxl" weight="bold" transform="capitalize" id="name">
+              {name?.split("-").join(" ")}
+            </Text>
+            <Text size="lg" transform="capitalize" id="id">
+              #{addZeroes(id, 3)}
+            </Text>
+            <div className="typesWrapper">
+              <div className="typesContainer">
+                {types?.map((type) => {
+                  return (
+                    <TypeCard
+                      pressable={true}
+                      pokemonType={type.type}
+                      key={`${type.type}`}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+            <div className="flavorWrapper">
+              <Text size="md">{flavor?.split("\f").join(" ")}</Text>
+            </div>
+          </div>
+        </div>
+        <Spacer />
+        <div className="detailsWrapper">
+          <div className="infoCard">
+            <Text size="md" transform="capitalize">
+              Altura:
+            </Text>
+            <div className="info">
+              <Text size="md">{(height * 0.1).toFixed(2)}m</Text>
+            </div>
+          </div>
+
+          <div className="infoCard">
+            <Text size="md" transform="capitalize">
+              Peso:
+            </Text>
+            <div className="info">
+              <Text size="md">{weight * 0.1}kg</Text>
+            </div>
+          </div>
+
+          {abilities?.map((ability) => {
+            return (
+              <div
+                className="infoCard"
+                onClick={() => navigate(`/ability/${ability.ability.name}`)}
+              >
+                <Text size="md" transform="capitalize">
+                  Habilidade
+                </Text>
+                <div
+                  key={`${ability.ability.name}-${ability.slot}`}
+                  className="info"
+                >
+                  <Text
+                    size="md"
+                    transform="capitalize"
+                    className="abilityName"
+                  >
+                    {ability.ability.name.split("-").join(" ")}
+                  </Text>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <Spacer />
+        <div className="statsWrapper">
+          <span>Base stats:</span>
+          <div className="statsContainer">
+            {stats?.map((stat) => {
+              return (
+                <div
+                  className="baseStatWrapper"
+                  key={`${stat.stat.name}-${stat.effort}`}
+                >
+                  <Text size="md" transform="capitalize">
+                    {stat.stat.name}
+                  </Text>
+                  <div className="baseStatDiv">
+                    <div
+                      style={{
+                        width: `${stat.base_stat}%`,
+                        maxWidth: "100%",
+                        backgroundColor: `${theme.colors.primary[500]}`,
+                        borderRadius: ".4rem",
+                      }}
+                    >
+                      <Text size="md">{stat.base_stat}</Text>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <Spacer />
+        <div className="evolution-chain">
+          <Text size="md">Cadeia evolutiva:</Text>
+          <div className="evolutions">
+            <div className="evolution">
+              <img
+                src={evolution_chain[0].sprite}
+                alt={`${evolution_chain[0].name}`}
+              />
+              <span>{evolution_chain[0].name}</span>
+            </div>
+          </div>
+        </div>
+        <div className="backButton">
+          <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>
+            <Button.Content text={"Voltar"} />
+          </Button.Root>
+        </div>
+        <BackToTop />
+      </Container>
+    );
+  }
+}
 export default UniquePokemonPage;

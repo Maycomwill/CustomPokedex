@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100vw;
-  padding: 1.2rem 2.4rem;
+  padding: 0rem 2.4rem;
+  margin: 1.6rem 0rem;
   overflow-x: hidden;
 
   #logos{

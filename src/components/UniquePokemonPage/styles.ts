@@ -1,25 +1,24 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
-import { backgroundColorType } from "../PokemonCard/styles";
 
 interface IUniqueContainerProps {
   firstType?: string;
 }
 
 export const Container = styled.div<IUniqueContainerProps>`
-  padding: 2rem 2.4rem;
   display: flex;
   flex-direction: column;
-  margin: auto;
-  width: 95%;
+  flex: 1;
+  width: 100vw;
   justify-content: space-evenly;
   align-items: center;
   margin-bottom: 2.4rem;
 
   @media (max-width: 500px) {
     flex-direction: column;
-    padding: 2rem;
-    width: 90%;
+    padding: 0rem 2rem;
+    width: 100%;
+    flex: 1;
     overflow-x: hidden;
   }
 
@@ -168,8 +167,12 @@ export const Container = styled.div<IUniqueContainerProps>`
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+
+    span{
+      font-size: 1.6rem;
+    }
 
     @media (max-width: 500px) {
       width: 100%;
@@ -201,6 +204,48 @@ export const Container = styled.div<IUniqueContainerProps>`
     flex-direction: column;
     gap: 0.2rem;
     padding-top: 0.8rem;
+  }
+
+  .evolution-chain{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: center;
+
+    .evolutions{
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      width: 100%;
+    }
+
+    .separator{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      min-width: 3.6rem;
+    }
+  }
+
+  .evolution{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    img{
+      padding: 0;
+      margin: 0;
+      width: 9.6rem;
+    }
+
+    span{
+      text-transform: capitalize;
+      font-size: 1.2rem;
+    }
   }
 
   .backButton {

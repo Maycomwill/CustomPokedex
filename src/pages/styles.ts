@@ -6,20 +6,12 @@ export const Container = styled.div`
   flex-direction: column;
   scroll-behavior: smooth;
 
-  #header{
-    flex: 0;
-  }
-
   #routes{
     padding: 0;
     margin: 0;
     flex: 1;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
   };
-
-  #footer{
-    flex: 0;
-  }
 `;

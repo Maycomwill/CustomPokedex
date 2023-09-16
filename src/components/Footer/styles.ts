@@ -7,6 +7,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   margin: 1.6rem;
+  height: 2.4rem;
 
   span > a {
     text-decoration: none;

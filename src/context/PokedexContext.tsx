@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useState } from "react";
 import { pokeapi } from "../services/api";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import {
   AbilityInfoProps,
   PokedexDataProps,
@@ -30,6 +30,9 @@ export const PokedexContext = createContext({} as PokedexContextDataProps);
 
 //Criação do provedor do contexto, que será utilizado na criação do hook
 export function PokedexContextProvider({ children }: PokedexProviderProps) {
+  let firstSprite: AxiosResponse;
+  let secondSprite: AxiosResponse | undefined;
+  let thirdSprite: AxiosResponse | undefined;
   let rawPokemonData: PokemonDataProps[] = [];
   let genTypeFilter: PokemonDataProps[] = [];
   const [abilityInfo, setAbilityInfo] = useState<AbilityInfoProps | undefined>(
@@ -194,41 +197,198 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     const extra_result = await pokeapi.get(
       `pokemon-species/${pokemonName?.toLowerCase()}`
     );
-    console.log("dados extra: ", extra_result.data);
-    setUniquePokemonData({
-      name: result.data.name,
-      id: result.data.id,
-      types: result.data.types.map((type: any) => {
-        return {
-          type: type.type.name,
-        };
-      }),
-      weight: result.data.weight,
-      height: result.data.height,
-      sprite_default: result.data.sprites.front_default,
-      sprite_shiny: result.data.sprites.front_shiny,
-      official_artwork:
-        result.data.sprites.other["official-artwork"].front_default,
-      stats: result.data.stats.map((stat: statsProps) => {
-        return {
-          base_stat: stat.base_stat,
-          effort: stat.effort,
-          stat: {
-            name: stat.stat.name,
+    // console.log("dados extra: ", extra_result.data);
+
+    const evolutionData = await pokeapi.get(extra_result.data.evolution_chain.url)
+    // console.log("evolution data: ", evolutionData.data);
+
+    let MIN_LEVEL_SECOND_EVOLUTION = null;
+    try {
+      MIN_LEVEL_SECOND_EVOLUTION =
+        evolutionData.data.chain.evolves_to[0].evolution_details[0]
+          .min_level;
+    } catch (error) {
+      console.log('Erro level segunda evolução: ', error);
+    }
+
+    let MIN_LEVEL_THIRD_EVOLUTION = null;
+    try {
+      MIN_LEVEL_THIRD_EVOLUTION =
+        evolutionData.data.chain.evolves_to[0].evolves_to[0]
+          .evolution_details[0].min_level;
+    } catch (error) {
+      console.log('Erro level terceira evolução: ', error);
+    }
+
+    try {
+      firstSprite = await pokeapi.get(
+        `pokemon/${evolutionData.data.chain.species.name}`
+      );
+    } catch (error) {
+      console.log(error);
+    }
+
+    try {
+      secondSprite = await pokeapi.get(
+        `pokemon/${evolutionData.data.chain.evolves_to[0]?.species.name}`
+      );
+    } catch (error) {
+      console.log(' Second evolution chain not founded');
+      secondSprite = undefined;
+    }
+
+    try {
+      thirdSprite = await pokeapi.get(
+        `pokemon/${evolutionData.data.chain.evolves_to[0]?.evolves_to[0]?.species.name}`
+      );
+    } catch (error) {
+      console.log('Third evolution chain not founded');
+      thirdSprite = undefined;
+    }
+
+    if (thirdSprite !== undefined && secondSprite !== undefined) {
+      setUniquePokemonData({
+        name: result.data.name,
+        id: result.data.id,
+        types: result.data.types.map((type: any) => {
+          return {
+            type: type.type.name,
+          };
+        }),
+        weight: result.data.weight,
+        height: result.data.height,
+        sprite_default: result.data.sprites.front_default,
+        sprite_shiny: result.data.sprites.front_shiny,
+        official_artwork:
+          result.data.sprites.other["official-artwork"].front_default,
+        stats: result.data.stats.map((stat: statsProps) => {
+          return {
+            base_stat: stat.base_stat,
+            effort: stat.effort,
+            stat: {
+              name: stat.stat.name,
+            },
+          };
+        }),
+        abilities: result.data.abilities.map((ability: any) => {
+          return {
+            ability: {
+              name: ability.ability.name,
+              url: ability.ability.url,
+            },
+            slot: ability.slot,
+          };
+        }),
+        flavor: extra_result.data.flavor_text_entries[0].flavor_text,
+        evolution_chain: [
+          {
+            min_level: null,
+            name: evolutionData.data.chain.species.name,
+            sprite: firstSprite.data.sprites.front_default,
           },
-        };
-      }),
-      abilities: result.data.abilities.map((ability: any) => {
-        return {
-          ability: {
-            name: ability.ability.name,
-            url: ability.ability.url,
+          {
+            min_level: MIN_LEVEL_SECOND_EVOLUTION,
+            name: evolutionData.data.chain.evolves_to[0].species.name,
+            sprite: secondSprite.data.sprites.front_default,
           },
-          slot: ability.slot,
-        };
-      }),
-      flavor: extra_result.data.flavor_text_entries[0].flavor_text,
-    });
+          {
+            min_level: MIN_LEVEL_THIRD_EVOLUTION,
+            name: evolutionData.data.chain.evolves_to[0].evolves_to[0]
+              .species.name,
+            sprite: thirdSprite.data.sprites.front_default,
+          },
+        ],
+      });
+    }else if (thirdSprite === undefined && secondSprite !== undefined){
+      setUniquePokemonData({
+        name: result.data.name,
+        id: result.data.id,
+        types: result.data.types.map((type: any) => {
+          return {
+            type: type.type.name,
+          };
+        }),
+        weight: result.data.weight,
+        height: result.data.height,
+        sprite_default: result.data.sprites.front_default,
+        sprite_shiny: result.data.sprites.front_shiny,
+        official_artwork:
+          result.data.sprites.other["official-artwork"].front_default,
+        stats: result.data.stats.map((stat: statsProps) => {
+          return {
+            base_stat: stat.base_stat,
+            effort: stat.effort,
+            stat: {
+              name: stat.stat.name,
+            },
+          };
+        }),
+        abilities: result.data.abilities.map((ability: any) => {
+          return {
+            ability: {
+              name: ability.ability.name,
+              url: ability.ability.url,
+            },
+            slot: ability.slot,
+          };
+        }),
+        flavor: extra_result.data.flavor_text_entries[0].flavor_text,
+        evolution_chain: [
+          {
+            min_level: null,
+            name: evolutionData.data.chain.species.name,
+            sprite: firstSprite.data.sprites.front_default,
+          },
+          {
+            min_level: MIN_LEVEL_SECOND_EVOLUTION,
+            name: evolutionData.data.chain.evolves_to[0].species.name,
+            sprite: secondSprite.data.sprites.front_default,
+          },
+        ],
+      });
+    }else{
+      setUniquePokemonData({
+        name: result.data.name,
+        id: result.data.id,
+        types: result.data.types.map((type: any) => {
+          return {
+            type: type.type.name,
+          };
+        }),
+        weight: result.data.weight,
+        height: result.data.height,
+        sprite_default: result.data.sprites.front_default,
+        sprite_shiny: result.data.sprites.front_shiny,
+        official_artwork:
+          result.data.sprites.other["official-artwork"].front_default,
+        stats: result.data.stats.map((stat: statsProps) => {
+          return {
+            base_stat: stat.base_stat,
+            effort: stat.effort,
+            stat: {
+              name: stat.stat.name,
+            },
+          };
+        }),
+        abilities: result.data.abilities.map((ability: any) => {
+          return {
+            ability: {
+              name: ability.ability.name,
+              url: ability.ability.url,
+            },
+            slot: ability.slot,
+          };
+        }),
+        flavor: extra_result.data.flavor_text_entries[0].flavor_text,
+        evolution_chain: [
+          {
+            min_level: null,
+            name: evolutionData.data.chain.species.name,
+            sprite: firstSprite?.data.sprites.front_default,
+          },
+        ],
+      });
+    }
   }
 
   //Esta função busca na api os dados de uma habilidade e salva esses dados em um estado

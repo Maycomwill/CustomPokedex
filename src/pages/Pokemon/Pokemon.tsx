@@ -37,6 +37,7 @@ export function Pokemon() {
         key={uniquePokemonData.id}
         flavor={uniquePokemonData.flavor}
         pressable={true}
+        evolution_chain={uniquePokemonData.evolution_chain}
       />
     );
   }
