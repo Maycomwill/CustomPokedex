@@ -218,7 +218,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
         (type: { name: string; url: string }) => type.name
       ),
     };
-    // console.log(damage_relations);
+    console.log(damage_relations);
 
     return damage_relations;
   }
@@ -254,7 +254,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
           objetos = combinedDamageObjects(damage_relations_objects);
           // console.log("Objetos combinados", objetos);
           damageRelationFilter(objetos);
-          // console.log("Objetos filtrados", objetos);
+          console.log("Objetos filtrados", objetos);
         });
     });
 

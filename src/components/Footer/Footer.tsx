@@ -13,7 +13,7 @@ export function Footer({ id }: IFooterProps) {
         <Button text={"Toggle Theme"}/>
       </div> */}
       <Text color="white" size="xsm">Criado por {" "}<a href="https://github.com/maycomwill" target="
-      _blank" rel="noopener">Maycom Willams</a> com 💚</Text>
+      _blank" rel="noopener"><Text color="white" size="xsm">Maycom Willams</Text></a> com 💚</Text>
     </Container>
   );
 }

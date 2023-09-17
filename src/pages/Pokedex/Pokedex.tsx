@@ -27,12 +27,23 @@ export function Pokedex() {
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
 
-  const pokemonListFiltered =
-    search.length > 0
+  console.log(genTypeFilteredList);
+
+  let pokemonListFiltered: PokemonDataProps[] = []
+
+  if(genTypeFilteredList.length > 0){
+    pokemonListFiltered = search.length > 0
       ? genTypeFilteredList.filter((pokemon) =>
           pokemon.name.includes(search.toLowerCase())
         )
       : [];
+  }else {
+    pokemonListFiltered = search.length > 0
+      ? pokemonData.filter((pokemon) =>
+          pokemon.name.includes(search.toLowerCase())
+        )
+      : [];
+  }
 
   useEffect(() => {
     setIsLoading(true);
@@ -64,9 +75,6 @@ export function Pokedex() {
             <div className="blankDiv"></div>
             <div className="inputWrapper">
               <form>
-                <label htmlFor="search" id="label">
-                  <Text size="lg">Filtre a lista pelo nome dos pokemon</Text>
-                </label>
                 <input
                   type="text"
                   placeholder="Digite o nome do pokemon"
@@ -148,9 +156,6 @@ export function Pokedex() {
             <div className="blankDiv"></div>
             <div className="inputWrapper">
               <form>
-                <label htmlFor="search">
-                  <Text size="lg">Filtre a lista pelo nome dos pokemon</Text>
-                </label>
                 <input
                   type="text"
                   placeholder="Digite o nome do pokemon"

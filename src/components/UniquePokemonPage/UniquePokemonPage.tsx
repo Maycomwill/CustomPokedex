@@ -177,14 +177,18 @@ function UniquePokemonPage({
               ))}
             </div>
           </div>
-          <div className="all-strengths">
-            <Text size="md">Forças:</Text>
-            <div className="strengths">
-              {damage_relation.double_damage_to.map((type) => (
-                <SimpleCardType key={type} pokemonType={type} />
-              ))}
+          {damage_relation.double_damage_to.length === 0 ? null : (
+            <div className="all-strengths">
+              <Text size="md">Forças:</Text>
+              <div className="strengths">
+                <>
+                  {damage_relation.double_damage_to.map((type) => {
+                    return <SimpleCardType pokemonType={type} key={type} />;
+                  })}
+                </>
+              </div>
             </div>
-          </div>
+          )}
         </div>
         <Spacer />
         <div className="evolution-chain">
@@ -340,6 +344,29 @@ function UniquePokemonPage({
           </div>
         </div>
         <Spacer />
+        <div className="damage-relations">
+          <div className="all-weakness">
+            <Text size="md">Fraquezas:</Text>
+            <div className="weakness">
+              {damage_relation.double_damage_from.map((type) => (
+                <SimpleCardType key={type} pokemonType={type} />
+              ))}
+            </div>
+          </div>
+          {damage_relation.double_damage_to.length === 0 ? null : (
+            <div className="all-strengths">
+              <Text size="md">Forças:</Text>
+              <div className="strengths">
+                <>
+                  {damage_relation.double_damage_to.map((type) => {
+                    return <SimpleCardType pokemonType={type} key={type} />;
+                  })}
+                </>
+              </div>
+            </div>
+          )}
+        </div>
+        <Spacer />
         <div className="evolution-chain">
           <Text size="md">Cadeia evolutiva:</Text>
           <div className="evolutions">
@@ -478,6 +505,29 @@ function UniquePokemonPage({
               );
             })}
           </div>
+        </div>
+        <Spacer />
+        <div className="damage-relations">
+          <div className="all-weakness">
+            <Text size="md">Fraquezas:</Text>
+            <div className="weakness">
+              {damage_relation.double_damage_from.map((type) => (
+                <SimpleCardType key={type} pokemonType={type} />
+              ))}
+            </div>
+          </div>
+          {damage_relation.double_damage_to.length === 0 ? null : (
+            <div className="all-strengths">
+              <Text size="md">Forças:</Text>
+              <div className="strengths">
+                <>
+                  {damage_relation.double_damage_to.map((type) => {
+                    return <SimpleCardType pokemonType={type} key={type} />;
+                  })}
+                </>
+              </div>
+            </div>
+          )}
         </div>
         <Spacer />
         <div className="evolution-chain">

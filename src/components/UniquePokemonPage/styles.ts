@@ -216,7 +216,6 @@ export const Container = styled.div<IUniqueContainerProps>`
       gap: .6rem
     }
 
-
   }
 
   .baseStatWrapper {
