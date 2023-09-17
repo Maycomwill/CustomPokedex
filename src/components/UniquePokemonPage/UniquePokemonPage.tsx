@@ -175,10 +175,10 @@ export default function UniquePokemonPage({
             <div className="weakness">
               {damage_relation.double_damage_from.map((type) => (
                 <CustomTooltip title={type} arrow>
-                <div>
-                  <SimpleCardType pokemonType={type} key={type} />
-                </div>
-              </CustomTooltip>
+                  <div>
+                    <SimpleCardType pokemonType={type} key={type} />
+                  </div>
+                </CustomTooltip>
               ))}
             </div>
           </div>
@@ -359,9 +359,15 @@ export default function UniquePokemonPage({
           <div className="all-weakness">
             <Text size="md">Fraquezas:</Text>
             <div className="weakness">
-              {damage_relation.double_damage_from.map((type) => (
-                <SimpleCardType pokemonType={type} key={type} />
-              ))}
+              {damage_relation.double_damage_from.map((type) => {
+                return (
+                  <CustomTooltip title={type} arrow>
+                    <div>
+                      <SimpleCardType pokemonType={type} key={type} />
+                    </div>
+                  </CustomTooltip>
+                );
+              })}
             </div>
           </div>
           {damage_relation.double_damage_to.length === 0 ? null : (
@@ -370,7 +376,13 @@ export default function UniquePokemonPage({
               <div className="strengths">
                 <>
                   {damage_relation.double_damage_to.map((type) => {
-                    return <SimpleCardType pokemonType={type} key={type} />;
+                    return (
+                      <CustomTooltip title={type} arrow>
+                        <div>
+                          <SimpleCardType pokemonType={type} key={type} />
+                        </div>
+                      </CustomTooltip>
+                    );
                   })}
                 </>
               </div>
@@ -522,9 +534,15 @@ export default function UniquePokemonPage({
           <div className="all-weakness">
             <Text size="md">Fraquezas:</Text>
             <div className="weakness">
-              {damage_relation.double_damage_from.map((type) => (
-                <SimpleCardType pokemonType={type} key={type} />
-              ))}
+              {damage_relation.double_damage_from.map((type) => {
+                return (
+                  <CustomTooltip title={type} arrow>
+                    <div>
+                      <SimpleCardType pokemonType={type} key={type} />
+                    </div>
+                  </CustomTooltip>
+                );
+              })}
             </div>
           </div>
           {damage_relation.double_damage_to.length === 0 ? null : (
@@ -533,7 +551,13 @@ export default function UniquePokemonPage({
               <div className="strengths">
                 <>
                   {damage_relation.double_damage_to.map((type) => {
-                    return <SimpleCardType pokemonType={type} key={type} />;
+                    return (
+                      <CustomTooltip title={type} arrow>
+                        <div>
+                          <SimpleCardType pokemonType={type} key={type} />
+                        </div>
+                      </CustomTooltip>
+                    );
                   })}
                 </>
               </div>
