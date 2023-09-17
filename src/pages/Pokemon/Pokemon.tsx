@@ -23,23 +23,25 @@ export function Pokemon() {
     return <Loading color={theme.colors.primary[500]} size={64} />;
   } else {
     return (
-      <UniquePokemonPage
-        abilities={uniquePokemonData.abilities}
-        name={uniquePokemonData.name}
-        id={uniquePokemonData.id}
-        height={uniquePokemonData.height}
-        official_artwork={uniquePokemonData.official_artwork}
-        stats={uniquePokemonData.stats}
-        sprite_default={uniquePokemonData.sprite_default}
-        sprite_shiny={uniquePokemonData.sprite_shiny}
-        types={uniquePokemonData.types}
-        weight={uniquePokemonData.weight}
-        key={uniquePokemonData.id}
-        flavor={uniquePokemonData.flavor}
-        pressable={true}
-        evolution_chain={uniquePokemonData.evolution_chain}
-        damage_relation={uniquePokemonData.damage_relation}
-      />
+      <>
+        <UniquePokemonPage
+          abilities={uniquePokemonData.abilities}
+          name={uniquePokemonData.name}
+          id={uniquePokemonData.id}
+          height={uniquePokemonData.height}
+          official_artwork={uniquePokemonData.official_artwork}
+          stats={uniquePokemonData.stats}
+          sprite_default={uniquePokemonData.sprite_default}
+          sprite_shiny={uniquePokemonData.sprite_shiny}
+          types={uniquePokemonData.types}
+          weight={uniquePokemonData.weight}
+          key={uniquePokemonData.id}
+          flavor={uniquePokemonData.flavor}
+          pressable={true}
+          evolution_chain={uniquePokemonData.evolution_chain}
+          damage_relation={uniquePokemonData.damage_relation}
+        />
+      </>
     );
   }
 }

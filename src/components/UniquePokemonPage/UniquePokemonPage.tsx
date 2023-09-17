@@ -11,11 +11,10 @@ import { CaretRight } from "phosphor-react";
 import SimpleCardType from "../SimpleCardType/SimpleCardType";
 
 interface IUniquePokemonPage extends UniquePokemonData {
-  firstType?: string;
   pressable?: boolean;
 }
 
-function UniquePokemonPage({
+export default function UniquePokemonPage({
   name,
   abilities,
   height,
@@ -550,6 +549,7 @@ function UniquePokemonPage({
         <BackToTop />
       </Container>
     );
+  } else {
+    return null;
   }
 }
-export default UniquePokemonPage;
