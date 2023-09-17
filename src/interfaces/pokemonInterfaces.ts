@@ -26,6 +26,14 @@ export interface evolutionProps {
   min_level: number | null | undefined
 }
 
+export interface damageRelationsProps {
+  double_damage_to: string[]
+  double_damage_from: string[]
+  half_damage_from: string[]
+  half_damage_to: string[]
+  no_damage_from: string[]
+  no_damage_to: string[]
+}
 
 export interface UniquePokemonData {
   name: string;
@@ -40,6 +48,7 @@ export interface UniquePokemonData {
   abilities: abilityProps[];
   flavor: string;
   evolution_chain: evolutionProps[]
+  damage_relation: damageRelationsProps
 }
 
 export interface abilityProps {

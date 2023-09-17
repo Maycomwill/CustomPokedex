@@ -3,6 +3,7 @@ import { pokeapi } from "../services/api";
 import axios, { AxiosResponse } from "axios";
 import {
   AbilityInfoProps,
+  damageRelationsProps,
   PokedexDataProps,
   PokedexProviderProps,
   PokemonDataProps,
@@ -191,6 +192,37 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     ]);
   }
 
+  async function getDamageRelation(type: any) {
+    // console.log("tipo chamado", type.type.name);
+    const result = await pokeapi.get(`type/${type.type.name}`);
+
+    // console.log(result.data.damage_relations);
+
+    const damage_relations = {
+      double_damage_from: result.data.damage_relations.double_damage_from.map(
+        (type: { name: string; url: string }) => type.name
+      ),
+      double_damage_to: result.data.damage_relations.double_damage_to.map(
+        (type: { name: string; url: string }) => type.name
+      ),
+      half_damage_from: result.data.damage_relations.half_damage_from.map(
+        (type: { name: string; url: string }) => type.name
+      ),
+      half_damage_to: result.data.damage_relations.half_damage_to.map(
+        (type: { name: string; url: string }) => type.name
+      ),
+      no_damage_from: result.data.damage_relations.no_damage_from.map(
+        (type: { name: string; url: string }) => type.name
+      ),
+      no_damage_to: result.data.damage_relations.no_damage_to.map(
+        (type: { name: string; url: string }) => type.name
+      ),
+    };
+    // console.log(damage_relations);
+
+    return damage_relations;
+  }
+
   // Esta função salva no estado os dados de um único pokemon
   async function getPokemonData(pokemonName: string | undefined) {
     const result = await pokeapi.get(`pokemon/${pokemonName?.toLowerCase()}`);
@@ -199,16 +231,84 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     );
     // console.log("dados extra: ", extra_result.data);
 
-    const evolutionData = await pokeapi.get(extra_result.data.evolution_chain.url)
+    const evolutionData = await pokeapi.get(
+      extra_result.data.evolution_chain.url
+    );
+
+    let objetos: damageRelationsProps = {
+      double_damage_from: [],
+      double_damage_to: [],
+      half_damage_from: [],
+      half_damage_to: [],
+      no_damage_from: [],
+      no_damage_to: [],
+    };
     // console.log("evolution data: ", evolutionData.data);
+
+    let damage_relations_objects: damageRelationsProps[] = [];
+
+    result.data.types.map(async (type: any) => {
+      await getDamageRelation(type)
+        .then((result) => damage_relations_objects.push(result))
+        .then(() => {
+          objetos = combinedDamageObjects(damage_relations_objects);
+          // console.log("Objetos combinados", objetos);
+          damageRelationFilter(objetos);
+          // console.log("Objetos filtrados", objetos);
+        });
+    });
+
+    function combinedDamageObjects(
+      damage_relations_objects: damageRelationsProps[]
+    ): damageRelationsProps {
+      let damage_relations: damageRelationsProps = {
+        double_damage_from: [],
+        double_damage_to: [],
+        half_damage_from: [],
+        half_damage_to: [],
+        no_damage_from: [],
+        no_damage_to: [],
+      };
+
+      damage_relations_objects.forEach((obj) => {
+        damage_relations.double_damage_from.push(...obj.double_damage_from);
+        damage_relations.double_damage_to.push(...obj.double_damage_to);
+        damage_relations.half_damage_from.push(...obj.half_damage_from);
+        damage_relations.half_damage_to.push(...obj.half_damage_to);
+        damage_relations.no_damage_from.push(...obj.no_damage_from);
+        damage_relations.no_damage_to.push(...obj.no_damage_to);
+      });
+      return damage_relations;
+    }
+
+    function damageRelationFilter(objeto: damageRelationsProps) {
+      let double_from = objeto.double_damage_from;
+      let double_to = objeto.double_damage_to;
+      let half_from = objeto.half_damage_from;
+      let half_to = objeto.half_damage_to;
+      let no_damage_from = objeto.no_damage_from;
+      let no_damage_to = objeto.no_damage_to;
+
+      let new_double_from = double_from.filter(
+        (type) => !half_from.includes(type)
+      );
+      let new_double_to = double_to.filter((type) => !half_to.includes(type));
+
+
+      // console.log(new_double_from)
+      return (objetos = {
+        ...objetos,
+        double_damage_from: new_double_from,
+        double_damage_to: new_double_to,
+      });
+    }
 
     let MIN_LEVEL_SECOND_EVOLUTION = null;
     try {
       MIN_LEVEL_SECOND_EVOLUTION =
-        evolutionData.data.chain.evolves_to[0].evolution_details[0]
-          .min_level;
+        evolutionData.data.chain.evolves_to[0].evolution_details[0].min_level;
     } catch (error) {
-      console.log('Erro level segunda evolução: ', error);
+      console.log("Erro level segunda evolução: ", error);
     }
 
     let MIN_LEVEL_THIRD_EVOLUTION = null;
@@ -217,7 +317,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
         evolutionData.data.chain.evolves_to[0].evolves_to[0]
           .evolution_details[0].min_level;
     } catch (error) {
-      console.log('Erro level terceira evolução: ', error);
+      console.log("Erro level terceira evolução: ", error);
     }
 
     try {
@@ -233,7 +333,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
         `pokemon/${evolutionData.data.chain.evolves_to[0]?.species.name}`
       );
     } catch (error) {
-      console.log(' Second evolution chain not founded');
+      console.log(" Second evolution chain not founded");
       secondSprite = undefined;
     }
 
@@ -242,7 +342,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
         `pokemon/${evolutionData.data.chain.evolves_to[0]?.evolves_to[0]?.species.name}`
       );
     } catch (error) {
-      console.log('Third evolution chain not founded');
+      console.log("Third evolution chain not founded");
       thirdSprite = undefined;
     }
 
@@ -293,13 +393,14 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
           },
           {
             min_level: MIN_LEVEL_THIRD_EVOLUTION,
-            name: evolutionData.data.chain.evolves_to[0].evolves_to[0]
-              .species.name,
+            name: evolutionData.data.chain.evolves_to[0].evolves_to[0].species
+              .name,
             sprite: thirdSprite.data.sprites.front_default,
           },
         ],
+        damage_relation: objetos
       });
-    }else if (thirdSprite === undefined && secondSprite !== undefined){
+    } else if (thirdSprite === undefined && secondSprite !== undefined) {
       setUniquePokemonData({
         name: result.data.name,
         id: result.data.id,
@@ -345,8 +446,9 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
             sprite: secondSprite.data.sprites.front_default,
           },
         ],
+        damage_relation: objetos
       });
-    }else{
+    } else {
       setUniquePokemonData({
         name: result.data.name,
         id: result.data.id,
@@ -387,6 +489,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
             sprite: firstSprite?.data.sprites.front_default,
           },
         ],
+        damage_relation: objetos
       });
     }
   }

@@ -6,7 +6,7 @@ interface ITypeProps {
   pokemonType: string
 };
 
-function backgroundColorType(color: string) {
+export function backgroundColorType(color: string) {
   switch (color) {
     case "bug":
       return `${theme.backgroundCard.bug}`;

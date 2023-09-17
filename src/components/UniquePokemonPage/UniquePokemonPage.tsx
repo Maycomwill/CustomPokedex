@@ -8,6 +8,7 @@ import { Container } from "./styles";
 import { Spacer } from "../Spacer/Spacer";
 import { BackToTop } from "../BackToTop/BackToTop";
 import { CaretRight } from "phosphor-react";
+import SimpleCardType from "../SimpleCardType/SimpleCardType";
 
 interface IUniquePokemonPage extends UniquePokemonData {
   firstType?: string;
@@ -27,10 +28,11 @@ function UniquePokemonPage({
   weight,
   flavor,
   evolution_chain,
+  damage_relation,
   pressable,
 }: IUniquePokemonPage) {
   // Console log para mostrar os tipos do pokemon
-  // console.log("Types:", types);
+  console.log("damage relation:", damage_relation);
 
   function checkingIMG(url: string) {
     if (url == null) {
@@ -55,7 +57,7 @@ function UniquePokemonPage({
 
   const navigate = useNavigate();
 
-  console.log("Evolution Chain", evolution_chain);
+  // console.log("Evolution Chain", evolution_chain);
 
   if (evolution_chain?.length == 3) {
     return (
@@ -105,7 +107,7 @@ function UniquePokemonPage({
               Peso:
             </Text>
             <div className="info">
-              <Text size="md">{weight * 0.1}kg</Text>
+              <Text size="md">{(weight * 0.1).toFixed(2)}kg</Text>
             </div>
           </div>
 
@@ -146,7 +148,7 @@ function UniquePokemonPage({
                   key={`${stat.stat.name}-${stat.effort}`}
                 >
                   <Text size="md" transform="capitalize">
-                    {stat.stat.name}
+                    {stat.stat.name.split("-").join(" ")}
                   </Text>
                   <div className="baseStatDiv">
                     <div
@@ -163,6 +165,25 @@ function UniquePokemonPage({
                 </div>
               );
             })}
+          </div>
+        </div>
+        <Spacer />
+        <div className="damage-relations">
+          <div className="all-weakness">
+            <Text size="md">Fraquezas:</Text>
+            <div className="weakness">
+              {damage_relation.double_damage_from.map((type) => (
+                <SimpleCardType key={type} pokemonType={type} />
+              ))}
+            </div>
+          </div>
+          <div className="all-strengths">
+            <Text size="md">Forças:</Text>
+            <div className="strengths">
+              {damage_relation.double_damage_to.map((type) => (
+                <SimpleCardType key={type} pokemonType={type} />
+              ))}
+            </div>
           </div>
         </div>
         <Spacer />
@@ -200,6 +221,8 @@ function UniquePokemonPage({
             </div>
           </div>
         </div>
+        <Spacer />
+
         <div className="backButton">
           <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>
             <Button.Content text={"Voltar"} />
@@ -256,7 +279,7 @@ function UniquePokemonPage({
               Peso:
             </Text>
             <div className="info">
-              <Text size="md">{weight * 0.1}kg</Text>
+              <Text size="md">{(weight * 0.1).toFixed(2)}kg</Text>
             </div>
           </div>
 
@@ -297,7 +320,7 @@ function UniquePokemonPage({
                   key={`${stat.stat.name}-${stat.effort}`}
                 >
                   <Text size="md" transform="capitalize">
-                    {stat.stat.name}
+                    {stat.stat.name.split("-").join(" ")}
                   </Text>
                   <div className="baseStatDiv">
                     <div
@@ -348,7 +371,7 @@ function UniquePokemonPage({
         <BackToTop />
       </Container>
     );
-  } else if (evolution_chain?.length == 1){
+  } else if (evolution_chain?.length == 1) {
     return (
       <Container>
         <div className="spritesDiv">
@@ -396,7 +419,7 @@ function UniquePokemonPage({
               Peso:
             </Text>
             <div className="info">
-              <Text size="md">{weight * 0.1}kg</Text>
+              <Text size="md">{(weight * 0.1).toFixed(2)}kg</Text>
             </div>
           </div>
 
@@ -428,7 +451,7 @@ function UniquePokemonPage({
 
         <Spacer />
         <div className="statsWrapper">
-          <span>Base stats:</span>
+          <span>Status base:</span>
           <div className="statsContainer">
             {stats?.map((stat) => {
               return (
@@ -437,7 +460,7 @@ function UniquePokemonPage({
                   key={`${stat.stat.name}-${stat.effort}`}
                 >
                   <Text size="md" transform="capitalize">
-                    {stat.stat.name}
+                    {stat.stat.name.split("-").join(" ")}
                   </Text>
                   <div className="baseStatDiv">
                     <div

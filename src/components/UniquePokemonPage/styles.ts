@@ -45,7 +45,6 @@ export const Container = styled.div<IUniqueContainerProps>`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-bottom: 2.4rem;
 
    /*  @media (max-width: 500px) {
       flex-direction: column;
@@ -115,7 +114,6 @@ export const Container = styled.div<IUniqueContainerProps>`
     width: 100%;
     @media (max-width: 500px) {
       width: 100%;
-      margin-bottom: 2rem;
     }
   }
 
@@ -193,6 +191,32 @@ export const Container = styled.div<IUniqueContainerProps>`
       grid-gap: 1.6rem;
       padding: 0 0.2rem;
     }
+  }
+
+  .damage-relations{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: .8rem;
+
+    .all-weakness, .all-strengths{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-evenly;
+      gap: .4rem;
+    }
+
+    .weakness, .strengths{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem
+    }
+
+
   }
 
   .baseStatWrapper {
