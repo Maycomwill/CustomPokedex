@@ -9,6 +9,8 @@ import { Spacer } from "../Spacer/Spacer";
 import { BackToTop } from "../BackToTop/BackToTop";
 import { CaretRight } from "phosphor-react";
 import SimpleCardType from "../SimpleCardType/SimpleCardType";
+import Tooltip from "@mui/material/Tooltip";
+import CustomTooltip from "../CustomTooltip/CustomTooltip";
 
 interface IUniquePokemonPage extends UniquePokemonData {
   pressable?: boolean;
@@ -172,7 +174,11 @@ export default function UniquePokemonPage({
             <Text size="md">Fraquezas:</Text>
             <div className="weakness">
               {damage_relation.double_damage_from.map((type) => (
-                <SimpleCardType key={type} pokemonType={type} />
+                <CustomTooltip title={type} arrow>
+                <div>
+                  <SimpleCardType pokemonType={type} key={type} />
+                </div>
+              </CustomTooltip>
               ))}
             </div>
           </div>
@@ -182,7 +188,13 @@ export default function UniquePokemonPage({
               <div className="strengths">
                 <>
                   {damage_relation.double_damage_to.map((type) => {
-                    return <SimpleCardType pokemonType={type} key={type} />;
+                    return (
+                      <CustomTooltip title={type} arrow>
+                        <div>
+                          <SimpleCardType pokemonType={type} key={type} />
+                        </div>
+                      </CustomTooltip>
+                    );
                   })}
                 </>
               </div>
@@ -348,7 +360,7 @@ export default function UniquePokemonPage({
             <Text size="md">Fraquezas:</Text>
             <div className="weakness">
               {damage_relation.double_damage_from.map((type) => (
-                <SimpleCardType key={type} pokemonType={type} />
+                <SimpleCardType pokemonType={type} key={type} />
               ))}
             </div>
           </div>
@@ -511,7 +523,7 @@ export default function UniquePokemonPage({
             <Text size="md">Fraquezas:</Text>
             <div className="weakness">
               {damage_relation.double_damage_from.map((type) => (
-                <SimpleCardType key={type} pokemonType={type} />
+                <SimpleCardType pokemonType={type} key={type} />
               ))}
             </div>
           </div>
