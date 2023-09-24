@@ -86,13 +86,12 @@ export const ContainerButton = styled.button<ITypeProps>`
   justify-content: space-evenly;
   align-items: center;
   gap: .8rem;
-  max-width: 10rem;
+  max-width: 12rem;
   height: 4rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding: 0rem 3rem;
 
   @media (min-width: 500px){
-    max-width: 12rem;
+    max-width: 10rem;
   }
 
   .svgDiv {

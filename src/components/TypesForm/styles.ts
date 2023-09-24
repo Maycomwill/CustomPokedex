@@ -34,10 +34,13 @@ export const Container = styled.div`
       place-items: center;
     }
     .typesDiv{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: .8rem;
-    align-items: center;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-column-gap: .8rem;
+      place-items: center;
+      align-items: center;
+      justify-content: center;
   }
   }
 `;

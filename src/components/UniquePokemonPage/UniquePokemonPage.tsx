@@ -226,7 +226,7 @@ export default function UniquePokemonPage({
               })} */}
                 {damage_relation.double_damage_from.map((type) => {
                   return (
-                    <CustomTooltip title={type} arrow>
+                    <CustomTooltip title={type} arrow key={type}>
                       <div>
                         <SimpleCardType
                           pokemonType={type}
