@@ -23,5 +23,23 @@ export const Container = styled.div<ITypeProps>`
     justify-content: center;
     border-radius: 50%;
     padding: 0.4rem;
+    position: relative;
+  }
+
+  .double_damage_relation{
+    background: green;
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: white;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    right: 0%;
+    bottom: 0;
   }
 `

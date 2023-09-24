@@ -170,33 +170,132 @@ export default function UniquePokemonPage({
         </div>
         <Spacer />
         <div className="damage-relations">
-          <div className="all-weakness">
-            <Text size="md">Fraquezas:</Text>
-            <div className="weakness">
-              {damage_relation.double_damage_from.map((type) => (
-                <CustomTooltip title={type} arrow>
-                  <div>
-                    <SimpleCardType pokemonType={type} key={type} />
-                  </div>
-                </CustomTooltip>
-              ))}
+          {damage_relation.double_damage_from.length === 0 ? null : (
+            <div className="all-weakness">
+              <Text size="md">Fraquezas:</Text>
+              <div className="weakness">
+                {/* {damage_relation.double_damage_from.map((type) => {
+                if (damage_relation.four_times_damage_from.length > 0) {
+                  for (
+                    let i = 0;
+                    i < damage_relation.four_times_damage_from?.length;
+                    i++
+                  ) {
+                    if (type === damage_relation.four_times_damage_from[i]) {
+                      console.log(
+                        "teste de comparação",
+                        type,
+                        damage_relation.four_times_damage_from[i]
+                      );
+                      return (
+                        <CustomTooltip title={type} arrow key={type}>
+                          <div>
+                            <SimpleCardType
+                              pokemonType={type}
+                              key={type}
+                              double_damage_relation={true}
+                            />
+                          </div>
+                        </CustomTooltip>
+                      );
+                    } else {
+                      return (
+                        <CustomTooltip title={type} arrow>
+                          <div>
+                            <SimpleCardType
+                              pokemonType={type}
+                              key={type}
+                              double_damage_relation={false}
+                            />
+                          </div>
+                        </CustomTooltip>
+                      );
+                    }
+                  }
+                } else {
+                  <CustomTooltip title={type} arrow>
+                    <div>
+                      <SimpleCardType
+                        pokemonType={type}
+                        key={type}
+                        double_damage_relation={false}
+                      />
+                    </div>
+                  </CustomTooltip>;
+                }
+              })} */}
+                {damage_relation.double_damage_from.map((type) => {
+                  return (
+                    <CustomTooltip title={type} arrow>
+                      <div>
+                        <SimpleCardType
+                          pokemonType={type}
+                          key={type}
+                          double_damage_relation={false}
+                        />
+                      </div>
+                    </CustomTooltip>
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          )}
           {damage_relation.double_damage_to.length === 0 ? null : (
             <div className="all-strengths">
               <Text size="md">Forças:</Text>
               <div className="strengths">
-                <>
-                  {damage_relation.double_damage_to.map((type) => {
-                    return (
-                      <CustomTooltip title={type} arrow>
-                        <div>
-                          <SimpleCardType pokemonType={type} key={type} />
-                        </div>
-                      </CustomTooltip>
-                    );
-                  })}
-                </>
+                {/* {damage_relation.double_damage_to.map((type) => {
+                  if (damage_relation.four_times_damage_to) {
+                    for (
+                      let i = 0;
+                      i <= damage_relation.four_times_damage_to.length;
+                      i++
+                    ) {
+                      if (type === damage_relation.four_times_damage_to[i]) {
+                        console.log(
+                          "teste de comparação",
+                          type,
+                          damage_relation.four_times_damage_to[i]
+                        );
+                        return (
+                          <CustomTooltip title={type} arrow key={type}>
+                            <div>
+                              <SimpleCardType
+                                pokemonType={type}
+                                key={type}
+                                double_damage_relation={true}
+                              />
+                            </div>
+                          </CustomTooltip>
+                        );
+                      } else {
+                        return (
+                          <CustomTooltip title={type} arrow>
+                            <div>
+                              <SimpleCardType
+                                pokemonType={type}
+                                key={type}
+                                double_damage_relation={false}
+                              />
+                            </div>
+                          </CustomTooltip>
+                        );
+                      }
+                    }
+                  }
+                })} */}
+                {damage_relation.double_damage_to.map((type) => {
+                  return (
+                    <CustomTooltip key={type} title={type} arrow>
+                      <div>
+                        <SimpleCardType
+                          pokemonType={type}
+                          double_damage_relation={false}
+                        />
+                      </div>
+                    </CustomTooltip>
+                  );
+                })}
               </div>
             </div>
           )}
@@ -356,20 +455,26 @@ export default function UniquePokemonPage({
         </div>
         <Spacer />
         <div className="damage-relations">
-          <div className="all-weakness">
-            <Text size="md">Fraquezas:</Text>
-            <div className="weakness">
-              {damage_relation.double_damage_from.map((type) => {
-                return (
-                  <CustomTooltip title={type} arrow>
-                    <div>
-                      <SimpleCardType pokemonType={type} key={type} />
-                    </div>
-                  </CustomTooltip>
-                );
-              })}
+          {damage_relation.double_damage_from.length === 0 ? null : (
+            <div className="all-weakness">
+              <Text size="md">Fraquezas:</Text>
+              <div className="weakness">
+                {damage_relation.double_damage_from.map((type) => {
+                  return (
+                    <CustomTooltip title={type} arrow key={type}>
+                      <div>
+                        <SimpleCardType
+                          double_damage_relation={false}
+                          pokemonType={type}
+                          key={type}
+                        />
+                      </div>
+                    </CustomTooltip>
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          )}
           {damage_relation.double_damage_to.length === 0 ? null : (
             <div className="all-strengths">
               <Text size="md">Forças:</Text>
@@ -379,7 +484,11 @@ export default function UniquePokemonPage({
                     return (
                       <CustomTooltip title={type} arrow>
                         <div>
-                          <SimpleCardType pokemonType={type} key={type} />
+                          <SimpleCardType
+                            double_damage_relation={false}
+                            pokemonType={type}
+                            key={type}
+                          />
                         </div>
                       </CustomTooltip>
                     );
@@ -531,20 +640,26 @@ export default function UniquePokemonPage({
         </div>
         <Spacer />
         <div className="damage-relations">
-          <div className="all-weakness">
-            <Text size="md">Fraquezas:</Text>
-            <div className="weakness">
-              {damage_relation.double_damage_from.map((type) => {
-                return (
-                  <CustomTooltip title={type} arrow>
-                    <div>
-                      <SimpleCardType pokemonType={type} key={type} />
-                    </div>
-                  </CustomTooltip>
-                );
-              })}
+          {damage_relation.double_damage_from.length === 0 ? null : (
+            <div className="all-weakness">
+              <Text size="md">Fraquezas:</Text>
+              <div className="weakness">
+                {damage_relation.double_damage_from.map((type) => {
+                  return (
+                    <CustomTooltip title={type} key={type} arrow>
+                      <div>
+                        <SimpleCardType
+                          pokemonType={type}
+                          key={type}
+                          double_damage_relation={false}
+                        />
+                      </div>
+                    </CustomTooltip>
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          )}
           {damage_relation.double_damage_to.length === 0 ? null : (
             <div className="all-strengths">
               <Text size="md">Forças:</Text>
@@ -554,7 +669,11 @@ export default function UniquePokemonPage({
                     return (
                       <CustomTooltip title={type} arrow>
                         <div>
-                          <SimpleCardType pokemonType={type} key={type} />
+                          <SimpleCardType
+                            double_damage_relation={false}
+                            pokemonType={type}
+                            key={type}
+                          />
                         </div>
                       </CustomTooltip>
                     );

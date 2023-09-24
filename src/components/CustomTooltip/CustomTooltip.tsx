@@ -18,7 +18,7 @@ function CustomTooltip({ title, children }: ITooltipProps) {
     },
     [`& .${tooltipClasses.tooltip}`]: {
       backgroundColor: theme.colors.gray[500],
-      fontSize: 12,
+      fontSize: 16,
       textTransform: "capitalize",
     },
   }));

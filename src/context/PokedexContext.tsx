@@ -192,7 +192,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     ]);
   }
 
-  async function getDamageRelation(type: any) {
+  async function getDamageRelation(type: { type: { name: string } }) {
     // console.log("tipo chamado", type.type.name);
     const result = await pokeapi.get(`type/${type.type.name}`);
 
@@ -217,6 +217,8 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
       no_damage_to: result.data.damage_relations.no_damage_to.map(
         (type: { name: string; url: string }) => type.name
       ),
+      four_times_damage_from: [],
+      four_times_damage_to: [],
     };
     console.log(damage_relations);
 
@@ -242,6 +244,8 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
       half_damage_to: [],
       no_damage_from: [],
       no_damage_to: [],
+      four_times_damage_from: [],
+      four_times_damage_to: [],
     };
     // console.log("evolution data: ", evolutionData.data);
 
@@ -254,7 +258,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
           objetos = combinedDamageObjects(damage_relations_objects);
           // console.log("Objetos combinados", objetos);
           damageRelationFilter(objetos);
-          console.log("Objetos filtrados", objetos);
+          // console.log("Objetos filtrados", objetos);
         });
     });
 
@@ -268,6 +272,8 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
         half_damage_to: [],
         no_damage_from: [],
         no_damage_to: [],
+        four_times_damage_from: [],
+        four_times_damage_to: [],
       };
 
       damage_relations_objects.forEach((obj) => {
@@ -294,12 +300,30 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
       );
       let new_double_to = double_to.filter((type) => !half_to.includes(type));
 
+      let four_times_damage_weakness = new_double_from.filter(
+        (element, index) => {
+          return new_double_from.indexOf(element) !== index;
+        }
+      );
 
-      // console.log(new_double_from)
+      let four_times_damage_strenght = new_double_to.filter(
+        (element, index) => {
+          return new_double_to.indexOf(element) !== index;
+        }
+      );
+
+      // console.log(four_times_damage_weakness)
+      // console.log(four_times_damage_strenght)
+
+      let unique_new_double_from = [...new Set(new_double_from)];
+      let unique_new_double_to = [...new Set(new_double_to)];
+
       return (objetos = {
         ...objetos,
-        double_damage_from: new_double_from,
-        double_damage_to: new_double_to,
+        double_damage_from: unique_new_double_from,
+        double_damage_to: unique_new_double_to,
+        four_times_damage_from: four_times_damage_weakness,
+        four_times_damage_to: four_times_damage_strenght,
       });
     }
 
@@ -398,7 +422,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
             sprite: thirdSprite.data.sprites.front_default,
           },
         ],
-        damage_relation: objetos
+        damage_relation: objetos,
       });
     } else if (thirdSprite === undefined && secondSprite !== undefined) {
       setUniquePokemonData({
@@ -446,7 +470,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
             sprite: secondSprite.data.sprites.front_default,
           },
         ],
-        damage_relation: objetos
+        damage_relation: objetos,
       });
     } else {
       setUniquePokemonData({
@@ -489,7 +513,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
             sprite: firstSprite?.data.sprites.front_default,
           },
         ],
-        damage_relation: objetos
+        damage_relation: objetos,
       });
     }
   }
