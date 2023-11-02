@@ -59,6 +59,7 @@ export const Container = styled.div`
     height: 100%;
     outline: none;
     border: none;
+    border-radius: 0.4rem;
     font-size: 1.6rem;
     color: ${theme.colors.gray[100]};
     background-color: ${theme.colors.gray[600]};
