@@ -11,7 +11,7 @@ function SimpleCardType({
   double_damage_relation = false,
 }: ISimpleTypeCardProps) {
 
-  console.log("simple type card", double_damage_relation)
+  // console.log("simple type card", double_damage_relation)
   if (double_damage_relation) {
     return (
       <Container pokemonType={pokemonType}>

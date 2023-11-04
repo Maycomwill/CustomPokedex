@@ -21,20 +21,20 @@ export interface PokedexProviderProps {
 }
 
 export interface evolutionProps {
-  name: string
-  sprite: string
-  min_level: number | null | undefined
+  name: string;
+  sprite: string;
+  min_level: number | null | undefined;
 }
 
 export interface damageRelationsProps {
-  double_damage_to: string[]
-  double_damage_from: string[]
-  half_damage_from: string[]
-  half_damage_to: string[]
-  no_damage_from: string[]
-  no_damage_to: string[]
-  four_times_damage_from: string[]
-  four_times_damage_to: string[]
+  double_damage_to: string[];
+  double_damage_from: string[];
+  half_damage_from: string[];
+  half_damage_to: string[];
+  no_damage_from: string[];
+  no_damage_to: string[];
+  four_times_damage_from: string[];
+  four_times_damage_to: string[];
 }
 
 export interface UniquePokemonData {
@@ -49,8 +49,13 @@ export interface UniquePokemonData {
   stats: statsProps[];
   abilities: abilityProps[];
   flavor: string;
-  evolution_chain: evolutionProps[]
-  damage_relation: damageRelationsProps
+  evolution_chain: evolutionProps[];
+  damage_relation: damageRelationsProps;
+  gender: {
+    name: string;
+    female: number;
+    male: number;
+  }
 }
 
 export interface abilityProps {

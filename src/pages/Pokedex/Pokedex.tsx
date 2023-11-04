@@ -27,7 +27,7 @@ export function Pokedex() {
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
 
-  console.log(genTypeFilteredList);
+  // console.log(genTypeFilteredList);
 
   let pokemonListFiltered: PokemonDataProps[] = []
 

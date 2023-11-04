@@ -281,6 +281,16 @@ export const Container = styled.div<IUniqueContainerProps>`
     }
   }
 
+  .gender-wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+
   .backButton {
     width: 10rem;
     margin: auto;

@@ -131,7 +131,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
       let newArray = rawPokemonData.sort((a, b) => {
         return a.id - b.id;
       });
-      console.log(newArray);
+      // console.log(newArray);
       newArray.map((pokemon) => storagePokemonInformation(pokemon));
     });
   }
@@ -220,7 +220,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
       four_times_damage_from: [],
       four_times_damage_to: [],
     };
-    console.log(damage_relations);
+    // console.log(damage_relations);
 
     return damage_relations;
   }
@@ -352,22 +352,92 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
       console.log(error);
     }
 
-    try {
-      secondSprite = await pokeapi.get(
-        `pokemon/${evolutionData.data.chain.evolves_to[0]?.species.name}`
-      );
-    } catch (error) {
-      console.log(" Second evolution chain not founded");
-      secondSprite = undefined;
+    if (MIN_LEVEL_SECOND_EVOLUTION !== null) {
+      try {
+        secondSprite = await pokeapi.get(
+          `pokemon/${evolutionData.data.chain.evolves_to[0]?.species.name}`
+        );
+      } catch (error) {
+        console.log(" Second evolution chain not founded");
+        secondSprite = undefined;
+      }
     }
 
-    try {
-      thirdSprite = await pokeapi.get(
-        `pokemon/${evolutionData.data.chain.evolves_to[0]?.evolves_to[0]?.species.name}`
+    if (MIN_LEVEL_THIRD_EVOLUTION !== null) {
+      try {
+        thirdSprite = await pokeapi.get(
+          `pokemon/${evolutionData.data.chain.evolves_to[0]?.evolves_to[0]?.species.name}`
+        );
+      } catch (error) {
+        console.log("Third evolution chain not founded");
+        thirdSprite = undefined;
+      }
+    }
+
+    let pokemonGender: {
+      pokemon_species: {
+        name: string;
+        url: string;
+      };
+      female_rate: number;
+      male_rate: number;
+    };
+    let rawGender: {
+      pokemon_species: {
+        name: string;
+        url: string;
+      };
+      rate: number;
+    };
+    const femaleGender: AxiosResponse = await pokeapi.get("/gender/1");
+    const genderlessPokemon: AxiosResponse = await pokeapi.get("/gender/3");
+
+    if (
+      genderlessPokemon.data.pokemon_species_details.find(
+        (pokemon: any) => pokemon.pokemon_species.name === pokemonName
+      )
+    ) {
+      rawGender = genderlessPokemon.data.pokemon_species_details.find(
+        (pokemon: any) => pokemon.pokemon_species.name === pokemonName
       );
-    } catch (error) {
-      console.log("Third evolution chain not founded");
-      thirdSprite = undefined;
+      console.log("Genderless Pokemon");
+      pokemonGender = {
+        pokemon_species: {
+          name: rawGender.pokemon_species.name,
+          url: rawGender.pokemon_species.url,
+        },
+        female_rate: 0,
+        male_rate: 0,
+      };
+    } else {
+      if (
+        femaleGender.data.pokemon_species_details.find(
+          (pokemon: any) => pokemon.pokemon_species.name === pokemonName
+        )
+      ) {
+        console.log("Gender founded");
+        rawGender = femaleGender.data.pokemon_species_details.find(
+          (pokemon: any) => pokemon.pokemon_species.name === pokemonName
+        );
+        pokemonGender = {
+          pokemon_species: {
+            name: rawGender.pokemon_species.name,
+            url: rawGender.pokemon_species.url,
+          },
+          female_rate: (rawGender.rate * 100) / 8,
+          male_rate: 100 - (rawGender.rate * 100) / 8,
+        };
+      } else {
+        console.log("Male only");
+        pokemonGender = {
+          pokemon_species: {
+            name: result.data.name,
+            url: `https://pokeapi.co/api/v2/pokemon/${pokemonName}`,
+          },
+          female_rate: 0,
+          male_rate: 100,
+        };
+      }
     }
 
     if (thirdSprite !== undefined && secondSprite !== undefined) {
@@ -423,8 +493,13 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
           },
         ],
         damage_relation: objetos,
+        gender: {
+          name: pokemonGender.pokemon_species.name,
+          female: pokemonGender.female_rate,
+          male: pokemonGender.male_rate,
+        },
       });
-    } else if (thirdSprite === undefined && secondSprite !== undefined) {
+    } else if (secondSprite !== undefined) {
       setUniquePokemonData({
         name: result.data.name,
         id: result.data.id,
@@ -471,6 +546,11 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
           },
         ],
         damage_relation: objetos,
+        gender: {
+          name: pokemonGender.pokemon_species.name,
+          female: pokemonGender.female_rate,
+          male: pokemonGender.male_rate,
+        },
       });
     } else {
       setUniquePokemonData({
@@ -514,6 +594,11 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
           },
         ],
         damage_relation: objetos,
+        gender: {
+          name: pokemonGender.pokemon_species.name,
+          female: pokemonGender.female_rate,
+          male: pokemonGender.male_rate,
+        },
       });
     }
   }
@@ -582,7 +667,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
       let newArray = rawPokemonData.sort((a, b) => {
         return a.id - b.id;
       });
-      console.log(newArray);
+      // console.log(newArray);
       setPokemonData([]);
       newArray.map((pokemon) => storagePokemonInformation(pokemon));
     });
@@ -598,7 +683,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
             )
           )
         : [];
-    console.log(genTypeFilter);
+    // console.log(genTypeFilter);
     setGenTypeFilteredList(genTypeFilter);
   }
 

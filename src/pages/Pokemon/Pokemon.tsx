@@ -40,6 +40,7 @@ export function Pokemon() {
           pressable={true}
           evolution_chain={uniquePokemonData.evolution_chain}
           damage_relation={uniquePokemonData.damage_relation}
+          gender={uniquePokemonData.gender}
         />
       </>
     );

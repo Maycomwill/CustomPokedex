@@ -9,8 +9,8 @@ import { Spacer } from "../Spacer/Spacer";
 import { BackToTop } from "../BackToTop/BackToTop";
 import { CaretRight } from "phosphor-react";
 import SimpleCardType from "../SimpleCardType/SimpleCardType";
-import Tooltip from "@mui/material/Tooltip";
 import CustomTooltip from "../CustomTooltip/CustomTooltip";
+import CustomChart from "../Chart/Chart";
 
 interface IUniquePokemonPage extends UniquePokemonData {
   pressable?: boolean;
@@ -31,9 +31,10 @@ export default function UniquePokemonPage({
   evolution_chain,
   damage_relation,
   pressable,
+  gender,
 }: IUniquePokemonPage) {
   // Console log para mostrar os tipos do pokemon
-  console.log("damage relation:", damage_relation);
+  // console.log("damage relation:", damage_relation);
 
   function checkingIMG(url: string) {
     if (url == null) {
@@ -289,6 +290,7 @@ export default function UniquePokemonPage({
                     <CustomTooltip key={type} title={type} arrow>
                       <div>
                         <SimpleCardType
+                          key={type}
                           pokemonType={type}
                           double_damage_relation={false}
                         />
@@ -337,11 +339,23 @@ export default function UniquePokemonPage({
         </div>
         <Spacer />
 
+        <div className="gender-wrapper">
+          <Text>Gender ratio</Text>
+          <div className="gender-rate">
+            {gender ? (
+              <CustomChart female={gender.female} male={gender.male} />
+            ) : null}
+          </div>
+        </div>
+
+        <Spacer />
+
         <div className="backButton">
           <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>
             <Button.Content text={"Voltar"} />
           </Button.Root>
         </div>
+
         <BackToTop />
       </Container>
     );
@@ -400,6 +414,7 @@ export default function UniquePokemonPage({
           {abilities?.map((ability) => {
             return (
               <div
+                key={`${ability.ability.name}`}
                 className="infoCard"
                 onClick={() => navigate(`/ability/${ability.ability.name}`)}
               >
@@ -482,7 +497,7 @@ export default function UniquePokemonPage({
                 <>
                   {damage_relation.double_damage_to.map((type) => {
                     return (
-                      <CustomTooltip title={type} arrow>
+                      <CustomTooltip title={type} arrow key={type}>
                         <div>
                           <SimpleCardType
                             double_damage_relation={false}
@@ -522,6 +537,18 @@ export default function UniquePokemonPage({
             </div>
           </div>
         </div>
+
+        <Spacer />
+
+        <div className="gender-wrapper">
+          <Text>Gender ratio</Text>
+          <div className="gender-rate">
+            {gender ? (
+              <CustomChart female={gender.female} male={gender.male} />
+            ) : null}
+          </div>
+        </div>
+
         <div className="backButton">
           <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>
             <Button.Content text={"Voltar"} />
@@ -585,6 +612,7 @@ export default function UniquePokemonPage({
           {abilities?.map((ability) => {
             return (
               <div
+                key={ability.ability.name}
                 className="infoCard"
                 onClick={() => navigate(`/ability/${ability.ability.name}`)}
               >
@@ -667,7 +695,7 @@ export default function UniquePokemonPage({
                 <>
                   {damage_relation.double_damage_to.map((type) => {
                     return (
-                      <CustomTooltip title={type} arrow>
+                      <CustomTooltip title={type} arrow key={type}>
                         <div>
                           <SimpleCardType
                             double_damage_relation={false}
@@ -696,6 +724,19 @@ export default function UniquePokemonPage({
             </div>
           </div>
         </div>
+
+        <Spacer />
+
+        <div className="gender-wrapper">
+          <Text>Gender ratio</Text>
+          <div className="gender-rate">
+            {gender ? (
+              <CustomChart female={gender.female} male={gender.male} />
+            ) : null}
+          </div>
+        </div>
+        <Spacer />
+
         <div className="backButton">
           <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>
             <Button.Content text={"Voltar"} />
