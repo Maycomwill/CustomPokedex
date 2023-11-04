@@ -45,7 +45,10 @@ export interface UniquePokemonData {
   id: number;
   sprite_default: string;
   sprite_shiny: string;
-  official_artwork: string;
+  official_artwork: {
+    default: string;
+    shiny: string;
+  };
   types: typeProps[];
   weight: number;
   height: number;

@@ -26,6 +26,14 @@ export const Container = styled.div<IUniqueContainerProps>`
     justify-content: center;
     align-items: center;
     margin-bottom: 0.8rem;
+    position: relative;
+    width: 100%;
+  }
+
+  .switch-principal-sprite-wrapper {
+    position: absolute;
+    top: 0%;
+    right: 2%;
   }
 
   .spritesDiv img {
@@ -65,12 +73,16 @@ export const Container = styled.div<IUniqueContainerProps>`
   }
 
   .pokedexInfo #name {
+
+    text-align: center;
     @media (min-width: 500px) {
       grid-area: 1 / 1 / 2 / 2;
     }
   }
 
   .pokedexInfo #id {
+
+    text-align: center;
     @media (min-width: 500px) {
       grid-area: 2 / 1 / 3 / 2;
     }

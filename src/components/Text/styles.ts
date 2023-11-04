@@ -66,6 +66,7 @@ export const TextStyled = styled.span<ITextProps>`
   text-transform: ${({ transform }) => transform};
   font-weight: ${({ weight }) => handleFontWeight(weight)};
   text-transform: ${({ transform }) => handleTransform(transform)};
+  padding: 0;
 
   @media (max-width: 500px) {
     font-size: ${({ size }) => (size ? `${theme.fontSize[size]}` : "1.4rem")};

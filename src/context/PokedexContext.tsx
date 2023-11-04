@@ -227,9 +227,10 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
 
   // Esta função salva no estado os dados de um único pokemon
   async function getPokemonData(pokemonName: string | undefined) {
+    var newPokemonName = pokemonName?.split("-");
     const result = await pokeapi.get(`pokemon/${pokemonName?.toLowerCase()}`);
     const extra_result = await pokeapi.get(
-      `pokemon-species/${pokemonName?.toLowerCase()}`
+      `pokemon-species/${newPokemonName![0]?.toLowerCase()}`
     );
     // console.log("dados extra: ", extra_result.data);
 
@@ -382,6 +383,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
       female_rate: number;
       male_rate: number;
     };
+    
     let rawGender: {
       pokemon_species: {
         name: string;
@@ -394,11 +396,11 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
 
     if (
       genderlessPokemon.data.pokemon_species_details.find(
-        (pokemon: any) => pokemon.pokemon_species.name === pokemonName
+        (pokemon: any) => pokemon.pokemon_species.name === newPokemonName![0]
       )
     ) {
       rawGender = genderlessPokemon.data.pokemon_species_details.find(
-        (pokemon: any) => pokemon.pokemon_species.name === pokemonName
+        (pokemon: any) => pokemon.pokemon_species.name === newPokemonName![0]
       );
       console.log("Genderless Pokemon");
       pokemonGender = {
@@ -412,12 +414,12 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     } else {
       if (
         femaleGender.data.pokemon_species_details.find(
-          (pokemon: any) => pokemon.pokemon_species.name === pokemonName
+          (pokemon: any) => pokemon.pokemon_species.name === newPokemonName![0]
         )
       ) {
         console.log("Gender founded");
         rawGender = femaleGender.data.pokemon_species_details.find(
-          (pokemon: any) => pokemon.pokemon_species.name === pokemonName
+          (pokemon: any) => pokemon.pokemon_species.name === newPokemonName![0]
         );
         pokemonGender = {
           pokemon_species: {
@@ -453,8 +455,10 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
         height: result.data.height,
         sprite_default: result.data.sprites.front_default,
         sprite_shiny: result.data.sprites.front_shiny,
-        official_artwork:
-          result.data.sprites.other["official-artwork"].front_default,
+        official_artwork: {
+          default: result.data.sprites.other["official-artwork"].front_default,
+          shiny: result.data.sprites.other["official-artwork"].front_shiny,
+        },
         stats: result.data.stats.map((stat: statsProps) => {
           return {
             base_stat: stat.base_stat,
@@ -521,8 +525,10 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
         height: result.data.height,
         sprite_default: result.data.sprites.front_default,
         sprite_shiny: result.data.sprites.front_shiny,
-        official_artwork:
-          result.data.sprites.other["official-artwork"].front_default,
+        official_artwork: {
+          default: result.data.sprites.other["official-artwork"].front_default,
+          shiny: result.data.sprites.other["official-artwork"].front_shiny,
+        },
         stats: result.data.stats.map((stat: statsProps) => {
           return {
             base_stat: stat.base_stat,
@@ -580,8 +586,10 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
         height: result.data.height,
         sprite_default: result.data.sprites.front_default,
         sprite_shiny: result.data.sprites.front_shiny,
-        official_artwork:
-          result.data.sprites.other["official-artwork"].front_default,
+        official_artwork: {
+          default: result.data.sprites.other["official-artwork"].front_default,
+          shiny: result.data.sprites.other["official-artwork"].front_shiny,
+        },
         stats: result.data.stats.map((stat: statsProps) => {
           return {
             base_stat: stat.base_stat,

@@ -22,6 +22,7 @@ export function Pokemon() {
   if (isLoading) {
     return <Loading color={theme.colors.primary[500]} size={64} />;
   } else {
+    // console.log(uniquePokemonData.official_artwork.shiny)
     return (
       <>
         <UniquePokemonPage

@@ -38,12 +38,19 @@ export default function UniquePokemonPage({
   // Console log para mostrar os tipos do pokemon
   // console.log("damage relation:", damage_relation);
   const [shinySprite, setShinySprite] = useState<boolean>(false);
-  console.log(shinySprite);
-  function checkingIMG(url: string) {
-    if (url == null) {
-      return sprite_default;
+  function checkimgIMG(url: string) {
+    if (shinySprite) {
+      if (url === null) {
+        return sprite_default;
+      } else {
+        return url;
+      }
     } else {
-      return url;
+      if (url === null) {
+        return sprite_default;
+      } else {
+        return url;
+      }
     }
   }
 
@@ -68,7 +75,34 @@ export default function UniquePokemonPage({
     return (
       <Container>
         <div className="spritesDiv">
-          <img src={checkingIMG(official_artwork)} alt={`${name} image`} />
+          {shinySprite ? (
+            <img
+              src={checkimgIMG(official_artwork.shiny)}
+              alt={`${name} image`}
+            />
+          ) : (
+            <img
+              src={checkimgIMG(official_artwork.default)}
+              alt={`${name} image`}
+            />
+          )}
+          <div className="switch-principal-sprite-wrapper">
+            {shinySprite ? (
+              <CircleButton
+                onClick={() => setShinySprite(!shinySprite)}
+                backgroundColor="white"
+              >
+                <Sparkle size={24} color={theme.colors.gray[800]} />
+              </CircleButton>
+            ) : (
+              <CircleButton
+                onClick={() => setShinySprite(!shinySprite)}
+                backgroundColor="gray"
+              >
+                <Sparkle size={24} color={theme.colors.gray[100]} />
+              </CircleButton>
+            )}
+          </div>
         </div>
         <div className="infoWrapper">
           <div className="pokedexInfo">
@@ -328,7 +362,7 @@ export default function UniquePokemonPage({
               <CaretRight size={24} />
             </div>
             <div className="evolution">
-            {shinySprite ? (
+              {shinySprite ? (
                 <img
                   src={evolution_chain[1].sprite.shiny}
                   alt={`${evolution_chain[1].name}`}
@@ -346,7 +380,7 @@ export default function UniquePokemonPage({
               <CaretRight size={24} />
             </div>
             <div className="evolution">
-            {shinySprite ? (
+              {shinySprite ? (
                 <img
                   src={evolution_chain[2].sprite.shiny}
                   alt={`${evolution_chain[2].name}`}
@@ -362,23 +396,19 @@ export default function UniquePokemonPage({
           </div>
           <div className="switch-sprite-wrapper">
             {shinySprite ? (
-              <CustomTooltip title="Change sprites">
-                <CircleButton
-                  onClick={() => setShinySprite(!shinySprite)}
-                  backgroundColor="white"
-                >
-                  <Sparkle size={24} color={theme.colors.gray[800]} />
-                </CircleButton>
-              </CustomTooltip>
+              <CircleButton
+                onClick={() => setShinySprite(!shinySprite)}
+                backgroundColor="white"
+              >
+                <Sparkle size={24} color={theme.colors.gray[800]} />
+              </CircleButton>
             ) : (
-              <CustomTooltip title="Change sprites">
-                <CircleButton
-                  onClick={() => setShinySprite(!shinySprite)}
-                  backgroundColor="gray"
-                >
-                  <Sparkle size={24} color={theme.colors.gray[100]} />
-                </CircleButton>
-              </CustomTooltip>
+              <CircleButton
+                onClick={() => setShinySprite(!shinySprite)}
+                backgroundColor="gray"
+              >
+                <Sparkle size={24} color={theme.colors.gray[100]} />
+              </CircleButton>
             )}
           </div>
         </div>
@@ -408,7 +438,34 @@ export default function UniquePokemonPage({
     return (
       <Container>
         <div className="spritesDiv">
-          <img src={checkingIMG(official_artwork)} alt={`${name} image`} />
+          {shinySprite ? (
+            <img
+              src={checkimgIMG(official_artwork.shiny)}
+              alt={`${name} image`}
+            />
+          ) : (
+            <img
+              src={checkimgIMG(official_artwork.default)}
+              alt={`${name} image`}
+            />
+          )}
+          <div className="switch-principal-sprite-wrapper">
+            {shinySprite ? (
+              <CircleButton
+                onClick={() => setShinySprite(!shinySprite)}
+                backgroundColor="white"
+              >
+                <Sparkle size={24} color={theme.colors.gray[800]} />
+              </CircleButton>
+            ) : (
+              <CircleButton
+                onClick={() => setShinySprite(!shinySprite)}
+                backgroundColor="gray"
+              >
+                <Sparkle size={24} color={theme.colors.gray[100]} />
+              </CircleButton>
+            )}
+          </div>
         </div>
         <div className="infoWrapper">
           <div className="pokedexInfo">
@@ -522,7 +579,7 @@ export default function UniquePokemonPage({
                 {damage_relation.double_damage_from.map((type) => {
                   return (
                     <CustomTooltip title={type} arrow key={type}>
-                      <div>
+                      <div key={type}>
                         <SimpleCardType
                           double_damage_relation={false}
                           pokemonType={type}
@@ -543,7 +600,7 @@ export default function UniquePokemonPage({
                   {damage_relation.double_damage_to.map((type) => {
                     return (
                       <CustomTooltip title={type} arrow key={type}>
-                        <div>
+                        <div key={type}>
                           <SimpleCardType
                             double_damage_relation={false}
                             pokemonType={type}
@@ -597,23 +654,19 @@ export default function UniquePokemonPage({
           </div>
           <div className="switch-sprite-wrapper">
             {shinySprite ? (
-              <CustomTooltip title="Change sprites">
-                <CircleButton
-                  onClick={() => setShinySprite(!shinySprite)}
-                  backgroundColor="white"
-                >
-                  <Sparkle size={24} color={theme.colors.gray[800]} />
-                </CircleButton>
-              </CustomTooltip>
+              <CircleButton
+                onClick={() => setShinySprite(!shinySprite)}
+                backgroundColor="white"
+              >
+                <Sparkle size={24} color={theme.colors.gray[800]} />
+              </CircleButton>
             ) : (
-              <CustomTooltip title="Change sprites">
-                <CircleButton
-                  onClick={() => setShinySprite(!shinySprite)}
-                  backgroundColor="gray"
-                >
-                  <Sparkle size={24} color={theme.colors.gray[100]} />
-                </CircleButton>
-              </CustomTooltip>
+              <CircleButton
+                onClick={() => setShinySprite(!shinySprite)}
+                backgroundColor="gray"
+              >
+                <Sparkle size={24} color={theme.colors.gray[100]} />
+              </CircleButton>
             )}
           </div>
         </div>
@@ -641,14 +694,41 @@ export default function UniquePokemonPage({
     return (
       <Container>
         <div className="spritesDiv">
-          <img src={checkingIMG(official_artwork)} alt={`${name} image`} />
+          {shinySprite ? (
+            <img
+              src={checkimgIMG(official_artwork.shiny)}
+              alt={`${name} image`}
+            />
+          ) : (
+            <img
+              src={checkimgIMG(official_artwork.default)}
+              alt={`${name} image`}
+            />
+          )}
+          <div className="switch-principal-sprite-wrapper">
+            {shinySprite ? (
+              <CircleButton
+                onClick={() => setShinySprite(!shinySprite)}
+                backgroundColor="white"
+              >
+                <Sparkle size={24} color={theme.colors.gray[800]} />
+              </CircleButton>
+            ) : (
+              <CircleButton
+                onClick={() => setShinySprite(!shinySprite)}
+                backgroundColor="gray"
+              >
+                <Sparkle size={24} color={theme.colors.gray[100]} />
+              </CircleButton>
+            )}
+          </div>
         </div>
         <div className="infoWrapper">
           <div className="pokedexInfo">
             <Text size="xxl" weight="bold" transform="capitalize" id="name">
               {name?.split("-").join(" ")}
             </Text>
-            <Text size="lg" transform="capitalize" id="id">
+            <Text size="xxl" transform="capitalize" id="id">
               #{addZeroes(id, 3)}
             </Text>
             <div className="typesWrapper">
@@ -755,7 +835,7 @@ export default function UniquePokemonPage({
                 {damage_relation.double_damage_from.map((type) => {
                   return (
                     <CustomTooltip title={type} key={type} arrow>
-                      <div>
+                      <div key={type}>
                         <SimpleCardType
                           pokemonType={type}
                           key={type}
@@ -776,7 +856,7 @@ export default function UniquePokemonPage({
                   {damage_relation.double_damage_to.map((type) => {
                     return (
                       <CustomTooltip title={type} arrow key={type}>
-                        <div>
+                        <div key={type}>
                           <SimpleCardType
                             double_damage_relation={false}
                             pokemonType={type}
@@ -812,23 +892,19 @@ export default function UniquePokemonPage({
           </div>
           <div className="switch-sprite-wrapper">
             {shinySprite ? (
-              <CustomTooltip title="Change sprites">
-                <CircleButton
-                  onClick={() => setShinySprite(!shinySprite)}
-                  backgroundColor="white"
-                >
-                  <Sparkle size={24} color={theme.colors.gray[800]} />
-                </CircleButton>
-              </CustomTooltip>
+              <CircleButton
+                onClick={() => setShinySprite(!shinySprite)}
+                backgroundColor="white"
+              >
+                <Sparkle size={24} color={theme.colors.gray[800]} />
+              </CircleButton>
             ) : (
-              <CustomTooltip title="Change sprites">
-                <CircleButton
-                  onClick={() => setShinySprite(!shinySprite)}
-                  backgroundColor="gray"
-                >
-                  <Sparkle size={24} color={theme.colors.gray[100]} />
-                </CircleButton>
-              </CustomTooltip>
+              <CircleButton
+                onClick={() => setShinySprite(!shinySprite)}
+                backgroundColor="gray"
+              >
+                <Sparkle size={24} color={theme.colors.gray[100]} />
+              </CircleButton>
             )}
           </div>
         </div>
