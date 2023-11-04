@@ -209,7 +209,7 @@ export const Container = styled.div<IUniqueContainerProps>`
     justify-content: flex-start;
     gap: 0.8rem;
 
-    @media (min-width: 500px){
+    @media (min-width: 500px) {
       padding: 0rem 2rem;
     }
 
@@ -237,7 +237,7 @@ export const Container = styled.div<IUniqueContainerProps>`
     width: 100%;
     align-items: flex-start;
     justify-content: center;
-    @media (min-width: 500px){
+    @media (min-width: 500px) {
       padding: 0rem 2rem;
     }
 
@@ -246,11 +246,19 @@ export const Container = styled.div<IUniqueContainerProps>`
       align-items: center;
       justify-content: space-evenly;
       width: 100%;
+      margin-bottom: 2.4rem;
 
-      @media(min-width: 500px){
+      @media (min-width: 500px) {
         justify-content: center;
         gap: 2rem;
       }
+    }
+
+    .switch-sprite-wrapper {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .separator {
@@ -281,7 +289,7 @@ export const Container = styled.div<IUniqueContainerProps>`
     }
   }
 
-  .gender-wrapper{
+  .gender-wrapper {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -289,7 +297,6 @@ export const Container = styled.div<IUniqueContainerProps>`
     justify-content: center;
     text-align: center;
   }
-
 
   .backButton {
     width: 10rem;

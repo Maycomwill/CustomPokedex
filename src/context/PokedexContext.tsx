@@ -478,18 +478,27 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
           {
             min_level: null,
             name: evolutionData.data.chain.species.name,
-            sprite: firstSprite.data.sprites.front_default,
+            sprite: {
+              default: firstSprite.data.sprites.front_default,
+              shiny: firstSprite.data.sprites.front_shiny,
+            },
           },
           {
             min_level: MIN_LEVEL_SECOND_EVOLUTION,
             name: evolutionData.data.chain.evolves_to[0].species.name,
-            sprite: secondSprite.data.sprites.front_default,
+            sprite: {
+              default: secondSprite.data.sprites.front_default,
+              shiny: secondSprite.data.sprites.front_shiny,
+            },
           },
           {
             min_level: MIN_LEVEL_THIRD_EVOLUTION,
             name: evolutionData.data.chain.evolves_to[0].evolves_to[0].species
               .name,
-            sprite: thirdSprite.data.sprites.front_default,
+            sprite: {
+              default: thirdSprite.data.sprites.front_default,
+              shiny: thirdSprite.data.sprites.front_shiny,
+            },
           },
         ],
         damage_relation: objetos,
@@ -537,12 +546,18 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
           {
             min_level: null,
             name: evolutionData.data.chain.species.name,
-            sprite: firstSprite.data.sprites.front_default,
+            sprite: {
+              default: firstSprite.data.sprites.front_default,
+              shiny: firstSprite.data.sprites.front_shiny,
+            },
           },
           {
             min_level: MIN_LEVEL_SECOND_EVOLUTION,
             name: evolutionData.data.chain.evolves_to[0].species.name,
-            sprite: secondSprite.data.sprites.front_default,
+            sprite: {
+              default: secondSprite.data.sprites.front_default,
+              shiny: secondSprite.data.sprites.front_shiny,
+            },
           },
         ],
         damage_relation: objetos,
@@ -590,7 +605,10 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
           {
             min_level: null,
             name: evolutionData.data.chain.species.name,
-            sprite: firstSprite?.data.sprites.front_default,
+            sprite: {
+              default: firstSprite?.data.sprites.front_default,
+              shiny: firstSprite?.data.sprites.front_shiny,
+            },
           },
         ],
         damage_relation: objetos,

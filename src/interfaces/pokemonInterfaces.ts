@@ -22,7 +22,10 @@ export interface PokedexProviderProps {
 
 export interface evolutionProps {
   name: string;
-  sprite: string;
+  sprite: {
+    default: string;
+    shiny: string;
+  };
   min_level: number | null | undefined;
 }
 
@@ -55,7 +58,7 @@ export interface UniquePokemonData {
     name: string;
     female: number;
     male: number;
-  }
+  };
 }
 
 export interface abilityProps {

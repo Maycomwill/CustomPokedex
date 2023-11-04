@@ -7,10 +7,12 @@ import { TypeCard } from "../TypeCard/TypeCard";
 import { Container } from "./styles";
 import { Spacer } from "../Spacer/Spacer";
 import { BackToTop } from "../BackToTop/BackToTop";
-import { CaretRight } from "phosphor-react";
+import { CaretRight, Sparkle } from "phosphor-react";
 import SimpleCardType from "../SimpleCardType/SimpleCardType";
 import CustomTooltip from "../CustomTooltip/CustomTooltip";
 import CustomChart from "../Chart/Chart";
+import { CircleButton } from "../Button/CircleButton/CircleButton";
+import { useState } from "react";
 
 interface IUniquePokemonPage extends UniquePokemonData {
   pressable?: boolean;
@@ -35,7 +37,8 @@ export default function UniquePokemonPage({
 }: IUniquePokemonPage) {
   // Console log para mostrar os tipos do pokemon
   // console.log("damage relation:", damage_relation);
-
+  const [shinySprite, setShinySprite] = useState<boolean>(false);
+  console.log(shinySprite);
   function checkingIMG(url: string) {
     if (url == null) {
       return sprite_default;
@@ -307,10 +310,17 @@ export default function UniquePokemonPage({
           <Text size="md">Cadeia evolutiva:</Text>
           <div className="evolutions">
             <div className="evolution">
-              <img
-                src={evolution_chain[0].sprite}
-                alt={`${evolution_chain[0].name}`}
-              />
+              {shinySprite ? (
+                <img
+                  src={evolution_chain[0].sprite.shiny}
+                  alt={`${evolution_chain[0].name}`}
+                />
+              ) : (
+                <img
+                  src={evolution_chain[0].sprite.default}
+                  alt={`${evolution_chain[0].name}`}
+                />
+              )}
               <span>{evolution_chain[0].name}</span>
             </div>
             <div className="separator">
@@ -318,10 +328,17 @@ export default function UniquePokemonPage({
               <CaretRight size={24} />
             </div>
             <div className="evolution">
-              <img
-                src={evolution_chain[1].sprite}
-                alt={`${evolution_chain[1].name}`}
-              />
+            {shinySprite ? (
+                <img
+                  src={evolution_chain[1].sprite.shiny}
+                  alt={`${evolution_chain[1].name}`}
+                />
+              ) : (
+                <img
+                  src={evolution_chain[1].sprite.default}
+                  alt={`${evolution_chain[1].name}`}
+                />
+              )}
               <span>{evolution_chain[1].name}</span>
             </div>
             <div className="separator">
@@ -329,12 +346,40 @@ export default function UniquePokemonPage({
               <CaretRight size={24} />
             </div>
             <div className="evolution">
-              <img
-                src={evolution_chain[2].sprite}
-                alt={`${evolution_chain[2].name}`}
-              />
+            {shinySprite ? (
+                <img
+                  src={evolution_chain[2].sprite.shiny}
+                  alt={`${evolution_chain[2].name}`}
+                />
+              ) : (
+                <img
+                  src={evolution_chain[2].sprite.default}
+                  alt={`${evolution_chain[2].name}`}
+                />
+              )}
               <span>{evolution_chain[2].name}</span>
             </div>
+          </div>
+          <div className="switch-sprite-wrapper">
+            {shinySprite ? (
+              <CustomTooltip title="Change sprites">
+                <CircleButton
+                  onClick={() => setShinySprite(!shinySprite)}
+                  backgroundColor="white"
+                >
+                  <Sparkle size={24} color={theme.colors.gray[800]} />
+                </CircleButton>
+              </CustomTooltip>
+            ) : (
+              <CustomTooltip title="Change sprites">
+                <CircleButton
+                  onClick={() => setShinySprite(!shinySprite)}
+                  backgroundColor="gray"
+                >
+                  <Sparkle size={24} color={theme.colors.gray[100]} />
+                </CircleButton>
+              </CustomTooltip>
+            )}
           </div>
         </div>
         <Spacer />
@@ -518,10 +563,17 @@ export default function UniquePokemonPage({
           <Text size="md">Cadeia evolutiva:</Text>
           <div className="evolutions">
             <div className="evolution">
-              <img
-                src={evolution_chain[0].sprite}
-                alt={`${evolution_chain[0].name}`}
-              />
+              {shinySprite ? (
+                <img
+                  src={evolution_chain[0].sprite.shiny}
+                  alt={`${evolution_chain[0].name}`}
+                />
+              ) : (
+                <img
+                  src={evolution_chain[0].sprite.default}
+                  alt={`${evolution_chain[0].name}`}
+                />
+              )}
               <span>{evolution_chain[0].name}</span>
             </div>
             <div className="separator">
@@ -529,12 +581,40 @@ export default function UniquePokemonPage({
               <CaretRight size={24} />
             </div>
             <div className="evolution">
-              <img
-                src={evolution_chain[1].sprite}
-                alt={`${evolution_chain[1].name}`}
-              />
+              {shinySprite ? (
+                <img
+                  src={evolution_chain[1].sprite.shiny}
+                  alt={`${evolution_chain[1].name}`}
+                />
+              ) : (
+                <img
+                  src={evolution_chain[1].sprite.default}
+                  alt={`${evolution_chain[1].name}`}
+                />
+              )}
               <span>{evolution_chain[1].name}</span>
             </div>
+          </div>
+          <div className="switch-sprite-wrapper">
+            {shinySprite ? (
+              <CustomTooltip title="Change sprites">
+                <CircleButton
+                  onClick={() => setShinySprite(!shinySprite)}
+                  backgroundColor="white"
+                >
+                  <Sparkle size={24} color={theme.colors.gray[800]} />
+                </CircleButton>
+              </CustomTooltip>
+            ) : (
+              <CustomTooltip title="Change sprites">
+                <CircleButton
+                  onClick={() => setShinySprite(!shinySprite)}
+                  backgroundColor="gray"
+                >
+                  <Sparkle size={24} color={theme.colors.gray[100]} />
+                </CircleButton>
+              </CustomTooltip>
+            )}
           </div>
         </div>
 
@@ -716,12 +796,40 @@ export default function UniquePokemonPage({
           <Text size="md">Cadeia evolutiva:</Text>
           <div className="evolutions">
             <div className="evolution">
-              <img
-                src={evolution_chain[0].sprite}
-                alt={`${evolution_chain[0].name}`}
-              />
+              {shinySprite ? (
+                <img
+                  src={evolution_chain[0].sprite.shiny}
+                  alt={`${evolution_chain[0].name}`}
+                />
+              ) : (
+                <img
+                  src={evolution_chain[0].sprite.default}
+                  alt={`${evolution_chain[0].name}`}
+                />
+              )}
               <span>{evolution_chain[0].name}</span>
             </div>
+          </div>
+          <div className="switch-sprite-wrapper">
+            {shinySprite ? (
+              <CustomTooltip title="Change sprites">
+                <CircleButton
+                  onClick={() => setShinySprite(!shinySprite)}
+                  backgroundColor="white"
+                >
+                  <Sparkle size={24} color={theme.colors.gray[800]} />
+                </CircleButton>
+              </CustomTooltip>
+            ) : (
+              <CustomTooltip title="Change sprites">
+                <CircleButton
+                  onClick={() => setShinySprite(!shinySprite)}
+                  backgroundColor="gray"
+                >
+                  <Sparkle size={24} color={theme.colors.gray[100]} />
+                </CircleButton>
+              </CustomTooltip>
+            )}
           </div>
         </div>
 
