@@ -5,16 +5,15 @@ export const Container = styled.div`
   margin: 1.6rem 0;
 
   .types-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    place-items: center;
     margin-top: 1.6rem;
     gap: 1.6rem;
   }
 
-  .typesDiv{
+  .typesDiv {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2.4rem;
@@ -22,25 +21,22 @@ export const Container = styled.div`
   }
 
   @media (max-width: 500px) {
-    .blank-spacer{
-      display: none;
-    }
-    .types-wrapper{
+    .types-wrapper {
       width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 0 1.2rem;
+      padding: 0 3.6rem;
       place-items: center;
     }
-    .typesDiv{
+    .typesDiv {
       width: 100%;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      grid-column-gap: .8rem;
+      grid-column-gap: 0rem;
       place-items: center;
       align-items: center;
       justify-content: center;
-  }
+    }
   }
 `;
