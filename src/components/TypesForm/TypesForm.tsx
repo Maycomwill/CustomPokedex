@@ -10,7 +10,6 @@ export function TypesForm() {
         <Text>Você pode filtrar os pokemon por tipos</Text>
       </div>
       <div className="types-wrapper">
-        <div className="blank-spacer"></div>
         <div className="typesDiv">
           <TypeCard pokemonType="bug" pressable />
           <TypeCard pokemonType="dark" pressable />
@@ -31,7 +30,6 @@ export function TypesForm() {
           <TypeCard pokemonType="steel" pressable />
           <TypeCard pokemonType="water" pressable />
         </div>
-        <div className="blank-spacer"></div>
       </div>
     </Container>
   );

@@ -1,10 +1,10 @@
-import { darken } from 'polished';
-import styled from 'styled-components';
-import theme from '../../styles/theme';
+import { darken } from "polished";
+import styled from "styled-components";
+import theme from "../../styles/theme";
 
 interface ITypeProps {
-  pokemonType: string
-};
+  pokemonType: string;
+}
 
 export function backgroundColorType(color: string) {
   switch (color) {
@@ -45,7 +45,7 @@ export function backgroundColorType(color: string) {
     case "water":
       return `${theme.backgroundCard.water}`;
     default:
-      return `${theme.colors.accent[200]}`
+      return `${theme.colors.accent[200]}`;
   }
 }
 
@@ -56,13 +56,13 @@ export const Container = styled.div<ITypeProps>`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  gap: .8rem;
-  max-width: 10rem;
+  gap: 0.8rem;
+  max-width: 14rem;
   height: 4rem;
   padding-left: 1rem;
   padding-right: 1rem;
 
-  @media (min-width: 500px){
+  @media (min-width: 500px) {
     width: 12rem;
   }
 
@@ -85,13 +85,13 @@ export const ContainerButton = styled.button<ITypeProps>`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  gap: .8rem;
-  max-width: 12rem;
+  gap: 0.8rem;
+  max-width: 14rem;
   height: 4rem;
   padding: 0rem 3rem;
 
-  @media (min-width: 500px){
-    max-width: 10rem;
+  @media (min-width: 500px) {
+    max-width: 12rem;
   }
 
   .svgDiv {
@@ -104,9 +104,9 @@ export const ContainerButton = styled.button<ITypeProps>`
     border-radius: 50%;
     padding: 0.4rem;
   }
-/* futura opção para ver as informações da tipagem */
-  :hover{
-    background-color: ${({ pokemonType }) => darken(0.1, backgroundColorType(pokemonType))};
+  /* futura opção para ver as informações da tipagem */
+  :hover {
+    background-color: ${({ pokemonType }) =>
+      darken(0.1, backgroundColorType(pokemonType))};
   }
-
 `;

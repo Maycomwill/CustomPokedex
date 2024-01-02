@@ -12,7 +12,8 @@ export const Container = styled.div<IUniqueContainerProps>`
   justify-content: space-evenly;
   align-items: center;
   margin-bottom: 2.4rem;
-
+  padding-left: 6rem;
+  padding-right: 6rem;
   @media (max-width: 500px) {
     flex-direction: column;
     padding: 0rem 2rem;
@@ -73,7 +74,6 @@ export const Container = styled.div<IUniqueContainerProps>`
   }
 
   .pokedexInfo #name {
-
     text-align: center;
     @media (min-width: 500px) {
       grid-area: 1 / 1 / 2 / 2;
@@ -81,7 +81,6 @@ export const Container = styled.div<IUniqueContainerProps>`
   }
 
   .pokedexInfo #id {
-
     text-align: center;
     @media (min-width: 500px) {
       grid-area: 2 / 1 / 3 / 2;
