@@ -383,7 +383,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
       female_rate: number;
       male_rate: number;
     };
-    
+
     let rawGender: {
       pokemon_species: {
         name: string;
