@@ -56,7 +56,7 @@ export const Container = styled.div<ITypeProps>`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  gap: 0.8rem;
+  gap: .8rem;
   max-width: 10rem;
   height: 4rem;
   padding-left: 1rem;
@@ -85,9 +85,8 @@ export const ContainerButton = styled.button<ITypeProps>`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  gap: 0.8rem;
-  width: 100%;
-  max-width: 13rem;
+  gap: .8rem;
+  max-width: 12rem;
   height: 4rem;
   padding: 0rem 0.4rem;
 

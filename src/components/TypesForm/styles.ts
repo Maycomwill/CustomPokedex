@@ -5,8 +5,8 @@ export const Container = styled.div`
   margin: 1.6rem 0;
 
   .types-wrapper {
-    display: flex;
-    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
     justify-content: center;
     margin-top: 1.6rem;
@@ -26,14 +26,15 @@ export const Container = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 0 1.2rem;
+      padding: 0 3.6rem;
       place-items: center;
     }
     .typesDiv {
       width: 100%;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-column-gap: .8rem;
+      place-items: center;
       align-items: center;
       justify-content: center;
     }
