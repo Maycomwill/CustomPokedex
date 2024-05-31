@@ -50,7 +50,7 @@ export function backgroundColorType(color?: string) {
 }
 
 export const Container = styled.button<IContainerProps>`
-height: 12rem;
+  height: 12rem;
   width: 100%;
   border: 0;
   outline: none;
@@ -64,12 +64,11 @@ height: 12rem;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  transition: background-color .25s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: background-color 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
 
   @media (max-width: 500px) {
     height: 12rem;
     flex-direction: row;
-
   }
 
   :hover {
@@ -93,7 +92,7 @@ height: 12rem;
   .pokemonInfoDiv {
     display: flex;
     flex-direction: column;
-    gap: .8rem;
+    gap: 0.8rem;
     align-items: flex-start;
     justify-content: flex-start;
     @media (max-width: 500px) {

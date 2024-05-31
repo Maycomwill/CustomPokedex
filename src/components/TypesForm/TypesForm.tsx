@@ -30,7 +30,6 @@ export function TypesForm() {
           <TypeCard pokemonType="steel" pressable />
           <TypeCard pokemonType="water" pressable />
         </div>
-        <div className="blank-spacer"></div>
       </div>
     </Container>
   );
