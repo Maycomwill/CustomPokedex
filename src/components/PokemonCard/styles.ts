@@ -73,8 +73,7 @@ height: 12rem;
   }
 
   :hover {
-    background-color: ${({ color }) =>
-    backgroundColorType(color)};
+    background-color: ${({ color }) => tint(0.5, backgroundColorType(color))};
   }
 
   .leftWrapper {
@@ -147,7 +146,7 @@ height: 12rem;
   }
 
   .spriteDiv .svg-Type-Pokemon-img {
-    opacity: 0.25;
+    /* opacity: 0.25; */
     height: 8rem;
     position: absolute;
     z-index: 0;
