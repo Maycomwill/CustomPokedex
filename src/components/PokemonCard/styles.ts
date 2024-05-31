@@ -72,7 +72,7 @@ export const Container = styled.button<IContainerProps>`
   }
 
   :hover {
-    background-color: ${({ color }) => tint(0.25, backgroundColorType(color))};
+    background-color: ${({ color }) => tint(0.5, backgroundColorType(color))};
   }
 
   .leftWrapper {
@@ -145,7 +145,7 @@ export const Container = styled.button<IContainerProps>`
   }
 
   .spriteDiv .svg-Type-Pokemon-img {
-    opacity: 0.25;
+    /* opacity: 0.25; */
     height: 8rem;
     position: absolute;
     z-index: 0;
