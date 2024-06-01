@@ -147,6 +147,16 @@ export const Container = styled.div<IUniqueContainerProps>`
   .detailsWrapper .info:has(.abilityName) {
     cursor: pointer;
   }
+  .info{
+    position: relative;
+  }
+
+  .hidden_ability{
+    position: absolute;
+    top: .5rem;
+    right: 1rem;
+    opacity: 20%;
+  }
 
   .abilities {
     width: 100%;
