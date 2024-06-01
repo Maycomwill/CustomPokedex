@@ -3,6 +3,7 @@ import { pokeapi } from "../services/api";
 import axios, { AxiosResponse } from "axios";
 import {
   AbilityInfoProps,
+  abilityProps,
   damageRelationsProps,
   PokedexDataProps,
   PokedexProviderProps,
@@ -468,12 +469,13 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
             },
           };
         }),
-        abilities: result.data.abilities.map((ability: any) => {
+        abilities: result.data.abilities.map((ability: abilityProps) => {
           return {
             ability: {
               name: ability.ability.name,
               url: ability.ability.url,
             },
+            is_hidden: ability.is_hidden,
             slot: ability.slot,
           };
         }),
@@ -538,12 +540,13 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
             },
           };
         }),
-        abilities: result.data.abilities.map((ability: any) => {
+        abilities: result.data.abilities.map((ability: abilityProps) => {
           return {
             ability: {
               name: ability.ability.name,
               url: ability.ability.url,
             },
+            is_hidden: ability.is_hidden,
             slot: ability.slot,
           };
         }),
@@ -599,12 +602,14 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
             },
           };
         }),
-        abilities: result.data.abilities.map((ability: any) => {
+        abilities: result.data.abilities.map((ability: abilityProps) => {
           return {
             ability: {
               name: ability.ability.name,
               url: ability.ability.url,
             },
+            is_hidden: ability.is_hidden,
+
             slot: ability.slot,
           };
         }),

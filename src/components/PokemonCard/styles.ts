@@ -145,7 +145,7 @@ export const Container = styled.button<IContainerProps>`
   }
 
   .spriteDiv .svg-Type-Pokemon-img {
-    /* opacity: 0.25; */
+    opacity: 0.25;
     height: 8rem;
     position: absolute;
     z-index: 0;
