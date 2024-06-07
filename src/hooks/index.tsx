@@ -1,14 +1,15 @@
 import { ReactNode } from "react";
 import { PokedexContextProvider } from "../context/PokedexContext";
+import { TypesContextProvider } from "../context/TypesContext";
 
 interface AppProviderProps {
   children: ReactNode;
 }
 
 function AppProvider({ children }: AppProviderProps) {
-  return(
+  return (
     <PokedexContextProvider>
-      {children}
+      <TypesContextProvider>{children}</TypesContextProvider>
     </PokedexContextProvider>
   );
 }
