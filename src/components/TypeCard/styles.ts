@@ -56,15 +56,14 @@ export const Container = styled.div<ITypeProps>`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  gap: .8rem;
+  gap: 0.4rem;
   max-width: 10rem;
+  min-width: 10rem;
+  width: 10rem;
   height: 4rem;
   padding-left: 1rem;
   padding-right: 1rem;
 
-  @media (min-width: 500px) {
-    width: 12rem;
-  }
 
   .svgDiv {
     width: 2.5rem;
@@ -80,19 +79,17 @@ export const Container = styled.div<ITypeProps>`
 
 export const ContainerButton = styled.button<ITypeProps>`
   background-color: ${({ pokemonType }) => backgroundColorType(pokemonType)};
-  border-radius: 9999rem;
+  border-radius: 999rem;
   border: none;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  gap: .8rem;
+  gap: 0.8rem;
   max-width: 12rem;
+  min-width: 12rem;
+  width: 12rem;
   height: 4rem;
   padding: 0rem 0.4rem;
-
-  @media (min-width: 500px) {
-    max-width: 12rem;
-  }
 
   .svgDiv {
     width: 2.5rem;
