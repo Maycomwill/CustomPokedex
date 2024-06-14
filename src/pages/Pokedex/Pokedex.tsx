@@ -11,44 +11,46 @@ import { BackToTop } from "../../components/BackToTop/BackToTop";
 import NavButtons from "../../components/NavButtons/NavButtons";
 import { DropMenu } from "../../components/DropdownMenu/DropMenu";
 import { Text } from "../../components/Text/Text";
+import useGeneration from "../../hooks/useGeneration";
 
 export function Pokedex() {
   const params = useParams();
   const navigate = useNavigate();
   let generation = params.generationid;
 
-  const {
-    getPokedexList,
-    pokemonData,
-    genTypeFilteredList,
-    handleFilterGenType,
-  } = usePokedex();
+  const { genTypeFilteredList, handleFilterGenType } = usePokedex();
+
+  const { pokemonData, getGenerationFromUserChoice } = useGeneration();
 
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
 
   // console.log(genTypeFilteredList);
 
-  let pokemonListFiltered: PokemonDataProps[] = []
+  let pokemonListFiltered: PokemonDataProps[] = [];
 
-  if(genTypeFilteredList.length > 0){
-    pokemonListFiltered = search.length > 0
-      ? genTypeFilteredList.filter((pokemon) =>
-          pokemon.name.includes(search.toLowerCase())
-        )
-      : [];
-  }else {
-    pokemonListFiltered = search.length > 0
-      ? pokemonData.filter((pokemon) =>
-          pokemon.name.includes(search.toLowerCase())
-        )
-      : [];
+  if (genTypeFilteredList.length > 0) {
+    pokemonListFiltered =
+      search.length > 0
+        ? genTypeFilteredList.filter((pokemon) =>
+            pokemon.name.includes(search.toLowerCase())
+          )
+        : [];
+  } else {
+    pokemonListFiltered =
+      search.length > 0
+        ? pokemonData.filter((pokemon) =>
+            pokemon.name.includes(search.toLowerCase())
+          )
+        : [];
   }
 
   useEffect(() => {
     setIsLoading(true);
-    handleFilterGenType("");
-    getPokedexList(generation);
+    handleFilterGenType("", pokemonData);
+    {
+      generation && getGenerationFromUserChoice(generation);
+    }
     setIsLoading(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [generation]);
@@ -86,10 +88,9 @@ export function Pokedex() {
               </form>
             </div>
             <div className="filtersDiv">
-              <DropMenu />
+              <DropMenu pokemonArray={pokemonData}/>
             </div>
           </div>
-
           {search.length > 0 ? (
             <div className="pokemonCard-wrapper">
               {pokemonListFiltered
@@ -167,7 +168,7 @@ export function Pokedex() {
               </form>
             </div>
             <div className="filtersDiv">
-              <DropMenu />
+              <DropMenu pokemonArray={pokemonData}/>
             </div>
           </div>
 

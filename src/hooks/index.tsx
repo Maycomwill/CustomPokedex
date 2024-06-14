@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { PokedexContextProvider } from "../context/PokedexContext";
 import { TypesContextProvider } from "../context/TypesContext";
+import { GenerationContextProvider } from "../context/GenerationContext";
 
 interface AppProviderProps {
   children: ReactNode;
@@ -9,7 +10,9 @@ interface AppProviderProps {
 function AppProvider({ children }: AppProviderProps) {
   return (
     <PokedexContextProvider>
-      <TypesContextProvider>{children}</TypesContextProvider>
+      <GenerationContextProvider>
+        <TypesContextProvider>{children}</TypesContextProvider>
+      </GenerationContextProvider>
     </PokedexContextProvider>
   );
 }

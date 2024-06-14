@@ -1,24 +1,25 @@
 import { useEffect } from "react";
 import useTypes from "../../hooks/useTypes";
 import { PokemonDataProps } from "../../interfaces/pokemonInterfaces";
+import useGeneration from "../../hooks/useGeneration";
 
 function Test() {
-  const { getTypeData, commonTypesPokemon } = useTypes();
+  const { getGenerationFromUserChoice, pokemonData} = useGeneration();
   useEffect(() => {
-    getTypeData("water");
+    getGenerationFromUserChoice("1");
   }, []);
   return (
     <div>
       Test
       <div>
-        {commonTypesPokemon && (
+        {pokemonData && (
           <div
             style={{
               display: "flex",
               flexDirection: "column",
             }}
           >
-            {commonTypesPokemon.map((pokemon: PokemonDataProps) => {
+            {pokemonData.map((pokemon: PokemonDataProps) => {
               return <span key={pokemon.id}>{pokemon.name}</span>;
             })}
           </div>
