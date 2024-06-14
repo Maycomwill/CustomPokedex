@@ -7,10 +7,12 @@ import {
 import { pokeapi } from "../services/api";
 import { waitingPromises } from "../utils/awaitPromises";
 import { storagePokemonInformation } from "../utils/storagePokemonInfo";
+import { NamedAPIResource } from "../interfaces/apiInterfaces";
 
 export interface TypesContextProps {
   types: typeProps[] | undefined;
   commonTypesPokemon: PokemonDataProps[];
+  moves: NamedAPIResource[];
   getTypeData: (type: string) => void;
 }
 
@@ -22,6 +24,7 @@ export function TypesContextProvider({ children }: { children: ReactNode }) {
     PokemonDataProps[]
   >([]);
   const [types, setTypes] = useState<typeProps[]>();
+  const [moves, setMoves] = useState<NamedAPIResource[]>([]);
 
   //Esta função busca na api os dados de um tipo e armazena os dados dos pokemon que possuem o mesmo tipo
   async function getTypeData(type: string) {
@@ -48,10 +51,14 @@ export function TypesContextProvider({ children }: { children: ReactNode }) {
         storagePokemonInformation(pokemon, setCommonTypesPokemon)
       );
     });
+
+    setMoves(data.moves);
   }
 
   return (
-    <TypesContext.Provider value={{ commonTypesPokemon, types, getTypeData }}>
+    <TypesContext.Provider
+      value={{ moves, commonTypesPokemon, types, getTypeData }}
+    >
       {children}
     </TypesContext.Provider>
   );

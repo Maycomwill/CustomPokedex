@@ -2,18 +2,23 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   margin: 1.6rem 0;
 
   .types-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 1.6rem;
-    gap: 1.6rem;
+    width: 50%;
   }
 
   .typesDiv {
+    width: 100%;
+    place-items: center;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2.4rem;
