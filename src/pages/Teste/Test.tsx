@@ -2,25 +2,26 @@ import { useEffect } from "react";
 import useTypes from "../../hooks/useTypes";
 import { PokemonDataProps } from "../../interfaces/pokemonInterfaces";
 import useGeneration from "../../hooks/useGeneration";
+import { NamedAPIResource } from "../../interfaces/apiInterfaces";
 
 function Test() {
-  const { getGenerationFromUserChoice, pokemonData} = useGeneration();
+const{getTypeData, moves}=useTypes();
   useEffect(() => {
-    getGenerationFromUserChoice("1");
+    getTypeData("fire");
   }, []);
   return (
     <div>
       Test
       <div>
-        {pokemonData && (
+        {moves && (
           <div
             style={{
               display: "flex",
               flexDirection: "column",
             }}
           >
-            {pokemonData.map((pokemon: PokemonDataProps) => {
-              return <span key={pokemon.id}>{pokemon.name}</span>;
+            {moves.map((move: NamedAPIResource) => {
+              return <span key={move.url}>{move.name}</span>;
             })}
           </div>
         )}
