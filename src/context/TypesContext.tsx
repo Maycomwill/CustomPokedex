@@ -45,7 +45,6 @@ export function TypesContextProvider({ children }: { children: ReactNode }) {
       let newArray = response.sort((a, b) => {
         return a.id - b.id;
       });
-      console.log(newArray);
       setCommonTypesPokemon([]);
       newArray.map((pokemon: PokemonDataProps) =>
         storagePokemonInformation(pokemon, setCommonTypesPokemon)
