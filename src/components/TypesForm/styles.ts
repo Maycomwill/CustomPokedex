@@ -21,6 +21,15 @@ export const Container = styled.div`
   }
 
   @media (max-width: 500px) {
+    .typesDiv {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-column-gap: .2rem;
+      place-items: center;
+      align-items: center;
+      justify-content: center;
+    }
     .types-wrapper {
       width: 100%;
       display: flex;
@@ -28,15 +37,6 @@ export const Container = styled.div`
       align-items: center;
       padding: 0 3.6rem;
       place-items: center;
-    }
-    .typesDiv {
-      width: 100%;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-column-gap: .8rem;
-      place-items: center;
-      align-items: center;
-      justify-content: center;
     }
   }
 `;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import theme from "../../styles/theme";
 
 export const Container = styled.div`
-  min-width: 100vw;
+  width: 100%;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -18,19 +18,25 @@ export const Container = styled.div`
   }
 
   .filtersWrapper {
-    width: 100%;
+    width: 90%;
     display: grid;
+    place-items: center;
     grid-template-columns: 1fr 2fr 1fr;
 
     @media (max-width: 500px) {
       width: 100%;
       display: flex;
       flex-direction: row;
-      justify-content: space-evenly;
+      justify-content: center;
       align-items: center;
-      padding: 0 2.4rem;
+      padding: 0 3.6rem;
       margin-top: 2.4rem;
     }
+  }
+
+  .filtersDiv {
+    display: flex;
+    height: 100%;
   }
 
   .blankDiv {
@@ -40,12 +46,6 @@ export const Container = styled.div`
     @media (max-width: 500px) {
       display: none;
     }
-  }
-
-  .filtersDiv {
-    display: flex;
-    flex: 1;
-    height: 100%;
   }
 
   .inputWrapper {
@@ -87,18 +87,19 @@ export const Container = styled.div`
 
     @media (max-width: 500px) {
       justify-content: flex-start;
-      padding: 0rem .4rem;
-      form{
+      padding: 0rem 0.4rem;
+      form {
         width: 80%;
         font-size: 1.4rem;
       }
-      form input{
+      form input {
         ::placeholder {
           font-size: 1.4rem;
         }
       }
     }
   }
+
   .pokemonCard-wrapper {
     width: min(120rem, 97%);
     padding-top: 1.2rem;
@@ -110,7 +111,6 @@ export const Container = styled.div`
     align-items: flex-start;
 
     @media (max-width: 500px) {
-
       height: 100%;
       display: flex;
       flex-direction: column;
