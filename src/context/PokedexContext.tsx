@@ -19,7 +19,7 @@ export interface PokedexContextDataProps {
   getPokemonData: (pokemonName: string | undefined) => void;
   getAbilityInfo: (ability: string | undefined) => void;
   getTypeData: (type: string | undefined) => void;
-  handleFilterGenType: (type: string) => void;
+  handleFilterGenType: (type: string, array: PokemonDataProps[]) => void;
   pokemonData: PokemonDataProps[];
   uniquePokemonData: UniquePokemonData;
   abilityInfo: AbilityInfoProps | undefined;
@@ -704,17 +704,13 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     });
   }
 
-  function handleFilterGenType(typeName: string) {
-    // console.log("função chamada:", type)
-    genTypeFilter =
-      typeName.length > 0
-        ? pokemonData.filter((pokemon) =>
-            pokemon.types.some(
-              (type) => type.type.toLowerCase() === typeName.toLowerCase()
-            )
-          )
-        : [];
-    // console.log(genTypeFilter);
+  function handleFilterGenType(typeName: string, array: PokemonDataProps[]) {
+    // console.log("função chamada:", typeName)
+    genTypeFilter = array.filter((pokemon) =>
+      pokemon.types.some(
+        (type) => type.type.toLowerCase() === typeName.toLowerCase()
+      )
+    );
     setGenTypeFilteredList(genTypeFilter);
   }
 

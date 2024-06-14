@@ -9,27 +9,31 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
-import { Button } from "../Button";
 import { CircleButton } from "../Button/CircleButton/CircleButton";
 import { Funnel } from "phosphor-react";
 import { usePokedex } from "../../hooks/usePokedex";
+import { PokemonDataProps } from "../../interfaces/pokemonInterfaces";
 
-export function DropMenu() {
-  const {handleFilterGenType} = usePokedex();
+export function DropMenu({
+  pokemonArray,
+}: {
+  pokemonArray: PokemonDataProps[];
+}) {
+  const { handleFilterGenType } = usePokedex();
 
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
   const [typeFilter, setTypeFilter] = React.useState<string>("");
 
-  let typeFiltered = ""
+  let typeFiltered = "";
 
   const handleTypeFilterChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setTypeFilter(event.target.value);
-    typeFiltered = event.target.value
-    handleFilterGenType(typeFiltered)
+    typeFiltered = event.target.value;
+    handleFilterGenType(typeFiltered, pokemonArray);
   };
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -71,8 +75,8 @@ export function DropMenu() {
             color: `${theme.colors.gray[800]}`,
           },
           ".MuiTypography-root": {
-            fontSize: 16
-          }
+            fontSize: 16,
+          },
         }}
       >
         <div className="formControlDiv">

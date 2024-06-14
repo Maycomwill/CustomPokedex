@@ -1,23 +1,25 @@
 import { useEffect, useState } from "react";
 import { Container } from "./styles";
 import { useNavigate, useParams } from "react-router-dom";
-import { usePokedex } from "../../hooks/usePokedex";
 import { Loading } from "../../components/Loading/Loading";
 import { PokemonCard } from "../../components/PokemonCard/PokemonCard";
 import { Text } from "../../components/Text/Text";
 import { Button } from "../../components/Button";
 import { BackToTop } from "../../components/BackToTop/BackToTop";
 import theme from "../../styles/theme";
+import useTypes from "../../hooks/useTypes";
 
 export function Type() {
   const params = useParams();
-  const { getTypeData, pokemonData } = usePokedex();
+  const { getTypeData, commonTypesPokemon } = useTypes();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);
-    getTypeData(params.typename);
+    {
+      params.typename && getTypeData(params.typename);
+    }
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
@@ -42,7 +44,7 @@ export function Type() {
           </div>
         </div>
         <div className="pokemonCard-wrapper">
-          {pokemonData.map((pokemon) => {
+          {commonTypesPokemon.map((pokemon) => {
             return (
               <PokemonCard
                 key={`${pokemon.id}-${pokemon.name}`}
