@@ -8,10 +8,12 @@ import { Button } from "../../components/Button";
 import { BackToTop } from "../../components/BackToTop/BackToTop";
 import theme from "../../styles/theme";
 import useTypes from "../../hooks/useTypes";
+import { Spacer } from "../../components/Spacer/Spacer";
+import MoveCard from "../../components/MoveCard";
 
 export function Type() {
   const params = useParams();
-  const { getTypeData, commonTypesPokemon } = useTypes();
+  const { getTypeData, commonTypesPokemon, moves } = useTypes();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
@@ -28,11 +30,12 @@ export function Type() {
   if (isLoading) {
     return <Loading color={theme.colors.primary[500]} size={64} />;
   } else {
+    console.log(moves);
     return (
       <Container>
         <div className="pageTitle">
-          <Text color="white" size="lg">
-            Todos os Pokemon que são do tipo:{" "}
+          <Text size="lg">
+            Técnicas do tipo:{" "}
             <Text transform="uppercase" color="primary" size="lg" weight="bold">
               {params.typename}
             </Text>
@@ -43,6 +46,21 @@ export function Type() {
             </Button.Root>
           </div>
         </div>
+        <div className="moves-wrapper">
+          <div className="moves-card-wrapper">
+            {moves.map((move) => {
+              return <MoveCard move={move} key={move.url} />;
+            })}
+          </div>
+        </div>
+        <Spacer />
+        <div className="pokemon-wrapper">
+        <Text size="lg">
+            Pokémon do tipo:{" "}
+            <Text transform="uppercase" color="primary" size="lg" weight="bold">
+              {params.typename}
+            </Text>
+          </Text>
         <div className="pokemonCard-wrapper">
           {commonTypesPokemon.map((pokemon) => {
             return (
@@ -56,6 +74,7 @@ export function Type() {
               />
             );
           })}
+        </div>
         </div>
         <div className="backButton">
           <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>
