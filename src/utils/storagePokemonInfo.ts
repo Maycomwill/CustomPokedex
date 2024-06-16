@@ -1,4 +1,3 @@
-import { Dispatch } from "react";
 import { PokemonDataProps } from "../interfaces/pokemonInterfaces";
 
 export function storagePokemonInformation(

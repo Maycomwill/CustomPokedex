@@ -84,5 +84,4 @@ export interface statsProps {
 export interface AbilityInfoProps {
   name: string;
   description: string;
-  pokemon?: PokemonDataProps[];
 }

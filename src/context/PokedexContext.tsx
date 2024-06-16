@@ -15,11 +15,9 @@ import {
 //Interface do Provedor
 export interface PokedexContextDataProps {
   getPokemonData: (pokemonName: string | undefined) => void;
-  getAbilityInfo: (ability: string | undefined) => void;
   handleFilterGenType: (type: string, array: PokemonDataProps[]) => void;
   pokemonData: PokemonDataProps[];
   uniquePokemonData: UniquePokemonData;
-  abilityInfo: AbilityInfoProps | undefined;
   pokemonAbilityCommon: PokemonDataProps[];
   genTypeFilteredList: PokemonDataProps[];
 }
@@ -34,9 +32,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
   let thirdSprite: AxiosResponse | undefined;
   let rawPokemonData: PokemonDataProps[] = [];
   let genTypeFilter: PokemonDataProps[] = [];
-  const [abilityInfo, setAbilityInfo] = useState<AbilityInfoProps | undefined>(
-    undefined
-  );
+
   const [pokemonAbilityCommon, setPokemonAbilityCommon] = useState<
     PokemonDataProps[]
   >([]);
@@ -47,7 +43,6 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
   const [genTypeFilteredList, setGenTypeFilteredList] = useState<
     PokemonDataProps[]
   >([]);
-
 
   // Esta função retorna os resultados de todas as requisições quando prontas
   function waitingPromises(results: PokedexDataProps[]) {
@@ -546,32 +541,6 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     }
   }
 
-  //Esta função busca na api os dados de uma habilidade e salva esses dados em um estado
-  async function getAbilityInfo(ability: string | undefined) {
-    setPokemonAbilityCommon([]);
-    let description = "";
-    rawPokemonData = [];
-    const result = await pokeapi.get(`ability/${ability}`);
-    let response = result.data.pokemon.map((pokemon: any) => {
-      return { name: pokemon.pokemon.name, url: pokemon.pokemon.url };
-    });
-    waitingPromises(response);
-
-    if (result.data.effect_entries[0].language.name === "en") {
-      description = result.data.effect_entries[0].effect;
-    } else {
-      description = result.data.effect_entries[1].effect;
-    }
-
-    setAbilityInfo({
-      name: result.data.name,
-      description: description,
-      pokemon: [],
-    });
-
-    storagePokemonAbilityCommon();
-  }
-
   //Esta função organiza e retorna os pokemon que possuem a mesma habilidade
   function storagePokemonAbilityCommon() {
     setTimeout(() => {
@@ -613,11 +582,9 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     <PokedexContext.Provider
       value={{
         getPokemonData,
-        getAbilityInfo,
         handleFilterGenType,
         pokemonData,
         uniquePokemonData,
-        abilityInfo,
         pokemonAbilityCommon,
         genTypeFilteredList,
       }}

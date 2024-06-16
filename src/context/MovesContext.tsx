@@ -58,7 +58,7 @@ export function MovesContextProvider({ children }: { children: ReactNode }) {
           return "";
         }
       );
-      console.log(flavor_text);
+      // console.log(flavor_text);
 
       setMove({
         accuracy: data.accuracy,
