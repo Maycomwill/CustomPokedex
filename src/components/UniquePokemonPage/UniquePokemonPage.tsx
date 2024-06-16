@@ -13,27 +13,16 @@ import CustomTooltip from "../CustomTooltip/CustomTooltip";
 import CustomChart from "../Chart/Chart";
 import { CircleButton } from "../Button/CircleButton/CircleButton";
 import { useState } from "react";
+import { types } from "util";
 
-interface IUniquePokemonPage extends UniquePokemonData {
+interface IUniquePokemonPage {
   pressable?: boolean;
+  data: UniquePokemonData;
 }
 
 export default function UniquePokemonPage({
-  name,
-  abilities,
-  height,
-  id,
-  official_artwork,
-  sprite_default,
-  sprite_shiny,
-  stats,
-  types,
-  weight,
-  flavor,
-  evolution_chain,
-  damage_relation,
+  data,
   pressable,
-  gender,
 }: IUniquePokemonPage) {
   // Console log para mostrar os tipos do pokemon
   // console.log("damage relation:", damage_relation);
@@ -41,13 +30,13 @@ export default function UniquePokemonPage({
   function checkimgIMG(url: string) {
     if (shinySprite) {
       if (url === null) {
-        return sprite_default;
+        return data.sprite_default;
       } else {
         return url;
       }
     } else {
       if (url === null) {
-        return sprite_default;
+        return data.sprite_default;
       } else {
         return url;
       }
@@ -71,19 +60,19 @@ export default function UniquePokemonPage({
 
   // console.log("Evolution Chain", evolution_chain);
 
-  if (evolution_chain?.length == 3) {
+  if (data.evolution_chain?.length == 3) {
     return (
       <Container>
         <div className="spritesDiv">
           {shinySprite ? (
             <img
-              src={checkimgIMG(official_artwork.shiny)}
-              alt={`${name} image`}
+              src={checkimgIMG(data.official_artwork.shiny)}
+              alt={`${data.name} image`}
             />
           ) : (
             <img
-              src={checkimgIMG(official_artwork.default)}
-              alt={`${name} image`}
+              src={checkimgIMG(data.official_artwork.default)}
+              alt={`${data.name} image`}
             />
           )}
           <div className="switch-principal-sprite-wrapper">
@@ -107,14 +96,14 @@ export default function UniquePokemonPage({
         <div className="infoWrapper">
           <div className="pokedexInfo">
             <Text size="xxl" weight="bold" transform="capitalize" id="name">
-              {name?.split("-").join(" ")}
+              {data.name?.split("-").join(" ")}
             </Text>
             <Text size="lg" transform="capitalize" id="id">
-              #{addZeroes(id, 3)}
+              #{addZeroes(data.id, 3)}
             </Text>
             <div className="typesWrapper">
               <div className="typesContainer">
-                {types?.map((type) => {
+                {data.types?.map((type) => {
                   return (
                     <TypeCard
                       pressable={true}
@@ -126,7 +115,7 @@ export default function UniquePokemonPage({
               </div>
             </div>
             <div className="flavorWrapper">
-              <Text size="md">{flavor?.split("\f").join(" ")}</Text>
+              <Text size="md">{data.flavor?.split("\f").join(" ")}</Text>
             </div>
           </div>
         </div>
@@ -137,7 +126,7 @@ export default function UniquePokemonPage({
               Altura:
             </Text>
             <div className="info">
-              <Text size="md">{(height * 0.1).toFixed(2)}m</Text>
+              <Text size="md">{(data.height * 0.1).toFixed(2)}m</Text>
             </div>
           </div>
 
@@ -146,11 +135,11 @@ export default function UniquePokemonPage({
               Peso:
             </Text>
             <div className="info">
-              <Text size="md">{(weight * 0.1).toFixed(2)}kg</Text>
+              <Text size="md">{(data.weight * 0.1).toFixed(2)}kg</Text>
             </div>
           </div>
 
-          {abilities?.map((ability) => {
+          {data.abilities?.map((ability) => {
             return (
               <div
                 className="infoCard"
@@ -180,7 +169,7 @@ export default function UniquePokemonPage({
         <div className="statsWrapper">
           <span>Status base:</span>
           <div className="statsContainer">
-            {stats?.map((stat) => {
+            {data.stats?.map((stat) => {
               return (
                 <div
                   className="baseStatWrapper"
@@ -208,7 +197,7 @@ export default function UniquePokemonPage({
         </div>
         <Spacer />
         <div className="damage-relations">
-          {damage_relation.double_damage_from.length === 0 ? null : (
+          {data.damage_relation.double_damage_from.length === 0 ? null : (
             <div className="all-weakness">
               <Text size="md">Fraquezas:</Text>
               <div className="weakness">
@@ -262,7 +251,7 @@ export default function UniquePokemonPage({
                   </CustomTooltip>;
                 }
               })} */}
-                {damage_relation.double_damage_from.map((type) => {
+                {data.damage_relation.double_damage_from.map((type) => {
                   return (
                     <CustomTooltip title={type} arrow key={type}>
                       <div>
@@ -278,7 +267,7 @@ export default function UniquePokemonPage({
               </div>
             </div>
           )}
-          {damage_relation.double_damage_to.length === 0 ? null : (
+          {data.damage_relation.double_damage_to.length === 0 ? null : (
             <div className="all-strengths">
               <Text size="md">Forças:</Text>
               <div className="strengths">
@@ -322,7 +311,7 @@ export default function UniquePokemonPage({
                     }
                   }
                 })} */}
-                {damage_relation.double_damage_to.map((type) => {
+                {data.damage_relation.double_damage_to.map((type) => {
                   return (
                     <CustomTooltip key={type} title={type} arrow>
                       <div>
@@ -346,52 +335,52 @@ export default function UniquePokemonPage({
             <div className="evolution">
               {shinySprite ? (
                 <img
-                  src={evolution_chain[0].sprite.shiny}
-                  alt={`${evolution_chain[0].name}`}
+                  src={data.evolution_chain[0].sprite.shiny}
+                  alt={`${data.evolution_chain[0].name}`}
                 />
               ) : (
                 <img
-                  src={evolution_chain[0].sprite.default}
-                  alt={`${evolution_chain[0].name}`}
+                  src={data.evolution_chain[0].sprite.default}
+                  alt={`${data.evolution_chain[0].name}`}
                 />
               )}
-              <span>{evolution_chain[0].name}</span>
+              <span>{data.evolution_chain[0].name}</span>
             </div>
             <div className="separator">
-              <span>lv. {evolution_chain[1].min_level}</span>
+              <span>lv. {data.evolution_chain[1].min_level}</span>
               <CaretRight size={24} />
             </div>
             <div className="evolution">
               {shinySprite ? (
                 <img
-                  src={evolution_chain[1].sprite.shiny}
-                  alt={`${evolution_chain[1].name}`}
+                  src={data.evolution_chain[1].sprite.shiny}
+                  alt={`${data.evolution_chain[1].name}`}
                 />
               ) : (
                 <img
-                  src={evolution_chain[1].sprite.default}
-                  alt={`${evolution_chain[1].name}`}
+                  src={data.evolution_chain[1].sprite.default}
+                  alt={`${data.evolution_chain[1].name}`}
                 />
               )}
-              <span>{evolution_chain[1].name}</span>
+              <span>{data.evolution_chain[1].name}</span>
             </div>
             <div className="separator">
-              <span>lv. {evolution_chain[2].min_level}</span>
+              <span>lv. {data.evolution_chain[2].min_level}</span>
               <CaretRight size={24} />
             </div>
             <div className="evolution">
               {shinySprite ? (
                 <img
-                  src={evolution_chain[2].sprite.shiny}
-                  alt={`${evolution_chain[2].name}`}
+                  src={data.evolution_chain[2].sprite.shiny}
+                  alt={`${data.evolution_chain[2].name}`}
                 />
               ) : (
                 <img
-                  src={evolution_chain[2].sprite.default}
-                  alt={`${evolution_chain[2].name}`}
+                  src={data.evolution_chain[2].sprite.default}
+                  alt={`${data.evolution_chain[2].name}`}
                 />
               )}
-              <span>{evolution_chain[2].name}</span>
+              <span>{data.evolution_chain[2].name}</span>
             </div>
           </div>
           <div className="switch-sprite-wrapper">
@@ -417,8 +406,11 @@ export default function UniquePokemonPage({
         <div className="gender-wrapper">
           <Text>Gender ratio</Text>
           <div className="gender-rate">
-            {gender ? (
-              <CustomChart female={gender.female} male={gender.male} />
+            {data.gender ? (
+              <CustomChart
+                female={data.gender.female}
+                male={data.gender.male}
+              />
             ) : null}
           </div>
         </div>
@@ -434,19 +426,19 @@ export default function UniquePokemonPage({
         <BackToTop />
       </Container>
     );
-  } else if (evolution_chain?.length == 2) {
+  } else if (data.evolution_chain?.length == 2) {
     return (
       <Container>
         <div className="spritesDiv">
           {shinySprite ? (
             <img
-              src={checkimgIMG(official_artwork.shiny)}
-              alt={`${name} image`}
+              src={checkimgIMG(data.official_artwork.shiny)}
+              alt={`${data.name} image`}
             />
           ) : (
             <img
-              src={checkimgIMG(official_artwork.default)}
-              alt={`${name} image`}
+              src={checkimgIMG(data.official_artwork.default)}
+              alt={`${data.name} image`}
             />
           )}
           <div className="switch-principal-sprite-wrapper">
@@ -470,14 +462,14 @@ export default function UniquePokemonPage({
         <div className="infoWrapper">
           <div className="pokedexInfo">
             <Text size="xxl" weight="bold" transform="capitalize" id="name">
-              {name?.split("-").join(" ")}
+              {data.name?.split("-").join(" ")}
             </Text>
             <Text size="lg" transform="capitalize" id="id">
-              #{addZeroes(id, 3)}
+              #{addZeroes(data.id, 3)}
             </Text>
             <div className="typesWrapper">
               <div className="typesContainer">
-                {types?.map((type) => {
+                {data.types?.map((type) => {
                   return (
                     <TypeCard
                       pressable={true}
@@ -489,7 +481,7 @@ export default function UniquePokemonPage({
               </div>
             </div>
             <div className="flavorWrapper">
-              <Text size="md">{flavor?.split("\f").join(" ")}</Text>
+              <Text size="md">{data.flavor?.split("\f").join(" ")}</Text>
             </div>
           </div>
         </div>
@@ -500,7 +492,7 @@ export default function UniquePokemonPage({
               Altura:
             </Text>
             <div className="info">
-              <Text size="md">{(height * 0.1).toFixed(2)}m</Text>
+              <Text size="md">{(data.height * 0.1).toFixed(2)}m</Text>
             </div>
           </div>
 
@@ -509,11 +501,11 @@ export default function UniquePokemonPage({
               Peso:
             </Text>
             <div className="info">
-              <Text size="md">{(weight * 0.1).toFixed(2)}kg</Text>
+              <Text size="md">{(data.weight * 0.1).toFixed(2)}kg</Text>
             </div>
           </div>
 
-          {abilities?.map((ability) => {
+          {data.abilities?.map((ability) => {
             return (
               <div
                 key={`${ability.ability.name}`}
@@ -544,7 +536,7 @@ export default function UniquePokemonPage({
         <div className="statsWrapper">
           <span>Status base:</span>
           <div className="statsContainer">
-            {stats?.map((stat) => {
+            {data.stats?.map((stat) => {
               return (
                 <div
                   className="baseStatWrapper"
@@ -572,11 +564,11 @@ export default function UniquePokemonPage({
         </div>
         <Spacer />
         <div className="damage-relations">
-          {damage_relation.double_damage_from.length === 0 ? null : (
+          {data.damage_relation.double_damage_from.length === 0 ? null : (
             <div className="all-weakness">
               <Text size="md">Fraquezas:</Text>
               <div className="weakness">
-                {damage_relation.double_damage_from.map((type) => {
+                {data.damage_relation.double_damage_from.map((type) => {
                   return (
                     <CustomTooltip title={type} arrow key={type}>
                       <div key={type}>
@@ -592,12 +584,12 @@ export default function UniquePokemonPage({
               </div>
             </div>
           )}
-          {damage_relation.double_damage_to.length === 0 ? null : (
+          {data.damage_relation.double_damage_to.length === 0 ? null : (
             <div className="all-strengths">
               <Text size="md">Forças:</Text>
               <div className="strengths">
                 <>
-                  {damage_relation.double_damage_to.map((type) => {
+                  {data.damage_relation.double_damage_to.map((type) => {
                     return (
                       <CustomTooltip title={type} arrow key={type}>
                         <div key={type}>
@@ -622,34 +614,34 @@ export default function UniquePokemonPage({
             <div className="evolution">
               {shinySprite ? (
                 <img
-                  src={evolution_chain[0].sprite.shiny}
-                  alt={`${evolution_chain[0].name}`}
+                  src={data.evolution_chain[0].sprite.shiny}
+                  alt={`${data.evolution_chain[0].name}`}
                 />
               ) : (
                 <img
-                  src={evolution_chain[0].sprite.default}
-                  alt={`${evolution_chain[0].name}`}
+                  src={data.evolution_chain[0].sprite.default}
+                  alt={`${data.evolution_chain[0].name}`}
                 />
               )}
-              <span>{evolution_chain[0].name}</span>
+              <span>{data.evolution_chain[0].name}</span>
             </div>
             <div className="separator">
-              <span>lv. {evolution_chain[1].min_level}</span>
+              <span>lv. {data.evolution_chain[1].min_level}</span>
               <CaretRight size={24} />
             </div>
             <div className="evolution">
               {shinySprite ? (
                 <img
-                  src={evolution_chain[1].sprite.shiny}
-                  alt={`${evolution_chain[1].name}`}
+                  src={data.evolution_chain[1].sprite.shiny}
+                  alt={`${data.evolution_chain[1].name}`}
                 />
               ) : (
                 <img
-                  src={evolution_chain[1].sprite.default}
-                  alt={`${evolution_chain[1].name}`}
+                  src={data.evolution_chain[1].sprite.default}
+                  alt={`${data.evolution_chain[1].name}`}
                 />
               )}
-              <span>{evolution_chain[1].name}</span>
+              <span>{data.evolution_chain[1].name}</span>
             </div>
           </div>
           <div className="switch-sprite-wrapper">
@@ -676,8 +668,11 @@ export default function UniquePokemonPage({
         <div className="gender-wrapper">
           <Text>Gender ratio</Text>
           <div className="gender-rate">
-            {gender ? (
-              <CustomChart female={gender.female} male={gender.male} />
+            {data.gender ? (
+              <CustomChart
+                female={data.gender.female}
+                male={data.gender.male}
+              />
             ) : null}
           </div>
         </div>
@@ -690,19 +685,19 @@ export default function UniquePokemonPage({
         <BackToTop />
       </Container>
     );
-  } else if (evolution_chain?.length == 1) {
+  } else if (data.evolution_chain?.length == 1) {
     return (
       <Container>
         <div className="spritesDiv">
           {shinySprite ? (
             <img
-              src={checkimgIMG(official_artwork.shiny)}
-              alt={`${name} image`}
+              src={checkimgIMG(data.official_artwork.shiny)}
+              alt={`${data.name} image`}
             />
           ) : (
             <img
-              src={checkimgIMG(official_artwork.default)}
-              alt={`${name} image`}
+              src={checkimgIMG(data.official_artwork.default)}
+              alt={`${data.name} image`}
             />
           )}
           <div className="switch-principal-sprite-wrapper">
@@ -726,14 +721,14 @@ export default function UniquePokemonPage({
         <div className="infoWrapper">
           <div className="pokedexInfo">
             <Text size="xxl" weight="bold" transform="capitalize" id="name">
-              {name?.split("-").join(" ")}
+              {data.name?.split("-").join(" ")}
             </Text>
             <Text size="xxl" transform="capitalize" id="id">
-              #{addZeroes(id, 3)}
+              #{addZeroes(data.id, 3)}
             </Text>
             <div className="typesWrapper">
               <div className="typesContainer">
-                {types?.map((type) => {
+                {data.types?.map((type) => {
                   return (
                     <TypeCard
                       pressable={true}
@@ -745,7 +740,7 @@ export default function UniquePokemonPage({
               </div>
             </div>
             <div className="flavorWrapper">
-              <Text size="md">{flavor?.split("\f").join(" ")}</Text>
+              <Text size="md">{data.flavor?.split("\f").join(" ")}</Text>
             </div>
           </div>
         </div>
@@ -756,7 +751,7 @@ export default function UniquePokemonPage({
               Altura:
             </Text>
             <div className="info">
-              <Text size="md">{(height * 0.1).toFixed(2)}m</Text>
+              <Text size="md">{(data.height * 0.1).toFixed(2)}m</Text>
             </div>
           </div>
 
@@ -765,11 +760,11 @@ export default function UniquePokemonPage({
               Peso:
             </Text>
             <div className="info">
-              <Text size="md">{(weight * 0.1).toFixed(2)}kg</Text>
+              <Text size="md">{(data.weight * 0.1).toFixed(2)}kg</Text>
             </div>
           </div>
 
-          {abilities?.map((ability) => {
+          {data.abilities?.map((ability) => {
             return (
               <div
                 key={ability.ability.name}
@@ -800,7 +795,7 @@ export default function UniquePokemonPage({
         <div className="statsWrapper">
           <span>Status base:</span>
           <div className="statsContainer">
-            {stats?.map((stat) => {
+            {data.stats?.map((stat) => {
               return (
                 <div
                   className="baseStatWrapper"
@@ -828,11 +823,11 @@ export default function UniquePokemonPage({
         </div>
         <Spacer />
         <div className="damage-relations">
-          {damage_relation.double_damage_from.length === 0 ? null : (
+          {data.damage_relation.double_damage_from.length === 0 ? null : (
             <div className="all-weakness">
               <Text size="md">Fraquezas:</Text>
               <div className="weakness">
-                {damage_relation.double_damage_from.map((type) => {
+                {data.damage_relation.double_damage_from.map((type) => {
                   return (
                     <CustomTooltip title={type} key={type} arrow>
                       <div key={type}>
@@ -848,12 +843,12 @@ export default function UniquePokemonPage({
               </div>
             </div>
           )}
-          {damage_relation.double_damage_to.length === 0 ? null : (
+          {data.damage_relation.double_damage_to.length === 0 ? null : (
             <div className="all-strengths">
               <Text size="md">Forças:</Text>
               <div className="strengths">
                 <>
-                  {damage_relation.double_damage_to.map((type) => {
+                  {data.damage_relation.double_damage_to.map((type) => {
                     return (
                       <CustomTooltip title={type} arrow key={type}>
                         <div key={type}>
@@ -878,16 +873,16 @@ export default function UniquePokemonPage({
             <div className="evolution">
               {shinySprite ? (
                 <img
-                  src={evolution_chain[0].sprite.shiny}
-                  alt={`${evolution_chain[0].name}`}
+                  src={data.evolution_chain[0].sprite.shiny}
+                  alt={`${data.evolution_chain[0].name}`}
                 />
               ) : (
                 <img
-                  src={evolution_chain[0].sprite.default}
-                  alt={`${evolution_chain[0].name}`}
+                  src={data.evolution_chain[0].sprite.default}
+                  alt={`${data.evolution_chain[0].name}`}
                 />
               )}
-              <span>{evolution_chain[0].name}</span>
+              <span>{data.evolution_chain[0].name}</span>
             </div>
           </div>
           <div className="switch-sprite-wrapper">
@@ -914,8 +909,11 @@ export default function UniquePokemonPage({
         <div className="gender-wrapper">
           <Text>Gender ratio</Text>
           <div className="gender-rate">
-            {gender ? (
-              <CustomChart female={gender.female} male={gender.male} />
+            {data.gender ? (
+              <CustomChart
+                female={data.gender.female}
+                male={data.gender.male}
+              />
             ) : null}
           </div>
         </div>
