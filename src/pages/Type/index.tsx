@@ -30,7 +30,7 @@ export function Type() {
   if (isLoading) {
     return <Loading color={theme.colors.primary[500]} size={64} />;
   } else {
-    console.log(moves);
+    // console.log(moves);
     return (
       <Container>
         <div className="pageTitle">
@@ -55,26 +55,26 @@ export function Type() {
         </div>
         <Spacer />
         <div className="pokemon-wrapper">
-        <Text size="lg">
+          <Text size="lg">
             Pokémon do tipo:{" "}
             <Text transform="uppercase" color="primary" size="lg" weight="bold">
               {params.typename}
             </Text>
           </Text>
-        <div className="pokemonCard-wrapper">
-          {commonTypesPokemon.map((pokemon) => {
-            return (
-              <PokemonCard
-                key={`${pokemon.id}-${pokemon.name}`}
-                id={pokemon.id}
-                name={pokemon.name}
-                types={pokemon.types}
-                sprite={pokemon.sprite}
-                primaryType={pokemon.types[0].type}
-              />
-            );
-          })}
-        </div>
+          <div className="pokemonCard-wrapper">
+            {commonTypesPokemon.map((pokemon) => {
+              return (
+                <PokemonCard
+                  key={`${pokemon.id}-${pokemon.name}`}
+                  id={pokemon.id}
+                  name={pokemon.name}
+                  types={pokemon.types}
+                  sprite={pokemon.sprite}
+                  primaryType={pokemon.types[0].type}
+                />
+              );
+            })}
+          </div>
         </div>
         <div className="backButton">
           <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>

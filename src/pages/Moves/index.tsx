@@ -73,7 +73,13 @@ function Moves() {
           <div className="effect-entries">
             <Text>Efeito: {move.effect_entries}</Text>
             <div className="text-info">
-              <Text>Chance: {move.effect_chance}%</Text>
+              <Text
+                style={{
+                  display: move.effect_chance === null ? "none" : "block",
+                }}
+              >
+                Chance: {move.effect_chance}%
+              </Text>
               <Text transform="capitalize">
                 Target: {move.target.name.split("-").join(" ")}
               </Text>
@@ -108,7 +114,9 @@ function Moves() {
               <div className="vertical">
                 <VSpacer />
               </div>
-              <Text>Prioridade: {move.priority}</Text>
+              <CustomTooltip arrow title={"Varia de -8 a 8"}>
+                <Text>Prioridade: {move.priority}</Text>
+              </CustomTooltip>
               <div className="vertical">
                 <VSpacer />
               </div>
