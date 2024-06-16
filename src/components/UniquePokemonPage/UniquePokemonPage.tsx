@@ -39,8 +39,6 @@ export default function UniquePokemonPage({ data }: IUniquePokemonPage) {
     }
   }
 
-
-
   const navigate = useNavigate();
 
   // console.log("Evolution Chain", evolution_chain);
@@ -127,6 +125,7 @@ export default function UniquePokemonPage({ data }: IUniquePokemonPage) {
           {data.abilities?.map((ability) => {
             return (
               <div
+                key={ability.ability.name}
                 className="infoCard"
                 onClick={() => navigate(`/ability/${ability.ability.name}`)}
               >

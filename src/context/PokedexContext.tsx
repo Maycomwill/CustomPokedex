@@ -11,6 +11,7 @@ import {
   statsProps,
   UniquePokemonData,
 } from "../interfaces/pokemonInterfaces";
+import useEvolution from "../hooks/useEvolution";
 
 //Interface do Provedor
 export interface PokedexContextDataProps {
@@ -32,6 +33,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
   let thirdSprite: AxiosResponse | undefined;
   let rawPokemonData: PokemonDataProps[] = [];
   let genTypeFilter: PokemonDataProps[] = [];
+  const {getEvolutionChainData} = useEvolution();
 
   const [pokemonAbilityCommon, setPokemonAbilityCommon] = useState<
     PokemonDataProps[]
@@ -54,50 +56,20 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
   // Esta função busca na api os dados básicos do pokemon e retorna os dados já formatados
   async function getPokemonInformation(pokemonUrl: string) {
     return await axios.get(pokemonUrl).then(function (response) {
-      if (response.data.sprites.front_default != null) {
-        return rawPokemonData.push({
-          name: response.data.name,
-          id: response.data.id,
-          sprite: response.data.sprites.front_default,
-          types: response.data.types.map((type: any) => {
-            return {
-              type: type.type.name,
-            };
-          }),
-        });
-      } else {
-        return rawPokemonData.push({
-          name: response.data.name,
-          id: response.data.id,
-          sprite: response.data.sprites.other["official-artwork"].front_default,
-          types: response.data.types.map((type: any) => {
-            return {
-              type: type.type.name,
-            };
-          }),
-        });
-      }
-    });
-  }
-
-  // Esta função salva no estado os dados dos pokemon
-  function storagePokemonInformation(pokemon: any) {
-    // Console para mostrar as informações individuais dos pokemon
-    // console.log("informações dos pokemon chegando na última função: ", pokemon);
-
-    return setPokemonData((prev) => [
-      ...prev,
-      {
-        name: pokemon.name,
-        id: pokemon.id,
-        sprite: pokemon.sprite,
-        types: pokemon.types.map((type: any) => {
+      return rawPokemonData.push({
+        name: response.data.name,
+        id: response.data.id,
+        sprite:
+          response.data.sprites.front_default !== null
+            ? response.data.sprites.front_default
+            : response.data.sprites.other["official-artwork"].front_default,
+        types: response.data.types.map((type: any) => {
           return {
-            type: type.type,
+            type: type.type.name,
           };
         }),
-      },
-    ]);
+      });
+    });
   }
 
   async function getDamageRelation(type: { type: { name: string } }) {
@@ -142,9 +114,12 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     );
     // console.log("dados extra: ", extra_result.data);
 
+    getEvolutionChainData(extra_result.data.evolution_chain.url)
     const evolutionData = await pokeapi.get(
       extra_result.data.evolution_chain.url
     );
+
+
 
     let objetos: damageRelationsProps = {
       double_damage_from: [],
@@ -325,7 +300,6 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
           (pokemon: any) => pokemon.pokemon_species.name === newPokemonName![0]
         )
       ) {
-        console.log("Gender founded");
         rawGender = femaleGender.data.pokemon_species_details.find(
           (pokemon: any) => pokemon.pokemon_species.name === newPokemonName![0]
         );
@@ -539,32 +513,6 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
         },
       });
     }
-  }
-
-  //Esta função organiza e retorna os pokemon que possuem a mesma habilidade
-  function storagePokemonAbilityCommon() {
-    setTimeout(() => {
-      rawPokemonData
-        .sort((a, b) => {
-          return a.id - b.id;
-        })
-        .map((pokemon) => {
-          return setPokemonAbilityCommon((prev) => [
-            ...prev,
-            {
-              name: pokemon.name,
-              id: pokemon.id,
-              sprite: pokemon.sprite,
-              types: pokemon.types.map((type: any) => {
-                return {
-                  type: type.type,
-                };
-              }),
-            },
-          ]);
-        }),
-        console.log(rawPokemonData);
-    }, 500);
   }
 
   function handleFilterGenType(typeName: string, array: PokemonDataProps[]) {
