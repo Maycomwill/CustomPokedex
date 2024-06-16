@@ -13,17 +13,13 @@ import CustomTooltip from "../CustomTooltip/CustomTooltip";
 import CustomChart from "../Chart/Chart";
 import { CircleButton } from "../Button/CircleButton/CircleButton";
 import { useState } from "react";
-import { types } from "util";
+import addZeroes from "../../utils/addZeros";
 
 interface IUniquePokemonPage {
-  pressable?: boolean;
   data: UniquePokemonData;
 }
 
-export default function UniquePokemonPage({
-  data,
-  pressable,
-}: IUniquePokemonPage) {
+export default function UniquePokemonPage({ data }: IUniquePokemonPage) {
   // Console log para mostrar os tipos do pokemon
   // console.log("damage relation:", damage_relation);
   const [shinySprite, setShinySprite] = useState<boolean>(false);
@@ -43,18 +39,7 @@ export default function UniquePokemonPage({
     }
   }
 
-  function addZeroes(num: number, len: number) {
-    var numberWithZeroes = String(num);
-    var counter = numberWithZeroes.length;
 
-    while (counter < len) {
-      numberWithZeroes = "0" + numberWithZeroes;
-
-      counter++;
-    }
-
-    return numberWithZeroes;
-  }
 
   const navigate = useNavigate();
 
@@ -155,7 +140,7 @@ export default function UniquePokemonPage({
                   {ability.is_hidden === true ? (
                     <div className="hidden_ability">
                       <CustomTooltip arrow title={"Hidden Ability"}>
-                      <EyeSlash size={24} />
+                        <EyeSlash size={24} />
                       </CustomTooltip>
                     </div>
                   ) : null}

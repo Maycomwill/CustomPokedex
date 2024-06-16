@@ -46,9 +46,16 @@ export function AbilityContextProvider({ children }: { children: ReactNode }) {
       }
     );
 
-    rawPokemonData.map((pokemon) => {
-      storagePokemonInformation(pokemon, setCommonAbilityPokemon);
-    });
+    rawPokemonData
+      .sort((a, b) => {
+        if (a.id < b.id) {
+          return -1;
+        }
+        return 1;
+      })
+      .map((pokemon) => {
+        storagePokemonInformation(pokemon, setCommonAbilityPokemon);
+      });
 
     setAbilityInfo({
       name: data.name,
