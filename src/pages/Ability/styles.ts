@@ -34,6 +34,7 @@ export const Container = styled.div`
     grid-auto-flow: row;
     grid-template-columns: repeat(3, minmax(5rem, 0.85fr));
     place-items: center;
+    align-items: center;
 
     @media (max-width: 500px) {
       display: flex;

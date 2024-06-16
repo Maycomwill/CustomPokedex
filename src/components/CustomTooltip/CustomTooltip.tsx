@@ -1,12 +1,10 @@
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
 import { styled } from "@mui/material/styles";
-import React, { ReactElement } from "react";
 import theme from "../../styles/theme";
-import { Fade, Zoom } from "@mui/material";
+import { Fade } from "@mui/material";
 
 interface ITooltipProps extends TooltipProps {
   title: string;
-  children: ReactElement;
 }
 
 function CustomTooltip({ title, children }: ITooltipProps) {
@@ -28,7 +26,7 @@ function CustomTooltip({ title, children }: ITooltipProps) {
       TransitionProps={{ timeout: 250 }}
       title={title}
     >
-      {children}
+      <div>{children}</div>
     </BootstrapTooltip>
   );
 }

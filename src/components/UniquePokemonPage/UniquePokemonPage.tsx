@@ -7,7 +7,7 @@ import { TypeCard } from "../TypeCard/TypeCard";
 import { Container } from "./styles";
 import { Spacer } from "../Spacer/Spacer";
 import { BackToTop } from "../BackToTop/BackToTop";
-import { CaretRight, Sparkle } from "phosphor-react";
+import { CaretRight, EyeSlash, Sparkle } from "phosphor-react";
 import SimpleCardType from "../SimpleCardType/SimpleCardType";
 import CustomTooltip from "../CustomTooltip/CustomTooltip";
 import CustomChart from "../Chart/Chart";
@@ -152,6 +152,13 @@ export default function UniquePokemonPage({
                   key={`${ability.ability.name}-${ability.slot}`}
                   className="info"
                 >
+                  {ability.is_hidden === true ? (
+                    <div className="hidden_ability">
+                      <CustomTooltip arrow title={"Hidden Ability"}>
+                      <EyeSlash size={24} />
+                      </CustomTooltip>
+                    </div>
+                  ) : null}
                   <Text
                     size="md"
                     transform="capitalize"

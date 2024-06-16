@@ -3,6 +3,7 @@ import { pokeapi } from "../services/api";
 import axios, { AxiosResponse } from "axios";
 import {
   AbilityInfoProps,
+  abilityProps,
   damageRelationsProps,
   PokedexDataProps,
   PokedexProviderProps,
@@ -13,15 +14,10 @@ import {
 
 //Interface do Provedor
 export interface PokedexContextDataProps {
-  getGenerationFromUserChoice: (generation: string | undefined) => void;
-  getPokedexList: (generation: string | undefined) => void;
   getPokemonData: (pokemonName: string | undefined) => void;
-  getAbilityInfo: (ability: string | undefined) => void;
-  getTypeData: (type: string | undefined) => void;
-  handleFilterGenType: (type: string) => void;
+  handleFilterGenType: (type: string, array: PokemonDataProps[]) => void;
   pokemonData: PokemonDataProps[];
   uniquePokemonData: UniquePokemonData;
-  abilityInfo: AbilityInfoProps | undefined;
   pokemonAbilityCommon: PokemonDataProps[];
   genTypeFilteredList: PokemonDataProps[];
 }
@@ -36,9 +32,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
   let thirdSprite: AxiosResponse | undefined;
   let rawPokemonData: PokemonDataProps[] = [];
   let genTypeFilter: PokemonDataProps[] = [];
-  const [abilityInfo, setAbilityInfo] = useState<AbilityInfoProps | undefined>(
-    undefined
-  );
+
   const [pokemonAbilityCommon, setPokemonAbilityCommon] = useState<
     PokemonDataProps[]
   >([]);
@@ -49,92 +43,6 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
   const [genTypeFilteredList, setGenTypeFilteredList] = useState<
     PokemonDataProps[]
   >([]);
-
-  //Função que recebe do front-end a escolha inicial do usuário
-  function getGenerationFromUserChoice(generation: string | undefined) {
-    console.log("Geração selecionada pelo usuário:", generation);
-    getPokedexList(generation);
-  }
-
-  //Função inicial utilizada para determinar os parâmetros da API definindo a geração de Pokemon que será buscada
-  async function getPokedexList(generation: string | undefined) {
-    setPokemonData([]);
-    let limitURL = "0";
-    let offsetURL = "0";
-
-    switch (generation) {
-      case "1":
-        limitURL = "151";
-        offsetURL = "0";
-        break;
-
-      case "2":
-        limitURL = "100";
-        offsetURL = "151";
-        break;
-
-      case "3":
-        limitURL = "135";
-        offsetURL = "251";
-        break;
-
-      case "4":
-        limitURL = "108";
-        offsetURL = "386";
-        break;
-
-      case "5":
-        limitURL = "155";
-        offsetURL = "494";
-        break;
-
-      case "6":
-        limitURL = "72";
-        offsetURL = "649";
-        break;
-
-      case "7":
-        limitURL = "88";
-        offsetURL = "721";
-        break;
-
-      case "8":
-        limitURL = "96";
-        offsetURL = "809";
-        break;
-
-      case "9":
-        limitURL = "105";
-        offsetURL = "905";
-    }
-
-    // Console para mostrar o limit e offset usados na requisição da API
-    // console.log(
-    //   "limit e offset selecionados de acordo com a geração:",
-    //   limitURL,
-    //   offsetURL
-    // );
-
-    const response = await pokeapi.get(
-      `pokemon?limit=${limitURL}&offset=${offsetURL}`
-    );
-    const result = response.data.results;
-
-    // Console para mostrar o resultado da consulta a API
-    // console.log("resultado da consulta da api pokelist:", result);
-
-    // result.map((pokemon: PokedexDataProps) => {
-    //   getPokemonInformation(pokemon.name);
-    // });
-    rawPokemonData = [];
-    waitingPromises(result).then((response) => {
-      let newArray = rawPokemonData.sort((a, b) => {
-        return a.id - b.id;
-      });
-      // console.log(newArray);
-      newArray.map((pokemon) => storagePokemonInformation(pokemon));
-    });
-  }
 
   // Esta função retorna os resultados de todas as requisições quando prontas
   function waitingPromises(results: PokedexDataProps[]) {
@@ -468,12 +376,13 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
             },
           };
         }),
-        abilities: result.data.abilities.map((ability: any) => {
+        abilities: result.data.abilities.map((ability: abilityProps) => {
           return {
             ability: {
               name: ability.ability.name,
               url: ability.ability.url,
             },
+            is_hidden: ability.is_hidden,
             slot: ability.slot,
           };
         }),
@@ -538,12 +447,13 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
             },
           };
         }),
-        abilities: result.data.abilities.map((ability: any) => {
+        abilities: result.data.abilities.map((ability: abilityProps) => {
           return {
             ability: {
               name: ability.ability.name,
               url: ability.ability.url,
             },
+            is_hidden: ability.is_hidden,
             slot: ability.slot,
           };
         }),
@@ -599,12 +509,14 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
             },
           };
         }),
-        abilities: result.data.abilities.map((ability: any) => {
+        abilities: result.data.abilities.map((ability: abilityProps) => {
           return {
             ability: {
               name: ability.ability.name,
               url: ability.ability.url,
             },
+            is_hidden: ability.is_hidden,
+
             slot: ability.slot,
           };
         }),
@@ -627,32 +539,6 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
         },
       });
     }
-  }
-
-  //Esta função busca na api os dados de uma habilidade e salva esses dados em um estado
-  async function getAbilityInfo(ability: string | undefined) {
-    setPokemonAbilityCommon([]);
-    let description = "";
-    rawPokemonData = [];
-    const result = await pokeapi.get(`ability/${ability}`);
-    let response = result.data.pokemon.map((pokemon: any) => {
-      return { name: pokemon.pokemon.name, url: pokemon.pokemon.url };
-    });
-    waitingPromises(response);
-
-    if (result.data.effect_entries[0].language.name === "en") {
-      description = result.data.effect_entries[0].effect;
-    } else {
-      description = result.data.effect_entries[1].effect;
-    }
-
-    setAbilityInfo({
-      name: result.data.name,
-      description: description,
-      pokemon: [],
-    });
-
-    storagePokemonAbilityCommon();
   }
 
   //Esta função organiza e retorna os pokemon que possuem a mesma habilidade
@@ -681,35 +567,13 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     }, 500);
   }
 
-  //Esta função busca na api os dados de um tipo e armazena os dados dos pokemon que possuem o mesmo tipo
-  async function getTypeData(type: string | undefined) {
-    const consult = await pokeapi.get(`/type/${type}`);
-    const pokemonTypeCommon = consult.data.pokemon;
-    let newPokemonTypeArray: any = [];
-    pokemonTypeCommon.map((pokemon: any) =>
-      newPokemonTypeArray.push(pokemon.pokemon)
+  function handleFilterGenType(typeName: string, array: PokemonDataProps[]) {
+    // console.log("função chamada:", typeName)
+    genTypeFilter = array.filter((pokemon) =>
+      pokemon.types.some(
+        (type) => type.type.toLowerCase() === typeName.toLowerCase()
+      )
     );
-    waitingPromises(newPokemonTypeArray).then((response) => {
-      let newArray = rawPokemonData.sort((a, b) => {
-        return a.id - b.id;
-      });
-      // console.log(newArray);
-      setPokemonData([]);
-      newArray.map((pokemon) => storagePokemonInformation(pokemon));
-    });
-  }
-
-  function handleFilterGenType(typeName: string) {
-    // console.log("função chamada:", type)
-    genTypeFilter =
-      typeName.length > 0
-        ? pokemonData.filter((pokemon) =>
-            pokemon.types.some(
-              (type) => type.type.toLowerCase() === typeName.toLowerCase()
-            )
-          )
-        : [];
-    // console.log(genTypeFilter);
     setGenTypeFilteredList(genTypeFilter);
   }
 
@@ -717,15 +581,10 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     //Retorno do provedor do contexto, disponibilizando todas as funções e variáveis necessárias para montar os componentes
     <PokedexContext.Provider
       value={{
-        getGenerationFromUserChoice,
-        getPokedexList,
         getPokemonData,
-        getAbilityInfo,
-        getTypeData,
         handleFilterGenType,
         pokemonData,
         uniquePokemonData,
-        abilityInfo,
         pokemonAbilityCommon,
         genTypeFilteredList,
       }}

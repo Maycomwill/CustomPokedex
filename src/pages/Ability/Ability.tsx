@@ -8,22 +8,23 @@ import { PokemonCard } from "../../components/PokemonCard/PokemonCard";
 import { Container } from "./styles";
 import { Button } from "../../components/Button";
 import { BackToTop } from "../../components/BackToTop/BackToTop";
+import useAbility from "../../hooks/useAbility";
 
 export function Ability() {
   const params = useParams();
   const navigate = useNavigate();
   let abilityName = params.abilityname;
 
-  const { getAbilityInfo, abilityInfo, pokemonAbilityCommon } = usePokedex();
-  const [isLoading, setIsLoading] = useState(true);
+  const { getAbilityInfo, abilityInfo, isLoading, commonAbilityPokemon } =
+    useAbility();
 
   useEffect(() => {
-    setIsLoading(true);
-    getAbilityInfo(abilityName);
-    setIsLoading(false);
+    {
+      abilityName && getAbilityInfo(abilityName);
+    }
   }, []);
 
-  if (pokemonAbilityCommon.length == 0) {
+  if (abilityInfo === undefined || isLoading === true) {
     return <Loading color={theme.colors.primary[500]} size={64} />;
   } else {
     return (
@@ -36,18 +37,18 @@ export function Ability() {
               color="primary"
               weight="bold"
             >
-              {abilityInfo?.name.split("-").join(" ")}
+              {abilityInfo.name.split("-").join(" ")}
             </Text>
           </div>
           <div className="descriptionDiv">
-            <Text size="md">{abilityInfo?.description}</Text>
+            <Text size="md">{abilityInfo.description}</Text>
           </div>
           <div className="pokemonCommon">
             <Text size="lg">Pokemons que possuem esta habilidade: </Text>
           </div>
           <div className="pokemons">
-            <>
-              {pokemonAbilityCommon.map((pokemon) => {
+            {commonAbilityPokemon !== undefined ? (
+              commonAbilityPokemon.map((pokemon) => {
                 return (
                   <PokemonCard
                     key={`${pokemon.id}-${pokemon.name}`}
@@ -58,8 +59,10 @@ export function Ability() {
                     primaryType={pokemon.types[0].type}
                   />
                 );
-              })}
-            </>
+              })
+            ) : (
+              <Loading color={theme.colors.primary[500]} size={64} />
+            )}
           </div>
           <div className="backButton">
             <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>

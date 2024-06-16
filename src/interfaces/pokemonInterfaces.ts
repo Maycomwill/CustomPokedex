@@ -69,6 +69,7 @@ export interface abilityProps {
     name: string;
     url: string;
   };
+  is_hidden: boolean;
   slot: number;
 }
 
@@ -83,5 +84,4 @@ export interface statsProps {
 export interface AbilityInfoProps {
   name: string;
   description: string;
-  pokemon?: PokemonDataProps[];
 }
