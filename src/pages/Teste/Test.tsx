@@ -17,7 +17,7 @@ function Test() {
     return evolution.map((_evolution) => {
       return (
         <div key={_evolution.name}>
-          <img src={_evolution.sprite} />
+          <img src={_evolution.sprites.default} />
         </div>
       );
     });
@@ -35,17 +35,7 @@ function Test() {
             }}
           >
             <span>{uniquePokemonData.name}</span>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "1.6rem"
-              }}
-            >
-              {renderEvolution(firstEvolution)}
-              {renderEvolution(secondEvolution)}
-              {renderEvolution(thirdEvolution)}
-            </div>
+
           </div>
         )}
       </div>

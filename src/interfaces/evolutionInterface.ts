@@ -41,7 +41,7 @@ export interface EvolutionDetail {
   /** The required relation between the Pokémon's Attack and Defense stats. 1 means Attack > Defense. 0 means Attack = Defense. -1 means Attack < Defense. */
   relative_physical_stats: 1 | 0 | -1 | null;
   /** The required time of day. Day or night. */
-  time_of_day: "Day" | "Night" | "";
+  time_of_day: "day" | "night" | "";
   /** Pokémon species for which this one must be traded. */
   trade_species: NamedAPIResource | null;
   /** Whether or not the 3DS needs to be turned upside-down as this Pokémon levels up. */
@@ -71,8 +71,11 @@ export interface EvolutionTrigger {
 }
 
 export interface Evolution {
-  details?: EvolutionDetail[]
-  name: string
-  sprite: string
-
+  details?: EvolutionDetail[];
+  name: string;
+  sprites: { default: string; shiny: string };
+  trigger: {
+    name: string;
+    sprite?: string;
+  } | null;
 }
