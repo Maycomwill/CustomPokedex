@@ -4,10 +4,10 @@ import theme from "../../styles/theme";
 import { Fade } from "@mui/material";
 
 interface ITooltipProps extends TooltipProps {
-  title: string;
+  title: string | undefined;
 }
 
-function CustomTooltip({ title, children }: ITooltipProps) {
+function CustomTooltip({ title = "", children }: ITooltipProps) {
   const BootstrapTooltip = styled(({ className, ...props }: TooltipProps) => (
     <Tooltip {...props} arrow classes={{ popper: className }} />
   ))(() => ({
@@ -25,6 +25,11 @@ function CustomTooltip({ title, children }: ITooltipProps) {
       TransitionComponent={Fade}
       TransitionProps={{ timeout: 250 }}
       title={title}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
     >
       <div>{children}</div>
     </BootstrapTooltip>

@@ -1,28 +1,41 @@
 import { useEffect } from "react";
-import useTypes from "../../hooks/useTypes";
-import { PokemonDataProps } from "../../interfaces/pokemonInterfaces";
-import useGeneration from "../../hooks/useGeneration";
-import { NamedAPIResource } from "../../interfaces/apiInterfaces";
+import { usePokedex } from "../../hooks/usePokedex";
+import useEvolution from "../../hooks/useEvolution";
+import { Evolution } from "../../interfaces/evolutionInterface";
 
 function Test() {
-const{getTypeData, moves}=useTypes();
+  const { getPokemonData, uniquePokemonData } = usePokedex();
+  const { firstEvolution, secondEvolution, thirdEvolution } = useEvolution();
   useEffect(() => {
-    getTypeData("fire");
+    getPokemonData("pichu");
   }, []);
+
+  function renderEvolution(evolution: Evolution[] | undefined) {
+    if (!evolution) {
+      return <span />;
+    }
+    return evolution.map((_evolution) => {
+      return (
+        <div key={_evolution.name}>
+          <img src={_evolution.sprites.default} />
+        </div>
+      );
+    });
+  }
+
   return (
     <div>
-      Test
+      Test secondEvolution{" "}
       <div>
-        {moves && (
+        {uniquePokemonData && (
           <div
             style={{
               display: "flex",
               flexDirection: "column",
             }}
           >
-            {moves.map((move: NamedAPIResource) => {
-              return <span key={move.url}>{move.name}</span>;
-            })}
+            <span>{uniquePokemonData.name}</span>
+
           </div>
         )}
       </div>

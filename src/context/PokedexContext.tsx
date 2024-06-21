@@ -11,13 +11,14 @@ import {
   statsProps,
   UniquePokemonData,
 } from "../interfaces/pokemonInterfaces";
+import useEvolution from "../hooks/useEvolution";
 
 //Interface do Provedor
 export interface PokedexContextDataProps {
   getPokemonData: (pokemonName: string | undefined) => void;
   handleFilterGenType: (type: string, array: PokemonDataProps[]) => void;
   pokemonData: PokemonDataProps[];
-  uniquePokemonData: UniquePokemonData;
+  uniquePokemonData: UniquePokemonData | undefined;
   pokemonAbilityCommon: PokemonDataProps[];
   genTypeFilteredList: PokemonDataProps[];
 }
@@ -28,18 +29,17 @@ export const PokedexContext = createContext({} as PokedexContextDataProps);
 //Criação do provedor do contexto, que será utilizado na criação do hook
 export function PokedexContextProvider({ children }: PokedexProviderProps) {
   let firstSprite: AxiosResponse;
-  let secondSprite: AxiosResponse | undefined;
-  let thirdSprite: AxiosResponse | undefined;
+
   let rawPokemonData: PokemonDataProps[] = [];
   let genTypeFilter: PokemonDataProps[] = [];
+  const { getEvolutionChainData } = useEvolution();
 
   const [pokemonAbilityCommon, setPokemonAbilityCommon] = useState<
     PokemonDataProps[]
   >([]);
   const [pokemonData, setPokemonData] = useState<PokemonDataProps[]>([]);
-  const [uniquePokemonData, setUniquePokemonData] = useState<UniquePokemonData>(
-    {} as UniquePokemonData
-  );
+  const [uniquePokemonData, setUniquePokemonData] =
+    useState<UniquePokemonData>();
   const [genTypeFilteredList, setGenTypeFilteredList] = useState<
     PokemonDataProps[]
   >([]);
@@ -54,50 +54,20 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
   // Esta função busca na api os dados básicos do pokemon e retorna os dados já formatados
   async function getPokemonInformation(pokemonUrl: string) {
     return await axios.get(pokemonUrl).then(function (response) {
-      if (response.data.sprites.front_default != null) {
-        return rawPokemonData.push({
-          name: response.data.name,
-          id: response.data.id,
-          sprite: response.data.sprites.front_default,
-          types: response.data.types.map((type: any) => {
-            return {
-              type: type.type.name,
-            };
-          }),
-        });
-      } else {
-        return rawPokemonData.push({
-          name: response.data.name,
-          id: response.data.id,
-          sprite: response.data.sprites.other["official-artwork"].front_default,
-          types: response.data.types.map((type: any) => {
-            return {
-              type: type.type.name,
-            };
-          }),
-        });
-      }
-    });
-  }
-
-  // Esta função salva no estado os dados dos pokemon
-  function storagePokemonInformation(pokemon: any) {
-    // Console para mostrar as informações individuais dos pokemon
-    // console.log("informações dos pokemon chegando na última função: ", pokemon);
-
-    return setPokemonData((prev) => [
-      ...prev,
-      {
-        name: pokemon.name,
-        id: pokemon.id,
-        sprite: pokemon.sprite,
-        types: pokemon.types.map((type: any) => {
+      return rawPokemonData.push({
+        name: response.data.name,
+        id: response.data.id,
+        sprite:
+          response.data.sprites.front_default !== null
+            ? response.data.sprites.front_default
+            : response.data.sprites.other["official-artwork"].front_default,
+        types: response.data.types.map((type: any) => {
           return {
-            type: type.type,
+            type: type.type.name,
           };
         }),
-      },
-    ]);
+      });
+    });
   }
 
   async function getDamageRelation(type: { type: { name: string } }) {
@@ -136,12 +106,14 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
   // Esta função salva no estado os dados de um único pokemon
   async function getPokemonData(pokemonName: string | undefined) {
     var newPokemonName = pokemonName?.split("-");
+
     const result = await pokeapi.get(`pokemon/${pokemonName?.toLowerCase()}`);
     const extra_result = await pokeapi.get(
       `pokemon-species/${newPokemonName![0]?.toLowerCase()}`
     );
     // console.log("dados extra: ", extra_result.data);
 
+    getEvolutionChainData(extra_result.data.evolution_chain.url);
     const evolutionData = await pokeapi.get(
       extra_result.data.evolution_chain.url
     );
@@ -236,53 +208,6 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
       });
     }
 
-    let MIN_LEVEL_SECOND_EVOLUTION = null;
-    try {
-      MIN_LEVEL_SECOND_EVOLUTION =
-        evolutionData.data.chain.evolves_to[0].evolution_details[0].min_level;
-    } catch (error) {
-      console.log("Erro level segunda evolução: ", error);
-    }
-
-    let MIN_LEVEL_THIRD_EVOLUTION = null;
-    try {
-      MIN_LEVEL_THIRD_EVOLUTION =
-        evolutionData.data.chain.evolves_to[0].evolves_to[0]
-          .evolution_details[0].min_level;
-    } catch (error) {
-      console.log("Erro level terceira evolução: ", error);
-    }
-
-    try {
-      firstSprite = await pokeapi.get(
-        `pokemon/${evolutionData.data.chain.species.name}`
-      );
-    } catch (error) {
-      console.log(error);
-    }
-
-    if (MIN_LEVEL_SECOND_EVOLUTION !== null) {
-      try {
-        secondSprite = await pokeapi.get(
-          `pokemon/${evolutionData.data.chain.evolves_to[0]?.species.name}`
-        );
-      } catch (error) {
-        console.log(" Second evolution chain not founded");
-        secondSprite = undefined;
-      }
-    }
-
-    if (MIN_LEVEL_THIRD_EVOLUTION !== null) {
-      try {
-        thirdSprite = await pokeapi.get(
-          `pokemon/${evolutionData.data.chain.evolves_to[0]?.evolves_to[0]?.species.name}`
-        );
-      } catch (error) {
-        console.log("Third evolution chain not founded");
-        thirdSprite = undefined;
-      }
-    }
-
     let pokemonGender: {
       pokemon_species: {
         name: string;
@@ -325,7 +250,6 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
           (pokemon: any) => pokemon.pokemon_species.name === newPokemonName![0]
         )
       ) {
-        console.log("Gender founded");
         rawGender = femaleGender.data.pokemon_species_details.find(
           (pokemon: any) => pokemon.pokemon_species.name === newPokemonName![0]
         );
@@ -350,221 +274,60 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
       }
     }
 
-    if (thirdSprite !== undefined && secondSprite !== undefined) {
-      setUniquePokemonData({
-        name: result.data.name,
-        id: result.data.id,
-        types: result.data.types.map((type: any) => {
-          return {
-            type: type.type.name,
-          };
-        }),
-        weight: result.data.weight,
-        height: result.data.height,
-        sprite_default: result.data.sprites.front_default,
-        sprite_shiny: result.data.sprites.front_shiny,
-        official_artwork: {
-          default: result.data.sprites.other["official-artwork"].front_default,
-          shiny: result.data.sprites.other["official-artwork"].front_shiny,
-        },
-        stats: result.data.stats.map((stat: statsProps) => {
-          return {
-            base_stat: stat.base_stat,
-            effort: stat.effort,
-            stat: {
-              name: stat.stat.name,
-            },
-          };
-        }),
-        abilities: result.data.abilities.map((ability: abilityProps) => {
-          return {
-            ability: {
-              name: ability.ability.name,
-              url: ability.ability.url,
-            },
-            is_hidden: ability.is_hidden,
-            slot: ability.slot,
-          };
-        }),
-        flavor: extra_result.data.flavor_text_entries[0].flavor_text,
-        evolution_chain: [
-          {
-            min_level: null,
-            name: evolutionData.data.chain.species.name,
-            sprite: {
-              default: firstSprite.data.sprites.front_default,
-              shiny: firstSprite.data.sprites.front_shiny,
-            },
+    return setUniquePokemonData({
+      name: result.data.name,
+      id: result.data.id,
+      types: result.data.types.map((type: any) => {
+        return {
+          type: type.type.name,
+        };
+      }),
+      weight: result.data.weight,
+      height: result.data.height,
+      sprite_default: result.data.sprites.front_default,
+      sprite_shiny: result.data.sprites.front_shiny,
+      official_artwork: {
+        default: result.data.sprites.other["official-artwork"].front_default,
+        shiny: result.data.sprites.other["official-artwork"].front_shiny,
+      },
+      stats: result.data.stats.map((stat: statsProps) => {
+        return {
+          base_stat: stat.base_stat,
+          effort: stat.effort,
+          stat: {
+            name: stat.stat.name,
           },
-          {
-            min_level: MIN_LEVEL_SECOND_EVOLUTION,
-            name: evolutionData.data.chain.evolves_to[0].species.name,
-            sprite: {
-              default: secondSprite.data.sprites.front_default,
-              shiny: secondSprite.data.sprites.front_shiny,
-            },
+        };
+      }),
+      abilities: result.data.abilities.map((ability: abilityProps) => {
+        return {
+          ability: {
+            name: ability.ability.name,
+            url: ability.ability.url,
           },
-          {
-            min_level: MIN_LEVEL_THIRD_EVOLUTION,
-            name: evolutionData.data.chain.evolves_to[0].evolves_to[0].species
-              .name,
-            sprite: {
-              default: thirdSprite.data.sprites.front_default,
-              shiny: thirdSprite.data.sprites.front_shiny,
-            },
-          },
-        ],
-        damage_relation: objetos,
-        gender: {
-          name: pokemonGender.pokemon_species.name,
-          female: pokemonGender.female_rate,
-          male: pokemonGender.male_rate,
-        },
-      });
-    } else if (secondSprite !== undefined) {
-      setUniquePokemonData({
-        name: result.data.name,
-        id: result.data.id,
-        types: result.data.types.map((type: any) => {
-          return {
-            type: type.type.name,
-          };
-        }),
-        weight: result.data.weight,
-        height: result.data.height,
-        sprite_default: result.data.sprites.front_default,
-        sprite_shiny: result.data.sprites.front_shiny,
-        official_artwork: {
-          default: result.data.sprites.other["official-artwork"].front_default,
-          shiny: result.data.sprites.other["official-artwork"].front_shiny,
-        },
-        stats: result.data.stats.map((stat: statsProps) => {
-          return {
-            base_stat: stat.base_stat,
-            effort: stat.effort,
-            stat: {
-              name: stat.stat.name,
-            },
-          };
-        }),
-        abilities: result.data.abilities.map((ability: abilityProps) => {
-          return {
-            ability: {
-              name: ability.ability.name,
-              url: ability.ability.url,
-            },
-            is_hidden: ability.is_hidden,
-            slot: ability.slot,
-          };
-        }),
-        flavor: extra_result.data.flavor_text_entries[0].flavor_text,
-        evolution_chain: [
-          {
-            min_level: null,
-            name: evolutionData.data.chain.species.name,
-            sprite: {
-              default: firstSprite.data.sprites.front_default,
-              shiny: firstSprite.data.sprites.front_shiny,
-            },
-          },
-          {
-            min_level: MIN_LEVEL_SECOND_EVOLUTION,
-            name: evolutionData.data.chain.evolves_to[0].species.name,
-            sprite: {
-              default: secondSprite.data.sprites.front_default,
-              shiny: secondSprite.data.sprites.front_shiny,
-            },
-          },
-        ],
-        damage_relation: objetos,
-        gender: {
-          name: pokemonGender.pokemon_species.name,
-          female: pokemonGender.female_rate,
-          male: pokemonGender.male_rate,
-        },
-      });
-    } else {
-      setUniquePokemonData({
-        name: result.data.name,
-        id: result.data.id,
-        types: result.data.types.map((type: any) => {
-          return {
-            type: type.type.name,
-          };
-        }),
-        weight: result.data.weight,
-        height: result.data.height,
-        sprite_default: result.data.sprites.front_default,
-        sprite_shiny: result.data.sprites.front_shiny,
-        official_artwork: {
-          default: result.data.sprites.other["official-artwork"].front_default,
-          shiny: result.data.sprites.other["official-artwork"].front_shiny,
-        },
-        stats: result.data.stats.map((stat: statsProps) => {
-          return {
-            base_stat: stat.base_stat,
-            effort: stat.effort,
-            stat: {
-              name: stat.stat.name,
-            },
-          };
-        }),
-        abilities: result.data.abilities.map((ability: abilityProps) => {
-          return {
-            ability: {
-              name: ability.ability.name,
-              url: ability.ability.url,
-            },
-            is_hidden: ability.is_hidden,
+          is_hidden: ability.is_hidden,
 
-            slot: ability.slot,
-          };
-        }),
-        flavor: extra_result.data.flavor_text_entries[0].flavor_text,
-        evolution_chain: [
-          {
-            min_level: null,
-            name: evolutionData.data.chain.species.name,
-            sprite: {
-              default: firstSprite?.data.sprites.front_default,
-              shiny: firstSprite?.data.sprites.front_shiny,
-            },
+          slot: ability.slot,
+        };
+      }),
+      flavor: extra_result.data.flavor_text_entries[0].flavor_text,
+      evolution_chain: [
+        {
+          min_level: null,
+          name: evolutionData.data.chain.species.name,
+          sprite: {
+            default: firstSprite?.data.sprites.front_default,
+            shiny: firstSprite?.data.sprites.front_shiny,
           },
-        ],
-        damage_relation: objetos,
-        gender: {
-          name: pokemonGender.pokemon_species.name,
-          female: pokemonGender.female_rate,
-          male: pokemonGender.male_rate,
         },
-      });
-    }
-  }
-
-  //Esta função organiza e retorna os pokemon que possuem a mesma habilidade
-  function storagePokemonAbilityCommon() {
-    setTimeout(() => {
-      rawPokemonData
-        .sort((a, b) => {
-          return a.id - b.id;
-        })
-        .map((pokemon) => {
-          return setPokemonAbilityCommon((prev) => [
-            ...prev,
-            {
-              name: pokemon.name,
-              id: pokemon.id,
-              sprite: pokemon.sprite,
-              types: pokemon.types.map((type: any) => {
-                return {
-                  type: type.type,
-                };
-              }),
-            },
-          ]);
-        }),
-        console.log(rawPokemonData);
-    }, 500);
+      ],
+      damage_relation: objetos,
+      gender: {
+        name: pokemonGender.pokemon_species.name,
+        female: pokemonGender.female_rate,
+        male: pokemonGender.male_rate,
+      },
+    });
   }
 
   function handleFilterGenType(typeName: string, array: PokemonDataProps[]) {

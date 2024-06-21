@@ -15,11 +15,13 @@
     "@radix-ui/react-tooltip": "^1.0.6",
     "@types/styled-components": "^5.1.26",
     "axios": "^1.2.1",
+    "material-ui-community-icons": "^0.15.0",
     "phosphor-react": "^1.4.1",
     "polished": "^4.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-google-charts": "^4.0.1",
+    "react-icons": "^5.2.1",
     "react-router-dom": "^6.4.5",
     "styled-components": "^5.3.6"
   },

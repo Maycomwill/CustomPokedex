@@ -4,28 +4,34 @@ import { Loading } from "../../components/Loading/Loading";
 import UniquePokemonPage from "../../components/UniquePokemonPage/UniquePokemonPage";
 import { usePokedex } from "../../hooks/usePokedex";
 import theme from "../../styles/theme";
+import useEvolution from "../../hooks/useEvolution";
 
 export function Pokemon() {
   const { getPokemonData, uniquePokemonData } = usePokedex();
+  const { firstEvolution, secondEvolution, thirdEvolution } = useEvolution();
   const [isLoading, setIsLoading] = useState(true);
   const params = useParams();
 
   useEffect(() => {
+    setIsLoading(true);
     getPokemonData(params.pokemonname);
-    if (uniquePokemonData == undefined) {
-      setIsLoading(true);
-    } else {
-      setIsLoading(false);
-    }
+    setTimeout(() => setIsLoading(false), 2000);
   }, []);
 
   if (isLoading) {
     return <Loading color={theme.colors.primary[500]} size={64} />;
   } else {
-    // console.log(uniquePokemonData.official_artwork.shiny)
+    // console.log(uniquePokemonData);
     return (
       <>
-        <UniquePokemonPage data={uniquePokemonData} />
+        <UniquePokemonPage
+          evolutions={{
+            first: firstEvolution,
+            second: secondEvolution,
+            third: thirdEvolution,
+          }}
+          data={uniquePokemonData}
+        />
       </>
     );
   }
