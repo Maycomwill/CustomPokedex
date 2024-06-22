@@ -25,11 +25,11 @@ export const Container = styled.div`
     align-items: center;
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 860px) {
     .typesDiv {
       width: 100%;
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       grid-column-gap: .2rem;
       place-items: center;
       align-items: center;
@@ -42,6 +42,11 @@ export const Container = styled.div`
       align-items: center;
       padding: 0 3.6rem;
       place-items: center;
+    }
+  }
+  @media (max-width: 500px) {
+    .typesDiv{
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 `;

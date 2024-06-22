@@ -52,9 +52,11 @@ export const Container = styled.div`
     place-items: center;
     gap: 0.8rem;
 
-    @media (max-width: 500px){
+    @media (max-width: 1180px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    @media (max-width: 800px){
       grid-template-columns: repeat(2, 1fr);
-
     }
   }
 
@@ -76,7 +78,11 @@ export const Container = styled.div`
     grid-template-columns: repeat(3, minmax(5rem, 0.85fr));
     place-items: center;
 
-    @media (max-width: 500px) {
+    @media (max-width: 1180px) {
+      grid-template-columns: repeat(2, minmax(5rem, 0.85fr));
+    place-items: center;
+    }
+    @media (max-width: 800px) {
       display: flex;
       flex-direction: column;
       justify-content: center;

@@ -85,7 +85,7 @@ export const Container = styled.div`
       }
     }
 
-    @media (max-width: 500px) {
+    @media (max-width: 860px) {
       justify-content: flex-start;
       padding: 0rem 0.4rem;
       form {
@@ -110,7 +110,11 @@ export const Container = styled.div`
     place-items: center;
     align-items: flex-start;
 
-    @media (max-width: 500px) {
+    @media (max-width: 1180px){
+      grid-template-columns: repeat(2, minmax(5rem, 0.85fr));
+    }
+
+    @media (max-width: 860px) {
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -120,7 +124,7 @@ export const Container = styled.div`
     }
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 860px) {
     align-items: center;
     justify-content: flex-start;
   }
