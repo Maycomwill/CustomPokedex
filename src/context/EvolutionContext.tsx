@@ -106,7 +106,7 @@ export function EvolutionContextProvider({
 
     if (chain.evolution_details[0].trigger.name === "use-item") {
       let item_name = chain.evolution_details;
-      console.log(item_name);
+      // console.log(item_name);
       let item_sprite = await getItemSprite(
         chain.evolution_details.map((item) => {
           if (item.item !== null) return item.item.name;

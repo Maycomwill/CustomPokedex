@@ -110,6 +110,9 @@ function Moves() {
             </div>
             <div className="text-info">
               <Text>PP: {move.pp}</Text>
+              <div className="vertical">
+                <VSpacer />
+              </div>
               <Text>Acurácia: {move.accuracy}%</Text>
               <div className="vertical">
                 <VSpacer />

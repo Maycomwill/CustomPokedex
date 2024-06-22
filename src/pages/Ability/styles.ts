@@ -36,7 +36,11 @@ export const Container = styled.div`
     place-items: center;
     align-items: center;
 
-    @media (max-width: 500px) {
+    @media(max-width: 1180px){
+      grid-template-columns: repeat(2, minmax(5rem, 0.85fr));
+    }
+
+    @media (max-width: 860px) {
       display: flex;
       flex-direction: column;
       justify-content: center;

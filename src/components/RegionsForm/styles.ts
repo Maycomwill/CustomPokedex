@@ -27,8 +27,13 @@ export const Container = styled.div`
     width: 100%;
   }
 
+  @media (max-width: 1280px){
+    .card-wrapper {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
 
-  @media (max-width: 500px) {
+  @media (max-width: 860px) {
     .card-wrapper {
       display: flex;
       flex-direction: column;

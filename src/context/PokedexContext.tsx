@@ -12,6 +12,7 @@ import {
   UniquePokemonData,
 } from "../interfaces/pokemonInterfaces";
 import useEvolution from "../hooks/useEvolution";
+import { NamedAPIResource } from "../interfaces/apiInterfaces";
 
 //Interface do Provedor
 export interface PokedexContextDataProps {
@@ -108,9 +109,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     var newPokemonName = pokemonName?.split("-");
 
     const result = await pokeapi.get(`pokemon/${pokemonName?.toLowerCase()}`);
-    const extra_result = await pokeapi.get(
-      `pokemon-species/${newPokemonName![0]?.toLowerCase()}`
-    );
+    const extra_result = await axios.get(result.data.species.url);
     // console.log("dados extra: ", extra_result.data);
 
     getEvolutionChainData(extra_result.data.evolution_chain.url);
@@ -235,7 +234,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
       rawGender = genderlessPokemon.data.pokemon_species_details.find(
         (pokemon: any) => pokemon.pokemon_species.name === newPokemonName![0]
       );
-      console.log("Genderless Pokemon");
+      // console.log("Genderless Pokemon");
       pokemonGender = {
         pokemon_species: {
           name: rawGender.pokemon_species.name,
@@ -262,7 +261,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
           male_rate: 100 - (rawGender.rate * 100) / 8,
         };
       } else {
-        console.log("Male only");
+        // console.log("Male only");
         pokemonGender = {
           pokemon_species: {
             name: result.data.name,
@@ -273,6 +272,14 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
         };
       }
     }
+
+    let flavor_text = extra_result.data.flavor_text_entries.find(
+      (flavor: {
+        flavor_text: string;
+        language: NamedAPIResource;
+        version: NamedAPIResource;
+      }) => flavor.language.name === "en"
+    );
 
     return setUniquePokemonData({
       name: result.data.name,
@@ -310,7 +317,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
           slot: ability.slot,
         };
       }),
-      flavor: extra_result.data.flavor_text_entries[0].flavor_text,
+      flavor: flavor_text.flavor_text,
       evolution_chain: [
         {
           min_level: null,

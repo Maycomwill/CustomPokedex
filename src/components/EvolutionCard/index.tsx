@@ -16,10 +16,16 @@ interface EvolutionCardProps {
 
 function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
   const navigate = useNavigate();
-  function handleTrigger(trigger: string) {
+  function handleTrigger(trigger: { name: string }) {
     //options: "level-up" | "trade" | "use-item" | "shed" | "other"
-
-    switch (trigger) {
+    if (trigger === null) {
+      return (
+        <Trigger>
+          <div className="spacer"></div>
+        </Trigger>
+      );
+    }
+    switch (trigger.name) {
       case "use-item":
         if (evolution.name === "glaceon" || evolution.name === "leafeon") {
           return (
@@ -59,7 +65,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
               {evolution.details![0].min_level && (
                 <CustomTooltip arrow title={"Level"} placement="top">
                   <>
-                    <ArrowFatLinesUp size={16} />
+                    <ArrowFatLinesUp color="white" size={16} />
                     <Text size="md">{evolution.details![0].min_level}</Text>
                   </>
                 </CustomTooltip>
@@ -82,12 +88,12 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
                   }}
                 >
                   <div className="min_effect">
-                    <IoMdHappy size={16} />
+                    <IoMdHappy color="white" size={16} />
                     <Text size="md">{evolution.details![0].min_happiness}</Text>
                     {evolution.details![0].time_of_day === "day" ? (
                       <FaSun size={14} color="yellow" />
                     ) : (
-                      <FaMoon size={14} color="gray" />
+                      <FaMoon size={14} color="white" />
                     )}
                   </div>
                 </CustomTooltip>
@@ -116,17 +122,15 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
           <Trigger>
             <CustomTooltip arrow title="Troca" placement="top">
               <div className="level-up">
-                <CgArrowsExchangeAltV size={20} />
+                <CgArrowsExchangeAltV color="white" size={20} />
               </div>
             </CustomTooltip>
           </Trigger>
         );
+      case null:
+        return <Trigger />;
       default:
-        return (
-          <Trigger>
-            <div className="spacer" />
-          </Trigger>
-        );
+        return <Trigger />;
     }
   }
 
@@ -137,14 +141,18 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
     }, 500);
   }
 
-  // console.log(evolution.name, evolution.details);
+  // console.log(evolution.name, evolution);
   return (
     <Container onClick={() => handleRedirect(evolution.name)}>
-      {evolution.trigger && handleTrigger(evolution.trigger.name)}
-      <img
-        src={shiny ? evolution.sprites.shiny : evolution.sprites.default}
-        alt={evolution.name}
-      />
+      <div className="trigger-wrapper">
+        {evolution.trigger && handleTrigger(evolution.trigger)}
+      </div>
+      <div className="img-wrapper">
+        <img
+          src={shiny ? evolution.sprites.shiny : evolution.sprites.default}
+          alt={evolution.name}
+        />
+      </div>
       <Text transform="capitalize">{evolution.name}</Text>
     </Container>
   );

@@ -11,7 +11,11 @@ export const Container = styled.div`
   flex: 1;
   align-items: center;
   justify-content: flex-start;
-  @media (max-width: 500px) {
+  @media (max-width: 1180px) {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+  @media (max-width: 800px) {
     padding-left: 1rem;
     padding-right: 1rem;
   }
@@ -24,7 +28,7 @@ export const Container = styled.div`
     padding-top: 2.4rem;
     padding-bottom: 2.4rem;
 
-    @media (max-width: 500px) {
+    @media (max-width: 800px) {
       flex-direction: column;
     }
   }
@@ -36,7 +40,7 @@ export const Container = styled.div`
     align-items: flex-start;
     justify-content: center;
     gap: 1.2rem;
-    @media (max-width: 500px) {
+    @media (max-width: 800px) {
       flex-direction: column;
       width: 100%;
       padding-left: 0.8rem;
@@ -52,7 +56,7 @@ export const Container = styled.div`
     align-items: flex-start;
     justify-content: center;
     gap: 1.2rem;
-    @media (max-width: 500px) {
+    @media (max-width: 800px) {
       padding-top: 2.4rem;
       flex-direction: column;
       width: 100%;
@@ -78,10 +82,10 @@ export const Container = styled.div`
     justify-content: flex-start;
     gap: 3.6rem;
     width: 100%;
-    @media (max-width: 500px) {
+    @media (max-width: 1180px) {
       flex-direction: row;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       gap: 1.2rem;
       flex-wrap: wrap;
     }
@@ -112,7 +116,11 @@ export const Container = styled.div`
     place-items: center;
     align-items: flex-start;
 
-    @media (max-width: 500px) {
+
+    @media (max-width: 1280px){
+      grid-template-columns: repeat(2, minmax(5rem, 0.85fr));
+    };
+    @media (max-width: 860px) {
       height: 100%;
       display: flex;
       flex-direction: column;
