@@ -1,4 +1,3 @@
-import React from "react";
 import theme from "../../styles/theme";
 import { Container } from "./styles";
 import {
@@ -13,6 +12,7 @@ import { CircleButton } from "../Button/CircleButton/CircleButton";
 import { Funnel } from "phosphor-react";
 import { usePokedex } from "../../hooks/usePokedex";
 import { PokemonDataProps } from "../../interfaces/pokemonInterfaces";
+import { ChangeEvent, useState } from "react";
 
 export function DropMenu({
   pokemonArray,
@@ -21,15 +21,15 @@ export function DropMenu({
 }) {
   const { handleFilterGenType } = usePokedex();
 
-  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(
     null
   );
-  const [typeFilter, setTypeFilter] = React.useState<string>("");
+  const [typeFilter, setTypeFilter] = useState<string>("");
 
   let typeFiltered = "";
 
   const handleTypeFilterChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: ChangeEvent<HTMLInputElement>
   ) => {
     setTypeFilter(event.target.value);
     typeFiltered = event.target.value;

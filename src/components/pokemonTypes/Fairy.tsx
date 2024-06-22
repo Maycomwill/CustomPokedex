@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { SVGProps } from 'react';
 const Fairy = (props: SVGProps<SVGSVGElement>) => (
   <svg

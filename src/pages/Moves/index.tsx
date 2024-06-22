@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Container } from "./styles";
 import useMoves from "../../hooks/useMoves";
@@ -40,12 +40,6 @@ function Moves() {
         return (
           <div className="damage_class_wrapper">
             <img src={Special} alt="Status type" />
-          </div>
-        );
-      case "physical":
-        return (
-          <div className="damage_class_wrapper">
-            <img src={Status} alt="Status type" />
           </div>
         );
       default:

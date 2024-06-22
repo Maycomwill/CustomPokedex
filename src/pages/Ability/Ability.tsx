@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Text } from "../../components/Text/Text";
-import { usePokedex } from "../../hooks/usePokedex";
 import { Loading } from "../../components/Loading/Loading";
 import theme from "../../styles/theme";
 import { PokemonCard } from "../../components/PokemonCard/PokemonCard";

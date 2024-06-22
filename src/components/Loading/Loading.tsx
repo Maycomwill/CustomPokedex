@@ -1,4 +1,3 @@
-import { CircleNotch } from "phosphor-react";
 import { Container } from "./styles";
 import LoadingGif from '../../assets/loading.gif'
 
