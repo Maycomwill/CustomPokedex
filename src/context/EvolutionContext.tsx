@@ -31,7 +31,7 @@ export function EvolutionContextProvider({
     setThirdEvolution([]);
     const { data }: { data: PrincipalEvolutionChain } = await axios.get(url);
     //First Evolution
-    let firstEvolutionArray: Evolution[] | undefined = [];
+    let firstEvolutionArray: Evolution[] = [];
     evolution(data.chain).then((response) => {
       if (response === undefined) {
         return;
@@ -41,7 +41,7 @@ export function EvolutionContextProvider({
     });
 
     //Second Evolution
-    let secondEvolutionArray: Evolution[] | undefined = [];
+    let secondEvolutionArray: Evolution[] = [];
     data.chain.evolves_to.map((_evolution) => {
       evolution(_evolution)
         .then((response) => {
@@ -55,7 +55,7 @@ export function EvolutionContextProvider({
         });
     });
 
-    let thirdEvolutionArray: Evolution[] | undefined = [];
+    let thirdEvolutionArray: Evolution[] = [];
     data.chain.evolves_to.map((_evolution) => {
       _evolution.evolves_to.map((_thirdEvolution) => {
         evolution(_thirdEvolution)

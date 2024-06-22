@@ -1,4 +1,3 @@
-import React from "react";
 import { Container } from "./styles";
 import { Text } from "../Text/Text";
 import { TypeCard } from "../TypeCard/TypeCard";
