@@ -135,10 +135,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
   }
 
   function handleRedirect(name: string) {
-    return setTimeout(() => {
-      navigate(`/pokemon/${name}`);
-      location.reload();
-    }, 500);
+    return navigate(`/pokemon/${name}`);
   }
 
   // console.log(evolution.name, evolution);

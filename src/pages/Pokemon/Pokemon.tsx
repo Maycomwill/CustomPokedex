@@ -16,7 +16,7 @@ export function Pokemon() {
     setIsLoading(true);
     getPokemonData(params.pokemonname);
     setTimeout(() => setIsLoading(false), 2000);
-  }, []);
+  }, [params]);
 
   if (isLoading) {
     return <Loading color={theme.colors.primary[500]} size={64} />;
