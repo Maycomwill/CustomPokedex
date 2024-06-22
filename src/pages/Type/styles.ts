@@ -10,6 +10,7 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 1.6rem;
 
     @media (max-width: 500px) {
       width: 100%;
@@ -17,7 +18,7 @@ export const Container = styled.div`
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: .4rem;
+      gap: 0.4rem;
     }
   }
 
@@ -30,9 +31,41 @@ export const Container = styled.div`
   .pageTitle > div {
     padding-right: 3.2rem;
 
-    @media (max-width: 500px){
+    @media (max-width: 500px) {
       padding: 0;
     }
+  }
+
+  .moves-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 0.8rem;
+  }
+
+  .moves-card-wrapper {
+    padding: 0rem 2.4rem;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    place-items: center;
+    gap: 0.8rem;
+
+    @media (max-width: 1180px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    @media (max-width: 800px){
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .pokemon-wrapper{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   .pokemonCard-wrapper {
@@ -45,7 +78,11 @@ export const Container = styled.div`
     grid-template-columns: repeat(3, minmax(5rem, 0.85fr));
     place-items: center;
 
-    @media (max-width: 500px) {
+    @media (max-width: 1180px) {
+      grid-template-columns: repeat(2, minmax(5rem, 0.85fr));
+    place-items: center;
+    }
+    @media (max-width: 800px) {
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -53,14 +90,14 @@ export const Container = styled.div`
     }
   }
 
-  .backButton{
+  .backButton {
     width: 10%;
     margin: auto;
     padding-top: 1.2rem;
     padding-bottom: 2.4rem;
 
     @media (max-width: 500px) {
-      margin-top: .8rem;
+      margin-top: 0.8rem;
       width: 25%;
     }
   }

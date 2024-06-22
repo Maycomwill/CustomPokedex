@@ -1,15 +1,13 @@
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
 import { styled } from "@mui/material/styles";
-import React, { ReactElement } from "react";
 import theme from "../../styles/theme";
-import { Fade, Zoom } from "@mui/material";
+import { Fade } from "@mui/material";
 
 interface ITooltipProps extends TooltipProps {
-  title: string;
-  children: ReactElement;
+  title: string | undefined;
 }
 
-function CustomTooltip({ title, children }: ITooltipProps) {
+function CustomTooltip({ title = "", children }: ITooltipProps) {
   const BootstrapTooltip = styled(({ className, ...props }: TooltipProps) => (
     <Tooltip {...props} arrow classes={{ popper: className }} />
   ))(() => ({
@@ -27,8 +25,13 @@ function CustomTooltip({ title, children }: ITooltipProps) {
       TransitionComponent={Fade}
       TransitionProps={{ timeout: 250 }}
       title={title}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
     >
-      {children}
+      <div>{children}</div>
     </BootstrapTooltip>
   );
 }

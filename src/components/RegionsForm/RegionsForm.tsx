@@ -1,4 +1,3 @@
-import React, { FormEvent, useState } from "react";
 import { Container } from "./styles";
 import { RegionCard } from "../RegionCard/RegionCard";
 import { useNavigate } from "react-router-dom";

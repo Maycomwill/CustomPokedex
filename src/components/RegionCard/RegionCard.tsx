@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes } from "react";
 import { Text } from "../Text/Text";
 import { Container } from "./styles";
 import { useNavigate } from "react-router-dom";

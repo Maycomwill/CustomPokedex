@@ -146,6 +146,16 @@ export const Container = styled.div<IUniqueContainerProps>`
   .detailsWrapper .info:has(.abilityName) {
     cursor: pointer;
   }
+  .info {
+    position: relative;
+  }
+
+  .hidden_ability {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    opacity: 20%;
+  }
 
   .abilities {
     width: 100%;
@@ -255,7 +265,7 @@ export const Container = styled.div<IUniqueContainerProps>`
     .evolutions {
       display: flex;
       align-items: center;
-      justify-content: space-evenly;
+      justify-content: center;
       width: 100%;
       margin-bottom: 2.4rem;
 
@@ -263,6 +273,22 @@ export const Container = styled.div<IUniqueContainerProps>`
         justify-content: center;
         gap: 2rem;
       }
+    }
+
+    .primary_evolution {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .second_evolution,
+    .third_evolution {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.4rem;
+      align-items: center;
+      justify-content: center;
     }
 
     .switch-sprite-wrapper {

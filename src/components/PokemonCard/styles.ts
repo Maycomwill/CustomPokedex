@@ -72,7 +72,7 @@ export const Container = styled.button<IContainerProps>`
   }
 
   :hover {
-    background-color: ${({ color }) => tint(0.25, backgroundColorType(color))};
+    background-color: ${({ color }) => tint(0.5, backgroundColorType(color))};
   }
 
   .leftWrapper {
