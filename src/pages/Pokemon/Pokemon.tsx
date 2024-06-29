@@ -5,10 +5,12 @@ import UniquePokemonPage from "../../components/UniquePokemonPage/UniquePokemonP
 import { usePokedex } from "../../hooks/usePokedex";
 import theme from "../../styles/theme";
 import useEvolution from "../../hooks/useEvolution";
+import { useForms } from "../../hooks/useForms";
 
 export function Pokemon() {
   const { getPokemonData, uniquePokemonData } = usePokedex();
   const { firstEvolution, secondEvolution, thirdEvolution } = useEvolution();
+  const {forms} = useForms()
   const [isLoading, setIsLoading] = useState(true);
   const params = useParams();
 
@@ -30,6 +32,7 @@ export function Pokemon() {
             second: secondEvolution,
             third: thirdEvolution,
           }}
+          forms={forms}
           data={uniquePokemonData}
         />
       </>

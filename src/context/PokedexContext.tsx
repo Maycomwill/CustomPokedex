@@ -13,6 +13,7 @@ import {
 } from "../interfaces/pokemonInterfaces";
 import useEvolution from "../hooks/useEvolution";
 import { NamedAPIResource } from "../interfaces/apiInterfaces";
+import { useForms } from "../hooks/useForms";
 
 //Interface do Provedor
 export interface PokedexContextDataProps {
@@ -20,7 +21,6 @@ export interface PokedexContextDataProps {
   handleFilterGenType: (type: string, array: PokemonDataProps[]) => void;
   pokemonData: PokemonDataProps[];
   uniquePokemonData: UniquePokemonData | undefined;
-  pokemonAbilityCommon: PokemonDataProps[];
   genTypeFilteredList: PokemonDataProps[];
 }
 
@@ -29,28 +29,17 @@ export const PokedexContext = createContext({} as PokedexContextDataProps);
 
 //Criação do provedor do contexto, que será utilizado na criação do hook
 export function PokedexContextProvider({ children }: PokedexProviderProps) {
-  let firstSprite: AxiosResponse;
-
   let rawPokemonData: PokemonDataProps[] = [];
   let genTypeFilter: PokemonDataProps[] = [];
   const { getEvolutionChainData } = useEvolution();
+  const { getForms } = useForms();
 
-  const [pokemonAbilityCommon, setPokemonAbilityCommon] = useState<
-    PokemonDataProps[]
-  >([]);
   const [pokemonData, setPokemonData] = useState<PokemonDataProps[]>([]);
   const [uniquePokemonData, setUniquePokemonData] =
     useState<UniquePokemonData>();
   const [genTypeFilteredList, setGenTypeFilteredList] = useState<
     PokemonDataProps[]
   >([]);
-
-  // Esta função retorna os resultados de todas as requisições quando prontas
-  function waitingPromises(results: PokedexDataProps[]) {
-    return axios.all(
-      results.map((pokemon) => getPokemonInformation(pokemon.url))
-    );
-  }
 
   // Esta função busca na api os dados básicos do pokemon e retorna os dados já formatados
   async function getPokemonInformation(pokemonUrl: string) {
@@ -113,10 +102,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     // console.log("dados extra: ", extra_result.data);
 
     getEvolutionChainData(extra_result.data.evolution_chain.url);
-    const evolutionData = await pokeapi.get(
-      extra_result.data.evolution_chain.url
-    );
-
+    getForms(extra_result.data.varieties);
     let objetos: damageRelationsProps = {
       double_damage_from: [],
       double_damage_to: [],
@@ -318,16 +304,6 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
         };
       }),
       flavor: flavor_text.flavor_text,
-      evolution_chain: [
-        {
-          min_level: null,
-          name: evolutionData.data.chain.species.name,
-          sprite: {
-            default: firstSprite?.data.sprites.front_default,
-            shiny: firstSprite?.data.sprites.front_shiny,
-          },
-        },
-      ],
       damage_relation: objetos,
       gender: {
         name: pokemonGender.pokemon_species.name,
@@ -355,7 +331,6 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
         handleFilterGenType,
         pokemonData,
         uniquePokemonData,
-        pokemonAbilityCommon,
         genTypeFilteredList,
       }}
     >
