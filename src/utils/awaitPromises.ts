@@ -17,7 +17,9 @@ export async function waitingPromises(results: PokedexDataProps[]) {
 export async function waitingFormsPromises(results: PokedexDataProps[]) {
   rawFormPokemonData = [];
 
-  await axios.all(results.map((pokemon) => getFormsPokemonInformation(pokemon.url)));
+  await axios.all(
+    results.map((pokemon) => getFormsPokemonInformation(pokemon.url))
+  );
   return rawFormPokemonData;
 }
 
@@ -35,10 +37,21 @@ export async function getFormsPokemonInformation(pokemonUrl: string) {
             ? response.data.sprites.front_shiny
             : response.data.sprites.other["official-artwork"].front_shiny,
         },
+        home: {
+          default: response.data.sprites.other.home.front_default
+            ? response.data.sprites.other.home.front_default
+            : response.data.sprites.front_default,
+          shiny: response.data.sprites.other.home.front_shiny
+            ? response.data.sprites.other.home.front_shiny
+            : response.data.sprites.front_shiny,
+        },
         artwork: {
-          default:
-            response.data.sprites.other["official-artwork"].front_default,
-          shiny: response.data.sprites.other["official-artwork"].front_shiny,
+          default: response.data.sprites.other["official-artwork"].front_default
+            ? response.data.sprites.other["official-artwork"].front_default
+            : response.data.sprites.front_default,
+          shiny: response.data.sprites.other["official-artwork"].front_shiny
+            ? response.data.sprites.other["official-artwork"].front_shiny
+            : response.data.sprites.front_shiny,
         },
       },
     });
