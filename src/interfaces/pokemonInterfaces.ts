@@ -55,7 +55,6 @@ export interface UniquePokemonData {
   stats: statsProps[];
   abilities: abilityProps[];
   flavor: string;
-  evolution_chain: evolutionProps[];
   damage_relation: damageRelationsProps;
   gender: {
     name: string;
