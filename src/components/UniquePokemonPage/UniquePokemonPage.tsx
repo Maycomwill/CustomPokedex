@@ -47,14 +47,22 @@ export default function UniquePokemonPage({
 
     if (selectForm === -1) {
       if (shinySprite) {
-        return forms[0].sprites.default.shiny;
+        return forms[0].sprites.home.shiny
+          ? forms[0].sprites.home.shiny
+          : forms[0].sprites.default.shiny;
       }
-      return forms[0].sprites.default.default;
+      return forms[0].sprites.home.default
+        ? forms[0].sprites.home.default
+        : forms[0].sprites.default.default;
     }
     if (shinySprite) {
-      return form.sprites.default.shiny;
+      return form.sprites.home.shiny
+        ? form.sprites.home.shiny
+        : form.sprites.default.shiny;
     }
-    return form.sprites.default.default;
+    return form.sprites.home.default
+      ? form.sprites.home.default
+      : form.sprites.default.default;
   }
 
   function checkimgIMG(url: string) {
@@ -105,7 +113,7 @@ export default function UniquePokemonPage({
             </CircleButton>
           )}
         </div>
-        <div className="forms-wrapper">
+        {forms && forms.length > 1 ? (<div className="forms-wrapper">
           <img id="formSprite" src={handleFormSprite()} alt="Form Sprite" />
           <select
             onChange={(e) => setSelectForm(Number(e.target.value))}
@@ -121,7 +129,7 @@ export default function UniquePokemonPage({
                 );
               })}
           </select>
-        </div>
+        </div>): null}
       </div>
       <div className="infoWrapper">
         <div className="pokedexInfo">

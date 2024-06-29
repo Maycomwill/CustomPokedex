@@ -47,6 +47,7 @@ export const Container = styled.div<IUniqueContainerProps>`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 1.2rem;
 
     #formSprite {
       width: 12rem;

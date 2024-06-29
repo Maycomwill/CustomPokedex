@@ -12,10 +12,14 @@ export interface FormDataSchema {
       default: string;
       shiny: string;
     };
+    home: {
+      default: string;
+      shiny: string;
+    };
   };
 }
 
 export interface Variety {
   is_default: boolean;
-  pokemon: NamedAPIResource
+  pokemon: NamedAPIResource;
 }
