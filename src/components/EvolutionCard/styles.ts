@@ -12,7 +12,7 @@ export const Container = styled.button`
   border-style: solid;
   border-color: ${theme.colors.accent[200]};
   border-radius: 0.8rem;
-  padding: 0.4rem 0.2rem;
+  padding: 0.4rem 0.8rem;
   background-color: rgb(255 255 255/0);
   transition: all 0.2s ease-in-out;
 
@@ -24,6 +24,13 @@ export const Container = styled.button`
   .img-wrapper {
     display: flex;
     flex: 2;
+
+    img {
+      @media (min-width: 500px) {
+        width: 18rem;
+        height: 18rem;
+      }
+    }
   }
 
   &:hover {

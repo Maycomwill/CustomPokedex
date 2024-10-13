@@ -8,7 +8,7 @@ export const Container = styled.div<IUniqueContainerProps>`
   display: flex;
   flex-direction: column;
   flex: 1;
-  width: 100vw;
+  width: 70%;
   justify-content: space-evenly;
   align-items: center;
   margin-bottom: 2.4rem;
@@ -59,9 +59,9 @@ export const Container = styled.div<IUniqueContainerProps>`
       color: ${theme.colors.gray[100]};
       background-color: ${theme.colors.gray[800]};
       border-radius: 0.2rem;
-      padding: .2rem .4rem;
+      padding: 0.2rem 0.4rem;
 
-      option{
+      option {
         text-transform: capitalize;
       }
     }
@@ -169,9 +169,10 @@ export const Container = styled.div<IUniqueContainerProps>`
     grid-column-gap: 0.8rem;
     width: 100%;
     @media (min-width: 500px) {
-      width: 100%;
-      grid-template-columns: repeat(3, 1fr);
+      width: 70%;
+      grid-template-columns: repeat(2, 1fr);
       grid-template-rows: repeat(2, 1fr);
+      column-gap: 3.2rem;
       padding: 0rem 2rem;
     }
   }
@@ -233,6 +234,7 @@ export const Container = styled.div<IUniqueContainerProps>`
     }
 
     @media (min-width: 500px) {
+      width: 70%;
       padding: 0rem 2rem;
     }
   }
@@ -248,15 +250,17 @@ export const Container = styled.div<IUniqueContainerProps>`
 
   .statsContainer {
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(10rem, 1fr));
     place-items: center;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(10rem, 1fr));
     grid-gap: 1.6rem;
 
-    @media (max-width: 500px) {
+    @media (min-width: 500px) {
       display: grid;
       grid-template-columns: repeat(2, minmax(10rem, 1fr));
+      column-gap: 1.2rem;
       grid-gap: 1.6rem;
+      margin: 0px auto;
     }
   }
 
@@ -275,12 +279,15 @@ export const Container = styled.div<IUniqueContainerProps>`
     width: 100%;
     display: flex;
     flex-direction: column;
+    gap: 0.6rem;
     align-items: flex-start;
-    justify-content: flex-start;
-    gap: 0.8rem;
+    justify-content: center;
 
     @media (min-width: 500px) {
-      padding: 0rem 2rem;
+      width: 70%;
+      gap: 4.2rem;
+      flex-direction: row;
+      padding: 2rem 2rem;
     }
 
     .all-weakness,
@@ -305,10 +312,13 @@ export const Container = styled.div<IUniqueContainerProps>`
     display: flex;
     flex-direction: column;
     width: 100%;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
+    gap: 0.6rem;
     @media (min-width: 500px) {
-      padding: 0rem 2rem;
+      gap: 2.4rem;
+      width: 70%;
+      padding: 1.2rem 2rem;
     }
 
     .evolutions {
@@ -331,13 +341,18 @@ export const Container = styled.div<IUniqueContainerProps>`
       justify-content: center;
     }
 
-    .second_evolution,
-    .third_evolution {
+    .second_evolution {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 0.4rem;
       align-items: center;
       justify-content: center;
+    }
+
+    .third_evolution {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
     }
 
     .switch-sprite-wrapper {

@@ -6,7 +6,6 @@ import {
   PokemonDataProps,
 } from "../interfaces/pokemonInterfaces";
 import { waitingPromises } from "../utils/awaitPromises";
-import { storagePokemonInformation } from "../utils/storagePokemonInfo";
 import { AxiosError } from "axios";
 
 export interface MovesContextProps {
@@ -38,13 +37,13 @@ export function MovesContextProvider({ children }: { children: ReactNode }) {
       });
 
       waitingPromises(newPokemonArray).then((response) => {
+        setCommonPokemon([]);
+
         let newArray = response.sort((a, b) => {
           return a.id - b.id;
         });
-        setCommonPokemon([]);
-        newArray.map((pokemon: PokemonDataProps) =>
-          storagePokemonInformation(pokemon, setCommonPokemon)
-        );
+
+        setCommonPokemon(newArray);
       });
 
       let { flavor_text } = data.flavor_text_entries.find(

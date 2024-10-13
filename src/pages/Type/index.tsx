@@ -33,34 +33,28 @@ export function Type() {
     // console.log(moves);
     return (
       <Container>
-        <div className="pageTitle">
-          <Text size="lg">
-            Técnicas do tipo:{" "}
-            <Text transform="uppercase" color="primary" size="lg" weight="bold">
-              {params.typename}
-            </Text>
-          </Text>
-          <div>
-            <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>
-              <Button.Content text={"Voltar"} />
-            </Button.Root>
-          </div>
-        </div>
-        <div className="moves-wrapper">
-          <div className="moves-card-wrapper">
-            {moves.map((move) => {
-              return <MoveCard move={move} key={move.url} />;
-            })}
-          </div>
-        </div>
-        <Spacer />
         <div className="pokemon-wrapper">
-          <Text size="lg">
-            Pokémon do tipo:{" "}
-            <Text transform="uppercase" color="primary" size="lg" weight="bold">
-              {params.typename}
+          <div className="pageTitle">
+            <Text size="lg">
+              Pokémon do tipo:{" "}
+              <Text
+                transform="uppercase"
+                color="primary"
+                size="lg"
+                weight="bold"
+              >
+                {params.typename}
+              </Text>
             </Text>
-          </Text>
+            <div>
+              <Button.Root
+                backgroundColor="delete"
+                onClick={() => navigate(-1)}
+              >
+                <Button.Content text={"Voltar"} />
+              </Button.Root>
+            </div>
+          </div>
           <div className="pokemonCard-wrapper">
             {commonTypesPokemon.map((pokemon) => {
               return (
@@ -73,6 +67,20 @@ export function Type() {
                   primaryType={pokemon.types[0].type}
                 />
               );
+            })}
+          </div>
+        </div>
+        <Spacer />
+        <div className="moves-wrapper">
+          <Text size="lg">
+            Técnicas do tipo:{" "}
+            <Text transform="uppercase" color="primary" size="lg" weight="bold">
+              {params.typename}
+            </Text>
+          </Text>
+          <div className="moves-card-wrapper">
+            {moves.map((move) => {
+              return <MoveCard move={move} key={move.url} />;
             })}
           </div>
         </div>

@@ -42,26 +42,32 @@ export default function UniquePokemonPage({
     return null;
   }
 
+  function handleStatsBar(value: number) {
+    const total = 255;
+    const newValue = (value * 100) / total;
+    return `${newValue}%`;
+  }
+
   function handleFormSprite() {
     const form = forms[selectForm];
 
     if (selectForm === -1) {
       if (shinySprite) {
-        return forms[0].sprites.home.shiny
-          ? forms[0].sprites.home.shiny
+        return forms[0].sprites.default.shiny
+          ? forms[0].sprites.default.shiny
           : forms[0].sprites.default.shiny;
       }
-      return forms[0].sprites.home.default
-        ? forms[0].sprites.home.default
+      return forms[0].sprites.default.default
+        ? forms[0].sprites.default.default
         : forms[0].sprites.default.default;
     }
     if (shinySprite) {
-      return form.sprites.home.shiny
-        ? form.sprites.home.shiny
+      return form.sprites.default.shiny
+        ? form.sprites.default.shiny
         : form.sprites.default.shiny;
     }
-    return form.sprites.home.default
-      ? form.sprites.home.default
+    return form.sprites.default.default
+      ? form.sprites.default.default
       : form.sprites.default.default;
   }
 
@@ -113,23 +119,25 @@ export default function UniquePokemonPage({
             </CircleButton>
           )}
         </div>
-        {forms && forms.length > 1 ? (<div className="forms-wrapper">
-          <img id="formSprite" src={handleFormSprite()} alt="Form Sprite" />
-          <select
-            onChange={(e) => setSelectForm(Number(e.target.value))}
-            id="formSelectInput"
-          >
-            <option value={-1}>Select form</option>
-            {forms &&
-              forms.map((form, index) => {
-                return (
-                  <option key={`${form.name}-${index}`} value={index}>
-                    {form.name.split("-").join(" ")}
-                  </option>
-                );
-              })}
-          </select>
-        </div>): null}
+        {forms && forms.length > 1 ? (
+          <div className="forms-wrapper">
+            <img id="formSprite" src={handleFormSprite()} alt="Form Sprite" />
+            <select
+              onChange={(e) => setSelectForm(Number(e.target.value))}
+              id="formSelectInput"
+            >
+              <option value={-1}>Select form</option>
+              {forms &&
+                forms.map((form, index) => {
+                  return (
+                    <option key={`${form.name}-${index}`} value={index}>
+                      {form.name.split("-").join(" ")}
+                    </option>
+                  );
+                })}
+            </select>
+          </div>
+        ) : null}
       </div>
       <div className="infoWrapper">
         <div className="pokedexInfo">
@@ -157,7 +165,9 @@ export default function UniquePokemonPage({
           </div>
         </div>
       </div>
+
       <Spacer />
+
       <div className="detailsWrapper">
         <div className="infoCard">
           <Text size="md" transform="capitalize">
@@ -201,6 +211,7 @@ export default function UniquePokemonPage({
       </div>
 
       <Spacer />
+
       <div className="statsWrapper">
         <span>Status base:</span>
         <div className="statsContainer">
@@ -216,7 +227,7 @@ export default function UniquePokemonPage({
                 <div className="baseStatDiv">
                   <div
                     style={{
-                      width: `${stat.base_stat}%`,
+                      width: handleStatsBar(stat.base_stat),
                       maxWidth: "100%",
                       backgroundColor: `${theme.colors.primary[500]}`,
                       borderRadius: ".4rem",
@@ -232,26 +243,6 @@ export default function UniquePokemonPage({
       </div>
       <Spacer />
       <div className="damage-relations">
-        {data.damage_relation.double_damage_from.length === 0 ? null : (
-          <div className="all-weakness">
-            <Text size="md">Fraquezas:</Text>
-            <div className="weakness">
-              {data.damage_relation.double_damage_from.map((type) => {
-                return (
-                  <CustomTooltip title={type} key={type} arrow>
-                    <div key={type}>
-                      <SimpleCardType
-                        pokemonType={type}
-                        key={type}
-                        double_damage_relation={false}
-                      />
-                    </div>
-                  </CustomTooltip>
-                );
-              })}
-            </div>
-          </div>
-        )}
         {data.damage_relation.double_damage_to.length === 0 ? null : (
           <div className="all-strengths">
             <Text size="md">Forças:</Text>
@@ -271,6 +262,26 @@ export default function UniquePokemonPage({
                   );
                 })}
               </>
+            </div>
+          </div>
+        )}
+        {data.damage_relation.double_damage_from.length === 0 ? null : (
+          <div className="all-weakness">
+            <Text size="md">Fraquezas:</Text>
+            <div className="weakness">
+              {data.damage_relation.double_damage_from.map((type) => {
+                return (
+                  <CustomTooltip title={type} key={type} arrow>
+                    <div key={type}>
+                      <SimpleCardType
+                        pokemonType={type}
+                        key={type}
+                        double_damage_relation={false}
+                      />
+                    </div>
+                  </CustomTooltip>
+                );
+              })}
             </div>
           </div>
         )}
@@ -314,12 +325,7 @@ export default function UniquePokemonPage({
           {evolutions.third && evolutions.third.length !== 0 ? (
             <>
               <CaretRight size={24} />
-              <div
-                className="third_evolution"
-                style={{
-                  display: evolutions.third.length === 1 ? "flex" : "grid",
-                }}
-              >
+              <div className="third_evolution">
                 {evolutions.third?.map((evolution) => {
                   return (
                     <EvolutionCard

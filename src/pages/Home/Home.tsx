@@ -1,25 +1,26 @@
-import { FormEvent, useState } from "react";
-import { RegionsForm } from "../../components/RegionsForm/RegionsForm";
-import { Container } from "./styles";
-import { useNavigate } from "react-router-dom";
-import { Loading } from "../../components/Loading/Loading";
-import theme from "../../styles/theme";
-import { TypesForm } from "../../components/TypesForm/TypesForm";
-import { BackToTop } from "../../components/BackToTop/BackToTop";
-import { Spacer } from "../../components/Spacer/Spacer";
-import { FileSearch } from "phosphor-react";
-import { Button } from "../../components/Button";
+import { FormEvent, useState } from 'react';
+import { RegionsForm } from '../../components/RegionsForm/RegionsForm';
+import { Container } from './styles';
+import { useNavigate } from 'react-router-dom';
+import { Loading } from '../../components/Loading/Loading';
+import theme from '../../styles/theme';
+import { TypesForm } from '../../components/TypesForm/TypesForm';
+import { BackToTop } from '../../components/BackToTop/BackToTop';
+import { Spacer } from '../../components/Spacer/Spacer';
+import { FileSearch } from 'phosphor-react';
+import { Button } from '../../components/Button';
+import TailwindcssTest from '../../components/TailwindcssTest';
 
 export function Home() {
   const screenWidth: number = screen.width;
-  const [pokemonRef, setPokemonRef] = useState<string>("");
+  const [pokemonRef, setPokemonRef] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleSearch = (e: FormEvent) => {
     setIsLoading(true);
     try {
-      if (pokemonRef !== "") {
+      if (pokemonRef !== '') {
         e.preventDefault();
         setTimeout(() => {
           navigate(`/pokemon/${pokemonRef}`);
@@ -27,11 +28,11 @@ export function Home() {
         setIsLoading(false);
       } else {
         setIsLoading(false);
-        alert("Digite o nome ou id de um pokemon para pesquisar");
+        alert('Digite o nome ou id de um pokemon para pesquisar');
         window.location.reload;
       }
     } catch (error) {
-      console.log("Erro ao escolher opção");
+      console.log('Erro ao escolher opção');
     } finally {
     }
   };
@@ -39,6 +40,7 @@ export function Home() {
   return (
     <Container>
       <div className="search-bar">
+        <TailwindcssTest />
         <form action="" className="search-form" onSubmit={handleSearch}>
           {screenWidth < 500 ? (
             <>

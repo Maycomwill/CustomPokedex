@@ -2,7 +2,6 @@ import { createContext, ReactNode, useState } from "react";
 import { PokemonDataProps } from "../interfaces/pokemonInterfaces";
 import { pokeapi } from "../services/api";
 import { waitingPromises } from "../utils/awaitPromises";
-import { storagePokemonInformation } from "../utils/storagePokemonInfo";
 
 export interface GenerationContextProps {
   getGenerationFromUserChoice: (generation: string) => void;
@@ -85,9 +84,7 @@ export function GenerationContextProvider({
         return a.id - b.id;
       });
       // console.log(newArray);
-      newArray.map((pokemon) =>
-        storagePokemonInformation(pokemon, setPokemonData)
-      );
+      setPokemonData(newArray);
     });
   }
   return (

@@ -42,7 +42,7 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     width: 100%;
-    gap: 0.8rem;
+    gap: 1.2rem;
   }
 
   .moves-card-wrapper {
@@ -55,12 +55,12 @@ export const Container = styled.div`
     @media (max-width: 1180px) {
       grid-template-columns: repeat(4, 1fr);
     }
-    @media (max-width: 800px){
+    @media (max-width: 800px) {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  .pokemon-wrapper{
+  .pokemon-wrapper {
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -80,7 +80,7 @@ export const Container = styled.div`
 
     @media (max-width: 1180px) {
       grid-template-columns: repeat(2, minmax(5rem, 0.85fr));
-    place-items: center;
+      place-items: center;
     }
     @media (max-width: 800px) {
       display: flex;

@@ -1,7 +1,7 @@
 import { ThemeProps, createGlobalStyle } from 'styled-components';
 import theme from './theme';
 
-import { DefaultTheme } from "styled-components";
+import { DefaultTheme } from 'styled-components';
 
 interface MyTheme extends DefaultTheme {
   background: string;
@@ -10,14 +10,13 @@ interface MyTheme extends DefaultTheme {
 
 export const lightTheme: MyTheme = {
   background: '#f4f4f5',
-  text: '#18181b'
+  text: '#18181b',
 };
 
 export const darkTheme: MyTheme = {
   background: '#18181b',
-  text: '#f4f4f5'
+  text: '#f4f4f5',
 };
-
 
 const GlobalStyle = createGlobalStyle<ThemeProps<MyTheme>>`
 
@@ -32,8 +31,8 @@ const GlobalStyle = createGlobalStyle<ThemeProps<MyTheme>>`
   }
 
   body {
-    background: ${(props)=> props.theme.background};
-    color: ${(props)=> props.theme.text};
+    background: ${(props) => props.theme.background};
+    color: ${(props) => props.theme.text};
     overflow-x: hidden;
 
     /* width */

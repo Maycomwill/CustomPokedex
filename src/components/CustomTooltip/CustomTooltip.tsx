@@ -5,11 +5,34 @@ import { Fade } from "@mui/material";
 
 interface ITooltipProps extends TooltipProps {
   title: string | undefined;
+  placement?:
+    | "bottom-end"
+    | "bottom-start"
+    | "bottom"
+    | "left-end"
+    | "left-start"
+    | "left"
+    | "right-end"
+    | "right-start"
+    | "right"
+    | "top-end"
+    | "top-start"
+    | "top"
+    | undefined;
 }
 
-function CustomTooltip({ title = "", children }: ITooltipProps) {
+function CustomTooltip({
+  title = "",
+  placement = "top",
+  children,
+}: ITooltipProps) {
   const BootstrapTooltip = styled(({ className, ...props }: TooltipProps) => (
-    <Tooltip {...props} arrow classes={{ popper: className }} />
+    <Tooltip
+      {...props}
+      placement={placement}
+      arrow
+      classes={{ popper: className }}
+    />
   ))(() => ({
     [`& .${tooltipClasses.arrow}`]: {
       color: theme.colors.gray[500],
