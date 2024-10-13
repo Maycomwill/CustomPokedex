@@ -37,6 +37,55 @@ export const Container = styled.div<IUniqueContainerProps>`
     right: 2%;
   }
 
+  .forms-wrapper {
+    position: absolute;
+    bottom: 0%;
+    right: 2%;
+    width: 14rem;
+    height: 14rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+
+    #formSprite {
+      width: 12rem;
+      height: 12rem;
+    }
+
+    select {
+      width: 100%;
+      color: ${theme.colors.gray[100]};
+      background-color: ${theme.colors.gray[800]};
+      border-radius: 0.2rem;
+      padding: .2rem .4rem;
+
+      option{
+        text-transform: capitalize;
+      }
+    }
+
+    @media (max-width: 800px) {
+      right: 0%;
+      width: 9.6rem;
+      height: 9.6rem;
+      #formSprite {
+        width: 8.2rem;
+        height: 8.2rem;
+      }
+    }
+    @media (max-width: 500px) {
+      right: 2%;
+      width: 7.2rem;
+      height: 7.2rem;
+      #formSprite {
+        width: 6.2rem;
+        height: 6.2rem;
+      }
+    }
+  }
+
   .spritesDiv img {
     width: 30rem;
     height: 30rem;

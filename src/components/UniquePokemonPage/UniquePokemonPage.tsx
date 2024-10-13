@@ -16,9 +16,11 @@ import { useState } from "react";
 import addZeroes from "../../utils/addZeros";
 import { Evolution } from "../../interfaces/evolutionInterface";
 import EvolutionCard from "../EvolutionCard";
+import { FormDataSchema } from "../../interfaces/formInterfaces";
 
 interface IUniquePokemonPage {
   data: UniquePokemonData | undefined;
+  forms: FormDataSchema[];
   evolutions: {
     first: Evolution[] | undefined;
     second: Evolution[] | undefined;
@@ -29,13 +31,38 @@ interface IUniquePokemonPage {
 export default function UniquePokemonPage({
   data,
   evolutions,
+  forms,
 }: IUniquePokemonPage) {
   // Console log para mostrar os tipos do pokemon
   // console.log("damage relation:", data);
   const [shinySprite, setShinySprite] = useState<boolean>(false);
+  const [selectForm, setSelectForm] = useState<number>(-1);
 
   if (data === undefined) {
     return null;
+  }
+
+  function handleFormSprite() {
+    const form = forms[selectForm];
+
+    if (selectForm === -1) {
+      if (shinySprite) {
+        return forms[0].sprites.home.shiny
+          ? forms[0].sprites.home.shiny
+          : forms[0].sprites.default.shiny;
+      }
+      return forms[0].sprites.home.default
+        ? forms[0].sprites.home.default
+        : forms[0].sprites.default.default;
+    }
+    if (shinySprite) {
+      return form.sprites.home.shiny
+        ? form.sprites.home.shiny
+        : form.sprites.default.shiny;
+    }
+    return form.sprites.home.default
+      ? form.sprites.home.default
+      : form.sprites.default.default;
   }
 
   function checkimgIMG(url: string) {
@@ -86,6 +113,23 @@ export default function UniquePokemonPage({
             </CircleButton>
           )}
         </div>
+        {forms && forms.length > 1 ? (<div className="forms-wrapper">
+          <img id="formSprite" src={handleFormSprite()} alt="Form Sprite" />
+          <select
+            onChange={(e) => setSelectForm(Number(e.target.value))}
+            id="formSelectInput"
+          >
+            <option value={-1}>Select form</option>
+            {forms &&
+              forms.map((form, index) => {
+                return (
+                  <option key={`${form.name}-${index}`} value={index}>
+                    {form.name.split("-").join(" ")}
+                  </option>
+                );
+              })}
+          </select>
+        </div>): null}
       </div>
       <div className="infoWrapper">
         <div className="pokedexInfo">
