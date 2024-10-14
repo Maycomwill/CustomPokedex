@@ -1,17 +1,16 @@
 import { Header } from '../components/Header/Header';
 import { IndexRoutes } from '../routes';
-import { Container } from './styles';
 import { Footer } from '../components/Footer/Footer';
 
 function Index() {
   return (
-    <Container>
+    <div className="flex min-h-screen w-full flex-col items-center justify-start">
       <Header />
-      <div id="routes">
+      <div className="flex flex-1">
         <IndexRoutes />
       </div>
       <Footer />
-    </Container>
+    </div>
   );
 }
 

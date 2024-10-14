@@ -4,10 +4,10 @@ import { Text } from '../../components/Text/Text';
 import Loading from '../../components/Loading/Loading';
 import theme from '../../styles/theme';
 import { PokemonCard } from '../../components/PokemonCard/PokemonCard';
-import { Container } from './styles';
-import { Button } from '../../components/Button';
 import { BackToTop } from '../../components/BackToTop/BackToTop';
 import useAbility from '../../hooks/useAbility';
+import { Button } from '@/components/ui/button';
+import clsx from 'clsx';
 
 export function Ability() {
   const params = useParams();
@@ -24,12 +24,16 @@ export function Ability() {
   }, []);
 
   if (abilityInfo === undefined || isLoading === true) {
-    return <Loading color={theme.colors.primary[500]} size={'lg'} />;
+    return (
+      <div className="flex w-full flex-1 items-center justify-center">
+        <Loading color={theme.colors.primary[500]} size={'lg'} />
+      </div>
+    );
   } else {
     return (
-      <Container>
+      <div className="flex min-h-screen w-full flex-col items-center justify-center px-1 pt-px">
         <>
-          <div className="abilityName">
+          <div className="text-center">
             <Text
               transform="uppercase"
               size="xxl"
@@ -39,38 +43,46 @@ export function Ability() {
               {abilityInfo.name.split('-').join(' ')}
             </Text>
           </div>
-          <div className="descriptionDiv">
+          <div className="px-3 pt-6 text-justify">
             <Text size="md">{abilityInfo.description}</Text>
           </div>
-          <div className="pokemonCommon">
+          <div className="py-4 text-center">
             <Text size="lg">Pokemons que possuem esta habilidade: </Text>
           </div>
-          <div className="pokemons">
+
+          <div className="grid w-full grid-cols-1 place-items-center items-center gap-4 px-2 pt-3 md:grid-cols-2 lg:grid-cols-3">
             {commonAbilityPokemon !== undefined ? (
-              commonAbilityPokemon.map((pokemon) => {
+              commonAbilityPokemon.map((pokemon, i) => {
                 return (
-                  <PokemonCard
-                    key={`${pokemon.id}-${pokemon.name}`}
-                    id={pokemon.id}
-                    name={pokemon.name}
-                    types={pokemon.types}
-                    sprite={pokemon.sprite}
-                    primaryType={pokemon.types[0].type}
-                  />
+                  <div
+                    className={clsx('w-full', {
+                      'md:col-span-2 md:w-auto lg:col-span-1':
+                        i === commonAbilityPokemon.length - 1,
+                    })}
+                  >
+                    <PokemonCard
+                      key={`${pokemon.id}-${pokemon.name}`}
+                      id={pokemon.id}
+                      name={pokemon.name}
+                      types={pokemon.types}
+                      sprite={pokemon.sprite}
+                      primaryType={pokemon.types[0].type}
+                    />
+                  </div>
                 );
               })
             ) : (
               <Loading color={theme.colors.primary[500]} size={'lg'} />
             )}
           </div>
-          <div className="backButton">
-            <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>
-              <Button.Content text={'Voltar'} />
-            </Button.Root>
+          <div className="py-4">
+            <Button size={'lg'} onClick={() => navigate(-1)}>
+              Voltar
+            </Button>
           </div>
         </>
         <BackToTop />
-      </Container>
+      </div>
     );
   }
 }
