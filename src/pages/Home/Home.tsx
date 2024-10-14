@@ -83,7 +83,7 @@ export function Home() {
                 />
               </div>
               <div className="search-button-wrapper">
-                {!isLoading ? (
+                {isLoading ? (
                   <Button.Root animated>
                     <Button.LeftIcon
                       icon={Spinner}

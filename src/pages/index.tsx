@@ -10,7 +10,7 @@ function Index() {
       <div id="routes">
         <IndexRoutes />
       </div>
-      <Footer id="footer" />
+      <Footer />
     </Container>
   );
 }
