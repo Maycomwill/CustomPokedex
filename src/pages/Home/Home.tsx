@@ -2,7 +2,7 @@ import { FormEvent, useState } from 'react';
 import { RegionsForm } from '../../components/RegionsForm/RegionsForm';
 import { Container } from './styles';
 import { useNavigate } from 'react-router-dom';
-import { Loading } from '../../components/Loading/Loading';
+import Loading from '../../components/Loading/Loading';
 import theme from '../../styles/theme';
 import { TypesForm } from '../../components/TypesForm/TypesForm';
 import { BackToTop } from '../../components/BackToTop/BackToTop';
@@ -10,6 +10,7 @@ import { Spacer } from '../../components/Spacer/Spacer';
 import { FileSearch } from 'phosphor-react';
 import { Button } from '../../components/Button';
 import TailwindcssTest from '../../components/TailwindcssTest';
+import Spinner from '@/components/Spinner/Spinner';
 
 export function Home() {
   const screenWidth: number = screen.width;
@@ -55,7 +56,7 @@ export function Home() {
                 {isLoading ? (
                   <Button.Root animated size="small">
                     <Button.LeftIcon
-                      icon={Loading}
+                      icon={Spinner}
                       size={30}
                       color={theme.colors.gray[100]}
                     />
@@ -82,10 +83,10 @@ export function Home() {
                 />
               </div>
               <div className="search-button-wrapper">
-                {isLoading ? (
+                {!isLoading ? (
                   <Button.Root animated>
                     <Button.LeftIcon
-                      icon={Loading}
+                      icon={Spinner}
                       size={30}
                       color={theme.colors.gray[100]}
                     />

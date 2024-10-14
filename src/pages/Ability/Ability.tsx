@@ -1,13 +1,13 @@
-import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { Text } from "../../components/Text/Text";
-import { Loading } from "../../components/Loading/Loading";
-import theme from "../../styles/theme";
-import { PokemonCard } from "../../components/PokemonCard/PokemonCard";
-import { Container } from "./styles";
-import { Button } from "../../components/Button";
-import { BackToTop } from "../../components/BackToTop/BackToTop";
-import useAbility from "../../hooks/useAbility";
+import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Text } from '../../components/Text/Text';
+import Loading from '../../components/Loading/Loading';
+import theme from '../../styles/theme';
+import { PokemonCard } from '../../components/PokemonCard/PokemonCard';
+import { Container } from './styles';
+import { Button } from '../../components/Button';
+import { BackToTop } from '../../components/BackToTop/BackToTop';
+import useAbility from '../../hooks/useAbility';
 
 export function Ability() {
   const params = useParams();
@@ -24,7 +24,7 @@ export function Ability() {
   }, []);
 
   if (abilityInfo === undefined || isLoading === true) {
-    return <Loading color={theme.colors.primary[500]} size={64} />;
+    return <Loading color={theme.colors.primary[500]} size={'lg'} />;
   } else {
     return (
       <Container>
@@ -36,7 +36,7 @@ export function Ability() {
               color="primary"
               weight="bold"
             >
-              {abilityInfo.name.split("-").join(" ")}
+              {abilityInfo.name.split('-').join(' ')}
             </Text>
           </div>
           <div className="descriptionDiv">
@@ -60,12 +60,12 @@ export function Ability() {
                 );
               })
             ) : (
-              <Loading color={theme.colors.primary[500]} size={64} />
+              <Loading color={theme.colors.primary[500]} size={'lg'} />
             )}
           </div>
           <div className="backButton">
             <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>
-              <Button.Content text={"Voltar"} />
+              <Button.Content text={'Voltar'} />
             </Button.Root>
           </div>
         </>

@@ -1,12 +1,12 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { BlankPage } from "../pages/404/404";
-import { Home } from "../pages/Home/Home";
-import { Pokedex } from "../pages/Pokedex/Pokedex";
-import { Pokemon } from "../pages/Pokemon/Pokemon";
-import { Ability } from "../pages/Ability/Ability";
-import { Type } from "../pages/Type";
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BlankPage } from '../pages/404/404';
+import { Home } from '../pages/Home/Home';
+import { Pokedex } from '../pages/Pokedex/Pokedex';
+import { Pokemon } from '../pages/Pokemon/Pokemon';
+import { Ability } from '../pages/Ability/Ability';
+import { Type } from '../pages/TypePage/Type';
 // import Test from "../pages/Teste/Test";
-import Moves from "../pages/Moves";
+import Moves from '../pages/Moves/Moves';
 
 export function IndexRoutes() {
   return (

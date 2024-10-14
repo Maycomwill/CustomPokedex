@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { Button } from "../../components/Button";
-import { Loading } from "../../components/Loading/Loading";
-import { PokemonCard } from "../../components/PokemonCard/PokemonCard";
-import { usePokedex } from "../../hooks/usePokedex";
-import theme from "../../styles/theme";
-import { Container } from "./styles";
-import { PokemonDataProps } from "../../interfaces/pokemonInterfaces";
-import { BackToTop } from "../../components/BackToTop/BackToTop";
-import NavButtons from "../../components/NavButtons/NavButtons";
-import { DropMenu } from "../../components/DropdownMenu/DropMenu";
-import { Text } from "../../components/Text/Text";
-import useGeneration from "../../hooks/useGeneration";
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Button } from '../../components/Button';
+import Loading from '../../components/Loading/Loading';
+import { PokemonCard } from '../../components/PokemonCard/PokemonCard';
+import { usePokedex } from '../../hooks/usePokedex';
+import theme from '../../styles/theme';
+import { Container } from './styles';
+import { PokemonDataProps } from '../../interfaces/pokemonInterfaces';
+import { BackToTop } from '../../components/BackToTop/BackToTop';
+import NavButtons from '../../components/NavButtons/NavButtons';
+import { DropMenu } from '../../components/DropdownMenu/DropMenu';
+import { Text } from '../../components/Text/Text';
+import useGeneration from '../../hooks/useGeneration';
 
 export function Pokedex() {
   const params = useParams();
@@ -23,7 +23,7 @@ export function Pokedex() {
   const { pokemonData, getGenerationFromUserChoice } = useGeneration();
 
   const [isLoading, setIsLoading] = useState(true);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
 
   // console.log(genTypeFilteredList);
 
@@ -33,30 +33,30 @@ export function Pokedex() {
     pokemonListFiltered =
       search.length > 0
         ? genTypeFilteredList.filter((pokemon) =>
-            pokemon.name.includes(search.toLowerCase())
+            pokemon.name.includes(search.toLowerCase()),
           )
         : [];
   } else {
     pokemonListFiltered =
       search.length > 0
         ? pokemonData.filter((pokemon) =>
-            pokemon.name.includes(search.toLowerCase())
+            pokemon.name.includes(search.toLowerCase()),
           )
         : [];
   }
 
   useEffect(() => {
     setIsLoading(true);
-    handleFilterGenType("", pokemonData);
+    handleFilterGenType('', pokemonData);
     {
       generation && getGenerationFromUserChoice(generation);
     }
     setIsLoading(false);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [generation]);
 
   if (isLoading || pokemonData.length === 0) {
-    return <Loading size={64} color={theme.colors.primary[500]} />;
+    return <Loading size={'lg'} color={theme.colors.primary[500]} />;
   } else {
     if (genTypeFilteredList.length == 0) {
       return (
@@ -69,7 +69,7 @@ export function Pokedex() {
                 onClick={() => navigate(-1)}
                 size="small"
               >
-                <Button.Content text={"Voltar"} />
+                <Button.Content text={'Voltar'} />
               </Button.Root>
             </div>
           </div>
@@ -88,7 +88,7 @@ export function Pokedex() {
               </form>
             </div>
             <div className="filtersDiv">
-              <DropMenu pokemonArray={pokemonData}/>
+              <DropMenu pokemonArray={pokemonData} />
             </div>
           </div>
           {search.length > 0 ? (
@@ -149,7 +149,7 @@ export function Pokedex() {
                 onClick={() => navigate(-1)}
                 size="small"
               >
-                <Button.Content text={"Voltar"} />
+                <Button.Content text={'Voltar'} />
               </Button.Root>
             </div>
           </div>
@@ -168,7 +168,7 @@ export function Pokedex() {
               </form>
             </div>
             <div className="filtersDiv">
-              <DropMenu pokemonArray={pokemonData}/>
+              <DropMenu pokemonArray={pokemonData} />
             </div>
           </div>
 
