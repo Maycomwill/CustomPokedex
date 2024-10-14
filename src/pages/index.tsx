@@ -1,12 +1,12 @@
-import { Header } from "../components/Header/Header";
-import { IndexRoutes } from "../routes";
-import { Container } from "./styles";
-import { Footer } from "../components/Footer/Footer";
+import { Header } from '../components/Header/Header';
+import { IndexRoutes } from '../routes';
+import { Container } from './styles';
+import { Footer } from '../components/Footer/Footer';
 
 function Index() {
   return (
     <Container>
-      <Header id="header" />
+      <Header />
       <div id="routes">
         <IndexRoutes />
       </div>

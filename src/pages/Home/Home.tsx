@@ -101,11 +101,11 @@ export function Home() {
         </form>
       </div>
       <div className="filters-wrapper">
-        <Spacer className="spacer1" />
+        <Spacer />
         <div className="regions-wrapper">
           <RegionsForm />
         </div>
-        <Spacer className="spacer2" />
+        <Spacer />
         <div className="types-wrapper">
           <TypesForm />
         </div>

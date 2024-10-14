@@ -1,20 +1,19 @@
-import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { Container } from "./styles";
-import useMoves from "../../hooks/useMoves";
-import { Loading } from "../../components/Loading/Loading";
-import theme from "../../styles/theme";
-import { Text } from "../../components/Text/Text";
-import { Spacer } from "../../components/Spacer/Spacer";
-import CustomTooltip from "../../components/CustomTooltip/CustomTooltip";
-import Physical from "../../assets/damage_class/physical.png";
-import Special from "../../assets/damage_class/special.png";
-import Status from "../../assets/damage_class/status.png";
-import VSpacer from "../../components/Spacer/VSpacer";
-import { TypeCard } from "../../components/TypeCard/TypeCard";
-import { PokemonCard } from "../../components/PokemonCard/PokemonCard";
-import { BackToTop } from "../../components/BackToTop/BackToTop";
-import { Button } from "../../components/Button";
+import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Container } from './styles';
+import useMoves from '../../hooks/useMoves';
+import { Loading } from '../../components/Loading/Loading';
+import theme from '../../styles/theme';
+import { Text } from '../../components/Text/Text';
+import { Spacer } from '../../components/Spacer/Spacer';
+import CustomTooltip from '../../components/CustomTooltip/CustomTooltip';
+import Physical from '../../assets/damage_class/physical.png';
+import Special from '../../assets/damage_class/special.png';
+import Status from '../../assets/damage_class/status.png';
+import { TypeCard } from '../../components/TypeCard/TypeCard';
+import { PokemonCard } from '../../components/PokemonCard/PokemonCard';
+import { BackToTop } from '../../components/BackToTop/BackToTop';
+import { Button } from '../../components/Button';
 
 function Moves() {
   const params = useParams();
@@ -28,15 +27,15 @@ function Moves() {
     }
   }, []);
 
-  function handleDamageClass(damage_class: "physical" | "special" | "status") {
+  function handleDamageClass(damage_class: 'physical' | 'special' | 'status') {
     switch (damage_class) {
-      case "physical":
+      case 'physical':
         return (
           <div className="damage_class_wrapper">
             <img src={Physical} alt="Status type" />
           </div>
         );
-      case "special":
+      case 'special':
         return (
           <div className="damage_class_wrapper">
             <img src={Special} alt="Status type" />
@@ -57,7 +56,7 @@ function Moves() {
     return (
       <Container>
         <Text size="xl" weight="bold" transform="capitalize">
-          {move.name.split("-").join(" ")}
+          {move.name.split('-').join(' ')}
         </Text>
         <div className="description">
           <Text size="md">{move.flavor_text_entries}</Text>
@@ -69,13 +68,13 @@ function Moves() {
             <div className="text-info">
               <Text
                 style={{
-                  display: move.effect_chance === null ? "none" : "block",
+                  display: move.effect_chance === null ? 'none' : 'block',
                 }}
               >
                 Chance: {move.effect_chance}%
               </Text>
               <Text transform="capitalize">
-                Target: {move.target.name.split("-").join(" ")}
+                Target: {move.target.name.split('-').join(' ')}
               </Text>
               <TypeCard pressable pokemonType={move.type.name} />
             </div>
@@ -83,9 +82,9 @@ function Moves() {
           <div className="attack-info">
             <div
               style={{
-                display: "flex",
-                gap: ".8rem",
-                width: "100%",
+                display: 'flex',
+                gap: '.8rem',
+                width: '100%',
               }}
             >
               <Text>Power:</Text>
@@ -93,29 +92,26 @@ function Moves() {
                 <div
                   style={{
                     width: `${move.power}%`,
-                    maxWidth: "100%",
+                    maxWidth: '100%',
                     backgroundColor: `${theme.colors.primary[500]}`,
-                    borderRadius: ".4rem",
+                    borderRadius: '.4rem',
                   }}
                 >
                   <Text size="md">{move.power}</Text>
                 </div>
               </div>
             </div>
-            <div className="text-info">
-              <Text>PP: {move.pp}</Text>
-              <div className="vertical">
-                <VSpacer />
+            <div className="grid w-full grid-cols-2 place-content-start place-items-start justify-center gap-4">
+              <div className="flex items-center justify-center">
+                <Text>PP: {move.pp}</Text>
               </div>
-              <Text>Acurácia: {move.accuracy}%</Text>
-              <div className="vertical">
-                <VSpacer />
+              <div className="flex items-center justify-center">
+                <Text>Acurácia: {move.accuracy}%</Text>
               </div>
-              <CustomTooltip arrow title={"Varia de -8 a 8"}>
-                <Text>Prioridade: {move.priority}</Text>
-              </CustomTooltip>
-              <div className="vertical">
-                <VSpacer />
+              <div className="flex items-center justify-center">
+                <CustomTooltip arrow title={'Varia de -8 a 8'}>
+                  <Text>Prioridade: {move.priority}</Text>
+                </CustomTooltip>
               </div>
               <div className="damage_class_wrapper">
                 <Text>Classe: </Text>
@@ -151,7 +147,7 @@ function Moves() {
         </div>
         <div className="backButton">
           <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>
-            <Button.Content text={"Voltar"} />
+            <Button.Content text={'Voltar'} />
           </Button.Root>
         </div>
         <BackToTop />

@@ -4,9 +4,7 @@ import { Button } from './ui/button';
 function TailwindcssTest() {
   return (
     <div className="">
-      <Button size={'lg'} variant={'secondary'}>
-        Test
-      </Button>
+      <Button size={'lg'}>Test</Button>
     </div>
   );
 }
