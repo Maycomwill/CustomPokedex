@@ -55,13 +55,13 @@ export function Ability() {
               commonAbilityPokemon.map((pokemon, i) => {
                 return (
                   <div
+                    key={`${pokemon.id}-${pokemon.name}`}
                     className={clsx('w-full', {
                       'md:col-span-2 md:w-auto lg:col-span-1':
                         i === commonAbilityPokemon.length - 1,
                     })}
                   >
                     <PokemonCard
-                      key={`${pokemon.id}-${pokemon.name}`}
                       id={pokemon.id}
                       name={pokemon.name}
                       types={pokemon.types}
