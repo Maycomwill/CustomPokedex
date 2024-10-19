@@ -6,7 +6,7 @@ function Index() {
   return (
     <div className="flex min-h-screen w-full flex-col items-center justify-start">
       <Header />
-      <div className="flex flex-1">
+      <div className="flex w-full flex-1">
         <IndexRoutes />
       </div>
       <Footer />

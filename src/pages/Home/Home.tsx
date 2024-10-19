@@ -55,11 +55,11 @@ export function Home() {
       </div>
       <div className="flex w-full flex-col px-12">
         <Spacer />
-        <div>
+        <div className="w-full">
           <RegionsForm />
         </div>
         <Spacer />
-        <div>
+        <div className="w-full">
           <TypesForm />
         </div>
       </div>
