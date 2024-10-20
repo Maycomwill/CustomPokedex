@@ -101,7 +101,12 @@ export function TypeCard({ pokemonType, pressable = false }: ITypeCardProps) {
       >
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white p-1">
           {poketypesComponents({
-            height: pokemonType === 'steel' || pokemonType === 'rock' ? 21 : 25,
+            height:
+              pokemonType === 'steel' ||
+              pokemonType === 'ice' ||
+              pokemonType === 'rock'
+                ? 21
+                : 25,
             width:
               pokemonType === 'grass'
                 ? 27
