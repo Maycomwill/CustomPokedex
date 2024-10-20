@@ -1,13 +1,12 @@
-import { ArrowFatLinesUp } from "phosphor-react";
-import { Evolution } from "../../interfaces/evolutionInterface";
-import { Text } from "../Text/Text";
-import { Container, Trigger } from "./styles";
-import CustomTooltip from "../CustomTooltip/CustomTooltip";
-import { FaHeart, FaMoon, FaSun } from "react-icons/fa";
-import { IoMdHappy } from "react-icons/io";
-import { IoSparkles, IoFemale } from "react-icons/io5";
-import { CgArrowsExchangeAltV } from "react-icons/cg";
-import { useNavigate } from "react-router-dom";
+import { ArrowFatLinesUp } from 'phosphor-react';
+import { Evolution } from '../../interfaces/evolutionInterface';
+import { Text } from '../Text/Text';
+import CustomTooltip from '../CustomTooltip/CustomTooltip';
+import { FaHeart, FaMoon, FaSun } from 'react-icons/fa';
+import { IoMdHappy } from 'react-icons/io';
+import { IoSparkles, IoFemale } from 'react-icons/io5';
+import { CgArrowsExchangeAltV } from 'react-icons/cg';
+import { useNavigate } from 'react-router-dom';
 
 interface EvolutionCardProps {
   shiny: boolean;
@@ -20,50 +19,50 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
     //options: "level-up" | "trade" | "use-item" | "shed" | "other"
     if (trigger === null) {
       return (
-        <Trigger>
-          <div className="spacer"></div>
-        </Trigger>
+        <div className="flex min-h-12 w-full flex-1 items-center justify-center">
+          <div className="flex items-center justify-center gap-1"></div>
+        </div>
       );
     }
     switch (trigger.name) {
-      case "use-item":
-        if (evolution.name === "glaceon" || evolution.name === "leafeon") {
+      case 'use-item':
+        if (evolution.name === 'glaceon' || evolution.name === 'leafeon') {
           return (
-            <Trigger>
+            <div className="flex min-h-12 w-full flex-1 items-center justify-center">
               <CustomTooltip
                 arrow
                 placement="top"
-                title={evolution.details![3].item?.name.split("-").join(" ")}
+                title={evolution.details![3].item?.name.split('-').join(' ')}
               >
                 <img
                   src={evolution.trigger!.sprite}
                   alt={evolution.details![3].item?.name}
                 />
               </CustomTooltip>
-            </Trigger>
+            </div>
           );
         }
         return (
-          <Trigger>
+          <div className="flex min-h-12 w-full flex-1 items-center justify-center">
             <CustomTooltip
               placement="top"
               arrow
-              title={evolution.details![0].item?.name.split("-").join(" ")}
+              title={evolution.details![0].item?.name.split('-').join(' ')}
             >
               <img
                 src={evolution.trigger!.sprite}
                 alt={evolution.details![0].item?.name}
               />
             </CustomTooltip>
-          </Trigger>
+          </div>
         );
 
-      case "level-up":
+      case 'level-up':
         return (
-          <Trigger>
-            <div className="level-up">
+          <div className="flex min-h-12 w-full flex-1 items-center justify-center">
+            <div className="flex items-center justify-center gap-1">
               {evolution.details![0].min_level && (
-                <CustomTooltip arrow title={"Level"} placement="top">
+                <CustomTooltip arrow title={'Level'} placement="top">
                   <>
                     <ArrowFatLinesUp color="white" size={16} />
                     <Text size="md">{evolution.details![0].min_level}</Text>
@@ -71,7 +70,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
                 </CustomTooltip>
               )}
               {evolution.details![0].min_beauty && (
-                <CustomTooltip arrow title={"Level"} placement="top">
+                <CustomTooltip arrow title={'Level'} placement="top">
                   <>
                     <IoSparkles size={16} color="yellow" />
                     <Text size="md">{evolution.details![0].min_beauty}</Text>
@@ -82,15 +81,15 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
                 <CustomTooltip
                   placement="top"
                   arrow
-                  title={"Felicidade"}
+                  title={'Felicidade'}
                   style={{
-                    backgroundColor: "red",
+                    backgroundColor: 'red',
                   }}
                 >
-                  <div className="min_effect">
+                  <div className="flex items-center justify-center gap-1">
                     <IoMdHappy color="white" size={16} />
                     <Text size="md">{evolution.details![0].min_happiness}</Text>
-                    {evolution.details![0].time_of_day === "day" ? (
+                    {evolution.details![0].time_of_day === 'day' ? (
                       <FaSun size={14} color="yellow" />
                     ) : (
                       <FaMoon size={14} color="white" />
@@ -99,38 +98,42 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
                 </CustomTooltip>
               )}
               {evolution.details![0].min_affection && (
-                <CustomTooltip arrow title={"Afeição"} placement="top">
-                  <div className="min_effect">
+                <CustomTooltip arrow title={'Afeição'} placement="top">
+                  <div className="flex items-center justify-center gap-1">
                     <FaHeart size={16} color="red" />
                     <Text size="md">{evolution.details![0].min_affection}</Text>
                   </div>
                 </CustomTooltip>
               )}
               {evolution.details![0].gender === 1 && (
-                <CustomTooltip arrow title={"Gênero"} placement="top">
-                  <div className="min_effect">
+                <CustomTooltip arrow title={'Gênero'} placement="top">
+                  <div className="flex items-center justify-center gap-1">
                     <IoFemale size={16} color="red" />
                     <Text size="md">{evolution.details![0].min_affection}</Text>
                   </div>
                 </CustomTooltip>
               )}
             </div>
-          </Trigger>
+          </div>
         );
-      case "trade":
+      case 'trade':
         return (
-          <Trigger>
+          <div className="flex min-h-12 w-full flex-1 items-center justify-center">
             <CustomTooltip arrow title="Troca" placement="top">
-              <div className="level-up">
+              <div className="flex items-center justify-center gap-1">
                 <CgArrowsExchangeAltV color="white" size={20} />
               </div>
             </CustomTooltip>
-          </Trigger>
+          </div>
         );
       case null:
-        return <Trigger />;
+        return (
+          <div className="flex min-h-12 w-full flex-1 items-center justify-center" />
+        );
       default:
-        return <Trigger />;
+        return (
+          <div className="flex min-h-12 w-full flex-1 items-center justify-center" />
+        );
     }
   }
 
@@ -140,18 +143,22 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
 
   // console.log(evolution.name, evolution);
   return (
-    <Container onClick={() => handleRedirect(evolution.name)}>
-      <div className="trigger-wrapper">
+    <button
+      className="flex min-h-72 flex-col items-center justify-between rounded-md border border-accent-200 bg-white/0 px-2 py-1 outline-none transition-all duration-200 ease-in-out hover:cursor-pointer hover:border-accent-500 hover:bg-white/10"
+      onClick={() => handleRedirect(evolution.name)}
+    >
+      <div className="min-h-12 w-full">
         {evolution.trigger && handleTrigger(evolution.trigger)}
       </div>
-      <div className="img-wrapper">
+      <div className="flex">
         <img
+          className="size-40 md:size-52 lg:size-64"
           src={shiny ? evolution.sprites.shiny : evolution.sprites.default}
           alt={evolution.name}
         />
       </div>
       <Text transform="capitalize">{evolution.name}</Text>
-    </Container>
+    </button>
   );
 }
 

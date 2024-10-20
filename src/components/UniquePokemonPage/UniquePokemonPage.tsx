@@ -1,22 +1,22 @@
-import { useNavigate } from "react-router-dom";
-import { UniquePokemonData } from "../../interfaces/pokemonInterfaces";
-import theme from "../../styles/theme";
-import { Button } from "../Button";
-import { Text } from "../Text/Text";
-import { TypeCard } from "../TypeCard/TypeCard";
-import { Container } from "./styles";
-import { Spacer } from "../Spacer/Spacer";
-import { BackToTop } from "../BackToTop/BackToTop";
-import { CaretRight, EyeSlash, Sparkle } from "phosphor-react";
-import SimpleCardType from "../SimpleCardType/SimpleCardType";
-import CustomTooltip from "../CustomTooltip/CustomTooltip";
-import CustomChart from "../Chart/Chart";
-import { CircleButton } from "../Button/CircleButton/CircleButton";
-import { useState } from "react";
-import addZeroes from "../../utils/addZeros";
-import { Evolution } from "../../interfaces/evolutionInterface";
-import EvolutionCard from "../EvolutionCard";
-import { FormDataSchema } from "../../interfaces/formInterfaces";
+import { useNavigate } from 'react-router-dom';
+import { UniquePokemonData } from '../../interfaces/pokemonInterfaces';
+import theme from '../../styles/theme';
+import { Button } from '../Button';
+import { Text } from '../Text/Text';
+import { TypeCard } from '../TypeCard/TypeCard';
+import { Container } from './styles';
+import { Spacer } from '../Spacer/Spacer';
+import { BackToTop } from '../BackToTop/BackToTop';
+import { CaretRight, EyeSlash, Sparkle } from 'phosphor-react';
+import SimpleCardType from '../SimpleCardType/SimpleCardType';
+import CustomTooltip from '../CustomTooltip/CustomTooltip';
+import CustomChart from '../Chart/Chart';
+import { CircleButton } from '../Button/CircleButton/CircleButton';
+import { useState } from 'react';
+import addZeroes from '../../utils/addZeros';
+import { Evolution } from '../../interfaces/evolutionInterface';
+import EvolutionCard from '../EvolutionCard/EvolutionCard';
+import { FormDataSchema } from '../../interfaces/formInterfaces';
 
 interface IUniquePokemonPage {
   data: UniquePokemonData | undefined;
@@ -131,7 +131,7 @@ export default function UniquePokemonPage({
                 forms.map((form, index) => {
                   return (
                     <option key={`${form.name}-${index}`} value={index}>
-                      {form.name.split("-").join(" ")}
+                      {form.name.split('-').join(' ')}
                     </option>
                   );
                 })}
@@ -142,7 +142,7 @@ export default function UniquePokemonPage({
       <div className="infoWrapper">
         <div className="pokedexInfo">
           <Text size="xxl" weight="bold" transform="capitalize" id="name">
-            {data.name?.split("-").join(" ")}
+            {data.name?.split('-').join(' ')}
           </Text>
           <Text size="xxl" transform="capitalize" id="id">
             #{addZeroes(data.id, 3)}
@@ -161,7 +161,7 @@ export default function UniquePokemonPage({
             </div>
           </div>
           <div className="flavorWrapper">
-            <Text size="md">{data.flavor?.split("\f").join(" ")}</Text>
+            <Text size="md">{data.flavor?.split('\f').join(' ')}</Text>
           </div>
         </div>
       </div>
@@ -202,7 +202,7 @@ export default function UniquePokemonPage({
                 className="info"
               >
                 <Text size="md" transform="capitalize" className="abilityName">
-                  {ability.ability.name.split("-").join(" ")}
+                  {ability.ability.name.split('-').join(' ')}
                 </Text>
               </div>
             </div>
@@ -222,15 +222,15 @@ export default function UniquePokemonPage({
                 key={`${stat.stat.name}-${stat.effort}`}
               >
                 <Text size="md" transform="capitalize">
-                  {stat.stat.name.split("-").join(" ")}
+                  {stat.stat.name.split('-').join(' ')}
                 </Text>
                 <div className="baseStatDiv">
                   <div
                     style={{
                       width: handleStatsBar(stat.base_stat),
-                      maxWidth: "100%",
+                      maxWidth: '100%',
                       backgroundColor: `${theme.colors.primary[500]}`,
-                      borderRadius: ".4rem",
+                      borderRadius: '.4rem',
                     }}
                   >
                     <Text size="md">{stat.base_stat}</Text>
@@ -307,7 +307,7 @@ export default function UniquePokemonPage({
               <div
                 className="second_evolution"
                 style={{
-                  display: evolutions.second.length === 1 ? "flex" : "grid",
+                  display: evolutions.second.length === 1 ? 'flex' : 'grid',
                 }}
               >
                 {evolutions.second.map((evolution) => {
@@ -372,7 +372,7 @@ export default function UniquePokemonPage({
 
       <div className="backButton">
         <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>
-          <Button.Content text={"Voltar"} />
+          <Button.Content text={'Voltar'} />
         </Button.Root>
       </div>
       <BackToTop />
