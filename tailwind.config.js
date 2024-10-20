@@ -1,3 +1,5 @@
+import { backgroundImages } from 'polished';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ['class'],
@@ -10,9 +12,8 @@ export default {
         sm: 'calc(var(--radius) - 4px)',
       },
       colors: {
-        black: '#121214',
         transparent: 'transparent',
-        red: '#d50000',
+
         primary: {
           100: '#b9ecd5',
           200: '#8be0b9',
@@ -90,6 +91,17 @@ export default {
           steel: '#88a0b5',
           water: '#4AA5F7',
         },
+      },
+      backgroundImage: {
+        'region-kanto': "url('/src/assets/regions/kanto.png')",
+        'region-johto': "url('/src/assets/regions/johto.png')",
+        'region-hoenn': "url('/src/assets/regions/hoenn.png')",
+        'region-sinnoh': "url('/src/assets/regions/sinnoh.png')",
+        'region-unova': "url('/src/assets/regions/unova.png')",
+        'region-alola': "url('/src/assets/regions/alola.png')",
+        'region-galar': "url('/src/assets/regions/galar.png')",
+        'region-kalos': "url('/src/assets/regions/kalos.png')",
+        'region-paldea': "url('/src/assets/regions/paldea.png')",
       },
     },
   },
