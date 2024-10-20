@@ -21,21 +21,23 @@ export function Pokemon() {
   }, [params]);
 
   if (isLoading) {
-    return <Loading color={theme.colors.primary[500]} size={'lg'} />;
+    return (
+      <div className="flex w-full flex-1 items-center justify-center">
+        <Loading color={theme.colors.primary[500]} size={'lg'} />
+      </div>
+    );
   } else {
     // console.log(uniquePokemonData);
     return (
-      <>
-        <UniquePokemonPage
-          evolutions={{
-            first: firstEvolution,
-            second: secondEvolution,
-            third: thirdEvolution,
-          }}
-          forms={forms}
-          data={uniquePokemonData}
-        />
-      </>
+      <UniquePokemonPage
+        evolutions={{
+          first: firstEvolution,
+          second: secondEvolution,
+          third: thirdEvolution,
+        }}
+        forms={forms}
+        data={uniquePokemonData}
+      />
     );
   }
 }

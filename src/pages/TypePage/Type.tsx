@@ -8,7 +8,7 @@ import { BackToTop } from '../../components/BackToTop/BackToTop';
 import theme from '../../styles/theme';
 import useTypes from '../../hooks/useTypes';
 import { Spacer } from '../../components/Spacer/Spacer';
-import MoveCard from '../../components/MoveCard';
+import MoveCard from '../../components/MoveCard/MoveCard';
 import { Button } from '@/components/ui/button';
 
 export function Type() {

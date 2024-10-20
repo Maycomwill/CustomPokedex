@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button } from '../../components/Button';
+
 import Loading from '../../components/Loading/Loading';
 import { PokemonCard } from '../../components/PokemonCard/PokemonCard';
 import { usePokedex } from '../../hooks/usePokedex';
 import theme from '../../styles/theme';
-import { Container } from './styles';
 import { PokemonDataProps } from '../../interfaces/pokemonInterfaces';
 import { BackToTop } from '../../components/BackToTop/BackToTop';
 import NavButtons from '../../components/NavButtons/NavButtons';
 import { DropMenu } from '../../components/DropdownMenu/DropMenu';
 import { Text } from '../../components/Text/Text';
 import useGeneration from '../../hooks/useGeneration';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Container } from 'lucide-react';
 
 export function Pokedex() {
   const params = useParams();
@@ -56,43 +58,40 @@ export function Pokedex() {
   }, [generation]);
 
   if (isLoading || pokemonData.length === 0) {
-    return <Loading size={'lg'} color={theme.colors.primary[500]} />;
+    return (
+      <div className="flex w-full flex-1 items-center justify-center">
+        <Loading color={theme.colors.primary[500]} size={'lg'} />
+      </div>
+    );
   } else {
     if (genTypeFilteredList.length == 0) {
       return (
-        <Container>
-          <div className="generationDiv">
+        <div className="flex min-h-screen w-full flex-col items-center justify-start px-2">
+          <div className="flex w-full items-center justify-between py-6">
             <Text size="xl">{params.generationid}ª Geração</Text>
             <div>
-              <Button.Root
-                backgroundColor="delete"
-                onClick={() => navigate(-1)}
-                size="small"
-              >
-                <Button.Content text={'Voltar'} />
-              </Button.Root>
+              <Button onClick={() => navigate(-1)}>Voltar</Button>
             </div>
           </div>
-          <div className="filtersWrapper">
-            <div className="blankDiv"></div>
-            <div className="inputWrapper">
-              <form>
-                <input
+          <div className="grid w-full grid-cols-[1fr_2fr_1fr] place-items-center">
+            <div />
+
+            <div className="flex w-full items-center justify-center">
+              <form className="flex flex-col gap-1">
+                <Input
                   type="text"
                   placeholder="Digite o nome do pokemon"
                   name="search"
-                  className="searchInput"
                   onChange={(e) => setSearch(e.target.value)}
                   value={search}
                 />
               </form>
             </div>
-            <div className="filtersDiv">
-              <DropMenu pokemonArray={pokemonData} />
-            </div>
+
+            <DropMenu pokemonArray={pokemonData} />
           </div>
           {search.length > 0 ? (
-            <div className="pokemonCard-wrapper">
+            <div className="m-auto grid w-full grid-cols-1 place-items-center justify-center gap-3 pt-3 md:grid-cols-2 lg:grid-cols-3">
               {pokemonListFiltered
                 .sort((a, b) => {
                   if (a > b) return 1;
@@ -113,7 +112,7 @@ export function Pokedex() {
                 })}
             </div>
           ) : (
-            <div className="pokemonCard-wrapper">
+            <div className="m-auto grid w-full grid-cols-1 place-items-center justify-center gap-3 pt-3 md:grid-cols-2 lg:grid-cols-3">
               {pokemonData
                 .sort((a, b) => {
                   if (a > b) return 1;
@@ -136,44 +135,36 @@ export function Pokedex() {
           )}
           <BackToTop />
           <NavButtons />
-        </Container>
+        </div>
       );
     } else {
       return (
-        <Container>
-          <div className="generationDiv">
+        <div className="flex min-h-screen w-full flex-col items-center justify-start px-2">
+          <div className="flex w-full items-center justify-between py-6">
             <Text size="lg">{params.generationid}ª Geração</Text>
             <div>
-              <Button.Root
-                backgroundColor="delete"
-                onClick={() => navigate(-1)}
-                size="small"
-              >
-                <Button.Content text={'Voltar'} />
-              </Button.Root>
+              <Button onClick={() => navigate(-1)}>Voltar</Button>
             </div>
           </div>
-          <div className="filtersWrapper">
-            <div className="blankDiv"></div>
-            <div className="inputWrapper">
-              <form>
-                <input
+          <div className="grid w-full grid-cols-[1fr_2fr_1fr] place-items-center">
+            <div />
+            <div className="flex w-full items-center justify-center">
+              <form className="flex flex-col gap-1">
+                <Input
                   type="text"
                   placeholder="Digite o nome do pokemon"
-                  className="searchInput"
                   name="search"
                   onChange={(e) => setSearch(e.target.value)}
                   value={search}
                 />
               </form>
             </div>
-            <div className="filtersDiv">
-              <DropMenu pokemonArray={pokemonData} />
-            </div>
+
+            <DropMenu pokemonArray={pokemonData} />
           </div>
 
           {search.length > 0 ? (
-            <div className="pokemonCard-wrapper">
+            <div className="m-auto grid w-full grid-cols-1 place-items-center justify-center gap-3 pt-3 md:grid-cols-2 lg:grid-cols-3">
               {pokemonListFiltered
                 .sort((a, b) => {
                   if (a > b) return 1;
@@ -194,7 +185,7 @@ export function Pokedex() {
                 })}
             </div>
           ) : (
-            <div className="pokemonCard-wrapper">
+            <div className="m-auto grid w-full grid-cols-1 place-items-center justify-center gap-3 pt-3 md:grid-cols-2 lg:grid-cols-3">
               {genTypeFilteredList
                 .sort((a, b) => {
                   if (a > b) return 1;
@@ -217,7 +208,7 @@ export function Pokedex() {
           )}
           <BackToTop />
           <NavButtons />
-        </Container>
+        </div>
       );
     }
   }
