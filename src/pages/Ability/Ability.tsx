@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Text } from '../../components/Text/Text';
 import Loading from '../../components/Loading/Loading';
 import theme from '../../styles/theme';
 import { PokemonCard } from '../../components/PokemonCard/PokemonCard';
@@ -34,20 +33,17 @@ export function Ability() {
       <div className="flex min-h-screen w-full flex-col items-center justify-center px-1 pt-px">
         <>
           <div className="text-center">
-            <Text
-              transform="uppercase"
-              size="xxl"
-              color="primary"
-              weight="bold"
-            >
+            <h1 className="text-4xl font-semibold uppercase text-primary-500">
               {abilityInfo.name.split('-').join(' ')}
-            </Text>
+            </h1>
           </div>
           <div className="px-3 pt-6 text-justify">
-            <Text size="md">{abilityInfo.description}</Text>
+            <span>{abilityInfo.description}</span>
           </div>
           <div className="py-4 text-center">
-            <Text size="lg">Pokemons que possuem esta habilidade: </Text>
+            <span className="text-3xl">
+              Pokemons que possuem esta habilidade:{' '}
+            </span>
           </div>
 
           <div className="grid w-full grid-cols-1 place-items-center items-center gap-4 px-2 pt-3 md:grid-cols-2 lg:grid-cols-3">

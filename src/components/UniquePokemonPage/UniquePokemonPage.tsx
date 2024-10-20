@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { UniquePokemonData } from '../../interfaces/pokemonInterfaces';
 import theme from '../../styles/theme';
-import { Text } from '../Text/Text';
 import { TypeCard } from '../TypeCard/TypeCard';
 import { Spacer } from '../Spacer/Spacer';
 import { BackToTop } from '../BackToTop/BackToTop';
@@ -150,12 +149,10 @@ export default function UniquePokemonPage({
 
       <div className="flex w-full flex-col items-center justify-center">
         <div className="grid grid-cols-2 grid-rows-3 items-start justify-center px-8 text-center md:gap-1">
-          <Text size="xxl" weight="bold" transform="capitalize" id="name">
+          <h1 className="text-4xl font-semibold capitalize">
             {data.name?.split('-').join(' ')}
-          </Text>
-          <Text size="xxl" transform="capitalize" id="id">
-            #{addZeroes(data.id, 3)}
-          </Text>
+          </h1>
+          <h2 className="text-2xl capitalize">#{addZeroes(data.id, 3)}</h2>
           <div className="typesWrapper">
             <div className="my-1 flex w-full flex-row items-start justify-center gap-4">
               {data.types?.map((type) => {
@@ -170,7 +167,7 @@ export default function UniquePokemonPage({
             </div>
           </div>
           <div className="text-justify">
-            <Text size="md">{data.flavor?.split('\f').join(' ')}</Text>
+            <p className="text-base">{data.flavor?.split('\f').join(' ')}</p>
           </div>
         </div>
       </div>
@@ -179,20 +176,19 @@ export default function UniquePokemonPage({
 
       <div className="grid w-[70%] grid-cols-2 gap-x-8 px-8">
         <div className="infoCard">
-          <Text size="md" transform="capitalize">
-            Altura:
-          </Text>
+          <span className="text-base capitalize">Altura:</span>
+
           <div className="flex flex-1 items-center justify-center rounded-md border border-gray-500 bg-gray-800 py-3">
-            <Text size="md">{(data.height * 0.1).toFixed(2)}m</Text>
+            <span className="text-base">{(data.height * 0.1).toFixed(2)}m</span>
           </div>
         </div>
 
         <div className="infoCard">
-          <Text size="md" transform="capitalize">
-            Peso:
-          </Text>
+          <span className="text-base capitalize">Peso:</span>
           <div className="flex flex-1 items-center justify-center rounded-md border border-gray-500 bg-gray-800 py-3">
-            <Text size="md">{(data.weight * 0.1).toFixed(2)}kg</Text>
+            <span className="text-base">
+              {(data.weight * 0.1).toFixed(2)}kg
+            </span>
           </div>
         </div>
 
@@ -203,16 +199,14 @@ export default function UniquePokemonPage({
               className="infoCard"
               onClick={() => navigate(`/ability/${ability.ability.name}`)}
             >
-              <Text size="md" transform="capitalize">
-                Habilidade
-              </Text>
+              <span className="text-base capitalize">Habilidade:</span>
               <div
                 key={`${ability.ability.name}-${ability.slot}`}
                 className="relative flex flex-1 cursor-pointer items-center justify-center rounded-md border border-gray-500 bg-gray-800 py-3 transition-all duration-200 ease-in-out hover:border-primary-500"
               >
-                <Text size="md" transform="capitalize" className="abilityName">
+                <span className="text-base capitalize">
                   {ability.ability.name.split('-').join(' ')}
-                </Text>
+                </span>
               </div>
             </div>
           );
@@ -231,9 +225,9 @@ export default function UniquePokemonPage({
                 className="m-auto flex w-full flex-col items-start justify-center gap-1 pt-2"
                 key={`${stat.stat.name}-${stat.effort}`}
               >
-                <Text size="md" transform="capitalize">
+                <span className="text-base capitalize">
                   {stat.stat.name.split('-').join(' ')}
-                </Text>
+                </span>
 
                 <div className="w-full rounded-md bg-gray-600">
                   <div
@@ -244,7 +238,9 @@ export default function UniquePokemonPage({
                       borderRadius: '.4rem',
                     }}
                   >
-                    <Text size="md">{stat.base_stat}</Text>
+                    <span className="text-base capitalize">
+                      {stat.base_stat}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -256,7 +252,7 @@ export default function UniquePokemonPage({
       <div className="flex w-[70%] flex-row items-start justify-center gap-10 p-8 md:w-full md:flex-col md:gap-2">
         {data.damage_relation.double_damage_to.length === 0 ? null : (
           <div className="flex flex-col items-start justify-evenly gap-1">
-            <Text size="md">Forças:</Text>
+            <span className="text-base capitalize">Forças:</span>
             <div className="flex items-center justify-center gap-2">
               <>
                 {data.damage_relation.double_damage_to.map((type) => {
@@ -278,7 +274,7 @@ export default function UniquePokemonPage({
         )}
         {data.damage_relation.double_damage_from.length === 0 ? null : (
           <div className="flex flex-col items-start justify-evenly gap-1">
-            <Text size="md">Fraquezas:</Text>
+            <span className="text-base capitalize">Fraquezas:</span>
             <div className="flex items-center justify-center gap-2">
               {data.damage_relation.double_damage_from.map((type) => {
                 return (
@@ -299,7 +295,7 @@ export default function UniquePokemonPage({
       </div>
       <Spacer />
       <div className="flex w-[70%] flex-col items-center justify-center gap-6 px-8 py-3 md:w-full md:gap-3">
-        <Text size="md">Cadeia evolutiva:</Text>
+        <span className="text-base capitalize">Cadeia evolutiva:</span>
         <div className="mb-6 flex w-full items-center justify-center gap-8">
           <div className="flex items-center justify-center gap-1">
             {evolutions.first?.map((evolution) => {
@@ -372,7 +368,7 @@ export default function UniquePokemonPage({
       <Spacer />
 
       <div className="flex w-full flex-col items-center justify-center text-center">
-        <Text>Gender ratio</Text>
+        <span className="text-base">Gender ratio</span>
         <div className="gender-rate">
           {data.gender ? (
             <CustomChart female={data.gender.female} male={data.gender.male} />

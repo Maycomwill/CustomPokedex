@@ -3,7 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import useMoves from '../../hooks/useMoves';
 import Loading from '../../components/Loading/Loading';
 import theme from '../../styles/theme';
-import { Text } from '../../components/Text/Text';
 import { Spacer } from '../../components/Spacer/Spacer';
 import CustomTooltip from '../../components/CustomTooltip/CustomTooltip';
 import Physical from '../../assets/damage_class/physical.png';
@@ -56,28 +55,32 @@ function Moves() {
   } else {
     return (
       <div className="flex min-h-screen flex-1 flex-col items-center justify-start px-2">
-        <Text size="xl" weight="bold" transform="capitalize">
+        <h1 className="text-4xl font-semibold capitalize">
           {move.name.split('-').join(' ')}
-        </Text>
+        </h1>
+
         <div className="text-justify">
-          <Text size="md">{move.flavor_text_entries}</Text>
+          <p className="text-base">{move.flavor_text_entries}</p>
         </div>
         <Spacer />
 
         <div className="flex w-full flex-col items-center justify-center py-6 md:flex-row">
           <div className="space-y-2 text-justify">
-            <Text>Efeito: {move.effect_entries}</Text>
+            <span className="text-base capitalize">
+              Efeito: {move.effect_entries}
+            </span>
             <div className="space-y-2">
-              <Text
-                style={{
-                  display: move.effect_chance === null ? 'none' : 'block',
-                }}
+              <span
+                className={clsx('block text-base', {
+                  hidden: move.effect_chance === null,
+                })}
               >
                 Chance: {move.effect_chance}%
-              </Text>
-              <Text transform="capitalize">
+              </span>
+
+              <span className="text-base capitalize">
                 Alvo: {move.target.name.split('-').join(' ')}
-              </Text>
+              </span>
             </div>
             <div className="flex w-full items-center justify-center py-4">
               <TypeCard pressable pokemonType={move.type.name} />
@@ -86,36 +89,36 @@ function Moves() {
           <div className="w-full space-y-12 pt-4">
             {move.damage_class.name !== 'status' && (
               <div className="flex flex-col items-start justify-center">
-                <Text>Power:</Text>
+                <span className="text-base">Power:</span>
                 <div className="relative h-6 w-full rounded-md bg-gray-600">
                   <div
                     className="absolute left-0 top-0 h-6 rounded-md bg-primary-300"
                     style={{ width: `${move.power}%` }}
                   >
-                    <Text size="md">{move.power}</Text>
+                    <span className="text-base">{move.power}</span>
                   </div>
                 </div>
               </div>
             )}
             <div className="grid w-full grid-cols-2 place-content-start place-items-center justify-center gap-8">
               <div className="flex items-center justify-center">
-                <Text>PP: {move.pp}</Text>
+                <span>PP: {move.pp}</span>
               </div>
               <div className="flex items-center justify-center">
-                <Text>
+                <span>
                   Acurácia:{' '}
                   {move.damage_class.name !== 'status'
                     ? `${move.accuracy}%`
                     : '---'}
-                </Text>
+                </span>
               </div>
               <div className="flex items-center justify-center">
                 <CustomTooltip arrow title={'Varia de -8 a 8'}>
-                  <Text>Prioridade: {move.priority}</Text>
+                  <span>Prioridade: {move.priority}</span>
                 </CustomTooltip>
               </div>
               <div className="flex flex-col space-y-1">
-                <Text>Classe de dano: </Text>
+                <span>Classe de dano: </span>
                 <CustomTooltip arrow title={move.damage_class.name}>
                   {handleDamageClass(move.damage_class.name)}
                 </CustomTooltip>
@@ -125,7 +128,7 @@ function Moves() {
         </div>
         <Spacer />
         <div className="w-full space-y-2 text-center">
-          <Text>Pokémon que podem aprender essa técnica</Text>
+          <span>Pokémon que podem aprender essa técnica</span>
           <div className="grid w-full grid-cols-1 place-items-center items-center gap-4 pt-3 md:grid-cols-2 lg:grid-cols-3">
             {moveCommonPokemon.length !== 0 ? (
               moveCommonPokemon.map((pokemon, i) => {

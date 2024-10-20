@@ -1,5 +1,4 @@
 import { typeProps } from '../../interfaces/pokemonInterfaces';
-import { Text } from '../Text/Text';
 import { TypeCard } from '../TypeCard/TypeCard';
 import { useNavigate } from 'react-router-dom';
 import { pokemonTypesObject } from '../pokemonTypes/objects/objects';
@@ -91,18 +90,12 @@ export function PokemonCard({
     >
       <div className="flex h-48 min-h-52 flex-1 flex-col items-start justify-between px-6 py-2">
         <div className="flex flex-col items-start justify-center gap-1 md:justify-start md:gap-2">
-          <Text
-            size="lg"
-            weight="bold"
-            transform="capitalize"
-            color="gray"
-            id="pokemonName"
-          >
+          <h1 className="text-3xl font-semibold capitalize text-gray-800">
             {name.split('-').join(' ')}
-          </Text>
-          <Text weight="semi-bold" color="gray">
+          </h1>
+          <span className="font-regular text-base text-gray-600">
             #{addZeroes(String(id), 3)}
-          </Text>
+          </span>
         </div>
         <div className="flex flex-col items-center justify-center gap-1 pb-2">
           <ul className="flex list-none items-center justify-center gap-2">

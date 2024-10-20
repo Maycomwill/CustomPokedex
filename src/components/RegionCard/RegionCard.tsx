@@ -1,5 +1,4 @@
 import { ButtonHTMLAttributes } from 'react';
-import { Text } from '../Text/Text';
 import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 interface RegionCardProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -45,12 +44,12 @@ export function RegionCard(props: RegionCardProps) {
       />
 
       <div className="z-10 flex w-full flex-col items-start justify-center py-3">
-        <Text size="xxl" transform="capitalize" color="white" weight="bold">
+        <span className="text-4xl font-semibold capitalize text-gray-100">
           {props.region.region_name}
-        </Text>
-        <Text size="md" transform="capitalize" color="white" weight="semi-bold">
+        </span>
+        <span className="text-base font-semibold capitalize text-gray-100">
           {props.region.number}º geração
-        </Text>
+        </span>
       </div>
     </button>
   );

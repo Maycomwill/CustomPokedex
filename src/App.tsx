@@ -1,18 +1,15 @@
-import { ThemeProvider } from 'styled-components';
 import AppProvider from './hooks';
 import Index from './pages';
-import GlobalStyle from './styles/global';
-import { darkTheme } from './styles/global';
+
 import './styles/main.css';
 
 function App() {
   return (
-    <ThemeProvider theme={darkTheme}>
+    <div className="h-full min-h-screen w-full bg-gradient-to-b from-gray-900 to-gray-950 text-gray-100">
       <AppProvider>
-        <GlobalStyle />
         <Index />
       </AppProvider>
-    </ThemeProvider>
+    </div>
   );
 }
 

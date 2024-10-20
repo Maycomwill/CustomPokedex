@@ -1,4 +1,3 @@
-import { Text } from '../Text/Text';
 import bug from '../../assets/TypesSvg/bug.svg';
 import dark from '../../assets/TypesSvg/dark.svg';
 import dragon from '../../assets/TypesSvg/dragon.svg';
@@ -119,9 +118,9 @@ export function TypeCard({ pokemonType, pressable = false }: ITypeCardProps) {
           })}
         </div>
         <div className="typeName">
-          <Text transform="capitalize" weight="bold" size="md">
+          <span className="text-base font-semibold capitalize">
             {pokemonType}
-          </Text>
+          </span>
         </div>
       </button>
     );
@@ -172,9 +171,9 @@ export function TypeCard({ pokemonType, pressable = false }: ITypeCardProps) {
         })}
       </div>
       <div>
-        <Text transform="capitalize" weight="bold" size="sm">
+        <span className="text-base font-semibold capitalize">
           {pokemonType}
-        </Text>
+        </span>
       </div>
     </div>
   );

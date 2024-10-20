@@ -1,9 +1,7 @@
-import { Text } from '../Text/Text';
-
 export function Footer() {
   return (
     <div className="flex w-full items-center justify-center py-4">
-      <Text color="white" size="xsm">
+      <p className="text-xs text-gray-100">
         Criado por{' '}
         <a
           href="https://github.com/maycomwill"
@@ -11,12 +9,10 @@ export function Footer() {
   _blank"
           rel="noopener"
         >
-          <Text color="white" size="xsm">
-            Maycom Willams
-          </Text>
+          <span className="text-xs text-gray-100">Maycom Willams</span>
         </a>{' '}
         com 💚
-      </Text>
+      </p>
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-
 import Loading from '../../components/Loading/Loading';
 import { PokemonCard } from '../../components/PokemonCard/PokemonCard';
 import { usePokedex } from '../../hooks/usePokedex';
@@ -9,11 +8,9 @@ import { PokemonDataProps } from '../../interfaces/pokemonInterfaces';
 import { BackToTop } from '../../components/BackToTop/BackToTop';
 import NavButtons from '../../components/NavButtons/NavButtons';
 import { DropMenu } from '../../components/DropdownMenu/DropMenu';
-import { Text } from '../../components/Text/Text';
 import useGeneration from '../../hooks/useGeneration';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Container } from 'lucide-react';
 
 export function Pokedex() {
   const params = useParams();
@@ -68,7 +65,7 @@ export function Pokedex() {
       return (
         <div className="flex w-full flex-col items-center justify-start px-12">
           <div className="flex w-full items-center justify-between py-6">
-            <Text size="xl">{params.generationid}ª Geração</Text>
+            <span className="text-3xl">{params.generationid}ª Geração</span>
             <div>
               <Button onClick={() => navigate(-1)}>Voltar</Button>
             </div>
@@ -140,7 +137,7 @@ export function Pokedex() {
       return (
         <div className="flex w-full flex-col items-center justify-start px-12">
           <div className="flex w-full items-center justify-between py-6">
-            <Text size="lg">{params.generationid}ª Geração</Text>
+            <span className="text-3xl">{params.generationid}ª Geração</span>
             <div>
               <Button onClick={() => navigate(-1)}>Voltar</Button>
             </div>

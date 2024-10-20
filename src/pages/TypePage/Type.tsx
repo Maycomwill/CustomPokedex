@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Loading from '../../components/Loading/Loading';
 import { PokemonCard } from '../../components/PokemonCard/PokemonCard';
-import { Text } from '../../components/Text/Text';
 
 import { BackToTop } from '../../components/BackToTop/BackToTop';
 import theme from '../../styles/theme';
@@ -39,17 +38,12 @@ export function Type() {
       <div className="h-full min-h-screen w-full px-4">
         <div className="flex flex-col space-y-4 py-4">
           <div className="flex w-full flex-col items-center text-center md:flex-row md:justify-between">
-            <Text size="lg">
+            <p className="text-3xl">
               Pokémon do tipo:{' '}
-              <Text
-                transform="uppercase"
-                color="primary"
-                size="lg"
-                weight="bold"
-              >
+              <span className="text-2xl font-semibold uppercase text-primary-500">
                 {params.typename}
-              </Text>
-            </Text>
+              </span>
+            </p>
             <div className="flex w-[50%] items-center justify-center md:justify-end">
               <Button onClick={() => navigate(-1)}>Voltar</Button>
             </div>
@@ -71,12 +65,12 @@ export function Type() {
         </div>
         <Spacer />
         <div className="flex w-full flex-col items-center justify-center gap-3">
-          <Text size="lg">
+          <p className="text-xl">
             Técnicas do tipo:{' '}
-            <Text transform="uppercase" color="primary" size="lg" weight="bold">
+            <span className="text-xl font-semibold uppercase text-primary-500">
               {params.typename}
-            </Text>
-          </Text>
+            </span>
+          </p>
           <div className="grid grid-cols-2 place-items-center gap-2 py-6 md:grid-cols-4 lg:grid-cols-6">
             {moves.map((move, i) => {
               return <MoveCard move={move} key={i} />;

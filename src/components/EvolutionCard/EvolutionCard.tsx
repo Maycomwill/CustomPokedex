@@ -1,6 +1,5 @@
 import { ArrowFatLinesUp } from 'phosphor-react';
 import { Evolution } from '../../interfaces/evolutionInterface';
-import { Text } from '../Text/Text';
 import CustomTooltip from '../CustomTooltip/CustomTooltip';
 import { FaHeart, FaMoon, FaSun } from 'react-icons/fa';
 import { IoMdHappy } from 'react-icons/io';
@@ -65,7 +64,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
                 <CustomTooltip arrow title={'Level'} placement="top">
                   <>
                     <ArrowFatLinesUp color="white" size={16} />
-                    <Text size="md">{evolution.details![0].min_level}</Text>
+                    <span>{evolution.details![0].min_level}</span>
                   </>
                 </CustomTooltip>
               )}
@@ -73,7 +72,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
                 <CustomTooltip arrow title={'Level'} placement="top">
                   <>
                     <IoSparkles size={16} color="yellow" />
-                    <Text size="md">{evolution.details![0].min_beauty}</Text>
+                    <span>{evolution.details![0].min_beauty}</span>
                   </>
                 </CustomTooltip>
               )}
@@ -88,7 +87,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
                 >
                   <div className="flex items-center justify-center gap-1">
                     <IoMdHappy color="white" size={16} />
-                    <Text size="md">{evolution.details![0].min_happiness}</Text>
+                    <span>{evolution.details![0].min_happiness}</span>
                     {evolution.details![0].time_of_day === 'day' ? (
                       <FaSun size={14} color="yellow" />
                     ) : (
@@ -101,7 +100,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
                 <CustomTooltip arrow title={'Afeição'} placement="top">
                   <div className="flex items-center justify-center gap-1">
                     <FaHeart size={16} color="red" />
-                    <Text size="md">{evolution.details![0].min_affection}</Text>
+                    <span>{evolution.details![0].min_affection}</span>
                   </div>
                 </CustomTooltip>
               )}
@@ -109,7 +108,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
                 <CustomTooltip arrow title={'Gênero'} placement="top">
                   <div className="flex items-center justify-center gap-1">
                     <IoFemale size={16} color="red" />
-                    <Text size="md">{evolution.details![0].min_affection}</Text>
+                    <span>{evolution.details![0].min_affection}</span>
                   </div>
                 </CustomTooltip>
               )}
@@ -157,7 +156,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
           alt={evolution.name}
         />
       </div>
-      <Text transform="capitalize">{evolution.name}</Text>
+      <span className="capitalize">{evolution.name}</span>
     </button>
   );
 }
