@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
-import { Container } from './styles';
 import { useNavigate, useParams } from 'react-router-dom';
 import Loading from '../../components/Loading/Loading';
 import { PokemonCard } from '../../components/PokemonCard/PokemonCard';
 import { Text } from '../../components/Text/Text';
-import { Button } from '../../components/Button';
+
 import { BackToTop } from '../../components/BackToTop/BackToTop';
 import theme from '../../styles/theme';
 import useTypes from '../../hooks/useTypes';
 import { Spacer } from '../../components/Spacer/Spacer';
 import MoveCard from '../../components/MoveCard';
+import { Button } from '@/components/ui/button';
 
 export function Type() {
   const params = useParams();
@@ -28,13 +28,17 @@ export function Type() {
   }, []);
 
   if (isLoading) {
-    return <Loading color={theme.colors.primary[500]} size={'lg'} />;
+    return (
+      <div className="flex w-full flex-1 items-center justify-center">
+        <Loading color={theme.colors.primary[500]} size={'lg'} />
+      </div>
+    );
   } else {
     // console.log(moves);
     return (
-      <Container>
-        <div className="pokemon-wrapper">
-          <div className="pageTitle">
+      <div className="h-full min-h-screen w-full px-4">
+        <div className="flex flex-col space-y-4 py-4">
+          <div className="flex w-full flex-col items-center text-center md:flex-row md:justify-between">
             <Text size="lg">
               Pokémon do tipo:{' '}
               <Text
@@ -46,16 +50,11 @@ export function Type() {
                 {params.typename}
               </Text>
             </Text>
-            <div>
-              <Button.Root
-                backgroundColor="delete"
-                onClick={() => navigate(-1)}
-              >
-                <Button.Content text={'Voltar'} />
-              </Button.Root>
+            <div className="flex w-[50%] items-center justify-center md:justify-end">
+              <Button onClick={() => navigate(-1)}>Voltar</Button>
             </div>
           </div>
-          <div className="pokemonCard-wrapper">
+          <div className="m-auto grid w-full grid-cols-1 place-items-center justify-center gap-3 pt-3 md:grid-cols-2 lg:grid-cols-3">
             {commonTypesPokemon.map((pokemon) => {
               return (
                 <PokemonCard
@@ -71,26 +70,24 @@ export function Type() {
           </div>
         </div>
         <Spacer />
-        <div className="moves-wrapper">
+        <div className="flex w-full flex-col items-center justify-center gap-3">
           <Text size="lg">
             Técnicas do tipo:{' '}
             <Text transform="uppercase" color="primary" size="lg" weight="bold">
               {params.typename}
             </Text>
           </Text>
-          <div className="moves-card-wrapper">
-            {moves.map((move) => {
-              return <MoveCard move={move} key={move.url} />;
+          <div className="grid grid-cols-2 place-items-center gap-2 py-6 md:grid-cols-4 lg:grid-cols-6">
+            {moves.map((move, i) => {
+              return <MoveCard move={move} key={i} />;
             })}
           </div>
         </div>
-        <div className="backButton">
-          <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>
-            <Button.Content text={'Voltar'} />
-          </Button.Root>
+        <div className="flex w-full items-center justify-center">
+          <Button onClick={() => navigate(-1)}>Voltar</Button>
         </div>
         <BackToTop />
-      </Container>
+      </div>
     );
   }
 }
