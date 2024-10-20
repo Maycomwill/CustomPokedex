@@ -17,24 +17,42 @@ function SimpleCardType({
         className={clsx(
           'flex h-20 w-20 items-center justify-center rounded-full',
           {
-            'bg-backgroundCard-bug': pokemonType === 'bug',
-            'bg-backgroundCard-dark': pokemonType === 'dark',
-            'bg-backgroundCard-dragon': pokemonType === 'dragon',
-            'bg-backgroundCard-electric': pokemonType === 'electric',
-            'bg-backgroundCard-fairy': pokemonType === 'fairy',
-            'bg-backgroundCard-flying': pokemonType === 'flying',
-            'bg-backgroundCard-fire': pokemonType === 'fire',
-            'bg-backgroundCard-fighting': pokemonType === 'fighting',
-            'bg-backgroundCard-ghost': pokemonType === 'ghost',
-            'bg-backgroundCard-grass': pokemonType === 'grass',
-            'bg-backgroundCard-ground': pokemonType === 'ground',
-            'bg-backgroundCard-ice': pokemonType === 'ice',
-            'bg-backgroundCard-normal': pokemonType === 'normal',
-            'bg-backgroundCard-poison': pokemonType === 'poison',
-            'bg-backgroundCard-psychic': pokemonType === 'psychic',
-            'bg-backgroundCard-rock': pokemonType === 'rock',
-            'bg-backgroundCard-steel': pokemonType === 'steel',
-            'bg-backgroundCard-water': pokemonType === 'water',
+            'bg-backgroundCard-bug-default hover:bg-backgroundCard-bug-dark':
+              pokemonType === 'bug',
+            'bg-backgroundCard-dark-default hover:bg-backgroundCard-dark-dark':
+              pokemonType === 'dark',
+            'bg-backgroundCard-dragon-default hover:bg-backgroundCard-dragon-dark':
+              pokemonType === 'dragon',
+            'bg-backgroundCard-electric-default hover:bg-backgroundCard-electric-dark':
+              pokemonType === 'electric',
+            'bg-backgroundCard-fairy-default hover:bg-backgroundCard-fairy-dark':
+              pokemonType === 'fairy',
+            'bg-backgroundCard-flying-default hover:bg-backgroundCard-flying-dark':
+              pokemonType === 'flying',
+            'bg-backgroundCard-fire-default hover:bg-backgroundCard-fire-dark':
+              pokemonType === 'fire',
+            'bg-backgroundCard-fighting-default hover:bg-backgroundCard-fighting-dark':
+              pokemonType === 'fighting',
+            'bg-backgroundCard-ghost-default hover:bg-backgroundCard-ghost-dark':
+              pokemonType === 'ghost',
+            'bg-backgroundCard-grass-default hover:bg-backgroundCard-grass-dark':
+              pokemonType === 'grass',
+            'bg-backgroundCard-ground-default hover:bg-backgroundCard-ground-dark':
+              pokemonType === 'ground',
+            'bg-backgroundCard-ice-default hover:bg-backgroundCard-ice-dark':
+              pokemonType === 'ice',
+            'bg-backgroundCard-normal-default hover:bg-backgroundCard-normal-dark':
+              pokemonType === 'normal',
+            'bg-backgroundCard-poison-default hover:bg-backgroundCard-poison-dark':
+              pokemonType === 'poison',
+            'bg-backgroundCard-psychic-default hover:bg-backgroundCard-psychic-dark':
+              pokemonType === 'psychic',
+            'bg-backgroundCard-rock-default hover:bg-backgroundCard-rock-dark':
+              pokemonType === 'rock',
+            'bg-backgroundCard-steel-default hover:bg-backgroundCard-steel-dark':
+              pokemonType === 'steel',
+            'bg-backgroundCard-water-default hover:bg-backgroundCard-water-dark':
+              pokemonType === 'water',
           },
         )}
       >
@@ -55,26 +73,44 @@ function SimpleCardType({
   return (
     <div
       className={clsx(
-        'flex h-20 w-20 items-center justify-center rounded-full',
+        'flex h-20 w-20 cursor-pointer items-center justify-center rounded-full',
         {
-          'bg-backgroundCard-bug': pokemonType === 'bug',
-          'bg-backgroundCard-dark': pokemonType === 'dark',
-          'bg-backgroundCard-dragon': pokemonType === 'dragon',
-          'bg-backgroundCard-electric': pokemonType === 'electric',
-          'bg-backgroundCard-fairy': pokemonType === 'fairy',
-          'bg-backgroundCard-flying': pokemonType === 'flying',
-          'bg-backgroundCard-fire': pokemonType === 'fire',
-          'bg-backgroundCard-fighting': pokemonType === 'fighting',
-          'bg-backgroundCard-ghost': pokemonType === 'ghost',
-          'bg-backgroundCard-grass': pokemonType === 'grass',
-          'bg-backgroundCard-ground': pokemonType === 'ground',
-          'bg-backgroundCard-ice': pokemonType === 'ice',
-          'bg-backgroundCard-normal': pokemonType === 'normal',
-          'bg-backgroundCard-poison': pokemonType === 'poison',
-          'bg-backgroundCard-psychic': pokemonType === 'psychic',
-          'bg-backgroundCard-rock': pokemonType === 'rock',
-          'bg-backgroundCard-steel': pokemonType === 'steel',
-          'bg-backgroundCard-water': pokemonType === 'water',
+          'bg-backgroundCard-bug-default hover:bg-backgroundCard-bug-dark':
+            pokemonType === 'bug',
+          'bg-backgroundCard-dark-default hover:bg-backgroundCard-dark-dark':
+            pokemonType === 'dark',
+          'bg-backgroundCard-dragon-default hover:bg-backgroundCard-dragon-dark':
+            pokemonType === 'dragon',
+          'bg-backgroundCard-electric-default hover:bg-backgroundCard-electric-dark':
+            pokemonType === 'electric',
+          'bg-backgroundCard-fairy-default hover:bg-backgroundCard-fairy-dark':
+            pokemonType === 'fairy',
+          'bg-backgroundCard-flying-default hover:bg-backgroundCard-flying-dark':
+            pokemonType === 'flying',
+          'bg-backgroundCard-fire-default hover:bg-backgroundCard-fire-dark':
+            pokemonType === 'fire',
+          'bg-backgroundCard-fighting-default hover:bg-backgroundCard-fighting-dark':
+            pokemonType === 'fighting',
+          'bg-backgroundCard-ghost-default hover:bg-backgroundCard-ghost-dark':
+            pokemonType === 'ghost',
+          'bg-backgroundCard-grass-default hover:bg-backgroundCard-grass-dark':
+            pokemonType === 'grass',
+          'bg-backgroundCard-ground-default hover:bg-backgroundCard-ground-dark':
+            pokemonType === 'ground',
+          'bg-backgroundCard-ice-default hover:bg-backgroundCard-ice-dark':
+            pokemonType === 'ice',
+          'bg-backgroundCard-normal-default hover:bg-backgroundCard-normal-dark':
+            pokemonType === 'normal',
+          'bg-backgroundCard-poison-default hover:bg-backgroundCard-poison-dark':
+            pokemonType === 'poison',
+          'bg-backgroundCard-psychic-default hover:bg-backgroundCard-psychic-dark':
+            pokemonType === 'psychic',
+          'bg-backgroundCard-rock-default hover:bg-backgroundCard-rock-dark':
+            pokemonType === 'rock',
+          'bg-backgroundCard-steel-default hover:bg-backgroundCard-steel-dark':
+            pokemonType === 'steel',
+          'bg-backgroundCard-water-default hover:bg-backgroundCard-water-dark':
+            pokemonType === 'water',
         },
       )}
     >

@@ -66,7 +66,7 @@ export function Pokedex() {
   } else {
     if (genTypeFilteredList.length == 0) {
       return (
-        <div className="flex min-h-screen w-full flex-col items-center justify-start px-2">
+        <div className="flex w-full flex-col items-center justify-start px-12">
           <div className="flex w-full items-center justify-between py-6">
             <Text size="xl">{params.generationid}ª Geração</Text>
             <div>
@@ -75,7 +75,6 @@ export function Pokedex() {
           </div>
           <div className="grid w-full grid-cols-[1fr_2fr_1fr] place-items-center">
             <div />
-
             <div className="flex w-full items-center justify-center">
               <form className="flex flex-col gap-1">
                 <Input
@@ -91,7 +90,7 @@ export function Pokedex() {
             <DropMenu pokemonArray={pokemonData} />
           </div>
           {search.length > 0 ? (
-            <div className="m-auto grid w-full grid-cols-1 place-items-center justify-center gap-3 pt-3 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid w-[90%] flex-1 grid-cols-1 place-items-center items-start gap-4 pt-3 md:grid-cols-2 lg:grid-cols-3">
               {pokemonListFiltered
                 .sort((a, b) => {
                   if (a > b) return 1;
@@ -112,7 +111,7 @@ export function Pokedex() {
                 })}
             </div>
           ) : (
-            <div className="m-auto grid w-full grid-cols-1 place-items-center justify-center gap-3 pt-3 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid w-[90%] flex-1 grid-cols-1 place-items-center items-start gap-3 pt-3 md:grid-cols-2 lg:grid-cols-3">
               {pokemonData
                 .sort((a, b) => {
                   if (a > b) return 1;
@@ -139,7 +138,7 @@ export function Pokedex() {
       );
     } else {
       return (
-        <div className="flex min-h-screen w-full flex-col items-center justify-start px-2">
+        <div className="flex w-full flex-col items-center justify-start px-12">
           <div className="flex w-full items-center justify-between py-6">
             <Text size="lg">{params.generationid}ª Geração</Text>
             <div>
@@ -164,7 +163,7 @@ export function Pokedex() {
           </div>
 
           {search.length > 0 ? (
-            <div className="m-auto grid w-full grid-cols-1 place-items-center justify-center gap-3 pt-3 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid w-[90%] flex-1 grid-cols-1 place-items-center items-start gap-3 pt-3 md:grid-cols-2 lg:grid-cols-3">
               {pokemonListFiltered
                 .sort((a, b) => {
                   if (a > b) return 1;
@@ -185,7 +184,7 @@ export function Pokedex() {
                 })}
             </div>
           ) : (
-            <div className="m-auto grid w-full grid-cols-1 place-items-center justify-center gap-3 pt-3 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid w-[90%] flex-1 grid-cols-1 place-items-center items-start gap-3 pt-3 md:grid-cols-2 lg:grid-cols-3">
               {genTypeFilteredList
                 .sort((a, b) => {
                   if (a > b) return 1;

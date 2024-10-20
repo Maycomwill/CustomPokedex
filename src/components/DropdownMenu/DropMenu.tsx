@@ -44,7 +44,7 @@ export function DropMenu({
   const id = open ? 'simple-popover' : undefined;
 
   return (
-    <div className="justifycenter flex h-full w-full items-center">
+    <div className="flex h-full w-full items-center justify-center">
       <CircleButton onClick={handleClick}>
         <Funnel size={24} color={colors.gray[800]} />
       </CircleButton>
