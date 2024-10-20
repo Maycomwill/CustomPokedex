@@ -1,12 +1,11 @@
-import styled from "styled-components";
-import { backgroundColorType } from "../TypeCard/styles";
+import styled from 'styled-components';
 
 interface ITypeProps {
-  pokemonType: string
-};
+  pokemonType: string;
+}
 
 export const Container = styled.div<ITypeProps>`
-  background-color: ${({ pokemonType }) => backgroundColorType(pokemonType)};
+  background-color: black;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,7 +25,7 @@ export const Container = styled.div<ITypeProps>`
     position: relative;
   }
 
-  .double_damage_relation{
+  .double_damage_relation {
     background: green;
     width: 2rem;
     height: 2rem;
@@ -42,4 +41,4 @@ export const Container = styled.div<ITypeProps>`
     right: 0%;
     bottom: 0;
   }
-`
+`;

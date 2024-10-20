@@ -39,7 +39,10 @@ export function RegionCard(props: RegionCardProps) {
       )}
       onClick={() => navigate(`/pokedex/${props.region.number}`)}
     >
-      <div className="absolute z-0 h-full w-full bg-gradient-to-r from-black/50 to-transparent" />
+      <div
+        className="absolute z-0 h-full w-full bg-gradient-to-r from-black/50 to-transparent"
+        id="filter"
+      />
 
       <div className="z-10 flex w-full flex-col items-start justify-center py-3">
         <Text size="xxl" transform="capitalize" color="white" weight="bold">
