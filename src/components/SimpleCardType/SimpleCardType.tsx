@@ -73,7 +73,7 @@ function SimpleCardType({
   return (
     <div
       className={clsx(
-        'flex h-20 w-20 cursor-pointer items-center justify-center rounded-full',
+        'flex size-12 cursor-pointer items-center justify-center rounded-full',
         {
           'bg-backgroundCard-bug-default hover:bg-backgroundCard-bug-dark':
             pokemonType === 'bug',
@@ -114,7 +114,7 @@ function SimpleCardType({
         },
       )}
     >
-      <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-white p-1">
+      <div className="relative flex size-6 items-center justify-center overflow-hidden rounded-full bg-white p-1">
         {poketypesComponents({
           height:
             pokemonType === 'steel' ||

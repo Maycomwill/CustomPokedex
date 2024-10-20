@@ -22,10 +22,11 @@ function Moves() {
   let moveName = params.moveName;
 
   useEffect(() => {
-    {
-      moveName && getMovesData(moveName);
-    }
-  }, []);
+    console.log('disparou');
+    moveName && getMovesData(moveName);
+    console.log(moveName);
+    return;
+  }, [params.moveName]);
 
   function handleDamageClass(damage_class: 'physical' | 'special' | 'status') {
     switch (damage_class) {
@@ -50,121 +51,124 @@ function Moves() {
     }
   }
 
-  if (isLoading || move === undefined) {
-    return <Loading color={theme.colors.primary[500]} size={'lg'} />;
-  } else {
+  if (isLoading) {
     return (
-      <div className="flex min-h-screen flex-1 flex-col items-center justify-start px-2">
-        <h1 className="text-4xl font-semibold capitalize">
-          {move.name.split('-').join(' ')}
-        </h1>
-
-        <div className="text-justify">
-          <p className="text-base">{move.flavor_text_entries}</p>
-        </div>
-        <Spacer />
-
-        <div className="flex w-full flex-col items-center justify-center py-6 md:flex-row">
-          <div className="space-y-2 text-justify">
-            <span className="text-base capitalize">
-              Efeito: {move.effect_entries}
-            </span>
-            <div className="space-y-2">
-              <span
-                className={clsx('block text-base', {
-                  hidden: move.effect_chance === null,
-                })}
-              >
-                Chance: {move.effect_chance}%
-              </span>
-
-              <span className="text-base capitalize">
-                Alvo: {move.target.name.split('-').join(' ')}
-              </span>
-            </div>
-            <div className="flex w-full items-center justify-center py-4">
-              <TypeCard pressable pokemonType={move.type.name} />
-            </div>
-          </div>
-          <div className="w-full space-y-12 pt-4">
-            {move.damage_class.name !== 'status' && (
-              <div className="flex flex-col items-start justify-center">
-                <span className="text-base">Power:</span>
-                <div className="relative h-6 w-full rounded-md bg-gray-600">
-                  <div
-                    className="absolute left-0 top-0 h-6 rounded-md bg-primary-300"
-                    style={{ width: `${move.power}%` }}
-                  >
-                    <span className="text-base">{move.power}</span>
-                  </div>
-                </div>
-              </div>
-            )}
-            <div className="grid w-full grid-cols-2 place-content-start place-items-center justify-center gap-8">
-              <div className="flex items-center justify-center">
-                <span>PP: {move.pp}</span>
-              </div>
-              <div className="flex items-center justify-center">
-                <span>
-                  Acurácia:{' '}
-                  {move.damage_class.name !== 'status'
-                    ? `${move.accuracy}%`
-                    : '---'}
-                </span>
-              </div>
-              <div className="flex items-center justify-center">
-                <CustomTooltip arrow title={'Varia de -8 a 8'}>
-                  <span>Prioridade: {move.priority}</span>
-                </CustomTooltip>
-              </div>
-              <div className="flex flex-col space-y-1">
-                <span>Classe de dano: </span>
-                <CustomTooltip arrow title={move.damage_class.name}>
-                  {handleDamageClass(move.damage_class.name)}
-                </CustomTooltip>
-              </div>
-            </div>
-          </div>
-        </div>
-        <Spacer />
-        <div className="w-full space-y-2 text-center">
-          <span>Pokémon que podem aprender essa técnica</span>
-          <div className="grid w-full grid-cols-1 place-items-center items-center gap-4 pt-3 md:grid-cols-2 lg:grid-cols-3">
-            {moveCommonPokemon.length !== 0 ? (
-              moveCommonPokemon.map((pokemon, i) => {
-                return (
-                  <div
-                    key={`${pokemon.id}-${pokemon.name}`}
-                    className={clsx('w-full', {
-                      'md:col-span-2 md:w-auto lg:col-span-1':
-                        i === moveCommonPokemon.length - 1,
-                    })}
-                  >
-                    <PokemonCard
-                      id={pokemon.id}
-                      name={pokemon.name}
-                      primaryType={pokemon.types[0].type}
-                      sprite={pokemon.sprite}
-                      types={pokemon.types}
-                      pressable
-                    />
-                  </div>
-                );
-              })
-            ) : (
-              <Loading color={theme.colors.primary[500]} size={'lg'} />
-            )}
-          </div>
-        </div>
-        <div className="py-4">
-          <Button size={'lg'} onClick={() => navigate(-1)}>
-            Voltar
-          </Button>
-        </div>
-        <BackToTop />
+      <div className="flex w-full items-center justify-center">
+        <Loading color={theme.colors.primary[500]} size={'lg'} />
       </div>
     );
   }
+  return (
+    <div className="flex min-h-screen flex-1 flex-col items-center justify-start px-2">
+      <h1 className="text-4xl font-semibold capitalize">
+        {move.name.split('-').join(' ')}
+      </h1>
+
+      <div className="text-justify">
+        <p className="text-base">{move.flavor_text_entries}</p>
+      </div>
+      <Spacer />
+
+      <div className="flex w-full flex-col items-center justify-center py-6 md:flex-row">
+        <div className="space-y-2 text-justify">
+          <span className="text-base capitalize">
+            Efeito: {move.effect_entries}
+          </span>
+          <div className="space-y-2">
+            <span
+              className={clsx('block text-base', {
+                hidden: move.effect_chance === null,
+              })}
+            >
+              Chance: {move.effect_chance}%
+            </span>
+
+            <span className="text-base capitalize">
+              Alvo: {move.target.name.split('-').join(' ')}
+            </span>
+          </div>
+          <div className="flex w-full items-center justify-center py-4">
+            <TypeCard pressable pokemonType={move.type.name} />
+          </div>
+        </div>
+        <div className="w-full space-y-12 pt-4">
+          {move.damage_class.name !== 'status' && (
+            <div className="flex flex-col items-start justify-center">
+              <span className="text-base">Power:</span>
+              <div className="relative h-6 w-full rounded-md bg-gray-600">
+                <div
+                  className="absolute left-0 top-0 h-6 rounded-md bg-primary-300"
+                  style={{ width: `${move.power}%` }}
+                >
+                  <span className="text-base">{move.power}</span>
+                </div>
+              </div>
+            </div>
+          )}
+          <div className="grid w-full grid-cols-2 place-content-start place-items-center justify-center gap-8">
+            <div className="flex items-center justify-center">
+              <span>PP: {move.pp}</span>
+            </div>
+            <div className="flex items-center justify-center">
+              <span>
+                Acurácia:{' '}
+                {move.damage_class.name !== 'status'
+                  ? `${move.accuracy}%`
+                  : '---'}
+              </span>
+            </div>
+            <div className="flex items-center justify-center">
+              <CustomTooltip arrow title={'Varia de -8 a 8'}>
+                <span>Prioridade: {move.priority}</span>
+              </CustomTooltip>
+            </div>
+            <div className="flex flex-col space-y-1">
+              <span>Classe de dano: </span>
+              <CustomTooltip arrow title={move.damage_class.name}>
+                {handleDamageClass(move.damage_class.name)}
+              </CustomTooltip>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Spacer />
+      <div className="w-full space-y-2 text-center">
+        <span>Pokémon que podem aprender essa técnica</span>
+        <div className="grid w-full grid-cols-1 place-items-center items-center gap-4 pt-3 md:grid-cols-2 lg:grid-cols-3">
+          {moveCommonPokemon.length !== 0 ? (
+            moveCommonPokemon.map((pokemon, i) => {
+              return (
+                <div
+                  key={`${pokemon.id}-${pokemon.name}`}
+                  className={clsx('w-full', {
+                    'md:col-span-2 md:w-auto lg:col-span-1':
+                      i === moveCommonPokemon.length - 1,
+                  })}
+                >
+                  <PokemonCard
+                    id={pokemon.id}
+                    name={pokemon.name}
+                    primaryType={pokemon.types[0].type}
+                    sprite={pokemon.sprite}
+                    types={pokemon.types}
+                    pressable
+                  />
+                </div>
+              );
+            })
+          ) : (
+            <Loading color={theme.colors.primary[500]} size={'lg'} />
+          )}
+        </div>
+      </div>
+      <div className="py-4">
+        <Button size={'lg'} onClick={() => navigate(-1)}>
+          Voltar
+        </Button>
+      </div>
+      <BackToTop />
+    </div>
+  );
 }
 
 export default Moves;

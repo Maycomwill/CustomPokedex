@@ -56,7 +56,7 @@ export function TypeCard({ pokemonType, pressable = false }: ITypeCardProps) {
     return (
       <button
         className={clsx(
-          'flex h-16 w-48 min-w-48 max-w-48 items-center justify-evenly gap-2 rounded-full border-none px-4',
+          'flex h-10 w-28 max-w-32 items-center justify-start gap-2 rounded-full border-none pl-1',
           {
             'bg-backgroundCard-bug-default hover:bg-backgroundCard-bug-dark':
               pokemonType === 'bug',
@@ -98,14 +98,14 @@ export function TypeCard({ pokemonType, pressable = false }: ITypeCardProps) {
         )}
         onClick={() => navigate(`/type/${pokemonType}`)}
       >
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white p-1">
+        <div className="flex size-8 items-center justify-center rounded-full bg-white">
           {poketypesComponents({
             height:
-              pokemonType === 'steel' ||
-              pokemonType === 'ice' ||
-              pokemonType === 'rock'
-                ? 21
-                : 25,
+              pokemonType === 'dragon'
+                ? 28
+                : pokemonType === 'rock' || pokemonType === 'green'
+                  ? 22
+                  : 25,
             width:
               pokemonType === 'grass'
                 ? 27
@@ -117,8 +117,8 @@ export function TypeCard({ pokemonType, pressable = false }: ITypeCardProps) {
             pokemonType,
           })}
         </div>
-        <div className="typeName">
-          <span className="text-base font-semibold capitalize">
+        <div className="w-1/2">
+          <span className="text-left font-semibold capitalize">
             {pokemonType}
           </span>
         </div>
@@ -128,7 +128,7 @@ export function TypeCard({ pokemonType, pressable = false }: ITypeCardProps) {
   return (
     <div
       className={clsx(
-        'flex h-16 w-48 min-w-48 max-w-48 items-center justify-evenly gap-2 rounded-full border-none px-4',
+        'flex h-10 w-28 max-w-32 items-center justify-start gap-2 rounded-full border-none pl-1',
         {
           'bg-backgroundCard-bug-default': pokemonType === 'bug',
           'bg-backgroundCard-dark-default': pokemonType === 'dark',
@@ -151,14 +151,14 @@ export function TypeCard({ pokemonType, pressable = false }: ITypeCardProps) {
         },
       )}
     >
-      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white p-1">
+      <div className="flex size-8 items-center justify-center rounded-full bg-white">
         {poketypesComponents({
           height:
-            pokemonType === 'steel' ||
-            pokemonType === 'ice' ||
-            pokemonType === 'rock'
-              ? 21
-              : 25,
+            pokemonType === 'dragon'
+              ? 28
+              : pokemonType === 'rock' || pokemonType === 'green'
+                ? 22
+                : 25,
           width:
             pokemonType === 'grass'
               ? 27
@@ -170,8 +170,8 @@ export function TypeCard({ pokemonType, pressable = false }: ITypeCardProps) {
           pokemonType,
         })}
       </div>
-      <div>
-        <span className="text-base font-semibold capitalize">
+      <div className="w-1/2">
+        <span className="text-left font-semibold capitalize">
           {pokemonType}
         </span>
       </div>

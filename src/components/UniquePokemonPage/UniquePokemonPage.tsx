@@ -87,74 +87,51 @@ export default function UniquePokemonPage({
   const navigate = useNavigate();
   return (
     <div className="mb-6 flex w-full flex-1 flex-col items-center justify-evenly overflow-x-hidden px-8 lg:w-[70%] lg:px-24">
-      <div className="relative mb-2 flex w-full items-center justify-center">
+      <div className="relative mb-2 flex w-full flex-col items-center justify-center">
+        {/* Shiny Sprite button */}
+        <div className="absolute right-[2%] top-0">
+          {shinySprite ? (
+            <Button
+              className="h-auto w-auto rounded-full bg-white p-2 transition-all duration-200 ease-in-out md:p-4"
+              onClick={() => setShinySprite(!shinySprite)}
+            >
+              <Sparkle className="size-6 text-gray-800 md:size-6" />
+            </Button>
+          ) : (
+            <Button
+              className="h-auto w-auto rounded-full bg-gray-800 p-2 transition-all duration-200 ease-in-out md:p-4"
+              onClick={() => setShinySprite(!shinySprite)}
+            >
+              <Sparkle className="size-6 text-gray-100 md:size-6" />
+            </Button>
+          )}
+        </div>
+
+        {/* Default Sprite */}
         {shinySprite ? (
           <img
-            className="size-72 lg:size-[30rem]"
+            className="size-52 lg:size-[30rem]"
             src={checkimgIMG(data.official_artwork.shiny)}
             alt={`${data.name} image`}
           />
         ) : (
           <img
-            className="size-72 lg:size-[30rem]"
+            className="size-52 lg:size-[30rem]"
             src={checkimgIMG(data.official_artwork.default)}
             alt={`${data.name} image`}
           />
         )}
-        <div className="absolute right-[2%] top-0">
-          {shinySprite ? (
-            <Button
-              className="h-auto w-auto rounded-full bg-white p-4 transition-all duration-200 ease-in-out"
-              onClick={() => setShinySprite(!shinySprite)}
-            >
-              <Sparkle size={24} color={theme.colors.gray[800]} />
-            </Button>
-          ) : (
-            <Button
-              className="h-auto w-auto rounded-full bg-gray-400 p-4 transition-all duration-200 ease-in-out"
-              onClick={() => setShinySprite(!shinySprite)}
-            >
-              <Sparkle size={24} color={theme.colors.gray[100]} />
-            </Button>
-          )}
-        </div>
-        {forms && forms.length > 1 ? (
-          <div className="absolute bottom-0 right-[2%] flex size-56 flex-col items-center justify-center gap-3">
-            <img
-              id="formSprite"
-              className="size-28 md:size-36 lg:size-48"
-              src={handleFormSprite()}
-              alt="Form Sprite"
-            />
-            <select
-              className="w-full rounded-md bg-gray-800 px-1 py-2 text-white"
-              onChange={(e) => setSelectForm(Number(e.target.value))}
-              id="formSelectInput"
-            >
-              <option className="capitalize" value={-1}>
-                Select form
-              </option>
-              {forms &&
-                forms.map((form, index) => {
-                  return (
-                    <option key={`${form.name}-${index}`} value={index}>
-                      {form.name.split('-').join(' ')}
-                    </option>
-                  );
-                })}
-            </select>
-          </div>
-        ) : null}
       </div>
 
       <div className="flex w-full flex-col items-center justify-center">
-        <div className="grid grid-cols-2 grid-rows-3 items-start justify-center px-8 text-center md:gap-1">
+        <div className="flex w-full flex-col items-center justify-center space-y-2">
           <h1 className="text-4xl font-semibold capitalize">
             {data.name?.split('-').join(' ')}
           </h1>
           <h2 className="text-2xl capitalize">#{addZeroes(data.id, 3)}</h2>
-          <div className="typesWrapper">
-            <div className="my-1 flex w-full flex-row items-start justify-center gap-4">
+
+          <div className="flex w-full flex-col items-center justify-center md:flex-row">
+            <div className="my-1 flex w-full items-start justify-center gap-4">
               {data.types?.map((type) => {
                 return (
                   <TypeCard
@@ -165,16 +142,46 @@ export default function UniquePokemonPage({
                 );
               })}
             </div>
-          </div>
-          <div className="text-justify">
-            <p className="text-base">{data.flavor?.split('\f').join(' ')}</p>
+
+            <div className="text-justify">
+              <p className="text-base">{data.flavor?.split('\f').join(' ')}</p>
+            </div>
           </div>
         </div>
       </div>
+      {/* Forms sprite selector */}
+      {forms && forms.length > 1 ? (
+        <div className="flex size-56 flex-col items-center justify-center gap-3">
+          <p>Variações do Pokémon</p>
+          <img
+            id="formSprite"
+            className="size-24 lg:size-32"
+            src={handleFormSprite()}
+            alt="Form Sprite"
+          />
+          <select
+            className="w-full rounded-md bg-gray-800 px-1 py-2 text-white"
+            onChange={(e) => setSelectForm(Number(e.target.value))}
+            id="formSelectInput"
+          >
+            <option className="capitalize" value={-1}>
+              Select form
+            </option>
+            {forms &&
+              forms.map((form, index) => {
+                return (
+                  <option key={`${form.name}-${index}`} value={index}>
+                    {form.name.split('-').join(' ')}
+                  </option>
+                );
+              })}
+          </select>
+        </div>
+      ) : null}
 
       <Spacer />
 
-      <div className="grid w-[70%] grid-cols-2 gap-x-8 px-8">
+      <div className="grid w-full grid-cols-2 gap-x-8 lg:w-[70%] lg:px-8">
         <div className="infoCard">
           <span className="text-base capitalize">Altura:</span>
 
@@ -215,7 +222,7 @@ export default function UniquePokemonPage({
 
       <Spacer />
 
-      <div className="flex w-[70%] flex-col items-start justify-center px-8 md:w-full">
+      <div className="flex w-full flex-col items-start justify-center md:w-full lg:w-[70%] lg:px-8">
         <span className="text-lg">Status base:</span>
 
         <div className="mx-auto grid w-full grid-cols-2 place-items-center gap-4 gap-x-3">
@@ -249,8 +256,10 @@ export default function UniquePokemonPage({
         </div>
       </div>
       <Spacer />
-      <div className="flex w-[70%] flex-row items-start justify-center gap-10 p-8 md:w-full md:flex-col md:gap-2">
-        {data.damage_relation.double_damage_to.length === 0 ? null : (
+      <div className="flex w-full flex-col items-start justify-center gap-10 md:w-full md:gap-2 lg:w-[70%] lg:px-8">
+        {data.damage_relation.double_damage_to.length === 0 ? (
+          <span className="text-center">Nenhuma vantagem de dano</span>
+        ) : (
           <div className="flex flex-col items-start justify-evenly gap-1">
             <span className="text-base capitalize">Forças:</span>
             <div className="flex items-center justify-center gap-2">
@@ -272,7 +281,9 @@ export default function UniquePokemonPage({
             </div>
           </div>
         )}
-        {data.damage_relation.double_damage_from.length === 0 ? null : (
+        {data.damage_relation.double_damage_from.length === 0 ? (
+          <span className="text-center">Nenhuma desvantagem de dano</span>
+        ) : (
           <div className="flex flex-col items-start justify-evenly gap-1">
             <span className="text-base capitalize">Fraquezas:</span>
             <div className="flex items-center justify-center gap-2">
@@ -294,9 +305,9 @@ export default function UniquePokemonPage({
         )}
       </div>
       <Spacer />
-      <div className="flex w-[70%] flex-col items-center justify-center gap-6 px-8 py-3 md:w-full md:gap-3">
+      <div className="flex w-full flex-col items-center justify-center gap-6 md:w-full md:gap-3 lg:w-[70%]">
         <span className="text-base capitalize">Cadeia evolutiva:</span>
-        <div className="mb-6 flex w-full items-center justify-center gap-8">
+        <div className="mb-6 flex w-full flex-col items-center justify-center gap-x-2 md:flex-row">
           <div className="flex items-center justify-center gap-1">
             {evolutions.first?.map((evolution) => {
               return (
@@ -310,9 +321,9 @@ export default function UniquePokemonPage({
           </div>
           {evolutions.second && evolutions.second.length !== 0 ? (
             <>
-              <CaretRight size={24} />
+              <CaretRight className="size-6 rotate-90 md:rotate-0" />
               <div
-                className="grid grid-cols-2 place-items-center items-center justify-center gap-1"
+                className="grid grid-cols-2 place-items-center items-center justify-center gap-2"
                 style={{
                   display: evolutions.second.length === 1 ? 'flex' : 'grid',
                 }}
@@ -331,7 +342,7 @@ export default function UniquePokemonPage({
           ) : null}
           {evolutions.third && evolutions.third.length !== 0 ? (
             <>
-              <CaretRight size={24} />
+              <CaretRight className="size-6 rotate-90 md:rotate-0" />
               <div className="flex items-center justify-center gap-1">
                 {evolutions.third?.map((evolution) => {
                   return (
@@ -349,17 +360,17 @@ export default function UniquePokemonPage({
         <div className="flex w-full items-center justify-center">
           {shinySprite ? (
             <Button
-              className="h-auto w-auto rounded-full bg-white p-4 transition-all duration-200 ease-in-out"
+              className="h-auto w-auto rounded-full bg-white p-2 transition-all duration-200 ease-in-out md:p-4"
               onClick={() => setShinySprite(!shinySprite)}
             >
-              <Sparkle size={24} color={theme.colors.gray[800]} />
+              <Sparkle className="size-6 text-gray-800 md:size-6" />
             </Button>
           ) : (
             <Button
-              className="h-auto w-auto rounded-full bg-gray-400 p-4 transition-all duration-200 ease-in-out"
+              className="h-auto w-auto rounded-full bg-gray-800 p-2 transition-all duration-200 ease-in-out md:p-4"
               onClick={() => setShinySprite(!shinySprite)}
             >
-              <Sparkle size={24} color={theme.colors.gray[100]} />
+              <Sparkle className="size-6 text-gray-100 md:size-6" />
             </Button>
           )}
         </div>

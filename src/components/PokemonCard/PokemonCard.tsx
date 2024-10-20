@@ -37,13 +37,9 @@ export function PokemonCard({
   const navigate = useNavigate();
 
   return (
-    // background-color: ${({ color }) => tint(0.85, backgroundColorType(color))};
-    // :hover {
-    //   background-color: ${({ color }) => tint(0.5, backgroundColorType(color))};
-    // }
     <div
       className={clsx(
-        'justify-cennter ease-custom-bezier flex h-48 min-h-52 w-full cursor-pointer flex-row items-center overflow-hidden rounded-xl border-none outline-none transition-all duration-300',
+        'justify-cennter ease-custom-bezier flex h-52 w-full cursor-pointer flex-row items-center overflow-hidden rounded-xl border-none outline-none transition-all duration-300',
         {
           'bg-backgroundCard-bug-light hover:bg-backgroundCard-bug-mediumLight':
             types[0].type === 'bug',
@@ -88,7 +84,7 @@ export function PokemonCard({
       }}
       color={primaryType}
     >
-      <div className="flex h-48 min-h-52 flex-1 flex-col items-start justify-between px-6 py-2">
+      <div className="flex h-full w-2/3 flex-1 flex-col items-start justify-between px-6 py-2">
         <div className="flex flex-col items-start justify-center gap-1 md:justify-start md:gap-2">
           <h1 className="text-3xl font-semibold capitalize text-gray-800">
             {name.split('-').join(' ')}
@@ -98,7 +94,7 @@ export function PokemonCard({
           </span>
         </div>
         <div className="flex flex-col items-center justify-center gap-1 pb-2">
-          <ul className="flex list-none items-center justify-center gap-2">
+          <ul className="flex list-none flex-col items-center justify-center gap-2">
             {types.map((type) => {
               return (
                 <li key={`${type.type}`}>
@@ -111,7 +107,7 @@ export function PokemonCard({
       </div>
       <div
         className={clsx(
-          'relative z-10 flex h-48 min-h-52 w-44 items-center justify-center rounded-xl',
+          'relative z-10 flex h-full w-1/3 items-center justify-center rounded-xl',
 
           {
             'bg-backgroundCard-bug-default': types[0].type === 'bug',
@@ -137,12 +133,12 @@ export function PokemonCard({
       >
         <div className="spriteDiv">
           <img
-            className="absolute z-0 h-32 object-cover opacity-25"
+            className="absolute z-0 h-24 object-cover opacity-25"
             src={pokemonTypesObject[primaryType]}
             alt={`${primaryType}-type-svg`}
           />
           <img
-            className="relative z-10 h-32"
+            className="relative z-10 h-24"
             src={sprite}
             alt={`${name} sprite`}
           />

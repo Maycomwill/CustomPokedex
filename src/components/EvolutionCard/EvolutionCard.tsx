@@ -143,7 +143,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
   // console.log(evolution.name, evolution);
   return (
     <button
-      className="flex min-h-72 flex-col items-center justify-between rounded-md border border-accent-200 bg-white/0 px-2 py-1 outline-none transition-all duration-200 ease-in-out hover:cursor-pointer hover:border-accent-500 hover:bg-white/10"
+      className="flex min-h-40 flex-col items-center justify-between rounded-md border border-accent-200 bg-white/0 px-2 py-2 outline-none transition-all duration-200 ease-in-out hover:cursor-pointer hover:border-accent-500 hover:bg-white/10"
       onClick={() => handleRedirect(evolution.name)}
     >
       <div className="min-h-12 w-full">
@@ -151,7 +151,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
       </div>
       <div className="flex">
         <img
-          className="size-40 md:size-52 lg:size-64"
+          className="size-24 md:size-40 lg:size-48"
           src={shiny ? evolution.sprites.shiny : evolution.sprites.default}
           alt={evolution.name}
         />
