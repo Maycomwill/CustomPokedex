@@ -1,6 +1,7 @@
 import { RegionCard } from '../RegionCard/RegionCard';
 import { useNavigate } from 'react-router-dom';
 import { Text } from '../Text/Text';
+import { pokemonRegions } from '@/utils/pokemon-regions';
 
 export function RegionsForm() {
   const navigate = useNavigate();
@@ -10,26 +11,15 @@ export function RegionsForm() {
   }
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-2 px-4 py-3">
+    <div className="flex h-full w-full flex-col items-center justify-center gap-2 px-4 py-3 text-center">
       <Text size="lg">Navege pelas regiões do mundo pokemon</Text>
       <div className="grid w-full grid-cols-1 place-items-center items-center gap-3 md:grid-cols-2 lg:grid-cols-3">
-        <RegionCard region={{ region_name: 'kanto', number: 1 }} />
-
-        <RegionCard region={{ region_name: 'johto', number: 2 }} />
-
-        <RegionCard region={{ region_name: 'hoenn', number: 3 }} />
-
-        <RegionCard region={{ region_name: 'sinnoh', number: 4 }} />
-
-        <RegionCard region={{ region_name: 'unova', number: 5 }} />
-
-        <RegionCard region={{ region_name: 'kalos', number: 6 }} />
-
-        <RegionCard region={{ region_name: 'alola', number: 7 }} />
-
-        <RegionCard region={{ region_name: 'galar', number: 8 }} />
-
-        <RegionCard region={{ region_name: 'paldea', number: 9 }} />
+        {pokemonRegions.map((region, i) => (
+          <RegionCard
+            key={i}
+            region={{ region_name: region.region, number: region.number }}
+          />
+        ))}
       </div>
     </div>
   );

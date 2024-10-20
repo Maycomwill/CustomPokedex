@@ -1,35 +1,16 @@
-import { Container } from "./styles";
-import { Text } from "../Text/Text";
-import { TypeCard } from "../TypeCard/TypeCard";
+import { pokemonTypes } from '@/utils/pokemon-types';
+import { Text } from '../Text/Text';
+import { TypeCard } from '../TypeCard/TypeCard';
 
 export function TypesForm() {
   return (
-    <Container>
-      <div className="text-wrapper">
-        <Text>Você pode filtrar os pokemon por tipos</Text>
+    <div className="mx-4 flex w-full flex-col items-center justify-center text-center">
+      <Text>Você pode filtrar os pokemon por tipos</Text>
+      <div className="mt-4 grid w-full grid-cols-2 place-items-center justify-center gap-4 md:w-[70%] md:grid-cols-4 lg:w-[80%] lg:grid-cols-6">
+        {pokemonTypes.map((type, i) => (
+          <TypeCard key={i} pokemonType={type} pressable />
+        ))}
       </div>
-      <div className="types-wrapper">
-        <div className="typesDiv">
-          <TypeCard pokemonType="bug" pressable />
-          <TypeCard pokemonType="dark" pressable />
-          <TypeCard pokemonType="dragon" pressable />
-          <TypeCard pokemonType="electric" pressable />
-          <TypeCard pokemonType="fairy" pressable />
-          <TypeCard pokemonType="fighting" pressable />
-          <TypeCard pokemonType="fire" pressable />
-          <TypeCard pokemonType="flying" pressable />
-          <TypeCard pokemonType="ghost" pressable />
-          <TypeCard pokemonType="grass" pressable />
-          <TypeCard pokemonType="ground" pressable />
-          <TypeCard pokemonType="ice" pressable />
-          <TypeCard pokemonType="normal" pressable />
-          <TypeCard pokemonType="poison" pressable />
-          <TypeCard pokemonType="psychic" pressable />
-          <TypeCard pokemonType="rock" pressable />
-          <TypeCard pokemonType="steel" pressable />
-          <TypeCard pokemonType="water" pressable />
-        </div>
-      </div>
-    </Container>
+    </div>
   );
 }
