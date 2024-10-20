@@ -1,22 +1,20 @@
 import { useNavigate } from 'react-router-dom';
 import { UniquePokemonData } from '../../interfaces/pokemonInterfaces';
 import theme from '../../styles/theme';
-import { Button } from '../Button';
 import { Text } from '../Text/Text';
 import { TypeCard } from '../TypeCard/TypeCard';
-import { Container } from './styles';
 import { Spacer } from '../Spacer/Spacer';
 import { BackToTop } from '../BackToTop/BackToTop';
-import { CaretRight, EyeSlash, Sparkle } from 'phosphor-react';
+import { CaretRight, Sparkle } from 'phosphor-react';
 import SimpleCardType from '../SimpleCardType/SimpleCardType';
 import CustomTooltip from '../CustomTooltip/CustomTooltip';
 import CustomChart from '../Chart/Chart';
-import { CircleButton } from '../Button/CircleButton/CircleButton';
 import { useState } from 'react';
 import addZeroes from '../../utils/addZeros';
 import { Evolution } from '../../interfaces/evolutionInterface';
 import EvolutionCard from '../EvolutionCard/EvolutionCard';
 import { FormDataSchema } from '../../interfaces/formInterfaces';
+import { Button } from '../ui/button';
 
 interface IUniquePokemonPage {
   data: UniquePokemonData | undefined;
@@ -89,44 +87,54 @@ export default function UniquePokemonPage({
 
   const navigate = useNavigate();
   return (
-    <Container>
-      <div className="spritesDiv">
+    <div className="mb-6 flex w-full flex-1 flex-col items-center justify-evenly overflow-x-hidden px-8 lg:w-[70%] lg:px-24">
+      <div className="relative mb-2 flex w-full items-center justify-center">
         {shinySprite ? (
           <img
+            className="size-72 lg:size-[30rem]"
             src={checkimgIMG(data.official_artwork.shiny)}
             alt={`${data.name} image`}
           />
         ) : (
           <img
+            className="size-72 lg:size-[30rem]"
             src={checkimgIMG(data.official_artwork.default)}
             alt={`${data.name} image`}
           />
         )}
-        <div className="switch-principal-sprite-wrapper">
+        <div className="absolute right-[2%] top-0">
           {shinySprite ? (
-            <CircleButton
+            <Button
+              className="h-auto w-auto rounded-full bg-white p-4 transition-all duration-200 ease-in-out"
               onClick={() => setShinySprite(!shinySprite)}
-              backgroundColor="white"
             >
               <Sparkle size={24} color={theme.colors.gray[800]} />
-            </CircleButton>
+            </Button>
           ) : (
-            <CircleButton
+            <Button
+              className="h-auto w-auto rounded-full bg-gray-400 p-4 transition-all duration-200 ease-in-out"
               onClick={() => setShinySprite(!shinySprite)}
-              backgroundColor="gray"
             >
               <Sparkle size={24} color={theme.colors.gray[100]} />
-            </CircleButton>
+            </Button>
           )}
         </div>
         {forms && forms.length > 1 ? (
-          <div className="forms-wrapper">
-            <img id="formSprite" src={handleFormSprite()} alt="Form Sprite" />
+          <div className="absolute bottom-0 right-[2%] flex size-56 flex-col items-center justify-center gap-3">
+            <img
+              id="formSprite"
+              className="size-28 md:size-36 lg:size-48"
+              src={handleFormSprite()}
+              alt="Form Sprite"
+            />
             <select
+              className="w-full rounded-md bg-gray-800 px-1 py-2 text-white"
               onChange={(e) => setSelectForm(Number(e.target.value))}
               id="formSelectInput"
             >
-              <option value={-1}>Select form</option>
+              <option className="capitalize" value={-1}>
+                Select form
+              </option>
               {forms &&
                 forms.map((form, index) => {
                   return (
@@ -139,8 +147,9 @@ export default function UniquePokemonPage({
           </div>
         ) : null}
       </div>
-      <div className="infoWrapper">
-        <div className="pokedexInfo">
+
+      <div className="flex w-full flex-col items-center justify-center">
+        <div className="grid grid-cols-2 grid-rows-3 items-start justify-center px-8 text-center md:gap-1">
           <Text size="xxl" weight="bold" transform="capitalize" id="name">
             {data.name?.split('-').join(' ')}
           </Text>
@@ -148,7 +157,7 @@ export default function UniquePokemonPage({
             #{addZeroes(data.id, 3)}
           </Text>
           <div className="typesWrapper">
-            <div className="typesContainer">
+            <div className="my-1 flex w-full flex-row items-start justify-center gap-4">
               {data.types?.map((type) => {
                 return (
                   <TypeCard
@@ -160,7 +169,7 @@ export default function UniquePokemonPage({
               })}
             </div>
           </div>
-          <div className="flavorWrapper">
+          <div className="text-justify">
             <Text size="md">{data.flavor?.split('\f').join(' ')}</Text>
           </div>
         </div>
@@ -168,12 +177,12 @@ export default function UniquePokemonPage({
 
       <Spacer />
 
-      <div className="detailsWrapper">
+      <div className="grid w-[70%] grid-cols-2 gap-x-8 px-8">
         <div className="infoCard">
           <Text size="md" transform="capitalize">
             Altura:
           </Text>
-          <div className="info">
+          <div className="flex flex-1 items-center justify-center rounded-md border border-gray-500 bg-gray-800 py-3">
             <Text size="md">{(data.height * 0.1).toFixed(2)}m</Text>
           </div>
         </div>
@@ -182,7 +191,7 @@ export default function UniquePokemonPage({
           <Text size="md" transform="capitalize">
             Peso:
           </Text>
-          <div className="info">
+          <div className="flex flex-1 items-center justify-center rounded-md border border-gray-500 bg-gray-800 py-3">
             <Text size="md">{(data.weight * 0.1).toFixed(2)}kg</Text>
           </div>
         </div>
@@ -199,7 +208,7 @@ export default function UniquePokemonPage({
               </Text>
               <div
                 key={`${ability.ability.name}-${ability.slot}`}
-                className="info"
+                className="relative flex flex-1 cursor-pointer items-center justify-center rounded-md border border-gray-500 bg-gray-800 py-3 transition-all duration-200 ease-in-out hover:border-primary-500"
               >
                 <Text size="md" transform="capitalize" className="abilityName">
                   {ability.ability.name.split('-').join(' ')}
@@ -212,19 +221,21 @@ export default function UniquePokemonPage({
 
       <Spacer />
 
-      <div className="statsWrapper">
-        <span>Status base:</span>
-        <div className="statsContainer">
+      <div className="flex w-[70%] flex-col items-start justify-center px-8 md:w-full">
+        <span className="text-lg">Status base:</span>
+
+        <div className="mx-auto grid w-full grid-cols-2 place-items-center gap-4 gap-x-3">
           {data.stats?.map((stat) => {
             return (
               <div
-                className="baseStatWrapper"
+                className="m-auto flex w-full flex-col items-start justify-center gap-1 pt-2"
                 key={`${stat.stat.name}-${stat.effort}`}
               >
                 <Text size="md" transform="capitalize">
                   {stat.stat.name.split('-').join(' ')}
                 </Text>
-                <div className="baseStatDiv">
+
+                <div className="w-full rounded-md bg-gray-600">
                   <div
                     style={{
                       width: handleStatsBar(stat.base_stat),
@@ -242,11 +253,11 @@ export default function UniquePokemonPage({
         </div>
       </div>
       <Spacer />
-      <div className="damage-relations">
+      <div className="flex w-[70%] flex-row items-start justify-center gap-10 p-8 md:w-full md:flex-col md:gap-2">
         {data.damage_relation.double_damage_to.length === 0 ? null : (
-          <div className="all-strengths">
+          <div className="flex flex-col items-start justify-evenly gap-1">
             <Text size="md">Forças:</Text>
-            <div className="strengths">
+            <div className="flex items-center justify-center gap-2">
               <>
                 {data.damage_relation.double_damage_to.map((type) => {
                   return (
@@ -266,9 +277,9 @@ export default function UniquePokemonPage({
           </div>
         )}
         {data.damage_relation.double_damage_from.length === 0 ? null : (
-          <div className="all-weakness">
+          <div className="flex flex-col items-start justify-evenly gap-1">
             <Text size="md">Fraquezas:</Text>
-            <div className="weakness">
+            <div className="flex items-center justify-center gap-2">
               {data.damage_relation.double_damage_from.map((type) => {
                 return (
                   <CustomTooltip title={type} key={type} arrow>
@@ -287,10 +298,10 @@ export default function UniquePokemonPage({
         )}
       </div>
       <Spacer />
-      <div className="evolution-chain">
+      <div className="flex w-[70%] flex-col items-center justify-center gap-6 px-8 py-3 md:w-full md:gap-3">
         <Text size="md">Cadeia evolutiva:</Text>
-        <div className="evolutions">
-          <div className="primary_evolution">
+        <div className="mb-6 flex w-full items-center justify-center gap-8">
+          <div className="flex items-center justify-center gap-1">
             {evolutions.first?.map((evolution) => {
               return (
                 <EvolutionCard
@@ -305,7 +316,7 @@ export default function UniquePokemonPage({
             <>
               <CaretRight size={24} />
               <div
-                className="second_evolution"
+                className="grid grid-cols-2 place-items-center items-center justify-center gap-1"
                 style={{
                   display: evolutions.second.length === 1 ? 'flex' : 'grid',
                 }}
@@ -325,7 +336,7 @@ export default function UniquePokemonPage({
           {evolutions.third && evolutions.third.length !== 0 ? (
             <>
               <CaretRight size={24} />
-              <div className="third_evolution">
+              <div className="flex items-center justify-center gap-1">
                 {evolutions.third?.map((evolution) => {
                   return (
                     <EvolutionCard
@@ -339,28 +350,28 @@ export default function UniquePokemonPage({
             </>
           ) : null}
         </div>
-        <div className="switch-sprite-wrapper">
+        <div className="flex w-full items-center justify-center">
           {shinySprite ? (
-            <CircleButton
+            <Button
+              className="h-auto w-auto rounded-full bg-white p-4 transition-all duration-200 ease-in-out"
               onClick={() => setShinySprite(!shinySprite)}
-              backgroundColor="white"
             >
               <Sparkle size={24} color={theme.colors.gray[800]} />
-            </CircleButton>
+            </Button>
           ) : (
-            <CircleButton
+            <Button
+              className="h-auto w-auto rounded-full bg-gray-400 p-4 transition-all duration-200 ease-in-out"
               onClick={() => setShinySprite(!shinySprite)}
-              backgroundColor="gray"
             >
               <Sparkle size={24} color={theme.colors.gray[100]} />
-            </CircleButton>
+            </Button>
           )}
         </div>
       </div>
 
       <Spacer />
 
-      <div className="gender-wrapper">
+      <div className="flex w-full flex-col items-center justify-center text-center">
         <Text>Gender ratio</Text>
         <div className="gender-rate">
           {data.gender ? (
@@ -370,12 +381,10 @@ export default function UniquePokemonPage({
       </div>
       <Spacer />
 
-      <div className="backButton">
-        <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>
-          <Button.Content text={'Voltar'} />
-        </Button.Root>
+      <div className="mx-auto flex w-full items-center justify-center">
+        <Button onClick={() => navigate(-1)}>Voltar</Button>
       </div>
       <BackToTop />
-    </Container>
+    </div>
   );
 }
