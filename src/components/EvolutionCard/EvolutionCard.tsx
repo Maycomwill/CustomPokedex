@@ -151,7 +151,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
       </div>
       <div className="flex">
         <img
-          className="size-24 md:size-40 lg:size-48"
+          className="size-24 md:size-32 lg:size-40"
           src={shiny ? evolution.sprites.shiny : evolution.sprites.default}
           alt={evolution.name}
         />

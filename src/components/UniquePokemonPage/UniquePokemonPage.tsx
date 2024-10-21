@@ -14,6 +14,7 @@ import { Evolution } from '../../interfaces/evolutionInterface';
 import EvolutionCard from '../EvolutionCard/EvolutionCard';
 import { FormDataSchema } from '../../interfaces/formInterfaces';
 import { Button } from '../ui/button';
+import clsx from 'clsx';
 
 interface IUniquePokemonPage {
   data: UniquePokemonData | undefined;
@@ -110,78 +111,78 @@ export default function UniquePokemonPage({
         {/* Default Sprite */}
         {shinySprite ? (
           <img
-            className="size-52 lg:size-[30rem]"
+            className="size-52 lg:size-80"
             src={checkimgIMG(data.official_artwork.shiny)}
             alt={`${data.name} image`}
           />
         ) : (
           <img
-            className="size-52 lg:size-[30rem]"
+            className="size-52 lg:size-80"
             src={checkimgIMG(data.official_artwork.default)}
             alt={`${data.name} image`}
           />
         )}
       </div>
 
-      <div className="flex w-full flex-col items-center justify-center">
-        <div className="flex w-full flex-col items-center justify-center space-y-2">
-          <h1 className="text-4xl font-semibold capitalize">
+      <div className="flex w-full flex-col items-center justify-start space-y-2 md:flex-row md:items-start md:space-y-0">
+        <div className="flex w-full flex-col justify-center space-y-2">
+          <h1 className="text-center text-4xl font-semibold capitalize md:text-left">
             {data.name?.split('-').join(' ')}
           </h1>
-          <h2 className="text-2xl capitalize">#{addZeroes(data.id, 3)}</h2>
-
-          <div className="flex w-full flex-col items-center justify-center md:flex-row">
-            <div className="my-1 flex w-full items-start justify-center gap-4">
-              {data.types?.map((type) => {
-                return (
-                  <TypeCard
-                    pressable={true}
-                    pokemonType={type.type}
-                    key={`${type.type}`}
-                  />
-                );
-              })}
-            </div>
-
-            <div className="text-justify">
-              <p className="text-base">{data.flavor?.split('\f').join(' ')}</p>
-            </div>
+          <div className="flex w-full flex-col items-center justify-center space-y-2 md:items-start">
+            <h2 className="text-2xl capitalize">#{addZeroes(data.id, 3)}</h2>
+            <p className="text-justify text-base md:w-[90%]">
+              {data.flavor?.split('\f').join(' ')}
+            </p>
+          </div>
+          <div className="my-1 flex w-full items-start justify-center gap-2 md:justify-start">
+            {data.types?.map((type) => {
+              return (
+                <TypeCard
+                  pressable={true}
+                  pokemonType={type.type}
+                  key={`${type.type}`}
+                />
+              );
+            })}
           </div>
         </div>
+
+        {/* Forms sprite selector */}
+        {forms && forms.length > 1 ? (
+          <div className="flex w-56 flex-col items-center justify-start gap-3">
+            <p>Variações do Pokémon</p>
+            <img
+              id="formSprite"
+              className="size-24 lg:size-32"
+              src={handleFormSprite()}
+              alt="Form Sprite"
+            />
+            <select
+              className="w-full rounded-md bg-gray-800 px-1 py-2 text-white"
+              onChange={(e) => setSelectForm(Number(e.target.value))}
+              id="formSelectInput"
+            >
+              <option className="capitalize" value={-1}>
+                Select form
+              </option>
+              {forms &&
+                forms.map((form, index) => {
+                  return (
+                    <option key={`${form.name}-${index}`} value={index}>
+                      {form.name.split('-').join(' ')}
+                    </option>
+                  );
+                })}
+            </select>
+          </div>
+        ) : null}
       </div>
-      {/* Forms sprite selector */}
-      {forms && forms.length > 1 ? (
-        <div className="flex size-56 flex-col items-center justify-center gap-3">
-          <p>Variações do Pokémon</p>
-          <img
-            id="formSprite"
-            className="size-24 lg:size-32"
-            src={handleFormSprite()}
-            alt="Form Sprite"
-          />
-          <select
-            className="w-full rounded-md bg-gray-800 px-1 py-2 text-white"
-            onChange={(e) => setSelectForm(Number(e.target.value))}
-            id="formSelectInput"
-          >
-            <option className="capitalize" value={-1}>
-              Select form
-            </option>
-            {forms &&
-              forms.map((form, index) => {
-                return (
-                  <option key={`${form.name}-${index}`} value={index}>
-                    {form.name.split('-').join(' ')}
-                  </option>
-                );
-              })}
-          </select>
-        </div>
-      ) : null}
 
       <Spacer />
 
-      <div className="grid w-full grid-cols-2 gap-x-8 lg:w-[70%] lg:px-8">
+      {/* Info */}
+      <div className="grid w-full grid-cols-2 gap-x-8 lg:w-[80%] lg:px-8">
         <div className="infoCard">
           <span className="text-base capitalize">Altura:</span>
 
@@ -222,7 +223,8 @@ export default function UniquePokemonPage({
 
       <Spacer />
 
-      <div className="flex w-full flex-col items-start justify-center md:w-full lg:w-[70%] lg:px-8">
+      {/* Stats */}
+      <div className="flex w-full flex-col items-start justify-center md:w-full lg:w-[80%] lg:px-8">
         <span className="text-lg">Status base:</span>
 
         <div className="mx-auto grid w-full grid-cols-2 place-items-center gap-4 gap-x-3">
@@ -255,8 +257,11 @@ export default function UniquePokemonPage({
           })}
         </div>
       </div>
+
       <Spacer />
-      <div className="flex w-full flex-col items-start justify-center gap-10 md:w-full md:gap-2 lg:w-[70%] lg:px-8">
+
+      {/* Damage Relation */}
+      <div className="flex w-full flex-col items-start justify-center gap-4 md:w-full lg:w-[80%] lg:px-8">
         {data.damage_relation.double_damage_to.length === 0 ? (
           <span className="text-center">Nenhuma vantagem de dano</span>
         ) : (
