@@ -39,7 +39,7 @@ export function PokemonCard({
   return (
     <div
       className={clsx(
-        'justify-cennter ease-custom-bezier flex h-52 w-full cursor-pointer flex-row items-center overflow-hidden rounded-xl border-none outline-none transition-all duration-300',
+        'justify-cennter flex h-48 w-full cursor-pointer flex-row items-center overflow-hidden rounded-xl border-none outline-none transition-all duration-300 ease-custom-bezier md:h-36',
         {
           'bg-backgroundCard-bug-light hover:bg-backgroundCard-bug-mediumLight':
             types[0].type === 'bug',
@@ -86,15 +86,15 @@ export function PokemonCard({
     >
       <div className="flex h-full w-2/3 flex-1 flex-col items-start justify-between px-6 py-2">
         <div className="flex flex-col items-start justify-center gap-1 md:justify-start md:gap-2">
-          <h1 className="text-3xl font-semibold capitalize text-gray-800">
+          <h2 className="text-2xl font-semibold capitalize text-gray-800">
             {name.split('-').join(' ')}
-          </h1>
+          </h2>
           <span className="font-regular text-base text-gray-600">
             #{addZeroes(String(id), 3)}
           </span>
         </div>
         <div className="flex flex-col items-center justify-center gap-1 pb-2">
-          <ul className="flex list-none flex-col items-center justify-center gap-2">
+          <ul className="flex list-none flex-col items-center justify-center gap-2 md:flex-row">
             {types.map((type) => {
               return (
                 <li key={`${type.type}`}>

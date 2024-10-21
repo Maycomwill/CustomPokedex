@@ -36,7 +36,7 @@ export function Type() {
     // console.log(moves);
     return (
       <div className="h-full min-h-screen w-full px-4">
-        <div className="flex flex-col space-y-4 py-4">
+        <div className="flex flex-col space-y-2 py-4">
           <div className="flex w-full flex-col items-center text-center md:flex-row md:justify-between">
             <p className="text-3xl">
               Pokémon do tipo:{' '}
@@ -44,7 +44,7 @@ export function Type() {
                 {params.typename}
               </span>
             </p>
-            <div className="flex w-[50%] items-center justify-center md:justify-end">
+            <div className="flex w-[50%] items-center justify-center pt-2 md:justify-end">
               <Button onClick={() => navigate(-1)}>Voltar</Button>
             </div>
           </div>
@@ -63,7 +63,7 @@ export function Type() {
             })}
           </div>
         </div>
-        <Spacer />
+        {/* <Spacer />
         <div className="flex w-full flex-col items-center justify-center gap-3">
           <p className="text-xl">
             Técnicas do tipo:{' '}
@@ -76,7 +76,7 @@ export function Type() {
               return <MoveCard move={move} key={i} />;
             })}
           </div>
-        </div>
+        </div> */}
         <div className="flex w-full items-center justify-center">
           <Button onClick={() => navigate(-1)}>Voltar</Button>
         </div>
