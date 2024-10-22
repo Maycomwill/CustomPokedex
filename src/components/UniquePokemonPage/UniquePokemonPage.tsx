@@ -263,7 +263,7 @@ export default function UniquePokemonPage({
       <Spacer />
 
       {/* Damage Relation */}
-      <div className="flex w-full flex-col items-start justify-center gap-4 md:w-full lg:w-[80%] lg:px-8">
+      <div className="flex w-full flex-col items-start justify-center gap-4 md:w-full md:flex-row lg:w-[80%] lg:px-8">
         {data.damage_relation.double_damage_to.length === 0 ? (
           <span className="text-center">Nenhuma vantagem de dano</span>
         ) : (

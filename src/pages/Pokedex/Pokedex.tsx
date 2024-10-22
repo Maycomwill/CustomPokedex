@@ -60,152 +60,152 @@ export function Pokedex() {
         <Loading color={theme.colors.primary[500]} size={'lg'} />
       </div>
     );
+  }
+
+  if (genTypeFilteredList.length == 0) {
+    return (
+      <div className="flex w-full flex-col items-center justify-start">
+        <div className="flex w-full items-center justify-between px-12 py-6">
+          <span className="text-3xl">{params.generationid}ª Geração</span>
+          <div>
+            <Button onClick={() => navigate(-1)}>Voltar</Button>
+          </div>
+        </div>
+        <div className="grid w-full grid-cols-[1fr_2fr_1fr] place-items-center">
+          <div />
+          <div className="flex w-full items-center justify-center">
+            <form className="flex flex-col gap-1">
+              <Input
+                type="text"
+                placeholder="Digite o nome do pokemon"
+                name="search"
+                onChange={(e) => setSearch(e.target.value)}
+                value={search}
+              />
+            </form>
+          </div>
+
+          <DropMenu pokemonArray={pokemonData} />
+        </div>
+        {search.length > 0 ? (
+          <div className="grid w-full flex-1 grid-cols-1 place-items-center items-start gap-4 px-2 pt-3 md:grid-cols-2 lg:grid-cols-3">
+            {pokemonListFiltered
+              .sort((a, b) => {
+                if (a > b) return 1;
+                if (a < b) return 0;
+                return 0;
+              })
+              .map((pokemon: PokemonDataProps) => {
+                return (
+                  <PokemonCard
+                    key={`${pokemon.id}-${pokemon.name}`}
+                    id={pokemon.id}
+                    name={pokemon.name}
+                    types={pokemon.types}
+                    sprite={pokemon.sprite}
+                    primaryType={pokemon.types[0].type}
+                  />
+                );
+              })}
+          </div>
+        ) : (
+          <div className="grid w-full flex-1 grid-cols-1 place-items-center items-start gap-3 px-2 pt-3 md:grid-cols-2 lg:grid-cols-3">
+            {pokemonData
+              .sort((a, b) => {
+                if (a > b) return 1;
+                if (a < b) return 0;
+                return 0;
+              })
+              .map((pokemon: PokemonDataProps) => {
+                return (
+                  <PokemonCard
+                    key={`${pokemon.id}-${pokemon.name}`}
+                    id={pokemon.id}
+                    name={pokemon.name}
+                    types={pokemon.types}
+                    sprite={pokemon.sprite}
+                    primaryType={pokemon.types[0].type}
+                  />
+                );
+              })}
+          </div>
+        )}
+        <BackToTop />
+        <NavButtons />
+      </div>
+    );
   } else {
-    if (genTypeFilteredList.length == 0) {
-      return (
-        <div className="flex w-full flex-col items-center justify-start px-12">
-          <div className="flex w-full items-center justify-between py-6">
-            <span className="text-3xl">{params.generationid}ª Geração</span>
-            <div>
-              <Button onClick={() => navigate(-1)}>Voltar</Button>
-            </div>
+    return (
+      <div className="flex w-full flex-col items-center justify-start px-12">
+        <div className="flex w-full items-center justify-between py-6">
+          <span className="text-3xl">{params.generationid}ª Geração</span>
+          <div>
+            <Button onClick={() => navigate(-1)}>Voltar</Button>
           </div>
-          <div className="grid w-full grid-cols-[1fr_2fr_1fr] place-items-center">
-            <div />
-            <div className="flex w-full items-center justify-center">
-              <form className="flex flex-col gap-1">
-                <Input
-                  type="text"
-                  placeholder="Digite o nome do pokemon"
-                  name="search"
-                  onChange={(e) => setSearch(e.target.value)}
-                  value={search}
-                />
-              </form>
-            </div>
-
-            <DropMenu pokemonArray={pokemonData} />
-          </div>
-          {search.length > 0 ? (
-            <div className="grid w-[90%] flex-1 grid-cols-1 place-items-center items-start gap-4 pt-3 md:grid-cols-2 lg:grid-cols-3">
-              {pokemonListFiltered
-                .sort((a, b) => {
-                  if (a > b) return 1;
-                  if (a < b) return 0;
-                  return 0;
-                })
-                .map((pokemon: PokemonDataProps) => {
-                  return (
-                    <PokemonCard
-                      key={`${pokemon.id}-${pokemon.name}`}
-                      id={pokemon.id}
-                      name={pokemon.name}
-                      types={pokemon.types}
-                      sprite={pokemon.sprite}
-                      primaryType={pokemon.types[0].type}
-                    />
-                  );
-                })}
-            </div>
-          ) : (
-            <div className="grid w-[90%] flex-1 grid-cols-1 place-items-center items-start gap-3 pt-3 md:grid-cols-2 lg:grid-cols-3">
-              {pokemonData
-                .sort((a, b) => {
-                  if (a > b) return 1;
-                  if (a < b) return 0;
-                  return 0;
-                })
-                .map((pokemon: PokemonDataProps) => {
-                  return (
-                    <PokemonCard
-                      key={`${pokemon.id}-${pokemon.name}`}
-                      id={pokemon.id}
-                      name={pokemon.name}
-                      types={pokemon.types}
-                      sprite={pokemon.sprite}
-                      primaryType={pokemon.types[0].type}
-                    />
-                  );
-                })}
-            </div>
-          )}
-          <BackToTop />
-          <NavButtons />
         </div>
-      );
-    } else {
-      return (
-        <div className="flex w-full flex-col items-center justify-start px-12">
-          <div className="flex w-full items-center justify-between py-6">
-            <span className="text-3xl">{params.generationid}ª Geração</span>
-            <div>
-              <Button onClick={() => navigate(-1)}>Voltar</Button>
-            </div>
-          </div>
-          <div className="grid w-full grid-cols-[1fr_2fr_1fr] place-items-center">
-            <div />
-            <div className="flex w-full items-center justify-center">
-              <form className="flex flex-col gap-1">
-                <Input
-                  type="text"
-                  placeholder="Digite o nome do pokemon"
-                  name="search"
-                  onChange={(e) => setSearch(e.target.value)}
-                  value={search}
-                />
-              </form>
-            </div>
-
-            <DropMenu pokemonArray={pokemonData} />
+        <div className="grid w-full grid-cols-[1fr_2fr_1fr] place-items-center">
+          <div />
+          <div className="flex w-full items-center justify-center">
+            <form className="flex flex-col gap-1">
+              <Input
+                type="text"
+                placeholder="Digite o nome do pokemon"
+                name="search"
+                onChange={(e) => setSearch(e.target.value)}
+                value={search}
+              />
+            </form>
           </div>
 
-          {search.length > 0 ? (
-            <div className="grid w-[90%] flex-1 grid-cols-1 place-items-center items-start gap-3 pt-3 md:grid-cols-2 lg:grid-cols-3">
-              {pokemonListFiltered
-                .sort((a, b) => {
-                  if (a > b) return 1;
-                  if (a < b) return 0;
-                  return 0;
-                })
-                .map((pokemon: PokemonDataProps) => {
-                  return (
-                    <PokemonCard
-                      key={`${pokemon.id}-${pokemon.name}`}
-                      id={pokemon.id}
-                      name={pokemon.name}
-                      types={pokemon.types}
-                      sprite={pokemon.sprite}
-                      primaryType={pokemon.types[0].type}
-                    />
-                  );
-                })}
-            </div>
-          ) : (
-            <div className="grid w-[90%] flex-1 grid-cols-1 place-items-center items-start gap-3 pt-3 md:grid-cols-2 lg:grid-cols-3">
-              {genTypeFilteredList
-                .sort((a, b) => {
-                  if (a > b) return 1;
-                  if (a < b) return 0;
-                  return 0;
-                })
-                .map((pokemon: PokemonDataProps) => {
-                  return (
-                    <PokemonCard
-                      key={`${pokemon.id}-${pokemon.name}`}
-                      id={pokemon.id}
-                      name={pokemon.name}
-                      types={pokemon.types}
-                      sprite={pokemon.sprite}
-                      primaryType={pokemon.types[0].type}
-                    />
-                  );
-                })}
-            </div>
-          )}
-          <BackToTop />
-          <NavButtons />
+          <DropMenu pokemonArray={pokemonData} />
         </div>
-      );
-    }
+
+        {search.length > 0 ? (
+          <div className="grid w-[90%] flex-1 grid-cols-1 place-items-center items-start gap-3 pt-3 md:grid-cols-2 lg:grid-cols-3">
+            {pokemonListFiltered
+              .sort((a, b) => {
+                if (a > b) return 1;
+                if (a < b) return 0;
+                return 0;
+              })
+              .map((pokemon: PokemonDataProps) => {
+                return (
+                  <PokemonCard
+                    key={`${pokemon.id}-${pokemon.name}`}
+                    id={pokemon.id}
+                    name={pokemon.name}
+                    types={pokemon.types}
+                    sprite={pokemon.sprite}
+                    primaryType={pokemon.types[0].type}
+                  />
+                );
+              })}
+          </div>
+        ) : (
+          <div className="grid w-[90%] flex-1 grid-cols-1 place-items-center items-start gap-3 pt-3 md:grid-cols-2 lg:grid-cols-3">
+            {genTypeFilteredList
+              .sort((a, b) => {
+                if (a > b) return 1;
+                if (a < b) return 0;
+                return 0;
+              })
+              .map((pokemon: PokemonDataProps) => {
+                return (
+                  <PokemonCard
+                    key={`${pokemon.id}-${pokemon.name}`}
+                    id={pokemon.id}
+                    name={pokemon.name}
+                    types={pokemon.types}
+                    sprite={pokemon.sprite}
+                    primaryType={pokemon.types[0].type}
+                  />
+                );
+              })}
+          </div>
+        )}
+        <BackToTop />
+        <NavButtons />
+      </div>
+    );
   }
 }

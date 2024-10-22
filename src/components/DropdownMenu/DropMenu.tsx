@@ -7,7 +7,6 @@ import {
   Radio,
   RadioGroup,
 } from '@mui/material';
-import { CircleButton } from '../Button/CircleButton/CircleButton';
 import { Funnel } from 'phosphor-react';
 import { usePokedex } from '../../hooks/usePokedex';
 import { PokemonDataProps } from '../../interfaces/pokemonInterfaces';
@@ -45,9 +44,9 @@ export function DropMenu({
 
   return (
     <div className="flex h-full w-full items-center justify-center">
-      <CircleButton onClick={handleClick}>
+      <button className="rounded-full bg-white p-2" onClick={handleClick}>
         <Funnel size={24} color={colors.gray[800]} />
-      </CircleButton>
+      </button>
       {/* <Button onClick={handleClick} /> */}
       <Popover
         id={id}
