@@ -56,7 +56,7 @@ export function TypeCard({ pokemonType, pressable = false }: ITypeCardProps) {
     return (
       <button
         className={clsx(
-          'flex h-9 w-24 max-w-32 items-center justify-start gap-2 rounded-full border-none pl-1',
+          'flex h-9 w-24 max-w-32 items-center justify-start gap-2 rounded-full border-none pl-[3px]',
           {
             'bg-backgroundCard-bug-default hover:bg-backgroundCard-bug-dark':
               pokemonType === 'bug',
@@ -98,7 +98,7 @@ export function TypeCard({ pokemonType, pressable = false }: ITypeCardProps) {
         )}
         onClick={() => navigate(`/type/${pokemonType}`)}
       >
-        <div className="flex items-center justify-center rounded-full bg-white p-[2px]">
+        <div className="flex size-8 items-center justify-center rounded-full bg-white p-[2px]">
           {poketypesComponents({
             height:
               pokemonType === 'dragon'
@@ -118,7 +118,7 @@ export function TypeCard({ pokemonType, pressable = false }: ITypeCardProps) {
           })}
         </div>
         <div className="flex w-1/2 items-center justify-start">
-          <span className="text-sm font-semibold capitalize">
+          <span className="text-xs font-semibold capitalize">
             {pokemonType}
           </span>
         </div>
@@ -128,7 +128,7 @@ export function TypeCard({ pokemonType, pressable = false }: ITypeCardProps) {
   return (
     <div
       className={clsx(
-        'flex h-9 w-24 max-w-32 items-center justify-start gap-1 rounded-full border-none pl-1',
+        'flex h-9 w-24 max-w-32 items-center justify-start gap-2 rounded-full border-none pl-[3px]',
         {
           'bg-backgroundCard-bug-default': pokemonType === 'bug',
           'bg-backgroundCard-dark-default': pokemonType === 'dark',
@@ -151,7 +151,7 @@ export function TypeCard({ pokemonType, pressable = false }: ITypeCardProps) {
         },
       )}
     >
-      <div className="flex items-center justify-center rounded-full bg-white p-[2px]">
+      <div className="flex size-8 items-center justify-center rounded-full bg-white p-[2px]">
         {poketypesComponents({
           height:
             pokemonType === 'dragon'
@@ -171,7 +171,7 @@ export function TypeCard({ pokemonType, pressable = false }: ITypeCardProps) {
         })}
       </div>
       <div className="flex w-1/2 items-center justify-start">
-        <span className="text-sm font-semibold capitalize">{pokemonType}</span>
+        <span className="text-xs font-semibold capitalize">{pokemonType}</span>
       </div>
     </div>
   );
