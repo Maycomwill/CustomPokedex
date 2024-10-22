@@ -15,6 +15,7 @@ import EvolutionCard from '../EvolutionCard/EvolutionCard';
 import { FormDataSchema } from '../../interfaces/formInterfaces';
 import { Button } from '../ui/button';
 import clsx from 'clsx';
+import { RadarChart } from '../RadarChart/RadarChart';
 
 interface IUniquePokemonPage {
   data: UniquePokemonData | undefined;
@@ -225,7 +226,8 @@ export default function UniquePokemonPage({
 
       {/* Stats */}
       <div className="flex w-full flex-col items-start justify-center md:w-full lg:w-[80%] lg:px-8">
-        <span className="text-lg">Status base:</span>
+        <RadarChart data={data.chart_data} />
+        {/* <span className="text-lg">Status base:</span>
 
         <div className="mx-auto grid w-full grid-cols-2 place-items-center gap-4 gap-x-3">
           {data.stats?.map((stat) => {
@@ -255,7 +257,7 @@ export default function UniquePokemonPage({
               </div>
             );
           })}
-        </div>
+        </div> */}
       </div>
 
       <Spacer />
