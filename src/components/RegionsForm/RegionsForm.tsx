@@ -14,7 +14,7 @@ export function RegionsForm() {
       <p className="pb-4 text-xl md:text-2xl lg:text-3xl">
         Navege pelas regiões do mundo pokemon
       </p>
-      <div className="grid w-full grid-cols-1 place-items-center items-center gap-3 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid w-full grid-cols-1 place-items-center items-center gap-3 md:grid-cols-2 lg:w-[70%] lg:grid-cols-3">
         {pokemonRegions.map((region, i) => (
           <RegionCard
             key={i}
