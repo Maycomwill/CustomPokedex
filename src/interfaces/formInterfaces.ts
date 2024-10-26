@@ -2,7 +2,7 @@ import { NamedAPIResource } from "./apiInterfaces";
 
 export interface FormDataSchema {
   name: string;
-  id: string;
+  id: number;
   sprites: {
     default: {
       default: string;

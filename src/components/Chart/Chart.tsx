@@ -1,6 +1,5 @@
-import { Chart } from "react-google-charts";
-import { Container } from "./style";
-import { Text } from "../Text/Text";
+import { Chart } from 'react-google-charts';
+import { Container } from './style';
 
 interface ICustomChart {
   female: number;
@@ -9,15 +8,15 @@ interface ICustomChart {
 
 function CustomChart({ female, male }: ICustomChart) {
   let data = [
-    ["Gender", "Percentage"],
-    ["Female", female],
-    ["Male", male],
+    ['Gender', 'Percentage'],
+    ['Female', female],
+    ['Male', male],
     // CSS-style declaration
   ];
   if (female === 0 && male === 0) {
     return (
       <Container>
-        <Text weight="bold" transform="uppercase">Gênero desconhecido</Text>
+        <span className="font-semibold uppercase">Gênero desconhecido</span>
       </Container>
     );
   } else {
@@ -31,9 +30,9 @@ function CustomChart({ female, male }: ICustomChart) {
           options={{
             is3D: false,
             width: 300,
-            backgroundColor: "transparent",
-            colors: ["#ED6EC7", "#0288d1"],
-            legend: "none",
+            backgroundColor: 'transparent',
+            colors: ['#ED6EC7', '#0288d1'],
+            legend: 'none',
             pieHole: 0.4,
           }}
         />

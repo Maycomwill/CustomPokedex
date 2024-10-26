@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 export interface PokedexDataProps {
   name: string;
@@ -40,6 +40,11 @@ export interface damageRelationsProps {
   four_times_damage_to: string[];
 }
 
+export interface StatsChartDataPros {
+  name: string;
+  value: number;
+}
+
 export interface UniquePokemonData {
   name: string;
   id: number;
@@ -53,6 +58,7 @@ export interface UniquePokemonData {
   weight: number;
   height: number;
   stats: statsProps[];
+  chart_data: StatsChartDataPros[];
   abilities: abilityProps[];
   flavor: string;
   damage_relation: damageRelationsProps;

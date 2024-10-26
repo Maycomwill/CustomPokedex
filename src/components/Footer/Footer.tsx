@@ -1,19 +1,18 @@
-import { Container } from "./styles";
-import { Text } from "../Text/Text";
-
-interface IFooterProps {
-  id: string;
-}
-
-export function Footer({ id }: IFooterProps) {
-
+export function Footer() {
   return (
-    <Container id={id}>
-      {/* <div>
-        <Button text={"Toggle Theme"}/>
-      </div> */}
-      <Text color="white" size="xsm">Criado por {" "}<a href="https://github.com/maycomwill" target="
-      _blank" rel="noopener"><Text color="white" size="xsm">Maycom Willams</Text></a> com 💚</Text>
-    </Container>
+    <div className="flex w-full items-center justify-center py-4">
+      <p className="text-xs text-gray-100">
+        Criado por{' '}
+        <a
+          href="https://github.com/maycomwill"
+          target="
+  _blank"
+          rel="noopener"
+        >
+          <span className="text-xs text-gray-100">Maycom Willams</span>
+        </a>{' '}
+        com 💚
+      </p>
+    </div>
   );
 }

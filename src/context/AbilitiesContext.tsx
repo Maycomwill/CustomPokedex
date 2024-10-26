@@ -5,7 +5,6 @@ import {
 } from "../interfaces/pokemonInterfaces";
 import { waitingPromises } from "../utils/awaitPromises";
 import { pokeapi } from "../services/api";
-import { storagePokemonInformation } from "../utils/storagePokemonInfo";
 
 export interface AbilityContextProps {
   getAbilityInfo: (ability: string) => void;
@@ -31,7 +30,15 @@ export function AbilityContextProvider({ children }: { children: ReactNode }) {
     let response = data.pokemon.map((pokemon: any) => {
       return { name: pokemon.pokemon.name, url: pokemon.pokemon.url };
     });
-    rawPokemonData = await waitingPromises(response);
+    waitingPromises(response).then((response) => {
+      setCommonAbilityPokemon([]);
+
+      rawPokemonData = response.sort((a, b) => {
+        return a.id - b.id;
+      });
+
+      setCommonAbilityPokemon(rawPokemonData);
+    });
 
     let description = data.effect_entries.find(
       (effect_element: {
@@ -45,17 +52,6 @@ export function AbilityContextProvider({ children }: { children: ReactNode }) {
         return "";
       }
     );
-
-    rawPokemonData
-      .sort((a, b) => {
-        if (a.id < b.id) {
-          return -1;
-        }
-        return 1;
-      })
-      .map((pokemon) => {
-        storagePokemonInformation(pokemon, setCommonAbilityPokemon);
-      });
 
     setAbilityInfo({
       name: data.name,

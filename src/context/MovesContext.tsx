@@ -1,17 +1,16 @@
-import { createContext, ReactNode, useState } from "react";
-import { pokeapi } from "../services/api";
-import { MoveProps } from "../interfaces/movesInterface";
+import { createContext, ReactNode, useState } from 'react';
+import { pokeapi } from '../services/api';
+import { MoveProps } from '../interfaces/movesInterface';
 import {
   PokedexDataProps,
   PokemonDataProps,
-} from "../interfaces/pokemonInterfaces";
-import { waitingPromises } from "../utils/awaitPromises";
-import { storagePokemonInformation } from "../utils/storagePokemonInfo";
-import { AxiosError } from "axios";
+} from '../interfaces/pokemonInterfaces';
+import { waitingPromises } from '../utils/awaitPromises';
+import { AxiosError } from 'axios';
 
 export interface MovesContextProps {
   getMovesData: (move: string) => void;
-  move: MoveProps | undefined;
+  move: MoveProps;
   moveCommonPokemon: PokemonDataProps[];
   isLoading: boolean;
 }
@@ -19,15 +18,17 @@ export interface MovesContextProps {
 export const MovesContext = createContext({} as MovesContextProps);
 
 export function MovesContextProvider({ children }: { children: ReactNode }) {
-  const [move, setMove] = useState<MoveProps>();
+  const [move, setMove] = useState<MoveProps>({} as MoveProps);
   const [isLoading, setIsLoading] = useState(false);
   const [moveCommonPokemon, setCommonPokemon] = useState<PokemonDataProps[]>(
-    []
+    [],
   );
   async function getMovesData(move: string) {
+    console.log('chegou');
     try {
       setIsLoading(true);
       const { data } = await pokeapi.get(`/move/${move}`);
+      console.log(move);
 
       let newPokemonArray: PokedexDataProps[] = [];
       data.learned_by_pokemon.map((pokemon: PokedexDataProps) => {
@@ -38,13 +39,13 @@ export function MovesContextProvider({ children }: { children: ReactNode }) {
       });
 
       waitingPromises(newPokemonArray).then((response) => {
+        setCommonPokemon([]);
+
         let newArray = response.sort((a, b) => {
           return a.id - b.id;
         });
-        setCommonPokemon([]);
-        newArray.map((pokemon: PokemonDataProps) =>
-          storagePokemonInformation(pokemon, setCommonPokemon)
-        );
+
+        setCommonPokemon(newArray);
       });
 
       let { flavor_text } = data.flavor_text_entries.find(
@@ -52,11 +53,11 @@ export function MovesContextProvider({ children }: { children: ReactNode }) {
           flavor_text: string;
           language: { url: string; name: string };
         }) => {
-          if (flavor.language.name === "en") {
+          if (flavor.language.name === 'en') {
             return flavor.flavor_text;
           }
-          return "";
-        }
+          return '';
+        },
       );
       // console.log(flavor_text);
 
@@ -77,7 +78,8 @@ export function MovesContextProvider({ children }: { children: ReactNode }) {
       return setIsLoading(false);
     } catch (error) {
       if (error instanceof AxiosError) {
-        location.replace("/");
+        setMove({} as MoveProps);
+        location.replace('/');
         return setIsLoading(false);
       }
     }

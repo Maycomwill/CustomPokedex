@@ -1,13 +1,12 @@
-import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { Text } from "../../components/Text/Text";
-import { Loading } from "../../components/Loading/Loading";
-import theme from "../../styles/theme";
-import { PokemonCard } from "../../components/PokemonCard/PokemonCard";
-import { Container } from "./styles";
-import { Button } from "../../components/Button";
-import { BackToTop } from "../../components/BackToTop/BackToTop";
-import useAbility from "../../hooks/useAbility";
+import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import Loading from '../../components/Loading/Loading';
+import theme from '../../styles/theme';
+import { PokemonCard } from '../../components/PokemonCard/PokemonCard';
+import { BackToTop } from '../../components/BackToTop/BackToTop';
+import useAbility from '../../hooks/useAbility';
+import { Button } from '@/components/ui/button';
+import clsx from 'clsx';
 
 export function Ability() {
   const params = useParams();
@@ -24,53 +23,62 @@ export function Ability() {
   }, []);
 
   if (abilityInfo === undefined || isLoading === true) {
-    return <Loading color={theme.colors.primary[500]} size={64} />;
+    return (
+      <div className="flex w-full flex-1 items-center justify-center">
+        <Loading color={theme.colors.primary[500]} size={'lg'} />
+      </div>
+    );
   } else {
     return (
-      <Container>
+      <div className="flex min-h-screen w-full flex-col items-center justify-center px-1 pt-px">
         <>
-          <div className="abilityName">
-            <Text
-              transform="uppercase"
-              size="xxl"
-              color="primary"
-              weight="bold"
-            >
-              {abilityInfo.name.split("-").join(" ")}
-            </Text>
+          <div className="text-center">
+            <h1 className="text-4xl font-semibold uppercase text-primary-500">
+              {abilityInfo.name.split('-').join(' ')}
+            </h1>
           </div>
-          <div className="descriptionDiv">
-            <Text size="md">{abilityInfo.description}</Text>
+          <div className="px-3 pt-6 text-justify">
+            <span>{abilityInfo.description}</span>
           </div>
-          <div className="pokemonCommon">
-            <Text size="lg">Pokemons que possuem esta habilidade: </Text>
+          <div className="py-4 text-center">
+            <span className="text-3xl">
+              Pokemons que possuem esta habilidade:{' '}
+            </span>
           </div>
-          <div className="pokemons">
+
+          <div className="grid w-full grid-cols-1 place-items-center items-center gap-4 px-2 pt-3 md:grid-cols-2 lg:grid-cols-3">
             {commonAbilityPokemon !== undefined ? (
-              commonAbilityPokemon.map((pokemon) => {
+              commonAbilityPokemon.map((pokemon, i) => {
                 return (
-                  <PokemonCard
+                  <div
                     key={`${pokemon.id}-${pokemon.name}`}
-                    id={pokemon.id}
-                    name={pokemon.name}
-                    types={pokemon.types}
-                    sprite={pokemon.sprite}
-                    primaryType={pokemon.types[0].type}
-                  />
+                    className={clsx('w-full', {
+                      'md:col-span-2 md:w-auto lg:col-span-1':
+                        i === commonAbilityPokemon.length - 1,
+                    })}
+                  >
+                    <PokemonCard
+                      id={pokemon.id}
+                      name={pokemon.name}
+                      types={pokemon.types}
+                      sprite={pokemon.sprite}
+                      primaryType={pokemon.types[0].type}
+                    />
+                  </div>
                 );
               })
             ) : (
-              <Loading color={theme.colors.primary[500]} size={64} />
+              <Loading color={theme.colors.primary[500]} size={'lg'} />
             )}
           </div>
-          <div className="backButton">
-            <Button.Root backgroundColor="delete" onClick={() => navigate(-1)}>
-              <Button.Content text={"Voltar"} />
-            </Button.Root>
+          <div className="py-4">
+            <Button size={'lg'} onClick={() => navigate(-1)}>
+              Voltar
+            </Button>
           </div>
         </>
         <BackToTop />
-      </Container>
+      </div>
     );
   }
 }
