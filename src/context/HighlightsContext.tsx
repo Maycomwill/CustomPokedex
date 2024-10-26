@@ -35,9 +35,9 @@ export function HighlightsContextProvider({
   function verifyDate() {
     const today = new Date().toISOString().split('T')[0];
     // Verify if already exists highlights
-    const storaged_date = localStorage.getItem('highlights_custom_pokedex');
+    const storaged_data = localStorage.getItem('highlights_custom_pokedex');
 
-    if (storaged_date === null || !storaged_date) {
+    if (storaged_data === null || !storaged_data) {
       const ids = randomizeIds();
       const date = new Date().toISOString().split('T')[0];
       setDateFilter({ ids, date, pokemon: [] });
@@ -48,7 +48,7 @@ export function HighlightsContextProvider({
       getHighlights();
       return;
     } else {
-      const parsed = JSON.parse(storaged_date);
+      const parsed = JSON.parse(storaged_data);
       if (parsed.date < today) {
         const ids = randomizeIds();
         setDateFilter({ ids, date: today, pokemon: [] });
@@ -89,7 +89,8 @@ export function HighlightsContextProvider({
         localStorage.setItem(
           'highlights_custom_pokedex',
           JSON.stringify({
-            ...dateFilter,
+            ids: parsed.ids,
+            date: parsed.date,
             pokemon: response,
           }),
         );
