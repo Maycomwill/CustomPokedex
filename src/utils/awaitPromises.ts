@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   PokedexDataProps,
   PokemonDataProps,
-} from "../interfaces/pokemonInterfaces";
-import { FormDataSchema } from "../interfaces/formInterfaces";
+} from '../interfaces/pokemonInterfaces';
+import { FormDataSchema } from '../interfaces/formInterfaces';
 
 let rawPokemonData: PokemonDataProps[] = [];
 let rawFormPokemonData: FormDataSchema[] = [];
@@ -14,11 +14,38 @@ export async function waitingPromises(results: PokedexDataProps[]) {
   return rawPokemonData;
 }
 
+export async function waitingPromisesById(ids: number[]) {
+  rawPokemonData = [];
+  await axios.all(ids.map((id) => getPokemonInformationById(id)));
+  return rawPokemonData;
+}
+
+export async function getPokemonInformationById(id: number) {
+  return await axios
+    .get(`https://pokeapi.co/api/v2/pokemon/${id}`)
+    .then(function (response) {
+      return rawPokemonData.push({
+        name: response.data.name,
+        id: response.data.id,
+        sprite: `${
+          response.data.sprites.front_default
+            ? response.data.sprites.front_default
+            : response.data.sprites.other['official-artwork'].front_default
+        }`,
+        types: response.data.types.map((type: any) => {
+          return {
+            type: type.type.name,
+          };
+        }),
+      });
+    });
+}
+
 export async function waitingFormsPromises(results: PokedexDataProps[]) {
   rawFormPokemonData = [];
 
   await axios.all(
-    results.map((pokemon) => getFormsPokemonInformation(pokemon.url))
+    results.map((pokemon) => getFormsPokemonInformation(pokemon.url)),
   );
   return rawFormPokemonData;
 }
@@ -32,10 +59,10 @@ export async function getFormsPokemonInformation(pokemonUrl: string) {
         default: {
           default: response.data.sprites.front_default
             ? response.data.sprites.front_default
-            : response.data.sprites.other["official-artwork"].front_default,
+            : response.data.sprites.other['official-artwork'].front_default,
           shiny: response.data.sprites.front_shiny
             ? response.data.sprites.front_shiny
-            : response.data.sprites.other["official-artwork"].front_shiny,
+            : response.data.sprites.other['official-artwork'].front_shiny,
         },
         home: {
           default: response.data.sprites.other.home.front_default
@@ -46,11 +73,11 @@ export async function getFormsPokemonInformation(pokemonUrl: string) {
             : response.data.sprites.front_shiny,
         },
         artwork: {
-          default: response.data.sprites.other["official-artwork"].front_default
-            ? response.data.sprites.other["official-artwork"].front_default
+          default: response.data.sprites.other['official-artwork'].front_default
+            ? response.data.sprites.other['official-artwork'].front_default
             : response.data.sprites.front_default,
-          shiny: response.data.sprites.other["official-artwork"].front_shiny
-            ? response.data.sprites.other["official-artwork"].front_shiny
+          shiny: response.data.sprites.other['official-artwork'].front_shiny
+            ? response.data.sprites.other['official-artwork'].front_shiny
             : response.data.sprites.front_shiny,
         },
       },
@@ -66,7 +93,7 @@ export async function getPokemonInformation(pokemonUrl: string) {
       sprite: `${
         response.data.sprites.front_default
           ? response.data.sprites.front_default
-          : response.data.sprites.other["official-artwork"].front_default
+          : response.data.sprites.other['official-artwork'].front_default
       }`,
       types: response.data.types.map((type: any) => {
         return {
