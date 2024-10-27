@@ -10,7 +10,7 @@ import { AxiosError } from 'axios';
 
 export interface MovesContextProps {
   getMovesData: (move: string) => void;
-  move: MoveProps;
+  move: MoveProps | undefined;
   moveCommonPokemon: PokemonDataProps[];
   isLoading: boolean;
 }
@@ -18,15 +18,15 @@ export interface MovesContextProps {
 export const MovesContext = createContext({} as MovesContextProps);
 
 export function MovesContextProvider({ children }: { children: ReactNode }) {
-  const [move, setMove] = useState<MoveProps>({} as MoveProps);
+  const [move, setMove] = useState<MoveProps>();
   const [isLoading, setIsLoading] = useState(false);
   const [moveCommonPokemon, setCommonPokemon] = useState<PokemonDataProps[]>(
     [],
   );
   async function getMovesData(move: string) {
+    setIsLoading(true);
     console.log('chegou');
     try {
-      setIsLoading(true);
       const { data } = await pokeapi.get(`/move/${move}`);
       console.log(move);
 
@@ -75,7 +75,7 @@ export function MovesContextProvider({ children }: { children: ReactNode }) {
         name: data.name,
       });
 
-      return setIsLoading(false);
+      return setTimeout(() => setIsLoading(false), 2000);
     } catch (error) {
       if (error instanceof AxiosError) {
         setMove({} as MoveProps);
