@@ -3,10 +3,7 @@ import { TypeCard } from '../TypeCard/TypeCard';
 
 export function TypesForm() {
   return (
-    <section
-      id="types"
-      className="flex w-full flex-col items-center justify-center space-y-4 text-center"
-    >
+    <div className="flex h-full w-full flex-col items-center justify-start space-y-4 text-center">
       <p className="text-xl font-semibold md:text-2xl">
         Você pode filtrar os pokemon por tipos
       </p>
@@ -15,6 +12,6 @@ export function TypesForm() {
           <TypeCard key={i} pokemonType={type} pressable />
         ))}
       </div>
-    </section>
+    </div>
   );
 }

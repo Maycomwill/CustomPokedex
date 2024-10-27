@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { GalleryVerticalEnd } from 'lucide-react';
 
 import {
   Sidebar,
@@ -17,71 +16,70 @@ import {
 import Pokeball from '../Pokeball';
 import { NavMainProps, SideBarProps } from '@/interfaces/sideBar';
 
-const data: SideBarProps[] = [
-  {
-    title: 'Começando',
-    url: '#',
-    items: [
-      {
-        title: 'Pesquise um pokémon',
-        url: '#',
-      },
-    ],
-  },
-  {
-    title: 'Listas',
-    url: '#',
-    items: [
-      {
-        title: 'Highlights',
-        url: '#highlights',
-      },
-      {
-        title: 'Regiões',
-        url: '#regions',
-      },
-      {
-        title: 'Tipos',
-        url: '#types',
-      },
-      {
-        title: 'Games',
-        url: '#',
-      },
-      {
-        title: 'Habilidades',
-        url: '#',
-      },
-      {
-        title: 'Golpes',
-        url: '#',
-      },
-    ],
-  },
-  {
-    title: 'Referências',
-    url: '#',
-    items: [
-      {
-        title: 'Github',
-        url: 'https://github.com/maycomwill',
-        target: '_blank',
-      },
-      {
-        title: 'Linkedin',
-        url: 'https://www.linkedin.com/in/maycomwill/',
-        target: '_blank',
-      },
-      {
-        title: 'API',
-        url: 'https://pokeapi.co/',
-        target: '_blank',
-      },
-    ],
-  },
-];
-
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const data: SideBarProps[] = [
+    {
+      title: 'Começando',
+      url: '/',
+      items: [
+        {
+          title: 'Pesquise um pokémon',
+          url: '/',
+        },
+      ],
+    },
+    {
+      title: 'Listas',
+      url: '/',
+      items: [
+        {
+          title: 'Highlights',
+          url: '/',
+        },
+        {
+          title: 'Regiões',
+          url: '/regions',
+        },
+        {
+          title: 'Tipos',
+          url: '/types',
+        },
+        {
+          title: 'Games',
+          url: '/games',
+        },
+        {
+          title: 'Habilidades',
+          url: '/abilities',
+        },
+        {
+          title: 'Golpes',
+          url: '/moves',
+        },
+      ],
+    },
+    {
+      title: 'Referências',
+      url: '#',
+      items: [
+        {
+          title: 'Github',
+          url: 'https://github.com/maycomwill',
+          target: '_blank',
+        },
+        {
+          title: 'Linkedin',
+          url: 'https://www.linkedin.com/in/maycomwill/',
+          target: '_blank',
+        },
+        {
+          title: 'API',
+          url: 'https://pokeapi.co/',
+          target: '_blank',
+        },
+      ],
+    },
+  ];
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
