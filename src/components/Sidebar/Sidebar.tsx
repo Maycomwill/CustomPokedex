@@ -64,7 +64,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       items: [
         {
           title: 'Github',
-          url: 'https://github.com/maycomwill',
+          url: 'https://github.com/Maycomwill/CustomPokedex',
           target: '_blank',
         },
         {
