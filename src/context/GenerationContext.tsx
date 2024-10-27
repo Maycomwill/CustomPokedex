@@ -1,7 +1,7 @@
-import { createContext, ReactNode, useState } from "react";
-import { PokemonDataProps } from "../interfaces/pokemonInterfaces";
-import { pokeapi } from "../services/api";
-import { waitingPromises } from "../utils/awaitPromises";
+import { createContext, ReactNode, useState } from 'react';
+import { PokemonDataProps } from '../interfaces/pokemonInterfaces';
+import { pokeapi } from '../services/api';
+import { waitingPromises } from '../utils/awaitPromises';
 
 export interface GenerationContextProps {
   getGenerationFromUserChoice: (generation: string) => void;
@@ -19,63 +19,63 @@ export function GenerationContextProvider({
 
   //Função que recebe do front-end a escolha inicial do usuário
   function getGenerationFromUserChoice(generation: string) {
-    console.log("Geração selecionada pelo usuário:", generation);
+    // console.log("Geração selecionada pelo usuário:", generation);
     getPokedexList(generation);
   }
 
   //Função inicial utilizada para determinar os parâmetros da API definindo a geração de Pokemon que será buscada
   async function getPokedexList(generation: string | undefined) {
     setPokemonData([]);
-    let limitURL = "0";
-    let offsetURL = "0";
+    let limitURL = '0';
+    let offsetURL = '0';
 
     switch (generation) {
-      case "1":
-        limitURL = "151";
-        offsetURL = "0";
+      case '1':
+        limitURL = '151';
+        offsetURL = '0';
         break;
 
-      case "2":
-        limitURL = "100";
-        offsetURL = "151";
+      case '2':
+        limitURL = '100';
+        offsetURL = '151';
         break;
 
-      case "3":
-        limitURL = "135";
-        offsetURL = "251";
+      case '3':
+        limitURL = '135';
+        offsetURL = '251';
         break;
 
-      case "4":
-        limitURL = "108";
-        offsetURL = "386";
+      case '4':
+        limitURL = '108';
+        offsetURL = '386';
         break;
 
-      case "5":
-        limitURL = "155";
-        offsetURL = "494";
+      case '5':
+        limitURL = '155';
+        offsetURL = '494';
         break;
 
-      case "6":
-        limitURL = "72";
-        offsetURL = "649";
+      case '6':
+        limitURL = '72';
+        offsetURL = '649';
         break;
 
-      case "7":
-        limitURL = "88";
-        offsetURL = "721";
+      case '7':
+        limitURL = '88';
+        offsetURL = '721';
         break;
 
-      case "8":
-        limitURL = "96";
-        offsetURL = "809";
+      case '8':
+        limitURL = '96';
+        offsetURL = '809';
         break;
 
-      case "9":
-        limitURL = "105";
-        offsetURL = "905";
+      case '9':
+        limitURL = '105';
+        offsetURL = '905';
     }
     const { data } = await pokeapi.get(
-      `pokemon?limit=${limitURL}&offset=${offsetURL}`
+      `pokemon?limit=${limitURL}&offset=${offsetURL}`,
     );
     const result = data.results;
 

@@ -83,7 +83,7 @@ export function HighlightsContextProvider({
     try {
       waitingPromisesById(parsed.ids).then((response) => {
         setHighlights(response);
-        console.log(response);
+        // console.log(response);
         setHighlights(response);
         setIsLoading(false);
         localStorage.setItem(

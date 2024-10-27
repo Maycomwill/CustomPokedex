@@ -8,15 +8,20 @@ import { Type } from '../pages/TypePage/Type';
 
 import Moves from '../pages/Moves/Moves';
 import Test from '@/pages/Teste/Test';
+import Regions from '@/pages/Regions/Regions';
+import Types from '@/pages/Types/Types';
+import Upcoming from '@/pages/Upcoming/Upcoming';
 
 export function IndexRoutes() {
   return (
     <Router>
       <Routes>
-        <Route path="*" element={<BlankPage />} />
+        <Route path="*" element={<Upcoming />} />
         <Route path="/" element={<Home />} />
         {/* <Route path="/teste" element={<Test />} /> */}
-        <Route path="/pokedex/:generationid" element={<Pokedex />} />
+        <Route path="/regions/:generationid" element={<Pokedex />} />
+        <Route path="/regions" element={<Regions />} />
+        <Route path="/types" element={<Types />} />
         <Route path="/pokemon/:pokemonname" element={<Pokemon />} />
         <Route path="/ability/:abilityname" element={<Ability />} />
         <Route path="/moves/:moveName" element={<Moves />} />

@@ -1,16 +1,11 @@
 import { FormEvent, useState } from 'react';
-import { RegionsForm } from '../../components/RegionsForm/RegionsForm';
 import { useNavigate } from 'react-router-dom';
-import { TypesForm } from '../../components/TypesForm/TypesForm';
 import { BackToTop } from '../../components/BackToTop/BackToTop';
 import { Spacer } from '../../components/Spacer/Spacer';
-
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import useHighlights from '@/hooks/useHighlights';
-import { PokemonCard } from '@/components/PokemonCard/PokemonCard';
 import PokemonHighlights from '@/components/PokemonHighlights/PokemonHighlights';
-import { Separator } from '@/components/ui/separator';
 
 export function Home() {
   const screenWidth: number = screen.width;
@@ -62,13 +57,6 @@ export function Home() {
         <Spacer />
         <PokemonHighlights />
         <Spacer />
-        <div className="w-full">
-          <RegionsForm />
-        </div>
-        <Spacer />
-        <div className="w-full">
-          <TypesForm />
-        </div>
       </div>
       <BackToTop />
     </div>

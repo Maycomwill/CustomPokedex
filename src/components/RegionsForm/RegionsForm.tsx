@@ -10,10 +10,7 @@ export function RegionsForm() {
   }
 
   return (
-    <section
-      id="regions"
-      className="flex h-full w-full flex-col items-center justify-center space-y-4 text-center"
-    >
+    <div className="flex h-full w-full flex-col items-center justify-start space-y-4 text-center">
       <p className="text-xl font-semibold md:text-2xl">
         Navege pelas regiões do mundo pokemon
       </p>
@@ -25,6 +22,6 @@ export function RegionsForm() {
           />
         ))}
       </div>
-    </section>
+    </div>
   );
 }
