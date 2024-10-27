@@ -1,5 +1,4 @@
 import { Chart } from 'react-google-charts';
-import { Container } from './style';
 
 interface ICustomChart {
   female: number;
@@ -15,13 +14,13 @@ function CustomChart({ female, male }: ICustomChart) {
   ];
   if (female === 0 && male === 0) {
     return (
-      <Container>
+      <div>
         <span className="font-semibold uppercase">Gênero desconhecido</span>
-      </Container>
+      </div>
     );
   } else {
     return (
-      <Container className="wrapper">
+      <div className="wrapper">
         <Chart
           chartType="PieChart"
           width={300}
@@ -36,7 +35,7 @@ function CustomChart({ female, male }: ICustomChart) {
             pieHole: 0.4,
           }}
         />
-      </Container>
+      </div>
     );
   }
 }
