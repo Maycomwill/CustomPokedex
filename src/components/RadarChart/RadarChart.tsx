@@ -1,4 +1,3 @@
-import { TrendingUp } from 'lucide-react';
 import {
   PolarAngleAxis,
   PolarGrid,
@@ -7,22 +6,14 @@ import {
   RadarChart as RechartsRadarChart,
 } from 'recharts';
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-import { StatsChartDataPros, statsProps } from '@/interfaces/pokemonInterfaces';
-import { useEffect, useState } from 'react';
+import { StatsChartDataPros } from '@/interfaces/pokemonInterfaces';
 
 interface RadarChartProps {
   data: StatsChartDataPros[];
@@ -37,11 +28,11 @@ const chartConfig = {
 
 export function RadarChart({ data }: RadarChartProps) {
   return (
-    <Card className="w-full border-none bg-transparent">
+    <Card className="w-full rounded-none border-none bg-transparent">
       <CardHeader className="items-center pb-4">
         <CardTitle className="text-gray-100">Pokemon Stats</CardTitle>
       </CardHeader>
-      <CardContent className="pb-0">
+      <CardContent className="px-0 pb-0">
         <ChartContainer
           config={chartConfig}
           className="mx-auto aspect-square max-h-[300px]"

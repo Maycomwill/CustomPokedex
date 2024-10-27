@@ -1,21 +1,19 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UniquePokemonData } from '../../interfaces/pokemonInterfaces';
-import theme from '../../styles/theme';
 import { TypeCard } from '../TypeCard/TypeCard';
 import { Spacer } from '../Spacer/Spacer';
 import { BackToTop } from '../BackToTop/BackToTop';
 import { CaretRight, Sparkle } from 'phosphor-react';
 import SimpleCardType from '../SimpleCardType/SimpleCardType';
 import CustomTooltip from '../CustomTooltip/CustomTooltip';
-import CustomChart from '../Chart/Chart';
-import { useState } from 'react';
 import addZeroes from '../../utils/addZeros';
 import { Evolution } from '../../interfaces/evolutionInterface';
 import EvolutionCard from '../EvolutionCard/EvolutionCard';
 import { FormDataSchema } from '../../interfaces/formInterfaces';
 import { Button } from '../ui/button';
-import clsx from 'clsx';
 import { RadarChart } from '../RadarChart/RadarChart';
+import { GenderChart } from '../Chart/GenderChart';
 
 interface IUniquePokemonPage {
   data: UniquePokemonData | undefined;
@@ -39,12 +37,6 @@ export default function UniquePokemonPage({
 
   if (data === undefined) {
     return null;
-  }
-
-  function handleStatsBar(value: number) {
-    const total = 255;
-    const newValue = (value * 100) / total;
-    return `${newValue}%`;
   }
 
   function handleFormSprite() {
@@ -225,39 +217,8 @@ export default function UniquePokemonPage({
       <Spacer />
 
       {/* Stats */}
-      <div className="flex w-full flex-col items-start justify-center md:w-full lg:w-[80%] lg:px-8">
+      <div className="flex w-full flex-col items-start justify-center px-[-8] md:w-full lg:w-[80%] lg:px-8">
         <RadarChart data={data.chart_data} />
-        {/* <span className="text-lg">Status base:</span>
-
-        <div className="mx-auto grid w-full grid-cols-2 place-items-center gap-4 gap-x-3">
-          {data.stats?.map((stat) => {
-            return (
-              <div
-                className="m-auto flex w-full flex-col items-start justify-center gap-1 pt-2"
-                key={`${stat.stat.name}-${stat.effort}`}
-              >
-                <span className="text-base capitalize">
-                  {stat.stat.name.split('-').join(' ')}
-                </span>
-
-                <div className="w-full rounded-md bg-gray-600">
-                  <div
-                    style={{
-                      width: handleStatsBar(stat.base_stat),
-                      maxWidth: '100%',
-                      backgroundColor: `${theme.colors.primary[500]}`,
-                      borderRadius: '.4rem',
-                    }}
-                  >
-                    <span className="text-base capitalize">
-                      {stat.base_stat}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div> */}
       </div>
 
       <Spacer />
@@ -386,14 +347,13 @@ export default function UniquePokemonPage({
       <Spacer />
 
       <div className="flex w-full flex-col items-center justify-center text-center">
-        <span className="text-base">Gender ratio</span>
-        <div className="gender-rate">
-          {data.gender ? (
-            <CustomChart female={data.gender.female} male={data.gender.male} />
-          ) : null}
-        </div>
+        {data.gender ? (
+          <div className="h-52 w-full">
+            <GenderChart female={data.gender.female} male={data.gender.male} />
+          </div>
+        ) : null}
+        {data.gender && <Spacer />}
       </div>
-      <Spacer />
 
       <div className="mx-auto flex w-full items-center justify-center">
         <Button onClick={() => navigate(-1)}>Voltar</Button>
