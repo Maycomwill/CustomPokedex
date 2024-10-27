@@ -37,6 +37,13 @@ export function GenderChart({ female, male }: ICustomChart) {
   useEffect(() => {
     setChartData([{ male, female }]);
   }, [female, male]);
+  if (male === 0 && female === 0) {
+    return (
+      <div className="flex w-full flex-1 items-center justify-center">
+        <p>Gênero desconhecido</p>
+      </div>
+    );
+  }
   return (
     <Card className="flex flex-col border-none bg-transparent text-gray-100">
       <CardHeader className="items-center pb-0">

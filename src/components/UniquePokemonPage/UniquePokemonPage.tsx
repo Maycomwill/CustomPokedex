@@ -14,6 +14,7 @@ import { FormDataSchema } from '../../interfaces/formInterfaces';
 import { Button } from '../ui/button';
 import { RadarChart } from '../RadarChart/RadarChart';
 import { GenderChart } from '../Chart/GenderChart';
+import clsx from 'clsx';
 
 interface IUniquePokemonPage {
   data: UniquePokemonData | undefined;
@@ -348,11 +349,15 @@ export default function UniquePokemonPage({
 
       <div className="flex w-full flex-col items-center justify-center text-center">
         {data.gender ? (
-          <div className="h-52 w-full">
+          <div
+            className={clsx('w-full', {
+              'h-52': data.gender.female !== 0 || data.gender.male !== 0,
+            })}
+          >
             <GenderChart female={data.gender.female} male={data.gender.male} />
           </div>
         ) : null}
-        {data.gender && <Spacer />}
+        <Spacer />
       </div>
 
       <div className="mx-auto flex w-full items-center justify-center">
