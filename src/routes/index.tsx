@@ -5,8 +5,9 @@ import { Pokedex } from '../pages/Pokedex/Pokedex';
 import { Pokemon } from '../pages/Pokemon/Pokemon';
 import { Ability } from '../pages/Ability/Ability';
 import { Type } from '../pages/TypePage/Type';
-// import Test from "../pages/Teste/Test";
+
 import Moves from '../pages/Moves/Moves';
+import Test from '@/pages/Teste/Test';
 
 export function IndexRoutes() {
   return (

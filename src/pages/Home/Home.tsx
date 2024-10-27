@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import useHighlights from '@/hooks/useHighlights';
 import { PokemonCard } from '@/components/PokemonCard/PokemonCard';
 import PokemonHighlights from '@/components/PokemonHighlights/PokemonHighlights';
+import { Separator } from '@/components/ui/separator';
 
 export function Home() {
   const screenWidth: number = screen.width;
@@ -38,7 +39,7 @@ export function Home() {
   };
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-start">
+    <div className="flex min-h-screen w-full flex-col items-center justify-start px-4">
       <div className="flex w-full items-center justify-center">
         <form
           className="flex w-full flex-col items-center justify-center space-y-4 md:flex-row md:space-x-4 md:space-y-0"
@@ -57,9 +58,10 @@ export function Home() {
           </div>
         </form>
       </div>
-      <div className="flex w-full flex-col px-12">
+      <div className="flex w-full flex-col">
         <Spacer />
         <PokemonHighlights />
+        <Spacer />
         <div className="w-full">
           <RegionsForm />
         </div>

@@ -11,6 +11,7 @@ import { DropMenu } from '../../components/DropdownMenu/DropMenu';
 import useGeneration from '../../hooks/useGeneration';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import clsx from 'clsx';
 
 export function Pokedex() {
   const params = useParams();
@@ -161,7 +162,7 @@ export function Pokedex() {
         </div>
 
         {search.length > 0 ? (
-          <div className="grid w-[90%] flex-1 grid-cols-1 place-items-center items-start gap-3 pt-3 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid w-[90%] flex-1 grid-cols-1 place-items-center items-start gap-3 pt-3 md:grid-cols-2 lg:w-full lg:grid-cols-3">
             {pokemonListFiltered
               .sort((a, b) => {
                 if (a > b) return 1;
@@ -182,7 +183,11 @@ export function Pokedex() {
               })}
           </div>
         ) : (
-          <div className="grid w-[90%] flex-1 grid-cols-1 place-items-center items-start gap-3 pt-3 md:grid-cols-2 lg:grid-cols-3">
+          <div
+            className={clsx(
+              'grid w-[90%] flex-1 grid-cols-1 place-items-center items-start gap-3 pt-3 md:grid-cols-2 lg:w-full lg:grid-cols-3',
+            )}
+          >
             {genTypeFilteredList
               .sort((a, b) => {
                 if (a > b) return 1;

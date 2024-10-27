@@ -13,11 +13,14 @@ function PokemonHighlights() {
     );
   }
   return (
-    <div className="flex flex-col items-center justify-center space-y-4">
-      <span className="text-2xl font-semibold md:text-4xl">
+    <section
+      id="highlights"
+      className="flex flex-col items-center justify-center space-y-4"
+    >
+      <span className="text-xl font-semibold md:text-2xl">
         Pokémon em destaque
       </span>
-      <div className="mx-auto grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:w-[90%]">
+      <div className="mx-auto grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {highlights.map((pokemon, i) => (
           <PokemonCard
             pressable
@@ -30,7 +33,7 @@ function PokemonHighlights() {
           />
         ))}
       </div>
-    </div>
+    </section>
   );
 }
 

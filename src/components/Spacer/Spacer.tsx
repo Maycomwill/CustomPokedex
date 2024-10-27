@@ -14,10 +14,10 @@ export function Spacer({
       className={clsx(
         'rounded-full',
         {
-          'my-4 h-px w-full': direction === 'horizontal',
+          'my-2 h-px w-full': direction === 'horizontal',
         },
         {
-          'mx-4 h-full min-h-16 w-px': direction === 'vertical',
+          'mx-2 h-full min-h-16 w-px': direction === 'vertical',
         },
         {
           'bg-primary-500': color === 'primary',
