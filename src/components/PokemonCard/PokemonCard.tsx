@@ -39,7 +39,7 @@ export function PokemonCard({
   return (
     <div
       className={clsx(
-        'justify-cennter flex h-48 w-full cursor-pointer flex-row items-center overflow-hidden rounded-xl border-none outline-none transition-all duration-300 ease-custom-bezier md:h-36',
+        'justify-cennter flex h-36 w-full cursor-pointer flex-row items-center overflow-hidden rounded-xl border-none outline-none transition-all duration-300 ease-custom-bezier md:h-40 lg:h-32',
         {
           'bg-backgroundCard-bug-light hover:bg-backgroundCard-bug-mediumLight':
             types[0].type === 'bug',
@@ -93,8 +93,8 @@ export function PokemonCard({
             #{addZeroes(String(id), 3)}
           </span>
         </div>
-        <div className="flex flex-col items-center justify-center gap-1 pb-2">
-          <ul className="flex list-none flex-col items-center justify-center gap-2 md:flex-row">
+        <div className="flex flex-col items-center justify-center gap-1">
+          <ul className="flex list-none flex-col items-center justify-center gap-px md:gap-2 lg:flex-row">
             {types.map((type) => {
               return (
                 <li key={`${type.type}`}>
@@ -107,7 +107,7 @@ export function PokemonCard({
       </div>
       <div
         className={clsx(
-          'relative z-10 flex h-full w-1/3 items-center justify-center rounded-xl',
+          'relative z-10 flex h-full w-[110px] items-center justify-center rounded-xl',
 
           {
             'bg-backgroundCard-bug-default': types[0].type === 'bug',
@@ -133,12 +133,12 @@ export function PokemonCard({
       >
         <div className="spriteDiv">
           <img
-            className="absolute z-0 h-24 object-cover opacity-25"
+            className="absolute z-0 h-20 object-cover opacity-25"
             src={pokemonTypesObject[primaryType]}
             alt={`${primaryType}-type-svg`}
           />
           <img
-            className="relative z-10 h-24"
+            className="relative z-10 h-20"
             src={sprite}
             alt={`${name} sprite`}
           />

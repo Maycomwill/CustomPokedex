@@ -1,13 +1,14 @@
-import { useEffect } from "react";
-import { usePokedex } from "../../hooks/usePokedex";
-import useEvolution from "../../hooks/useEvolution";
-import { Evolution } from "../../interfaces/evolutionInterface";
+import { useEffect } from 'react';
+import { usePokedex } from '../../hooks/usePokedex';
+import useEvolution from '../../hooks/useEvolution';
+import { Evolution } from '../../interfaces/evolutionInterface';
+import Page from '@/app/dashboard/page';
 
 function Test() {
   const { getPokemonData, uniquePokemonData } = usePokedex();
   const { firstEvolution, secondEvolution, thirdEvolution } = useEvolution();
   useEffect(() => {
-    getPokemonData("pichu");
+    getPokemonData('pichu');
   }, []);
 
   function renderEvolution(evolution: Evolution[] | undefined) {
@@ -25,20 +26,7 @@ function Test() {
 
   return (
     <div>
-      Test secondEvolution{" "}
-      <div>
-        {uniquePokemonData && (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <span>{uniquePokemonData.name}</span>
-
-          </div>
-        )}
-      </div>
+      <Page />
     </div>
   );
 }
