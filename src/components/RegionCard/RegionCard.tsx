@@ -36,7 +36,7 @@ export function RegionCard(props: RegionCardProps) {
           'bg-region-paldea': props.region.region_name === 'paldea',
         },
       )}
-      onClick={() => navigate(`/pokedex/${props.region.number}`)}
+      onClick={() => navigate(`/regions/${props.region.number}`)}
     >
       <div
         className="absolute z-0 h-full w-full bg-gradient-to-r from-black/50 to-transparent"

@@ -66,7 +66,7 @@ export function HighlightsContextProvider({
 
   function randomizeIds() {
     const ids = [];
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 9; i++) {
       const id = Math.floor(Math.random() * 1010) + 1;
       ids.push(id);
     }

@@ -1,13 +1,12 @@
 import useHighlights from '@/hooks/useHighlights';
 import { PokemonCard } from '../PokemonCard/PokemonCard';
-import Loading from '../Loading/Loading';
 import Spinner from '../Spinner/Spinner';
 
 function PokemonHighlights() {
   const { highlights, isLoading } = useHighlights();
   if (isLoading) {
     return (
-      <div className="flex w-full flex-1 items-center justify-center">
+      <div className="flex h-full w-full flex-1 items-center justify-center">
         <Spinner />
       </div>
     );

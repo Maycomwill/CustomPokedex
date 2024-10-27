@@ -57,7 +57,7 @@ export function Pokedex() {
 
   if (isLoading || pokemonData.length === 0) {
     return (
-      <div className="flex w-full flex-1 items-center justify-center">
+      <div className="flex h-full w-full flex-1 items-center justify-center">
         <Loading color={theme.colors.primary[500]} size={'lg'} />
       </div>
     );
@@ -89,7 +89,7 @@ export function Pokedex() {
           <DropMenu pokemonArray={pokemonData} />
         </div>
         {search.length > 0 ? (
-          <div className="grid w-full flex-1 grid-cols-1 place-items-center items-start gap-4 px-2 pt-3 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid w-full flex-1 grid-cols-1 place-items-center items-start gap-3 px-2 pt-3 md:grid-cols-2 lg:w-full lg:grid-cols-3">
             {pokemonListFiltered
               .sort((a, b) => {
                 if (a > b) return 1;
@@ -110,7 +110,7 @@ export function Pokedex() {
               })}
           </div>
         ) : (
-          <div className="grid w-full flex-1 grid-cols-1 place-items-center items-start gap-3 px-2 pt-3 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid w-full flex-1 grid-cols-1 place-items-center items-start gap-3 px-2 pt-3 md:grid-cols-2 lg:w-full lg:grid-cols-3">
             {pokemonData
               .sort((a, b) => {
                 if (a > b) return 1;
@@ -137,8 +137,8 @@ export function Pokedex() {
     );
   } else {
     return (
-      <div className="flex w-full flex-col items-center justify-start px-12">
-        <div className="flex w-full items-center justify-between py-6">
+      <div className="flex w-full flex-col items-center justify-start">
+        <div className="flex w-full items-center justify-between px-12 py-6">
           <span className="text-3xl">{params.generationid}ª Geração</span>
           <div>
             <Button onClick={() => navigate(-1)}>Voltar</Button>
@@ -162,7 +162,7 @@ export function Pokedex() {
         </div>
 
         {search.length > 0 ? (
-          <div className="grid w-[90%] flex-1 grid-cols-1 place-items-center items-start gap-3 pt-3 md:grid-cols-2 lg:w-full lg:grid-cols-3">
+          <div className="grid w-full flex-1 grid-cols-1 place-items-center items-start gap-3 px-2 pt-3 md:grid-cols-2 lg:w-full lg:grid-cols-3">
             {pokemonListFiltered
               .sort((a, b) => {
                 if (a > b) return 1;
@@ -185,7 +185,7 @@ export function Pokedex() {
         ) : (
           <div
             className={clsx(
-              'grid w-[90%] flex-1 grid-cols-1 place-items-center items-start gap-3 pt-3 md:grid-cols-2 lg:w-full lg:grid-cols-3',
+              'grid w-full flex-1 grid-cols-1 place-items-center items-start gap-3 px-2 pt-3 md:grid-cols-2 lg:w-full lg:grid-cols-3',
             )}
           >
             {genTypeFilteredList
