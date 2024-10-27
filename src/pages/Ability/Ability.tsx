@@ -24,13 +24,13 @@ export function Ability() {
 
   if (abilityInfo === undefined || isLoading === true) {
     return (
-      <div className="flex w-full flex-1 items-center justify-center">
+      <div className="flex h-full w-full flex-1 items-center justify-center">
         <Loading color={theme.colors.primary[500]} size={'lg'} />
       </div>
     );
   } else {
     return (
-      <div className="flex min-h-screen w-full flex-col items-center justify-center px-1 pt-px">
+      <div className="flex min-h-screen w-full flex-col items-center justify-start px-1 pt-px">
         <>
           <div className="text-center">
             <h1 className="text-4xl font-semibold uppercase text-primary-500">
@@ -53,7 +53,7 @@ export function Ability() {
                   <div
                     key={`${pokemon.id}-${pokemon.name}`}
                     className={clsx('w-full', {
-                      'md:col-span-2 md:w-auto lg:col-span-1':
+                      'col-span-1 md:col-span-2 md:w-auto lg:col-span-1 lg:w-full':
                         i === commonAbilityPokemon.length - 1,
                     })}
                   >

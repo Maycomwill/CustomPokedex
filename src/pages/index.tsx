@@ -10,7 +10,7 @@ function Index() {
       <AppSidebar />
       <div className="flex min-h-screen w-full flex-col items-center justify-start">
         <Header />
-        <div className="flex w-full flex-1 items-center justify-start">
+        <div className="flex w-full flex-1 items-start justify-center">
           <IndexRoutes />
         </div>
         <Footer />

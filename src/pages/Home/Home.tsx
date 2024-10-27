@@ -4,12 +4,9 @@ import { BackToTop } from '../../components/BackToTop/BackToTop';
 import { Spacer } from '../../components/Spacer/Spacer';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import useHighlights from '@/hooks/useHighlights';
 import PokemonHighlights from '@/components/PokemonHighlights/PokemonHighlights';
 
 export function Home() {
-  const screenWidth: number = screen.width;
-  const { highlights } = useHighlights();
   const [pokemonRef, setPokemonRef] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();

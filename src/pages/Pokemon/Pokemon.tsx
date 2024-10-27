@@ -22,7 +22,7 @@ export function Pokemon() {
 
   if (isLoading) {
     return (
-      <div className="flex w-full flex-1 items-center justify-center">
+      <div className="flex h-full w-full flex-1 items-center justify-center">
         <Loading color={theme.colors.primary[500]} size={'lg'} />
       </div>
     );
