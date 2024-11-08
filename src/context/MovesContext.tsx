@@ -7,18 +7,33 @@ import {
 } from '../interfaces/pokemonInterfaces';
 import { waitingPromises } from '../utils/awaitPromises';
 import { AxiosError } from 'axios';
+import { NamedAPIResource } from '@/interfaces/apiInterfaces';
 
 export interface MovesContextProps {
   getMovesData: (move: string) => void;
+  getMoves: (offset?: number, limit?: number) => void;
+  moves: NamedAPIResource[];
   move: MoveProps | undefined;
   moveCommonPokemon: PokemonDataProps[];
   isLoading: boolean;
+  total: number;
+  previous: { offset: string; limit: string } | null;
+  next: { offset: string; limit: string } | null;
 }
 
 export const MovesContext = createContext({} as MovesContextProps);
 
 export function MovesContextProvider({ children }: { children: ReactNode }) {
   const [move, setMove] = useState<MoveProps>();
+  const [moves, setMoves] = useState<NamedAPIResource[]>([]);
+  const [total, setTotal] = useState(0);
+  const [previous, setPrevious] = useState<{
+    offset: string;
+    limit: string;
+  } | null>(null);
+  const [next, setNext] = useState<{ offset: string; limit: string } | null>(
+    null,
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [moveCommonPokemon, setCommonPokemon] = useState<PokemonDataProps[]>(
     [],
@@ -85,9 +100,60 @@ export function MovesContextProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  async function getMoves(offset?: number, limit?: number) {
+    setIsLoading(true);
+
+    try {
+      const { data } = await pokeapi.get(
+        `/move?offset=${offset}&limit=${limit}`,
+      );
+      // //Next offset
+      // console.log(data.next.split('offset=')[1].split('&')[0]);
+      // // Next limit
+      // console.log(data.next.split('limit=')[1]);
+
+      setMoves(data.results);
+      setTotal(data.count);
+      setPrevious(
+        data.previous
+          ? {
+              offset: data.previous.split('offset=')[1].split('&')[0],
+              limit: data.previous.split('limit=')[1],
+            }
+          : null,
+      );
+      setNext(
+        data.next
+          ? {
+              offset: data.next.split('offset=')[1].split('&')[0],
+              limit: data.next.split('limit=')[1],
+            }
+          : null,
+      );
+      setIsLoading(false);
+      return;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        setMoves([]);
+        setIsLoading(false);
+        return error.message;
+      }
+    }
+  }
+
   return (
     <MovesContext.Provider
-      value={{ getMovesData, move, moveCommonPokemon, isLoading }}
+      value={{
+        getMovesData,
+        getMoves,
+        move,
+        next,
+        previous,
+        total,
+        moves,
+        moveCommonPokemon,
+        isLoading,
+      }}
     >
       {children}
     </MovesContext.Provider>
