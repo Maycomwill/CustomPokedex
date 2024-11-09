@@ -29,9 +29,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
           return (
             <div className="flex min-h-12 w-full flex-1 items-center justify-center">
               <CustomTooltip
-                arrow
-                placement="top"
-                title={evolution.details![3].item?.name.split('-').join(' ')}
+                content={evolution.details![3].item!.name.split('-').join(' ')}
               >
                 <img
                   src={evolution.trigger!.sprite}
@@ -44,9 +42,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
         return (
           <div className="flex min-h-12 w-full flex-1 items-center justify-center">
             <CustomTooltip
-              placement="top"
-              arrow
-              title={evolution.details![0].item?.name.split('-').join(' ')}
+              content={evolution.details![0].item!.name.split('-').join(' ')}
             >
               <img
                 src={evolution.trigger!.sprite}
@@ -61,7 +57,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
           <div className="flex min-h-12 w-full flex-1 items-center justify-center">
             <div className="flex items-center justify-center gap-1">
               {evolution.details![0].min_level && (
-                <CustomTooltip arrow title={'Level'} placement="top">
+                <CustomTooltip content={'Level'}>
                   <>
                     <ArrowFatLinesUp color="white" size={16} />
                     <span>{evolution.details![0].min_level}</span>
@@ -69,7 +65,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
                 </CustomTooltip>
               )}
               {evolution.details![0].min_beauty && (
-                <CustomTooltip arrow title={'Level'} placement="top">
+                <CustomTooltip content={'Level'}>
                   <>
                     <IoSparkles size={16} color="yellow" />
                     <span>{evolution.details![0].min_beauty}</span>
@@ -77,14 +73,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
                 </CustomTooltip>
               )}
               {evolution.details![0].min_happiness && (
-                <CustomTooltip
-                  placement="top"
-                  arrow
-                  title={'Felicidade'}
-                  style={{
-                    backgroundColor: 'red',
-                  }}
-                >
+                <CustomTooltip content={'Felicidade'}>
                   <div className="flex items-center justify-center gap-1">
                     <IoMdHappy color="white" size={16} />
                     <span>{evolution.details![0].min_happiness}</span>
@@ -97,7 +86,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
                 </CustomTooltip>
               )}
               {evolution.details![0].min_affection && (
-                <CustomTooltip arrow title={'Afeição'} placement="top">
+                <CustomTooltip content={'Afeição'}>
                   <div className="flex items-center justify-center gap-1">
                     <FaHeart size={16} color="red" />
                     <span>{evolution.details![0].min_affection}</span>
@@ -105,7 +94,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
                 </CustomTooltip>
               )}
               {evolution.details![0].gender === 1 && (
-                <CustomTooltip arrow title={'Gênero'} placement="top">
+                <CustomTooltip content={'Gênero'}>
                   <div className="flex items-center justify-center gap-1">
                     <IoFemale size={16} color="red" />
                     <span>{evolution.details![0].min_affection}</span>
@@ -118,7 +107,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
       case 'trade':
         return (
           <div className="flex min-h-12 w-full flex-1 items-center justify-center">
-            <CustomTooltip arrow title="Troca" placement="top">
+            <CustomTooltip content="Troca">
               <div className="flex items-center justify-center gap-1">
                 <CgArrowsExchangeAltV color="white" size={20} />
               </div>

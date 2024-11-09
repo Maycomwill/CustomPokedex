@@ -1,10 +1,10 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useState } from 'react';
 import {
   AbilityInfoProps,
   PokemonDataProps,
-} from "../interfaces/pokemonInterfaces";
-import { waitingPromises } from "../utils/awaitPromises";
-import { pokeapi } from "../services/api";
+} from '../interfaces/pokemonInterfaces';
+import { waitingPromises } from '../utils/awaitPromises';
+import { pokeapi } from '../services/api';
 
 export interface AbilityContextProps {
   getAbilityInfo: (ability: string) => void;
@@ -45,17 +45,19 @@ export function AbilityContextProvider({ children }: { children: ReactNode }) {
         effect: string;
         language: { url: string; name: string };
       }) => {
-        if (effect_element.language.name === "en") {
+        if (effect_element.language.name === 'en') {
           return effect_element.effect;
         }
 
-        return "";
-      }
+        return '';
+      },
     );
+
+    console.log(data);
 
     setAbilityInfo({
       name: data.name,
-      description: description.effect,
+      description: description ? description.effect : '',
     });
 
     return setIsLoading(false);

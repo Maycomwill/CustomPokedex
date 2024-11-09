@@ -235,7 +235,7 @@ export default function UniquePokemonPage({
               <>
                 {data.damage_relation.double_damage_to.map((type) => {
                   return (
-                    <CustomTooltip title={type} arrow key={type}>
+                    <CustomTooltip content={type} key={type}>
                       <div key={type}>
                         <SimpleCardType
                           double_damage_relation={false}
@@ -258,7 +258,7 @@ export default function UniquePokemonPage({
             <div className="flex items-center justify-center gap-2">
               {data.damage_relation.double_damage_from.map((type) => {
                 return (
-                  <CustomTooltip title={type} key={type} arrow>
+                  <CustomTooltip content={type} key={type}>
                     <div key={type}>
                       <SimpleCardType
                         pokemonType={type}

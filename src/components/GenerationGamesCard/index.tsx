@@ -22,21 +22,19 @@ function GenerationGamesCard({
       <div
         className={clsx({
           'flex items-center justify-center space-x-4': games.length <= 3,
-          'grid grid-cols-3 place-items-center items-center gap-4':
+          'grid grid-cols-3 place-content-center place-items-center items-center gap-4':
             games.length >= 4,
         })}
       >
         {games.map((game, i) => {
           return (
-            <CustomTooltip title={game.name} key={i}>
+            <CustomTooltip content={game.name} key={i}>
               <img
                 className={clsx(
                   'duration-250 size-32 rounded-lg ring-accent-500 transition-transform ease-in-out hover:scale-110 hover:cursor-pointer hover:ring-2',
                   {
                     'mt-2 last:col-span-3':
-                      i === games.length - 1 &&
-                      games.length > 3 &&
-                      games.length % 3 === 1,
+                      games.length >= 4 && games.length % 3 !== 0,
                   },
                 )}
                 src={game.picture}
@@ -51,7 +49,7 @@ function GenerationGamesCard({
           <div className="flex items-center justify-center space-x-4 pt-4">
             {remakes.map((game, i) => {
               return (
-                <CustomTooltip title={game.name} key={i}>
+                <CustomTooltip content={game.name} key={i}>
                   <img
                     className="duration-250 size-32 rounded-lg ring-accent-500 transition-transform ease-in-out hover:scale-110 hover:cursor-pointer hover:ring-2"
                     src={game.picture}
