@@ -10,6 +10,7 @@ import Regions from '@/pages/Regions/Regions';
 import Types from '@/pages/Types/Types';
 import Upcoming from '@/pages/Upcoming/Upcoming';
 import Move from '../pages/Move/Move';
+import Games from '@/pages/Games/Games';
 
 export function IndexRoutes() {
   return (
@@ -26,6 +27,7 @@ export function IndexRoutes() {
         <Route path="/moves/:moveName" element={<Move />} />
         <Route path="/moves" element={<Moves />} />
         <Route path="/type/:typename" element={<Type />} />
+        <Route path="games" element={<Games />} />
       </Routes>
     </Router>
   );
