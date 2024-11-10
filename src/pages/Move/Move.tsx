@@ -68,7 +68,7 @@ function Move() {
 
         <div className="flex w-full flex-col items-start justify-center py-6 md:flex-row">
           <div className="mx-auto w-full space-y-2 text-center md:w-1/2">
-            <p className="text-base capitalize">
+            <p className="text-base">
               Efeito:{' '}
               <span className="break-words font-semibold">
                 {move.effect_entries}
@@ -99,10 +99,12 @@ function Move() {
             {move.damage_class.name !== 'status' && (
               <div className="justify-center0 flex flex-col items-start px-4">
                 <span className="w-full text-center text-base">Power:</span>
-                <div className="relative h-6 w-full rounded-md bg-gray-600">
+                <div className="relative h-6 w-full rounded-full bg-gray-600">
                   <div
-                    className="absolute left-0 top-0 h-6 rounded-md bg-primary-300 px-2 font-semibold"
-                    style={{ width: `${move.power}%` }}
+                    className="absolute left-0 top-0 h-6 rounded-full bg-primary-300 px-2 font-semibold"
+                    style={{
+                      width: move.power > 100 ? '100%' : `${move.power}%`,
+                    }}
                   >
                     <span className="text-base">{move.power}</span>
                   </div>

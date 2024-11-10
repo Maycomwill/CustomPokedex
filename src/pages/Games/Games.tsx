@@ -1,3 +1,4 @@
+import Game_National from '@/assets/games/gen0/1.png';
 import Game_Red from '@/assets/games/gen1/1.png';
 import Game_Blue from '@/assets/games/gen1/2.png';
 import Game_Yellow from '@/assets/games/gen1/3.png';
@@ -35,113 +36,176 @@ import Game_Brilliant_Diamond from '@/assets/games/gen8/remake_gen4/1.png';
 import Game_Shining_Pearl from '@/assets/games/gen8/remake_gen4/2.png';
 import Game_Scarlet from '@/assets/games/gen9/1.png';
 import Game_Violet from '@/assets/games/gen9/2.png';
+import { BackToTop } from '@/components/BackToTop/BackToTop';
 
 import GenerationGamesCard from '@/components/GenerationGamesCard';
 function Games() {
   return (
-    <div className="grid grid-cols-2 place-content-start place-items-center items-start gap-4 gap-y-6">
+    <div className="grid grid-cols-1 place-content-start place-items-center items-start gap-4 gap-y-6 px-1 lg:grid-cols-2">
       <GenerationGamesCard
         generation={1}
         games={[
-          { name: 'Pokemon Red', picture: Game_Red },
-          { name: 'Pokemon Blue', picture: Game_Blue },
-          { name: 'Pokemon Yellow', picture: Game_Yellow },
+          { name: 'Pokémon Red', picture: Game_Red, pokedex: ['2'] },
+          { name: 'Pokémon Blue', picture: Game_Blue, pokedex: ['2'] },
+          { name: 'Pokémon Yellow', picture: Game_Yellow, pokedex: ['2'] },
         ]}
-        pokedexLinks={['/pokedex/2']}
       />
       <GenerationGamesCard
         generation={2}
         games={[
-          { name: 'Pokemon Gold', picture: Game_Gold },
-          { name: 'Pokemon Silver', picture: Game_Silver },
-          { name: 'Pokemon Crystal', picture: Game_Crystal },
+          { name: 'Pokémon Gold', picture: Game_Gold, pokedex: ['3'] },
+          { name: 'Pokémon Silver', picture: Game_Silver, pokedex: ['3'] },
+          { name: 'Pokémon Crystal', picture: Game_Crystal, pokedex: ['3'] },
         ]}
-        pokedexLinks={['/pokedex/3']}
       />
       <GenerationGamesCard
         generation={3}
         games={[
-          { name: 'Pokemon Ruby', picture: Game_Ruby },
-          { name: 'Pokemon Sapphire', picture: Game_Sapphire },
-          { name: 'Pokemon Emerald', picture: Game_Emerald },
+          { name: 'Pokémon Ruby', picture: Game_Ruby, pokedex: ['4'] },
+          { name: 'Pokémon Sapphire', picture: Game_Sapphire, pokedex: ['4'] },
+          { name: 'Pokémon Emerald', picture: Game_Emerald, pokedex: ['4'] },
         ]}
         remakes={[
-          { name: 'Pokemon FireRed', picture: Game_FireRed },
-          { name: 'Pokemon LeafGreen', picture: Game_LeafGreen },
+          { name: 'Pokémon FireRed', picture: Game_FireRed, pokedex: ['2'] },
+          {
+            name: 'Pokémon LeafGreen',
+            picture: Game_LeafGreen,
+            pokedex: ['2'],
+          },
         ]}
-        pokedexLinks={['/pokedex/4']}
       />
       <GenerationGamesCard
         generation={4}
         games={[
-          { name: 'Pokemon Diamond', picture: Game_Diamond },
-          { name: 'Pokemon Pearl', picture: Game_Pearl },
-          { name: 'Pokemon Platinum', picture: Game_Platinum },
+          { name: 'Pokémon Diamond', picture: Game_Diamond, pokedex: ['5'] },
+          { name: 'Pokémon Pearl', picture: Game_Pearl, pokedex: ['5'] },
+          { name: 'Pokémon Platinum', picture: Game_Platinum, pokedex: ['6'] },
         ]}
         remakes={[
-          { name: 'Pokemon HeartGold', picture: Game_HeartGold },
-          { name: 'Pokemon SoulSilver', picture: Game_SoulSilver },
+          {
+            name: 'Pokémon HeartGold',
+            picture: Game_HeartGold,
+            pokedex: ['7'],
+          },
+          {
+            name: 'Pokémon SoulSilver',
+            picture: Game_SoulSilver,
+            pokedex: ['7'],
+          },
         ]}
-        pokedexLinks={['/pokedex/5']}
       />
       <GenerationGamesCard
         generation={5}
         games={[
-          { name: 'Pokemon Black', picture: Game_Black },
-          { name: 'Pokemon White', picture: Game_White },
-          { name: 'Pokemon Black 2', picture: Game_Black_2 },
-          { name: 'Pokemon White 2', picture: Game_White_2 },
+          { name: 'Pokémon Black', picture: Game_Black, pokedex: ['8'] },
+          { name: 'Pokémon White', picture: Game_White, pokedex: ['8'] },
+          { name: 'Pokémon Black 2', picture: Game_Black_2, pokedex: ['9'] },
+          { name: 'Pokémon White 2', picture: Game_White_2, pokedex: ['9'] },
         ]}
-        pokedexLinks={['/pokedex/6']}
       />
       <GenerationGamesCard
         generation={6}
         games={[
-          { name: 'Pokemon X', picture: Game_X },
-          { name: 'Pokemon Y', picture: Game_Y },
+          { name: 'Pokémon X', picture: Game_X, pokedex: ['12', '13', '14'] },
+          { name: 'Pokémon Y', picture: Game_Y, pokedex: ['12', '13', '14'] },
         ]}
         remakes={[
-          { name: 'Pokemon Omega Ruby', picture: Game_Omega_Ruby },
-          { name: 'Pokemon Alpha Sapphire', picture: Game_Alpha_Sapphire },
+          {
+            name: 'Pokémon Omega Ruby',
+            picture: Game_Omega_Ruby,
+            pokedex: ['15'],
+          },
+          {
+            name: 'Pokémon Alpha Sapphire',
+            picture: Game_Alpha_Sapphire,
+            pokedex: ['15'],
+          },
         ]}
-        pokedexLinks={['/pokedex/7']}
       />
       <GenerationGamesCard
         generation={7}
         games={[
-          { name: 'Pokemon Sun', picture: Game_Sun },
-          { name: 'Pokemon Moon', picture: Game_Moon },
-          { name: 'Pokemon Ultra Sun', picture: Game_Ultra_Sun },
-          { name: 'Pokemon Ultra Moon', picture: Game_Ultra_Moon },
-          { name: "Pokemon Let's Go Pikachu", picture: Game_Lets_Go_Pikachu },
-          { name: "Pokemon Let's Go Eevee", picture: Game_Lets_Go_Eevee },
+          {
+            name: 'Pokémon Sun',
+            picture: Game_Sun,
+            pokedex: ['16', '17', '18', '19', '20'],
+          },
+          {
+            name: 'Pokémon Moon',
+            picture: Game_Moon,
+            pokedex: ['16', '17', '18', '19', '20'],
+          },
+          {
+            name: 'Pokémon Ultra Sun',
+            picture: Game_Ultra_Sun,
+            pokedex: ['21', '22', '23', '24', '25'],
+          },
+          {
+            name: 'Pokémon Ultra Moon',
+            picture: Game_Ultra_Moon,
+            pokedex: ['21', '22', '23', '24', '25'],
+          },
+          {
+            name: "Pokémon Let's Go Pikachu",
+            picture: Game_Lets_Go_Pikachu,
+            pokedex: ['26'],
+          },
+          {
+            name: "Pokémon Let's Go Eevee",
+            picture: Game_Lets_Go_Eevee,
+            pokedex: ['26'],
+          },
         ]}
-        pokedexLinks={['/pokedex/8']}
       />
       <GenerationGamesCard
         generation={8}
         games={[
-          { name: 'Pokemon Sword', picture: Game_Sword },
-          { name: 'Pokemon Shield', picture: Game_Shield },
-          { name: 'Pokemon Legend Arceus', picture: Game_Arceus },
+          {
+            name: 'Pokémon Sword',
+            picture: Game_Sword,
+            pokedex: ['27', '28', '29'],
+          },
+          {
+            name: 'Pokémon Shield',
+            picture: Game_Shield,
+            pokedex: ['27', '28', '29'],
+          },
+          {
+            name: 'Pokémon Legend Arceus',
+            picture: Game_Arceus,
+            pokedex: ['30'],
+          },
         ]}
         remakes={[
           {
-            name: 'Pokemon Brilliant Diamond',
+            name: 'Pokémon Brilliant Diamond',
             picture: Game_Brilliant_Diamond,
+            pokedex: ['5'],
           },
-          { name: 'Pokemon Shining Pearl', picture: Game_Shining_Pearl },
+          {
+            name: 'Pokémon Shining Pearl',
+            picture: Game_Shining_Pearl,
+            pokedex: ['5'],
+          },
         ]}
-        pokedexLinks={['/pokedex/9']}
       />
       <GenerationGamesCard
         generation={9}
         games={[
-          { name: 'Pokemon Scarlet', picture: Game_Scarlet },
-          { name: 'Pokemon Violet', picture: Game_Violet },
+          { name: 'Pokémon Scarlet', picture: Game_Scarlet, pokedex: ['31'] },
+          { name: 'Pokémon Violet', picture: Game_Violet, pokedex: ['31'] },
         ]}
-        pokedexLinks={['/pokedex/10']}
       />
+      <GenerationGamesCard
+        games={[
+          {
+            name: 'National Pokédex',
+            picture: Game_National,
+            pokedex: ['1'],
+          },
+        ]}
+      />
+      <BackToTop />
     </div>
   );
 }

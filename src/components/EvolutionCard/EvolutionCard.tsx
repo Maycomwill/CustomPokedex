@@ -57,7 +57,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
           <div className="flex min-h-12 w-full flex-1 items-center justify-center">
             <div className="flex items-center justify-center gap-1">
               {evolution.details![0].min_level && (
-                <CustomTooltip content={'Level'}>
+                <CustomTooltip content="Level">
                   <>
                     <ArrowFatLinesUp color="white" size={16} />
                     <span>{evolution.details![0].min_level}</span>
@@ -65,7 +65,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
                 </CustomTooltip>
               )}
               {evolution.details![0].min_beauty && (
-                <CustomTooltip content={'Level'}>
+                <CustomTooltip content="Level">
                   <>
                     <IoSparkles size={16} color="yellow" />
                     <span>{evolution.details![0].min_beauty}</span>
@@ -73,7 +73,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
                 </CustomTooltip>
               )}
               {evolution.details![0].min_happiness && (
-                <CustomTooltip content={'Felicidade'}>
+                <CustomTooltip content="Felicidade">
                   <div className="flex items-center justify-center gap-1">
                     <IoMdHappy color="white" size={16} />
                     <span>{evolution.details![0].min_happiness}</span>
@@ -86,7 +86,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
                 </CustomTooltip>
               )}
               {evolution.details![0].min_affection && (
-                <CustomTooltip content={'Afeição'}>
+                <CustomTooltip content="Afeição">
                   <div className="flex items-center justify-center gap-1">
                     <FaHeart size={16} color="red" />
                     <span>{evolution.details![0].min_affection}</span>
@@ -94,7 +94,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
                 </CustomTooltip>
               )}
               {evolution.details![0].gender === 1 && (
-                <CustomTooltip content={'Gênero'}>
+                <CustomTooltip content="Gênero">
                   <div className="flex items-center justify-center gap-1">
                     <IoFemale size={16} color="red" />
                     <span>{evolution.details![0].min_affection}</span>

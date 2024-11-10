@@ -7,6 +7,7 @@ import { AbilityContextProvider } from '../context/AbilitiesContext';
 import { EvolutionContextProvider } from '../context/EvolutionContext';
 import { FormContextProvider } from '../context/FormsContexts';
 import { HighlightsContextProvider } from '@/context/HighlightsContext';
+import { GameContextProvider } from '@/context/GamesContext';
 
 interface AppProviderProps {
   children: ReactNode;
@@ -22,7 +23,7 @@ function AppProvider({ children }: AppProviderProps) {
               <AbilityContextProvider>
                 <MovesContextProvider>
                   <HighlightsContextProvider>
-                    {children}
+                    <GameContextProvider>{children}</GameContextProvider>
                   </HighlightsContextProvider>
                 </MovesContextProvider>
               </AbilityContextProvider>

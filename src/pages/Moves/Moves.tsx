@@ -1,3 +1,4 @@
+import { BackToTop } from '@/components/BackToTop/BackToTop';
 import MoveCard from '@/components/MoveCard/MoveCard';
 import Pagination from '@/components/Pagination';
 import useMoves from '@/hooks/useMoves';
@@ -23,6 +24,7 @@ function Moves() {
       <div>
         <Pagination total={total} next={next} previous={previous} />
       </div>
+      <BackToTop />
     </div>
   );
 }
