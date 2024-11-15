@@ -6,7 +6,7 @@ import { Spacer } from '../Spacer/Spacer';
 import { BackToTop } from '../BackToTop/BackToTop';
 import { CaretRight, Sparkle } from 'phosphor-react';
 import SimpleCardType from '../SimpleCardType/SimpleCardType';
-import CustomTooltip from '../CustomTooltip/CustomToolTip';
+import CustomTooltip from '../CustomTooltip/CustomTooltip';
 import addZeroes from '../../utils/addZeros';
 import { Evolution } from '../../interfaces/evolutionInterface';
 import EvolutionCard from '../EvolutionCard/EvolutionCard';

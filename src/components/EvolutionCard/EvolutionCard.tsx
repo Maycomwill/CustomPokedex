@@ -1,6 +1,6 @@
 import { ArrowFatLinesUp } from 'phosphor-react';
 import { Evolution } from '../../interfaces/evolutionInterface';
-import CustomTooltip from '../CustomTooltip/CustomToolTip';
+import CustomTooltip from '../CustomTooltip/CustomTooltip';
 import { FaHeart, FaMoon, FaSun } from 'react-icons/fa';
 import { IoMdHappy } from 'react-icons/io';
 import { IoSparkles, IoFemale } from 'react-icons/io5';

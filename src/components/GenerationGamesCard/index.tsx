@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import CustomTooltip from '../CustomTooltip/CustomToolTip';
+import CustomTooltip from '../CustomTooltip/CustomTooltip';
 import { Link } from 'react-router-dom';
 
 interface GenerationGamesCardProps {
