@@ -31,7 +31,7 @@ export function Home() {
   };
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-start px-4">
+    <div className="animate-surge-in-bottom flex min-h-screen w-full flex-col items-center justify-start px-4">
       <div className="flex w-full items-center justify-center">
         <form
           className="flex w-full flex-col items-center justify-center space-y-4 md:flex-row md:space-x-4 md:space-y-0"

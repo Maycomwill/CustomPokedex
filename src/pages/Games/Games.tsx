@@ -41,7 +41,7 @@ import { BackToTop } from '@/components/BackToTop/BackToTop';
 import GenerationGamesCard from '@/components/GenerationGamesCard';
 function Games() {
   return (
-    <div className="grid grid-cols-1 place-content-start place-items-center items-start gap-4 gap-y-6 px-1 lg:grid-cols-2">
+    <div className="animate-surge-in-bottom grid grid-cols-1 place-content-start place-items-center items-start gap-4 gap-y-6 px-1 lg:grid-cols-2">
       <GenerationGamesCard
         generation={1}
         games={[
