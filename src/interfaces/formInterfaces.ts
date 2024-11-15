@@ -1,4 +1,4 @@
-import { NamedAPIResource } from "./apiInterfaces";
+import { NamedAPIResource } from './apiInterfaces';
 
 export interface FormDataSchema {
   name: string;
