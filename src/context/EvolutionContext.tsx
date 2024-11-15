@@ -1,11 +1,11 @@
-import { createContext, ReactNode, useState } from "react";
-import axios from "axios";
+import { createContext, ReactNode, useState } from 'react';
+import axios from 'axios';
 import {
   ChainLink,
   Evolution,
   PrincipalEvolutionChain,
-} from "../interfaces/evolutionInterface";
-import { pokeapi } from "../services/api";
+} from '../interfaces/evolutionInterface';
+import { pokeapi } from '../services/api';
 
 export interface EvolutionContextProps {
   getEvolutionChainData: (url: string) => void;
@@ -83,13 +83,13 @@ export function EvolutionContextProvider({
       };
     }
 
-    if (chain.species.name === "leafeon" || chain.species.name === "glaceon") {
+    if (chain.species.name === 'leafeon' || chain.species.name === 'glaceon') {
       let item_name = chain.evolution_details;
       console.log(item_name[3]);
       let item_sprite = await getItemSprite(
         chain.evolution_details.map((item) => {
           if (item.item !== null) return item.item.name;
-        })[3]
+        })[3],
       );
       return {
         name: chain.species.name,
@@ -104,13 +104,13 @@ export function EvolutionContextProvider({
       };
     }
 
-    if (chain.evolution_details[0].trigger.name === "use-item") {
+    if (chain.evolution_details[0].trigger.name === 'use-item') {
       let item_name = chain.evolution_details;
       // console.log(item_name);
       let item_sprite = await getItemSprite(
         chain.evolution_details.map((item) => {
           if (item.item !== null) return item.item.name;
-        })[0]
+        })[0],
       );
 
       return {
@@ -154,6 +154,10 @@ export function EvolutionContextProvider({
     return {
       default: data.sprites.front_default,
       shiny: data.sprites.front_shiny,
+      gif: {
+        default: data.sprites.other.showdown.front_default,
+        shiny: data.sprites.other.showdown.front_shiny,
+      },
     };
   }
 

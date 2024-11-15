@@ -1,6 +1,6 @@
 import { ArrowFatLinesUp } from 'phosphor-react';
 import { Evolution } from '../../interfaces/evolutionInterface';
-import CustomTooltip from '../CustomTooltip/CustomTooltip';
+import CustomTooltip from '../CustomTooltip/CustomToolTip';
 import { FaHeart, FaMoon, FaSun } from 'react-icons/fa';
 import { IoMdHappy } from 'react-icons/io';
 import { IoSparkles, IoFemale } from 'react-icons/io5';
@@ -138,10 +138,12 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
       <div className="min-h-12 w-full">
         {evolution.trigger && handleTrigger(evolution.trigger)}
       </div>
-      <div className="flex">
+      <div className="flex w-32 items-center justify-center">
         <img
-          className="size-24 md:size-32 lg:size-40"
-          src={shiny ? evolution.sprites.shiny : evolution.sprites.default}
+          className="h-24"
+          src={
+            shiny ? evolution.sprites.gif.shiny : evolution.sprites.gif.default
+          }
           alt={evolution.name}
         />
       </div>

@@ -38,7 +38,7 @@ function Game() {
           {gameName?.split('-').join(' ')}
         </h1>
       </div>
-      <div className="mx-auto flex w-[60%] flex-col items-center justify-center space-y-2 py-4 md:w-full md:flex-row md:justify-evenly md:space-y-0">
+      <div className="mx-auto flex w-[60%] flex-col items-center justify-center space-y-2 py-4 md:w-full md:flex-row md:space-x-12 md:space-y-0">
         {dexes.length > 1 &&
           dexes.map((dex, i) => (
             <Button

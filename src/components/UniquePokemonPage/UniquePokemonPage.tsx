@@ -6,7 +6,7 @@ import { Spacer } from '../Spacer/Spacer';
 import { BackToTop } from '../BackToTop/BackToTop';
 import { CaretRight, Sparkle } from 'phosphor-react';
 import SimpleCardType from '../SimpleCardType/SimpleCardType';
-import CustomTooltip from '../CustomTooltip/CustomTooltip';
+import CustomTooltip from '../CustomTooltip/CustomToolTip';
 import addZeroes from '../../utils/addZeros';
 import { Evolution } from '../../interfaces/evolutionInterface';
 import EvolutionCard from '../EvolutionCard/EvolutionCard';
@@ -81,7 +81,7 @@ export default function UniquePokemonPage({
 
   const navigate = useNavigate();
   return (
-    <div className="mb-6 flex w-full flex-1 flex-col items-center justify-evenly overflow-x-hidden px-8 lg:w-[70%] lg:px-24">
+    <div className="mb-6 flex h-full w-full flex-1 flex-col items-center justify-evenly px-8 lg:w-[70%] lg:px-24">
       <div className="relative mb-2 flex w-full flex-col items-center justify-center">
         {/* Shiny Sprite button */}
         <div className="absolute right-[2%] top-0">
