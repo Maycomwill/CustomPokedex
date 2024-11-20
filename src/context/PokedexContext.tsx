@@ -1,6 +1,6 @@
-import { createContext, ReactNode, useState } from "react";
-import { pokeapi } from "../services/api";
-import axios, { AxiosResponse } from "axios";
+import { createContext, ReactNode, useState } from 'react';
+import { pokeapi } from '../services/api';
+import axios, { AxiosResponse } from 'axios';
 import {
   AbilityInfoProps,
   abilityProps,
@@ -10,10 +10,10 @@ import {
   PokemonDataProps,
   statsProps,
   UniquePokemonData,
-} from "../interfaces/pokemonInterfaces";
-import useEvolution from "../hooks/useEvolution";
-import { NamedAPIResource } from "../interfaces/apiInterfaces";
-import { useForms } from "../hooks/useForms";
+} from '../interfaces/pokemonInterfaces';
+import useEvolution from '../hooks/useEvolution';
+import { NamedAPIResource } from '../interfaces/apiInterfaces';
+import { useForms } from '../hooks/useForms';
 
 //Interface do Provedor
 export interface PokedexContextDataProps {
@@ -50,7 +50,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
         sprite:
           response.data.sprites.front_default !== null
             ? response.data.sprites.front_default
-            : response.data.sprites.other["official-artwork"].front_default,
+            : response.data.sprites.other['official-artwork'].front_default,
         types: response.data.types.map((type: any) => {
           return {
             type: type.type.name,
@@ -60,30 +60,29 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     });
   }
 
-  async function getDamageRelation(type: { type: { name: string } }) {
+  async function getDamageRelation(type: NamedAPIResource) {
     // console.log("tipo chamado", type.type.name);
-    const result = await pokeapi.get(`type/${type.type.name}`);
-
+    const result = await pokeapi.get(`type/${type.name}`);
     // console.log(result.data.damage_relations);
 
     const damage_relations = {
       double_damage_from: result.data.damage_relations.double_damage_from.map(
-        (type: { name: string; url: string }) => type.name
+        (type: NamedAPIResource) => type.name,
       ),
       double_damage_to: result.data.damage_relations.double_damage_to.map(
-        (type: { name: string; url: string }) => type.name
+        (type: NamedAPIResource) => type.name,
       ),
       half_damage_from: result.data.damage_relations.half_damage_from.map(
-        (type: { name: string; url: string }) => type.name
+        (type: NamedAPIResource) => type.name,
       ),
       half_damage_to: result.data.damage_relations.half_damage_to.map(
-        (type: { name: string; url: string }) => type.name
+        (type: NamedAPIResource) => type.name,
       ),
       no_damage_from: result.data.damage_relations.no_damage_from.map(
-        (type: { name: string; url: string }) => type.name
+        (type: NamedAPIResource) => type.name,
       ),
       no_damage_to: result.data.damage_relations.no_damage_to.map(
-        (type: { name: string; url: string }) => type.name
+        (type: NamedAPIResource) => type.name,
       ),
       four_times_damage_from: [],
       four_times_damage_to: [],
@@ -95,7 +94,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
 
   // Esta função salva no estado os dados de um único pokemon
   async function getPokemonData(pokemonName: string | undefined) {
-    var newPokemonName = pokemonName?.split("-");
+    var newPokemonName = pokemonName?.split('-');
 
     const result = await pokeapi.get(`pokemon/${pokemonName?.toLowerCase()}`);
     const extra_result = await axios.get(result.data.species.url);
@@ -117,19 +116,24 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
 
     let damage_relations_objects: damageRelationsProps[] = [];
 
-    result.data.types.map(async (type: any) => {
-      await getDamageRelation(type)
-        .then((result) => damage_relations_objects.push(result))
-        .then(() => {
-          objetos = combinedDamageObjects(damage_relations_objects);
-          // console.log("Objetos combinados", objetos);
-          damageRelationFilter(objetos);
-          // console.log("Objetos filtrados", objetos);
-        });
-    });
+    result.data.types.map(
+      async (type: { slot: number; type: NamedAPIResource }) => {
+        await getDamageRelation(type.type)
+          .then((result) => {
+            console.log(result);
+            damage_relations_objects.push(result);
+          })
+          .then(() => {
+            objetos = combinedDamageObjects(damage_relations_objects);
+            // console.log("Objetos combinados", objetos);
+            damageRelationFilter(objetos);
+            // console.log("Objetos filtrados", objetos);
+          });
+      },
+    );
 
     function combinedDamageObjects(
-      damage_relations_objects: damageRelationsProps[]
+      damage_relations_objects: damageRelationsProps[],
     ): damageRelationsProps {
       let damage_relations: damageRelationsProps = {
         double_damage_from: [],
@@ -162,20 +166,20 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
       let no_damage_to = objeto.no_damage_to;
 
       let new_double_from = double_from.filter(
-        (type) => !half_from.includes(type)
+        (type) => !half_from.includes(type),
       );
       let new_double_to = double_to.filter((type) => !half_to.includes(type));
 
       let four_times_damage_weakness = new_double_from.filter(
         (element, index) => {
           return new_double_from.indexOf(element) !== index;
-        }
+        },
       );
 
       let four_times_damage_strenght = new_double_to.filter(
         (element, index) => {
           return new_double_to.indexOf(element) !== index;
-        }
+        },
       );
 
       // console.log(four_times_damage_weakness)
@@ -194,31 +198,25 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     }
 
     let pokemonGender: {
-      pokemon_species: {
-        name: string;
-        url: string;
-      };
+      pokemon_species: NamedAPIResource;
       female_rate: number;
       male_rate: number;
     };
 
     let rawGender: {
-      pokemon_species: {
-        name: string;
-        url: string;
-      };
+      pokemon_species: NamedAPIResource;
       rate: number;
     };
-    const femaleGender: AxiosResponse = await pokeapi.get("/gender/1");
-    const genderlessPokemon: AxiosResponse = await pokeapi.get("/gender/3");
+    const femaleGender: AxiosResponse = await pokeapi.get('/gender/1');
+    const genderlessPokemon: AxiosResponse = await pokeapi.get('/gender/3');
 
     if (
       genderlessPokemon.data.pokemon_species_details.find(
-        (pokemon: any) => pokemon.pokemon_species.name === newPokemonName![0]
+        (pokemon: any) => pokemon.pokemon_species.name === newPokemonName![0],
       )
     ) {
       rawGender = genderlessPokemon.data.pokemon_species_details.find(
-        (pokemon: any) => pokemon.pokemon_species.name === newPokemonName![0]
+        (pokemon: any) => pokemon.pokemon_species.name === newPokemonName![0],
       );
       // console.log("Genderless Pokemon");
       pokemonGender = {
@@ -232,11 +230,11 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     } else {
       if (
         femaleGender.data.pokemon_species_details.find(
-          (pokemon: any) => pokemon.pokemon_species.name === newPokemonName![0]
+          (pokemon: any) => pokemon.pokemon_species.name === newPokemonName![0],
         )
       ) {
         rawGender = femaleGender.data.pokemon_species_details.find(
-          (pokemon: any) => pokemon.pokemon_species.name === newPokemonName![0]
+          (pokemon: any) => pokemon.pokemon_species.name === newPokemonName![0],
         );
         pokemonGender = {
           pokemon_species: {
@@ -264,7 +262,7 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
         flavor_text: string;
         language: NamedAPIResource;
         version: NamedAPIResource;
-      }) => flavor.language.name === "en"
+      }) => flavor.language.name === 'en',
     );
 
     return setUniquePokemonData({
@@ -280,8 +278,8 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
       sprite_default: result.data.sprites.front_default,
       sprite_shiny: result.data.sprites.front_shiny,
       official_artwork: {
-        default: result.data.sprites.other["official-artwork"].front_default,
-        shiny: result.data.sprites.other["official-artwork"].front_shiny,
+        default: result.data.sprites.other['official-artwork'].front_default,
+        shiny: result.data.sprites.other['official-artwork'].front_shiny,
       },
       stats: result.data.stats.map((stat: statsProps) => {
         return {
@@ -310,6 +308,12 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
         female: pokemonGender.female_rate,
         male: pokemonGender.male_rate,
       },
+      chart_data: result.data.stats.map((stat: statsProps) => {
+        return {
+          name: stat.stat.name,
+          value: stat.base_stat,
+        };
+      }),
     });
   }
 
@@ -317,8 +321,8 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     // console.log("função chamada:", typeName)
     genTypeFilter = array.filter((pokemon) =>
       pokemon.types.some(
-        (type) => type.type.toLowerCase() === typeName.toLowerCase()
-      )
+        (type) => type.type.toLowerCase() === typeName.toLowerCase(),
+      ),
     );
     setGenTypeFilteredList(genTypeFilter);
   }

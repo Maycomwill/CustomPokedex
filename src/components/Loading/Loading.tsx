@@ -1,20 +1,26 @@
-import { Container } from "./styles";
-import LoadingGif from '../../assets/loading.gif'
+import clsx from 'clsx';
+import LoadingGif from '../../assets/loading.gif';
+import colors from 'tailwindcss/colors';
 
-interface ILoadingProps{
-  color: string;
-  size: number;
+interface LoadingProps {
+  size?: 'sm' | 'md' | 'lg';
+  color?: string;
 }
-
-export function Loading({color, size}: ILoadingProps) {
+export default function Loading({
+  size = 'md',
+  color = colors.emerald[500],
+}: LoadingProps) {
   return (
-    <Container>
-      <div>
-        <img src={LoadingGif} alt="" />
-      </div>
-      {/* <div className="spinner">
-        <CircleNotch size={size} color={color} />
-      </div> */}
-    </Container>
+    <div>
+      <img
+        className={clsx(color, {
+          'size-4': size === 'sm',
+          'size-6': size === 'md',
+          'size-16': size === 'lg',
+        })}
+        src={LoadingGif}
+        alt=""
+      />
+    </div>
   );
 }

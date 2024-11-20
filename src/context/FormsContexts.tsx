@@ -20,10 +20,7 @@ export function FormContextProvider({ children }: { children: ReactNode }) {
     waitingFormsPromises(newArray).then((response) =>
       setForms(
         response.sort((a, b) => {
-          if (a.id < b.id) {
-            return -1;
-          }
-          return 1;
+          return a.id - b.id;
         })
       )
     );

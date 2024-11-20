@@ -1,15 +1,30 @@
-import { Container } from './styles'
+import clsx from 'clsx';
 
-interface SpacerProps{
-  className?: string
+interface SpacerProps {
+  direction?: 'horizontal' | 'vertical';
+  color?: 'primary' | 'accent' | 'gray';
 }
 
-export function Spacer({className}: SpacerProps) {
+export function Spacer({
+  direction = 'horizontal',
+  color = 'primary',
+}: SpacerProps) {
   return (
-    <Container className={className}>
-      <div className='spacer'/>
-    </Container>
-  )
+    <div
+      className={clsx(
+        'rounded-full',
+        {
+          'my-2 h-px w-full': direction === 'horizontal',
+        },
+        {
+          'mx-2 h-full min-h-16 w-px': direction === 'vertical',
+        },
+        {
+          'bg-primary-500': color === 'primary',
+          'bg-accent-500': color === 'accent',
+          'bg-slate-900': color === 'gray',
+        },
+      )}
+    />
+  );
 }
-
-

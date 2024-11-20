@@ -1,11 +1,10 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useState } from 'react';
 import {
   AbilityInfoProps,
   PokemonDataProps,
-} from "../interfaces/pokemonInterfaces";
-import { waitingPromises } from "../utils/awaitPromises";
-import { pokeapi } from "../services/api";
-import { storagePokemonInformation } from "../utils/storagePokemonInfo";
+} from '../interfaces/pokemonInterfaces';
+import { waitingPromises } from '../utils/awaitPromises';
+import { pokeapi } from '../services/api';
 
 export interface AbilityContextProps {
   getAbilityInfo: (ability: string) => void;
@@ -31,35 +30,34 @@ export function AbilityContextProvider({ children }: { children: ReactNode }) {
     let response = data.pokemon.map((pokemon: any) => {
       return { name: pokemon.pokemon.name, url: pokemon.pokemon.url };
     });
-    rawPokemonData = await waitingPromises(response);
+    waitingPromises(response).then((response) => {
+      setCommonAbilityPokemon([]);
+
+      rawPokemonData = response.sort((a, b) => {
+        return a.id - b.id;
+      });
+
+      setCommonAbilityPokemon(rawPokemonData);
+    });
 
     let description = data.effect_entries.find(
       (effect_element: {
         effect: string;
         language: { url: string; name: string };
       }) => {
-        if (effect_element.language.name === "en") {
+        if (effect_element.language.name === 'en') {
           return effect_element.effect;
         }
 
-        return "";
-      }
+        return '';
+      },
     );
 
-    rawPokemonData
-      .sort((a, b) => {
-        if (a.id < b.id) {
-          return -1;
-        }
-        return 1;
-      })
-      .map((pokemon) => {
-        storagePokemonInformation(pokemon, setCommonAbilityPokemon);
-      });
+    console.log(data);
 
     setAbilityInfo({
       name: data.name,
-      description: description.effect,
+      description: description ? description.effect : '',
     });
 
     return setIsLoading(false);

@@ -1,5 +1,4 @@
-import theme from "../../styles/theme";
-import { Container } from "./styles";
+import theme from '../../styles/theme';
 import {
   FormControl,
   FormControlLabel,
@@ -7,12 +6,12 @@ import {
   Popover,
   Radio,
   RadioGroup,
-} from "@mui/material";
-import { CircleButton } from "../Button/CircleButton/CircleButton";
-import { Funnel } from "phosphor-react";
-import { usePokedex } from "../../hooks/usePokedex";
-import { PokemonDataProps } from "../../interfaces/pokemonInterfaces";
-import { ChangeEvent, useState } from "react";
+} from '@mui/material';
+import { Funnel } from 'phosphor-react';
+import { usePokedex } from '../../hooks/usePokedex';
+import { PokemonDataProps } from '../../interfaces/pokemonInterfaces';
+import { ChangeEvent, useState } from 'react';
+import colors from 'tailwindcss/colors';
 
 export function DropMenu({
   pokemonArray,
@@ -21,16 +20,12 @@ export function DropMenu({
 }) {
   const { handleFilterGenType } = usePokedex();
 
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(
-    null
-  );
-  const [typeFilter, setTypeFilter] = useState<string>("");
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const [typeFilter, setTypeFilter] = useState<string>('');
 
-  let typeFiltered = "";
+  let typeFiltered = '';
 
-  const handleTypeFilterChange = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleTypeFilterChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTypeFilter(event.target.value);
     typeFiltered = event.target.value;
     handleFilterGenType(typeFiltered, pokemonArray);
@@ -45,13 +40,13 @@ export function DropMenu({
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
+  const id = open ? 'simple-popover' : undefined;
 
   return (
-    <Container>
-      <CircleButton onClick={handleClick}>
-        <Funnel size={28} />
-      </CircleButton>
+    <div className="flex h-full w-full items-center justify-center">
+      <button className="rounded-full bg-white p-2" onClick={handleClick}>
+        <Funnel size={24} color={colors.gray[800]} />
+      </button>
       {/* <Button onClick={handleClick} /> */}
       <Popover
         id={id}
@@ -59,27 +54,27 @@ export function DropMenu({
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
+          vertical: 'bottom',
+          horizontal: 'center',
         }}
         transformOrigin={{
-          vertical: "top",
-          horizontal: "center",
+          vertical: 'top',
+          horizontal: 'center',
         }}
         sx={{
-          ".MuiPaper-elevation8": {
-            p: ".8rem",
-            width: "30rem",
-            height: "30rem",
+          '.MuiPaper-elevation8': {
+            p: '.8rem',
+            width: '30rem',
+            height: '30rem',
             backgroundColor: `${theme.colors.gray[200]}`,
             color: `${theme.colors.gray[800]}`,
           },
-          ".MuiTypography-root": {
+          '.MuiTypography-root': {
             fontSize: 16,
           },
         }}
       >
-        <div className="formControlDiv">
+        <div className="w-full">
           <FormControl>
             <FormLabel
               id="filter-label"
@@ -102,7 +97,7 @@ export function DropMenu({
                   <Radio
                     sx={{
                       color: theme.colors.accent[500],
-                      "&.Mui-checked": {
+                      '&.Mui-checked': {
                         color: theme.colors.primary[500],
                       },
                     }}
@@ -116,7 +111,7 @@ export function DropMenu({
                   <Radio
                     sx={{
                       color: theme.colors.accent[500],
-                      "&.Mui-checked": {
+                      '&.Mui-checked': {
                         color: theme.colors.primary[500],
                       },
                     }}
@@ -130,7 +125,7 @@ export function DropMenu({
                   <Radio
                     sx={{
                       color: theme.colors.accent[500],
-                      "&.Mui-checked": {
+                      '&.Mui-checked': {
                         color: theme.colors.primary[500],
                       },
                     }}
@@ -144,7 +139,7 @@ export function DropMenu({
                   <Radio
                     sx={{
                       color: theme.colors.accent[500],
-                      "&.Mui-checked": {
+                      '&.Mui-checked': {
                         color: theme.colors.primary[500],
                       },
                     }}
@@ -158,7 +153,7 @@ export function DropMenu({
                   <Radio
                     sx={{
                       color: theme.colors.accent[500],
-                      "&.Mui-checked": {
+                      '&.Mui-checked': {
                         color: theme.colors.primary[500],
                       },
                     }}
@@ -172,7 +167,7 @@ export function DropMenu({
                   <Radio
                     sx={{
                       color: theme.colors.accent[500],
-                      "&.Mui-checked": {
+                      '&.Mui-checked': {
                         color: theme.colors.primary[500],
                       },
                     }}
@@ -186,7 +181,7 @@ export function DropMenu({
                   <Radio
                     sx={{
                       color: theme.colors.accent[500],
-                      "&.Mui-checked": {
+                      '&.Mui-checked': {
                         color: theme.colors.primary[500],
                       },
                     }}
@@ -200,7 +195,7 @@ export function DropMenu({
                   <Radio
                     sx={{
                       color: theme.colors.accent[500],
-                      "&.Mui-checked": {
+                      '&.Mui-checked': {
                         color: theme.colors.primary[500],
                       },
                     }}
@@ -214,7 +209,7 @@ export function DropMenu({
                   <Radio
                     sx={{
                       color: theme.colors.accent[500],
-                      "&.Mui-checked": {
+                      '&.Mui-checked': {
                         color: theme.colors.primary[500],
                       },
                     }}
@@ -228,7 +223,7 @@ export function DropMenu({
                   <Radio
                     sx={{
                       color: theme.colors.accent[500],
-                      "&.Mui-checked": {
+                      '&.Mui-checked': {
                         color: theme.colors.primary[500],
                       },
                     }}
@@ -242,7 +237,7 @@ export function DropMenu({
                   <Radio
                     sx={{
                       color: theme.colors.accent[500],
-                      "&.Mui-checked": {
+                      '&.Mui-checked': {
                         color: theme.colors.primary[500],
                       },
                     }}
@@ -256,7 +251,7 @@ export function DropMenu({
                   <Radio
                     sx={{
                       color: theme.colors.accent[500],
-                      "&.Mui-checked": {
+                      '&.Mui-checked': {
                         color: theme.colors.primary[500],
                       },
                     }}
@@ -270,7 +265,7 @@ export function DropMenu({
                   <Radio
                     sx={{
                       color: theme.colors.accent[500],
-                      "&.Mui-checked": {
+                      '&.Mui-checked': {
                         color: theme.colors.primary[500],
                       },
                     }}
@@ -284,7 +279,7 @@ export function DropMenu({
                   <Radio
                     sx={{
                       color: theme.colors.accent[500],
-                      "&.Mui-checked": {
+                      '&.Mui-checked': {
                         color: theme.colors.primary[500],
                       },
                     }}
@@ -298,7 +293,7 @@ export function DropMenu({
                   <Radio
                     sx={{
                       color: theme.colors.accent[500],
-                      "&.Mui-checked": {
+                      '&.Mui-checked': {
                         color: theme.colors.primary[500],
                       },
                     }}
@@ -312,7 +307,7 @@ export function DropMenu({
                   <Radio
                     sx={{
                       color: theme.colors.accent[500],
-                      "&.Mui-checked": {
+                      '&.Mui-checked': {
                         color: theme.colors.primary[500],
                       },
                     }}
@@ -326,7 +321,7 @@ export function DropMenu({
                   <Radio
                     sx={{
                       color: theme.colors.accent[500],
-                      "&.Mui-checked": {
+                      '&.Mui-checked': {
                         color: theme.colors.primary[500],
                       },
                     }}
@@ -340,7 +335,7 @@ export function DropMenu({
                   <Radio
                     sx={{
                       color: theme.colors.accent[500],
-                      "&.Mui-checked": {
+                      '&.Mui-checked': {
                         color: theme.colors.primary[500],
                       },
                     }}
@@ -354,7 +349,7 @@ export function DropMenu({
                   <Radio
                     sx={{
                       color: theme.colors.accent[500],
-                      "&.Mui-checked": {
+                      '&.Mui-checked': {
                         color: theme.colors.primary[500],
                       },
                     }}
@@ -366,6 +361,6 @@ export function DropMenu({
           </FormControl>
         </div>
       </Popover>
-    </Container>
+    </div>
   );
 }

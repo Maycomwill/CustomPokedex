@@ -1,17 +1,21 @@
-import { Header } from "../components/Header/Header";
-import { IndexRoutes } from "../routes";
-import { Container } from "./styles";
-import { Footer } from "../components/Footer/Footer";
+import { Footer } from '@/components/Footer/Footer';
+import { Header } from '@/components/Header/Header';
+import { AppSidebar } from '@/components/Sidebar/Sidebar';
+import { SidebarProvider } from '@/components/ui/sidebar';
+import { IndexRoutes } from '@/routes';
 
 function Index() {
   return (
-    <Container>
-      <Header id="header" />
-      <div id="routes">
-        <IndexRoutes />
+    <SidebarProvider>
+      <AppSidebar />
+      <div className="flex min-h-screen w-full flex-col items-center justify-start">
+        <Header />
+        <div className="flex w-full flex-1 items-start justify-center">
+          <IndexRoutes />
+        </div>
+        <Footer />
       </div>
-      <Footer id="footer" />
-    </Container>
+    </SidebarProvider>
   );
 }
 
