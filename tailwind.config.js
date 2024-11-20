@@ -318,6 +318,15 @@ export default {
       transitionTimingFunction: {
         'custom-bezier': 'cubic-bezier(0.165, 0.84, 0.44, 1)',
       },
+      keyframes: {
+        'surge-in': {
+          '0%': { transform: 'translateY(80%)', opacity: 0 },
+          '100%': { transform: 'translateY(0%)', opacity: 100 },
+        },
+      },
+      animation: {
+        'surge-in-bottom': 'surge-in 1s ease-in-out forwards',
+      },
     },
   },
   plugins: [require('tailwindcss-animate')],

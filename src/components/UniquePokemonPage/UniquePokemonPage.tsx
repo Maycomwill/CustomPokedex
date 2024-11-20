@@ -360,7 +360,7 @@ export default function UniquePokemonPage({
         <Spacer />
       </div>
 
-      <div className="mx-auto flex w-full items-center justify-center">
+      <div className="z-10 mx-auto flex w-full items-center justify-center">
         <Button onClick={() => navigate(-1)}>Voltar</Button>
       </div>
       <BackToTop />

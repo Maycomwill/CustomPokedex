@@ -60,30 +60,29 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     });
   }
 
-  async function getDamageRelation(type: { type: { name: string } }) {
+  async function getDamageRelation(type: NamedAPIResource) {
     // console.log("tipo chamado", type.type.name);
-    const result = await pokeapi.get(`type/${type.type.name}`);
-
+    const result = await pokeapi.get(`type/${type.name}`);
     // console.log(result.data.damage_relations);
 
     const damage_relations = {
       double_damage_from: result.data.damage_relations.double_damage_from.map(
-        (type: { name: string; url: string }) => type.name,
+        (type: NamedAPIResource) => type.name,
       ),
       double_damage_to: result.data.damage_relations.double_damage_to.map(
-        (type: { name: string; url: string }) => type.name,
+        (type: NamedAPIResource) => type.name,
       ),
       half_damage_from: result.data.damage_relations.half_damage_from.map(
-        (type: { name: string; url: string }) => type.name,
+        (type: NamedAPIResource) => type.name,
       ),
       half_damage_to: result.data.damage_relations.half_damage_to.map(
-        (type: { name: string; url: string }) => type.name,
+        (type: NamedAPIResource) => type.name,
       ),
       no_damage_from: result.data.damage_relations.no_damage_from.map(
-        (type: { name: string; url: string }) => type.name,
+        (type: NamedAPIResource) => type.name,
       ),
       no_damage_to: result.data.damage_relations.no_damage_to.map(
-        (type: { name: string; url: string }) => type.name,
+        (type: NamedAPIResource) => type.name,
       ),
       four_times_damage_from: [],
       four_times_damage_to: [],
@@ -117,16 +116,21 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
 
     let damage_relations_objects: damageRelationsProps[] = [];
 
-    result.data.types.map(async (type: any) => {
-      await getDamageRelation(type)
-        .then((result) => damage_relations_objects.push(result))
-        .then(() => {
-          objetos = combinedDamageObjects(damage_relations_objects);
-          // console.log("Objetos combinados", objetos);
-          damageRelationFilter(objetos);
-          // console.log("Objetos filtrados", objetos);
-        });
-    });
+    result.data.types.map(
+      async (type: { slot: number; type: NamedAPIResource }) => {
+        await getDamageRelation(type.type)
+          .then((result) => {
+            console.log(result);
+            damage_relations_objects.push(result);
+          })
+          .then(() => {
+            objetos = combinedDamageObjects(damage_relations_objects);
+            // console.log("Objetos combinados", objetos);
+            damageRelationFilter(objetos);
+            // console.log("Objetos filtrados", objetos);
+          });
+      },
+    );
 
     function combinedDamageObjects(
       damage_relations_objects: damageRelationsProps[],
@@ -194,19 +198,13 @@ export function PokedexContextProvider({ children }: PokedexProviderProps) {
     }
 
     let pokemonGender: {
-      pokemon_species: {
-        name: string;
-        url: string;
-      };
+      pokemon_species: NamedAPIResource;
       female_rate: number;
       male_rate: number;
     };
 
     let rawGender: {
-      pokemon_species: {
-        name: string;
-        url: string;
-      };
+      pokemon_species: NamedAPIResource;
       rate: number;
     };
     const femaleGender: AxiosResponse = await pokeapi.get('/gender/1');

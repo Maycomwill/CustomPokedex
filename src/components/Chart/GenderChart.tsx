@@ -45,7 +45,7 @@ export function GenderChart({ female, male }: ICustomChart) {
     );
   }
   return (
-    <Card className="flex flex-col border-none bg-transparent text-gray-100">
+    <Card className="z-0 flex flex-col border-none bg-transparent text-gray-100">
       <CardHeader className="items-center pb-0">
         <CardTitle>Gender rate</CardTitle>
       </CardHeader>
