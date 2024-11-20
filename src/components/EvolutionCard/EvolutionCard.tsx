@@ -19,7 +19,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
     if (trigger === null) {
       return (
         <div className="flex min-h-12 w-full flex-1 items-center justify-center">
-          <div className="flex items-center justify-center gap-1"></div>
+          <div className="flex items-center justify-center"></div>
         </div>
       );
     }
@@ -40,7 +40,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
           );
         }
         return (
-          <div className="flex min-h-12 w-full flex-1 items-center justify-center">
+          <div className="flex min-h-12 w-full flex-1 items-center justify-center space-x-2">
             <CustomTooltip
               content={evolution.details![0].item!.name.split('-').join(' ')}
             >
@@ -55,7 +55,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
       case 'level-up':
         return (
           <div className="flex min-h-12 w-full flex-1 items-center justify-center">
-            <div className="flex items-center justify-center gap-1">
+            <div className="flex items-center justify-center space-x-2">
               {evolution.details![0].min_level && (
                 <CustomTooltip content="Level">
                   <>
@@ -74,7 +74,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
               )}
               {evolution.details![0].min_happiness && (
                 <CustomTooltip content="Felicidade">
-                  <div className="flex items-center justify-center gap-1">
+                  <div className="flex items-center justify-center space-x-2">
                     <IoMdHappy color="white" size={16} />
                     <span>{evolution.details![0].min_happiness}</span>
                     {evolution.details![0].time_of_day === 'day' ? (
@@ -87,19 +87,21 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
               )}
               {evolution.details![0].min_affection && (
                 <CustomTooltip content="Afeição">
-                  <div className="flex items-center justify-center gap-1">
+                  <div className="flex items-center justify-center space-x-2">
                     <FaHeart size={16} color="red" />
                     <span>{evolution.details![0].min_affection}</span>
                   </div>
                 </CustomTooltip>
               )}
               {evolution.details![0].gender === 1 && (
-                <CustomTooltip content="Gênero">
-                  <div className="flex items-center justify-center gap-1">
-                    <IoFemale size={16} color="red" />
-                    <span>{evolution.details![0].min_affection}</span>
-                  </div>
-                </CustomTooltip>
+                <div className="flex min-h-12 w-full flex-1 items-center justify-center">
+                  <CustomTooltip content="Gênero">
+                    <div className="flex items-center justify-center space-x-2">
+                      <IoFemale size={16} color="red" />
+                      <span>{evolution.details![0].min_affection}</span>
+                    </div>
+                  </CustomTooltip>
+                </div>
               )}
             </div>
           </div>
@@ -108,7 +110,7 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
         return (
           <div className="flex min-h-12 w-full flex-1 items-center justify-center">
             <CustomTooltip content="Troca">
-              <div className="flex items-center justify-center gap-1">
+              <div className="flex items-center justify-center">
                 <CgArrowsExchangeAltV color="white" size={20} />
               </div>
             </CustomTooltip>
@@ -132,15 +134,15 @@ function EvolutionCard({ shiny, evolution }: EvolutionCardProps) {
   // console.log(evolution.name, evolution);
   return (
     <button
-      className="flex min-h-40 flex-col items-center justify-between rounded-md border border-accent-200 bg-white/0 px-2 py-2 outline-none transition-all duration-200 ease-in-out hover:cursor-pointer hover:border-accent-500 hover:bg-white/10"
+      className="flex min-h-40 flex-col items-center justify-between rounded-md border border-accent-200 bg-white/0 py-2 outline-none transition-all duration-200 ease-in-out hover:cursor-pointer hover:border-accent-500 hover:bg-white/10"
       onClick={() => handleRedirect(evolution.name)}
     >
-      <div className="min-h-12 w-full">
+      <div className="flex min-h-12 w-full items-center justify-center">
         {evolution.trigger && handleTrigger(evolution.trigger)}
       </div>
-      <div className="flex w-32 items-center justify-center">
+      <div className="flex h-20 w-32 items-center justify-center">
         <img
-          className="h-24"
+          className="max-h-20"
           src={
             shiny ? evolution.sprites.gif.shiny : evolution.sprites.gif.default
           }

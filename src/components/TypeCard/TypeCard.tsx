@@ -112,7 +112,7 @@ export function TypeCard({ pokemonType, pressable = false }: ITypeCardProps) {
                 : pokemonType === 'bug' ||
                     pokemonType === 'fire' ||
                     pokemonType === 'dragon'
-                  ? 23
+                  ? 24
                   : 25,
             pokemonType,
           })}
